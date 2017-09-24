@@ -3,78 +3,136 @@ HOST: http://polls.apiblueprint.org/
 
 # museumary
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Museumary is a simple API used to retrieve data on art by
+specific artwork, artist, location, and type of art.
 
-## Questions Collection [/questions]
+## Artwork Collection [/artworks]
 
-### List All Questions [GET]
+### List All Artworks [GET]
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                "id": "0",
+                "name": "The Wounded Veteran",
+                "artist": "Vincent can Gogh",
+                "type": "drawing",
+                "data": "c. 1882-1883",
+                "culture": "Dutch",
+                "location": "Harvard Art Museum"
+            },
+            {
+                "id": "1",
+                "name": "Envy",
+                "artist": "Salvador Dali",
+                "type": "print",
+                "data": "1966-1967",
+                "culture": "Spanish",
+                "location": "Harvard Art Museum"
+            },
+            {
+                "id": "2",
+                "name": "The Pomegranate",
+                "artist": "Pablo Ruiz Picasso",
+                "type": "painting",
+                "data": "1911-1912",
+                "culture": "Spanish",
+                "location": "Harvard Art Museum"
             }
         ]
 
-### Create a New Question [POST]
+### Specific Artwork [GET]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
++ Parameters
+    + id (required, integer) ...ID of the requested artwork
 
-+ Request (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
     + Headers
 
-            Location: /questions/2
+            Location: /artworks/id
 
     + Body
 
+        {
+            "id": "1",
+            "name": "Envy"
+            "artist": "Salvador Dali"
+            "type": "print"
+            "data": "1966-1967"
+            "culture": "Spanish"
+        }
+            
+## Artists [/artists]
+
+### List All Artists [GET]
+
++ Response 200 (application/json)
+
+        [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "id": "0",
+                "name": "Vincent van Gogh",
+                "birth": "1853",
+                "death": "1890",
+                "birthplace": "Groot Zundert (Zundert), The Netherlands",
+                "deathplace": "Auvers-sur-Oise, France",
+                "artwork_ids": ["0"],
+                "culture": "Dutch"
+            },
+            {
+                "id": "1",
+                "name": "Salvador Dali",
+                "birth": "1904",
+                "death": "1989",
+                "birthplace": "Figueres, Spain",
+                "deathplace": "Figueres, Spain",
+                "artwork_ids": ["1"],
+                "culture": "Spanish"
+            },
+            {
+                "id": "2",
+                "name": "Pablo Ruiz Picasso",
+                "birth": "1881",
+                "death": "1973",
+                "birthplace": "Malaga, Spain",
+                "deathplace": "Mougins, France",
+                "artwork_ids": ["2"],
+                "culture": "Spanish"
             }
+        ]
+
+### Specific Artist [GET]
+
++ Parameters
+    + id (required, integer) ...ID of the requested artist
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /artists/id
+
+    + Body
+
+        {
+            "id": "1",
+            "name": "Salvador Dali",
+            "birth": "1904",
+            "death": "1989",
+            "birthplace": "Figueres, Spain",
+            "deathplace": "Figueres, Spain",
+            "artwork_ids": ["1"],
+            "culture": "Spanish"
+        }
+
+## Museums [/museums]
+
+### List All Museums [GET]
+### Specific Museum [GET]
+
+## Types of Art [/types]
+
+### List All Types [GET]
+### Specific Type [GET]
