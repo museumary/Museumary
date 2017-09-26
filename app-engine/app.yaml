@@ -21,5 +21,10 @@ api_version: 1
 threadsafe: true
 
 handlers:
-- url: /.*
-  script: main.app
+    #- url: /.
+    #script: main.app
+
+  url: /
+  static_files: index.html
+  upload: index.html
+
