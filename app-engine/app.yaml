@@ -21,10 +21,20 @@ api_version: 1
 threadsafe: true
 
 handlers:
-    #- url: /.
-    #script: main.app
 
-  url: /
-  static_files: index.html
-  upload: index.html
+- url: /
+  static_files: bootstrap/index.html
+  upload: bootstrap/index.html
+
+- url: /bootstrap
+  static_dir: bootstrap
+
+- url: /css
+  static_dir: bootstrap/css
+
+- url: /js
+  static_dir: bootstrap/js
+
+- url: /fonts
+  static_dir: bootstrap/fonts  
 
