@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set css_name = "css/about.css" %}
+{% block content %}
+
+    <h1>Artists</h1>
+
+    <div class = "results"></div>
+    <script>
+      var iframe = document.createElement('iframe');
+      iframe.id = 'iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+      iframe.src = 'artists.json';
+      var json;
+      setTimeout(function(){
+        json = JSON.parse(document.getElementById('iframe').contentDocument.body.firstChild.innerHTML);
+        var i = "";
+        for (var key in json) {
+          var val = json[key];
+          for(var key2 in val) {
+            i += val[key2].name + "<br><br>";
+          }
+        }
+        document.querySelector('.results').innerHTML = i;
+      }, 1000);
+    </script>
+
+{% endblock %}
