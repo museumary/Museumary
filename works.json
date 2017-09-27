@@ -1,0 +1,73 @@
+{ "works" : [ 
+			{
+				"work_id": "0",
+                "name": "The Wounded Veteran",
+                "artist": "Vincent can Gogh",
+                "type": "drawing",
+                "date": "c. 1882-1883",
+                "culture": "Dutch",
+                "location": "Harvard Art Museum",
+                "primaryimageurl":"http://nrs.harvard.edu/urn-3:HUAM:VRS45707_dynmc"
+            },
+            {
+                "work_id": "1",
+                "name": "Envy",
+                "artist": "Salvador Dali",
+                "type": "print",
+                "date": "1966-1967",
+                "culture": "Spanish",
+                "location": "Harvard Art Museum",
+                "primaryimageurl":"http://nrs.harvard.edu/urn-3:HUAM:VRS84755_dynmc"
+            },
+            {
+                "work_id": "2",
+                "name": "The Pomegranate",
+                "artist": "Pablo Ruiz Picasso",
+                "type": "painting",
+                "date": "1911-1912",
+                "culture": "Spanish",
+                "location": "Harvard Art Museum",
+                "primaryimageurl":"http://nrs.harvard.edu/urn-3:HUAM:53632_dynmc"
+            },
+            {
+                "work_id": "3",
+                "name": "Aryballos in the Form of a Hedgehog",
+                "artist": "unknown",
+                "type": "ceramics",
+                "date": "6th-5th century BC (Ptolemaic)",
+                "culture": "Egypt",
+                "location": "Walters Art Museum",
+                "primaryimageurl":"http://static.thewalters.org/images/PS1_48.2863_3Qtr_DD_T09.jpg"
+            },
+            {
+                "work_id": "4",
+                "name": "Protestors marching with banner 'Racism is the Same Everywhere', Anti Springbok Tour protest",
+                "artist": "Hanly, Gil, 1934-, photographer",
+                "type": "photograph",
+                "date": "1981",
+                "culture": "Auckland",
+                "location": "Auckland Museum",
+                "primaryimageurl":"http://api.aucklandmuseum.com/id/media/p/e1f904a4de334e6d8bada40a66a063aeba1cce64?rendering=original.jpg"
+            },
+            {
+                "work_id": "5",
+                "name": "Design for Memorial to a Dog",
+                "artist": "Giulio Romano",
+                "type": "drawing",
+                "date": "1531–34",
+                "culture": "Italy",
+                "location": "Cooper Hewitt, Smithsonian Design Museum",
+                "primaryimageurl":"https://images.collection.cooperhewitt.org/5983_78f3453b5d8ff5fd_o.jpg"
+            },
+            {
+                "work_id": "6",
+                "name": "Street in Auvers-sur-Oise",
+                "artist": "Vincent van Gogh",
+                "type": "painting",
+                "date": "1890",
+                "culture": "Dutch",
+                "location": "Finnish National Gallery",
+                "primaryimageurl":"http://kokoelmat.fng.fi/app?action=image&iid=X0025002&profile=topicartworkbignew"
+            }
+        ]
+}
