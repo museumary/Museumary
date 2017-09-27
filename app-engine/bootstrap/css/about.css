@@ -3,7 +3,9 @@ body {
     color: #000000;
     font-family: 'Montserrat', sans-serif;
 }
-h1 {
+.container h1 {
+    font-size: 60px;
+    font-weight: bold;
     text-align: center;
 }
 .row p {
@@ -16,11 +18,7 @@ h1 {
 .col-md-6 p {
     text-align: center;
 }
-/*p {
-    font-size: 16px;
-    color: #cdcdcd;
-}
-*/
+
 .navbar {
     margin-bottom: 0;
 }
