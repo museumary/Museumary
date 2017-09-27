@@ -1,0 +1,58 @@
+{"artists": [
+            {
+                "artist_id": "0",
+                "name": "Vincent van Gogh",
+                "birth": "1853",
+                "death": "1890",
+                "birthplace": "Groot Zundert (Zundert), The Netherlands",
+                "deathplace": "Auvers-sur-Oise, France",
+                "work_ids": ["0","6"],
+                "culture": "Dutch",
+                "primaryimageurl":"http://nrs.harvard.edu/urn-3:HUAM:DDC251942_dynmc"
+            },
+            {
+                "artist_id": "1",
+                "name": "Salvador Dali",
+                "birth": "1904",
+                "death": "1989",
+                "birthplace": "Figueres, Spain",
+                "deathplace": "Figueres, Spain",
+                "work_ids": ["1"],
+                "culture": "Spanish",
+                "primaryimageurl":"http://nrs.harvard.edu/urn-3:HUAM:INV012317_dynmc"
+            },
+            {
+                "artist_id": "2",
+                "name": "Pablo Ruiz Picasso",
+                "birth": "1881",
+                "death": "1973",
+                "birthplace": "Malaga, Spain",
+                "deathplace": "Mougins, France",
+                "work_ids": ["2"],
+                "culture": "Spanish",
+                "primaryimageurl":"https://www.biography.com/.image/t_share/MTE1ODA0OTcxNzU0MDk2MTQx/pablo-picasso-9440021-1-402.jpg"
+            },
+            {
+                "artist_id": "3",
+                "name": "Gil Hanly",
+                "birth": "1934",
+                "death": "null",
+                "birthplace": "Rangitikei, New Zealand",
+                "deathplace": "null",
+                "work_ids": ["4"],
+                "culture": "New Zealand",
+                "primaryimageurl":"https://elsewhere.scdn3.secure.raxcdn.com/images/v95000/articles/2_gil.jpg"
+            },
+            {
+                "artist_id": "4",
+                "name": "Giulio Romano",
+                "birth": "1499",
+                "death": "1546",
+                "birthplace": "Rome, Italy",
+                "deathplace": "Mantua, Italy",
+                "work_ids": ["5"],
+                "culture": "Italy",
+                "primaryimageurl":"https://upload.wikimedia.org/wikipedia/commons/7/75/Titian_-_Portrait_of_Giulio_Romano_-_WGA22947.jpg"
+            }
+]
+}
