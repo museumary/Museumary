@@ -1,29 +1,64 @@
-{% extends "base.html" %}
-{% set css_name = 'css/home.css' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Art Museum Database</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/home.css" rel="stylesheet">
+  </head>
+  <!-- 
+    HOME PAGE 
+  -->
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="home.html#">Museumary</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="artists.html#">Artists</a></li>
+            <li><a href="works.html#">Works</a></li>
+            <li><a href="venues.html#">Venues</a></li>
+            <li><a href="art_forms.html#">Art Forms</a></li>
+            <li><a href="about.html#">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <!-- CAROUSEL -->
     <div class="container">
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <!-- <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li> -->
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <div class="item active">
-            <img class="carousel-image" src="/static/images/Guernica.jpg" alt="Guernica" width="3200" height="1200">
+            <img class="carousel-image" src="images/Guernica.jpg" alt="Guernica" width="3200" height="1200">
+          </div>
+
+          <!-- <div class="item">
+            <img class="carousel-image" src="images/Starry_Night.jpg" alt="Starry Night" width="3200" height="1200">
           </div>
 
           <div class="item">
-            <img class="carousel-image" src="/static/images/Starry_Night.jpg" alt="Starry Night" width="3200" height="1200">
-          </div>
-
-          <div class="item">
-            <img class="carousel-image" src="/static/images/American_Gothic.jpg" alt="American Gothic" width="3200" height="1200">
-          </div>
+            <img class="carousel-image" src="images/American_Gothic.jpg" alt="American Gothic" width="3200" height="1200">
+          </div> -->
         </div>
 
         <!-- Left and right controls -->
@@ -37,7 +72,7 @@
         </a>
       </div>
     </div>
-
+    
     <!-- MODELS -->
     <div class="container">
       <div class="row">
@@ -63,4 +98,8 @@
         </div>
       </div>
     </div>
-{% endblock %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
