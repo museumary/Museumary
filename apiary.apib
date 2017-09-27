@@ -1,86 +1,126 @@
 FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
-# museumary
+# Museumary
 
 Museumary is a simple API used to retrieve data on art by
 specific artwork, artist, location, and type of art.
 
-## Artwork Collection [/artworks]
+## group Artwork Collection
 
+## All Works [/works]
 ### List All Artworks [GET]
+
 
 + Response 200 (application/json)
 
-        [
+    + Body
+    
             {
-                "id": "0",
-                "name": "The Wounded Veteran",
-                "artist": "Vincent can Gogh",
-                "type": "drawing",
-                "data": "c. 1882-1883",
-                "culture": "Dutch",
-                "location": "Harvard Art Museum"
-            },
-            {
-                "id": "1",
-                "name": "Envy",
-                "artist": "Salvador Dali",
-                "type": "print",
-                "data": "1966-1967",
-                "culture": "Spanish",
-                "location": "Harvard Art Museum"
-            },
-            {
-                "id": "2",
-                "name": "The Pomegranate",
-                "artist": "Pablo Ruiz Picasso",
-                "type": "painting",
-                "data": "1911-1912",
-                "culture": "Spanish",
-                "location": "Harvard Art Museum"
+                "works": [
+                    {
+                        "id": "0",
+                        "name": "The Wounded Veteran",
+                        "artist": "Vincent can Gogh",
+                        "type": "drawing",
+                        "data": "c. 1882-1883",
+                        "culture": "Dutch",
+                        "location": "Harvard Art Museum"
+                    },
+                    {
+                        "id": "1",
+                        "name": "Envy",
+                        "artist": "Salvador Dali",
+                        "type": "print",
+                        "data": "1966-1967",
+                        "culture": "Spanish",
+                        "location": "Harvard Art Museum"
+                    },
+                    {
+                        "id": "2",
+                        "name": "The Pomegranate",
+                        "artist": "Pablo Ruiz Picasso",
+                        "type": "painting",
+                        "data": "1911-1912",
+                        "culture": "Spanish",
+                        "location": "Harvard Art Museum"
+                    }
+                ]
             }
-        ]
 
+## Single Work [/works/{work_id}]
 ### Specific Artwork [GET]
 
 + Parameters
-    + id (required, integer) ...ID of the requested artwork
+    + work_id (required, integer) ...ID of the requested artwork
 
 + Response 200 (application/json)
 
-    + Headers
-
-            Location: /artworks/id
-
     + Body
 
-        {
-            "id": "1",
-            "name": "Envy"
-            "artist": "Salvador Dali"
-            "type": "print"
-            "data": "1966-1967"
-            "culture": "Spanish"
-        }
-            
-## Artists [/artists]
+            {
+                "id": "1",
+                "name": "Envy"
+                "artist": "Salvador Dali"
+                "type": "print"
+                "data": "1966-1967"
+                "culture": "Spanish"
+            }
+          
+## group Artist Collection
 
+## All Artists [/artists]
 ### List All Artists [GET]
 
 + Response 200 (application/json)
 
-        [
+    + Body
+    
             {
-                "id": "0",
-                "name": "Vincent van Gogh",
-                "birth": "1853",
-                "death": "1890",
-                "birthplace": "Groot Zundert (Zundert), The Netherlands",
-                "deathplace": "Auvers-sur-Oise, France",
-                "artwork_ids": ["0"],
-                "culture": "Dutch"
-            },
+                "artists": [
+                    {
+                        "id": "0",
+                        "name": "Vincent van Gogh",
+                        "birth": "1853",
+                        "death": "1890",
+                        "birthplace": "Groot Zundert (Zundert), The Netherlands",
+                        "deathplace": "Auvers-sur-Oise, France",
+                        "artwork_ids": ["0"],
+                        "culture": "Dutch"
+                    },
+                    {
+                        "id": "1",
+                        "name": "Salvador Dali",
+                        "birth": "1904",
+                        "death": "1989",
+                        "birthplace": "Figueres, Spain",
+                        "deathplace": "Figueres, Spain",
+                        "artwork_ids": ["1"],
+                        "culture": "Spanish"
+                    },
+                    {
+                        "id": "2",
+                        "name": "Pablo Ruiz Picasso",
+                        "birth": "1881",
+                        "death": "1973",
+                        "birthplace": "Malaga, Spain",
+                        "deathplace": "Mougins, France",
+                        "artwork_ids": ["2"],
+                        "culture": "Spanish"
+                    }
+                ]
+            }
+
+## Single Artist [/artists/{artist_id}]
+### Specific Artist [GET]
+
++ Parameters
+    + artist_id (required, integer) ...ID of the requested artist
+
++ Response 200 (application/json)
+
+    + Body
+
             {
                 "id": "1",
                 "name": "Salvador Dali",
@@ -90,49 +130,144 @@ specific artwork, artist, location, and type of art.
                 "deathplace": "Figueres, Spain",
                 "artwork_ids": ["1"],
                 "culture": "Spanish"
-            },
-            {
-                "id": "2",
-                "name": "Pablo Ruiz Picasso",
-                "birth": "1881",
-                "death": "1973",
-                "birthplace": "Malaga, Spain",
-                "deathplace": "Mougins, France",
-                "artwork_ids": ["2"],
-                "culture": "Spanish"
             }
-        ]
 
-### Specific Artist [GET]
+## group Venues
 
-+ Parameters
-    + id (required, integer) ...ID of the requested artist
+## All Venues [/venues]
+### List All Venues [GET]
 
 + Response 200 (application/json)
 
-    + Headers
+    + Body
+    
+            {
+                "venues": [
+                    {
+                        "venue_id": "0",
+                        "name": "Harvard Art Museum",
+                        "country" : "USA",
+                        "city": "Cambridge, MA",
+                        "work_ids": ["0","1","2"],
+                        "address": "32 Quincy St, Cambridge, MA 02138"
+                    },
+                    {
+                        "venue_id": "1",
+                        "name": "The Walters Art Museum",
+                        "country" : "USA",
+                        "city": "Baltimore, MD",
+                        "work_ids": ["3"],
+                        "address": "600 N. Charles Street, Baltimore, MD"
+                    },
+                    {
+                        "venue_id": "2",
+                        "name": "Auckland Museum",
+                        "country" : "New Zealand",
+                        "city": "Auckland",
+                        "work_ids": ["4"],
+                        "address": "The Auckland Domain, Parnell, Auckland 1010, New Zealand"
+                    },
+                    {
+                        "venue_id": "3",
+                        "name": "Cooper Hewitt, Smithsonian Design Museum",
+                        "country" : "USA",
+                        "city": "New York, NY",
+                        "work_ids": ["5"],
+                        "address": "2 E 91st St, New York, NY 10128"
+                    },
+                    {
+                        "venue_id": "4",
+                        "name": "Finish National Gallery",
+                        "country" : "Finland",
+                        "city": "Helenski",
+                        "work_ids": ["6"],
+                        "address": "Kaivokatu 2, 00100 Helsinki, Finland"
+                    }
+                ]
+            }
+        
+## Single Venue [/venues/{venue_id}]
+### Specific Venue [GET]
 
-            Location: /artists/id
++ Parameters
+    + venue_id (required, integer) ...ID of the requested venue
+
++ Response 200 (application/json)
 
     + Body
 
-        {
-            "id": "1",
-            "name": "Salvador Dali",
-            "birth": "1904",
-            "death": "1989",
-            "birthplace": "Figueres, Spain",
-            "deathplace": "Figueres, Spain",
-            "artwork_ids": ["1"],
-            "culture": "Spanish"
-        }
+            {
+                "venue_id": "0",
+                "name": "Harvard Art Museum",
+                "country" : "USA",
+                "city": "Cambridge, MA",
+                "work_ids": ["0","1","2"],
+                "address": "32 Quincy St, Cambridge, MA 02138"
+            }
 
-## Museums [/museums]
+## group Art Form
 
-### List All Museums [GET]
-### Specific Museum [GET]
-
-## Types of Art [/types]
-
+## All Art Forms [/art_forms]
 ### List All Types [GET]
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "types": [
+                    {
+                        "name": "painting",
+                        "type_id": "0",
+                        "meduims": ["oil on canvas"],
+                        "notable examples": ["2", "6"],
+                        "notable artists": ["2"]
+                    },
+                    {
+                        "name": "drawing",
+                        "type_id": "1",
+                        "meduims": ["charcoal", "pen on paper", "pencil on paper"],
+                        "notable examples": ["5", "0"],
+                        "notable artists": ["0"]
+                    },
+                    {
+                        "name": "print",
+                        "type_id": "2",
+                        "meduims": ["engraving", "screenprinting"],
+                        "notable examples": ["1"],
+                        "notable artists": ["1"]
+                    },
+                    {
+                        "name": "ceramics",
+                        "type_id": "3",
+                        "meduims": ["faience"],
+                        "notable examples": ["3"],
+                        "notable artists": []
+                    },
+                    {
+                        "name": "photograph",
+                        "type_id": "4",
+                        "meduims": ["documentary photography"],
+                        "notable examples": ["4"],
+                        "notable artists": ["3"]
+                    }
+                ]
+            }
+
+## Single Art Form [/art_forms/{art_form_id}]
 ### Specific Type [GET]
+
++ Parameters
+    + art_form_id (required, integer) ...ID of the requested art form
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "name": "painting",
+                "type_id": "0",
+                "meduims": ["oil on canvas"],
+                "notable examples": ["2", "6"],
+                "notable artists": ["2"]
+            }
