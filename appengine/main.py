@@ -28,6 +28,10 @@ def works():
 def artists():
     return render_template('artists.html')
 
+@app.route('/artist')
+def artist():
+    return render_template('artist.html')
+
 # This is only used when running locally. When running live, gunicorn runs
 # the application.
 if __name__ == '__main__':
