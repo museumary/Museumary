@@ -8,7 +8,7 @@ body {
     font-weight: bold;
     text-align: center;
 }
-.row p {
+p {
     text-align: center;
 }
 .col-md-6 h2 {
@@ -16,6 +16,9 @@ body {
     text-align: center;
 }
 .col-md-6 p {
+    text-align: center;
+}
+.col-md-4 p {
     text-align: center;
 }
 
