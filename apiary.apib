@@ -19,7 +19,7 @@ specific artwork, artist, location, and type of art.
             {
                 "works": [
                     {
-                        "id": "0",
+                        "work_id": "0",
                         "name": "The Wounded Veteran",
                         "artist": "Vincent can Gogh",
                         "type": "drawing",
@@ -28,7 +28,7 @@ specific artwork, artist, location, and type of art.
                         "location": "Harvard Art Museum"
                     },
                     {
-                        "id": "1",
+                        "work_id": "1",
                         "name": "Envy",
                         "artist": "Salvador Dali",
                         "type": "print",
@@ -37,7 +37,7 @@ specific artwork, artist, location, and type of art.
                         "location": "Harvard Art Museum"
                     },
                     {
-                        "id": "2",
+                        "work_id": "2",
                         "name": "The Pomegranate",
                         "artist": "Pablo Ruiz Picasso",
                         "type": "painting",
@@ -59,7 +59,7 @@ specific artwork, artist, location, and type of art.
     + Body
 
             {
-                "id": "1",
+                "work_id": "1",
                 "name": "Envy"
                 "artist": "Salvador Dali"
                 "type": "print"
@@ -79,7 +79,7 @@ specific artwork, artist, location, and type of art.
             {
                 "artists": [
                     {
-                        "id": "0",
+                        "artist_id": "0",
                         "name": "Vincent van Gogh",
                         "birth": "1853",
                         "death": "1890",
@@ -89,7 +89,7 @@ specific artwork, artist, location, and type of art.
                         "culture": "Dutch"
                     },
                     {
-                        "id": "1",
+                        "artist_id": "1",
                         "name": "Salvador Dali",
                         "birth": "1904",
                         "death": "1989",
@@ -99,7 +99,7 @@ specific artwork, artist, location, and type of art.
                         "culture": "Spanish"
                     },
                     {
-                        "id": "2",
+                        "artist_id": "2",
                         "name": "Pablo Ruiz Picasso",
                         "birth": "1881",
                         "death": "1973",
@@ -122,7 +122,7 @@ specific artwork, artist, location, and type of art.
     + Body
 
             {
-                "id": "1",
+                "artist_id": "1",
                 "name": "Salvador Dali",
                 "birth": "1904",
                 "death": "1989",
@@ -205,9 +205,9 @@ specific artwork, artist, location, and type of art.
                 "address": "32 Quincy St, Cambridge, MA 02138"
             }
 
-## group Art Form
+## group Art Type
 
-## All Art Forms [/art_forms]
+## All Art Types [/types]
 ### List All Types [GET]
 
 + Response 200 (application/json)
@@ -254,11 +254,11 @@ specific artwork, artist, location, and type of art.
                 ]
             }
 
-## Single Art Form [/art_forms/{art_form_id}]
+## Single Art Type [/types/{type_id}]
 ### Specific Type [GET]
 
 + Parameters
-    + art_form_id (required, integer) ...ID of the requested art form
+    + type_id (required, integer) ...ID of the requested art form
 
 + Response 200 (application/json)
 
