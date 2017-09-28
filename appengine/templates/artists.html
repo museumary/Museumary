@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% set css_name = "css/about.css" %}
+{% set css_name = "static/css/about.css" %}
 {% block content %}
 
     <h1>Artists</h1>
@@ -10,11 +10,12 @@
       iframe.id = 'iframe';
       iframe.style.display = 'none';
       document.body.appendChild(iframe);
-      iframe.src = 'artists.json';
+      iframe.src = '/static/JSONs/artists.json';
       var json;
       setTimeout(function(){
-        json = JSON.parse(document.getElementById('iframe').contentDocument.body.firstChild.innerHTML);
-        var i = "";
+        var text = document.getElementById('iframe').contentDocument.body.firstChild.innerHTML;
+        json = JSON.parse(text);
+        var i = "<br>";
         for (var key in json) {
           var val = json[key];
           for(var key2 in val) {
