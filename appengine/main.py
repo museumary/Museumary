@@ -12,9 +12,9 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/art_forms')
+@app.route('/types')
 def art_forms():
-    return render_template('art_forms.html')
+    return render_template('types.html')
 
 @app.route('/venues')
 def venues():

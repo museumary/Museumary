@@ -19,7 +19,7 @@ specific artwork, artist, location, and type of art.
             {
                 "works": [
                     {
-                        "id": "0",
+                        "work_id": "0",
                         "name": "The Wounded Veteran",
                         "artist": "Vincent can Gogh",
                         "type": "drawing",
@@ -28,7 +28,7 @@ specific artwork, artist, location, and type of art.
                         "location": "Harvard Art Museum"
                     },
                     {
-                        "id": "1",
+                        "work_id": "1",
                         "name": "Envy",
                         "artist": "Salvador Dali",
                         "type": "print",
@@ -37,7 +37,7 @@ specific artwork, artist, location, and type of art.
                         "location": "Harvard Art Museum"
                     },
                     {
-                        "id": "2",
+                        "work_id": "2",
                         "name": "The Pomegranate",
                         "artist": "Pablo Ruiz Picasso",
                         "type": "painting",
@@ -59,7 +59,7 @@ specific artwork, artist, location, and type of art.
     + Body
 
             {
-                "id": "1",
+                "work_id": "1",
                 "name": "Envy"
                 "artist": "Salvador Dali"
                 "type": "print"
@@ -79,7 +79,7 @@ specific artwork, artist, location, and type of art.
             {
                 "artists": [
                     {
-                        "id": "0",
+                        "artist_id": "0",
                         "name": "Vincent van Gogh",
                         "birth": "1853",
                         "death": "1890",
@@ -89,7 +89,7 @@ specific artwork, artist, location, and type of art.
                         "culture": "Dutch"
                     },
                     {
-                        "id": "1",
+                        "artist_id": "1",
                         "name": "Salvador Dali",
                         "birth": "1904",
                         "death": "1989",
@@ -99,7 +99,7 @@ specific artwork, artist, location, and type of art.
                         "culture": "Spanish"
                     },
                     {
-                        "id": "2",
+                        "artist_id": "2",
                         "name": "Pablo Ruiz Picasso",
                         "birth": "1881",
                         "death": "1973",
@@ -122,7 +122,7 @@ specific artwork, artist, location, and type of art.
     + Body
 
             {
-                "id": "1",
+                "artist_id": "1",
                 "name": "Salvador Dali",
                 "birth": "1904",
                 "death": "1989",
@@ -205,9 +205,9 @@ specific artwork, artist, location, and type of art.
                 "address": "32 Quincy St, Cambridge, MA 02138"
             }
 
-## group Art Form
+## group Art Type
 
-## All Art Forms [/art_forms]
+## All Art Types [/types]
 ### List All Types [GET]
 
 + Response 200 (application/json)
@@ -219,46 +219,46 @@ specific artwork, artist, location, and type of art.
                     {
                         "type_id": "0",
                         "name": "painting",
-                        "meduims": ["oil on canvas"],
+                        "mediums": ["oil on canvas"],
                         "notable examples": ["2", "6"],
                         "notable artists": ["2"]
                     },
                     {
                         "type_id": "1",
                         "name": "drawing",
-                        "meduims": ["charcoal", "pen on paper", "pencil on paper"],
+                        "mediums": ["charcoal", "pen on paper", "pencil on paper"],
                         "notable examples": ["5", "0"],
                         "notable artists": ["0"]
                     },
                     {
                         "type_id": "2",
                         "name": "print",
-                        "meduims": ["engraving", "screenprinting"],
+                        "mediums": ["engraving", "screenprinting"],
                         "notable examples": ["1"],
                         "notable artists": ["1"]
                     },
                     {
                         "type_id": "3",
                         "name": "ceramics",
-                        "meduims": ["faience"],
+                        "mediums": ["faience"],
                         "notable examples": ["3"],
                         "notable artists": []
                     },
                     {
                         "type_id": "4",
                         "name": "photograph",
-                        "meduims": ["documentary photography"],
+                        "mediums": ["documentary photography"],
                         "notable examples": ["4"],
                         "notable artists": ["3"]
                     }
                 ]
             }
 
-## Single Art Form [/art_forms/{art_form_id}]
+## Single Art Type [/types/{type_id}]
 ### Specific Type [GET]
 
 + Parameters
-    + art_form_id (required, integer) ...ID of the requested art form
+    + type_id (required, integer) ...ID of the requested art form
 
 + Response 200 (application/json)
 
@@ -267,7 +267,7 @@ specific artwork, artist, location, and type of art.
             {
                 "type_id": "0",
                 "name": "painting",
-                "meduims": ["oil on canvas"],
+                "mediums'": ["oil on canvas"],
                 "notable examples": ["2", "6"],
                 "notable artists": ["2"]
             }
