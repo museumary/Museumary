@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% set css_name = "/static/css/about.css" %}
+{% set css_name = "css/model.css" %}
 {% block content %}
 
     <h1>Artists</h1>
@@ -21,7 +21,6 @@
           for(var key2 in val) {
             var name = val[key2].name;
             var URIname = encodeURI(name);
-            console.log(URIname);
             i += "<a href=artist?name=" + URIname + ">" + name + "</a><br><br>";
           }
         }

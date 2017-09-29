@@ -2,7 +2,7 @@
 {% set css_name = "css/model.css" %}
 {% block content %}
 
-    <h1>Works</h1>
+    <h1>Art Forms</h1>
 
     <div class = "results"></div>
     <script>
@@ -10,7 +10,7 @@
       iframe.id = 'iframe';
       iframe.style.display = 'none';
       document.body.appendChild(iframe);
-      iframe.src = '/static/JSONs/works.json';
+      iframe.src = '/static/JSONs/types.json';
       var json;
       setTimeout(function(){
         var text = document.getElementById('iframe').contentDocument.body.firstChild.innerHTML;
@@ -19,7 +19,7 @@
         for (var key in json) {
           var val = json[key];
           for(var key2 in val) {
-            i += "<a href=work?name=" + encodeURI(val[key2].name) + ">" + val[key2].name + "</a><br><br>";
+            i += "<a href=type?name=" + encodeURI(val[key2].name) + ">" + val[key2].name + "</a><br><br>";
           }
         }
         document.querySelector('.results').innerHTML = i;

@@ -32,6 +32,18 @@ def artists():
 def artist():
     return render_template('artist.html')
 
+@app.route('/work')
+def work():
+    return render_template('work.html')
+
+@app.route('/venue')
+def venue():
+    return render_template('venue.html')
+
+@app.route('/type')
+def type():
+    return render_template('type.html')
+
 # This is only used when running locally. When running live, gunicorn runs
 # the application.
 if __name__ == '__main__':

@@ -15,7 +15,7 @@
       iframe.id = 'iframe';
       iframe.style.display = 'none';
       document.body.appendChild(iframe);
-      iframe.src = 'static/JSONs/artists.json';
+      iframe.src = 'static/JSONs/types.json';
 
       var iframe2 = document.createElement('iframe');
       iframe2.id = 'iframe2';
@@ -23,40 +23,56 @@
       document.body.appendChild(iframe2);
       iframe2.src = 'static/JSONs/works.json';
 
+      var iframe3 = document.createElement('iframe');
+      iframe3.id = 'iframe3';
+      iframe3.style.display = 'none';
+      document.body.appendChild(iframe3);
+      iframe3.src = 'static/JSONs/artists.json';
+
       var json;
       var json2;
+      var json3;
 
       setTimeout(function() {
-        var text = document.getElementById('iframe').contentDocument.body.firstChild.innerHTML;
-        json = JSON.parse(text);
+        var types = document.getElementById('iframe').contentDocument.body.firstChild.innerHTML;
+        json = JSON.parse(types);
 
         var works = document.getElementById('iframe2').contentDocument.body.firstChild.innerHTML;
         json2 = JSON.parse(works);
+
+        var artists = document.getElementById('iframe3').contentDocument.body.firstChild.innerHTML;
+        json3 = JSON.parse(artists);
 
         for (var key in json) {
           var val = json[key];
           for(var key2 in val) {
             var obj = val[key2];
             if(obj.name === name) {
-              result += obj.culture + "<br>";
-              if(obj.death === "null") {
-                result += "born " + obj.birth + " (" + obj.birthplace + ")<br>";
+              for(var med in obj.mediums) {
+                result += obj.mediums[med] + "<br>";
               }
-              else {
-                result += "born " + obj.birth + " (" + obj.birthplace + ")<br>";
-                result += "died " + obj.death + " (" + obj.deathplace + ")<br>";
-              }
-              result += "<h2>Works</h2><br>";
+
+              result += "<br><h2>Notable Works</h2><br>"
               for(var i in json2) {
                 var val2 = json2[i];
                 for(var j in val2) {
                   var work = val2[j];
-                  if(obj.work_ids.includes(work.work_id)) {
+                  if(obj.notable_examples.includes(work.work_id)) {
                     result += "<a href=work?name=" + encodeURI(work.name) + ">" + work.name + "</a><br><br>";
                   }
                 }
               }
-              result += "<img src=" + obj.primaryimageurl + "><br><br>";
+
+              result += "<h2>Notable Arists</h2><br>"
+              for(var k in json3) {
+                var val3 = json3[k];
+                for(var l in val3) {
+                  var artist = val3[l];
+                  if(obj.notable_artists.includes(artist.artist_id)) {
+                    result += "<a href=artist?name=" + encodeURI(artist.name) + ">" + artist.name + "</a><br><br>";
+                  }
+                }
+              }
             }
           }
         }

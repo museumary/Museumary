@@ -2,37 +2,37 @@
 	"types": [{
 			"name": "painting",
 			"type_id": "0",
-			"meduims": ["oil on canvas"],
-			"notable examples": ["2", "6"],
-			"notable artists": ["2"]
+			"mediums": ["oil on canvas"],
+			"notable_examples": ["2", "6"],
+			"notable_artists": ["2"]
 		},
 		{
 			"name": "drawing",
 			"type_id": "1",
-			"meduims": ["charcoal", "pen on paper", "pencil on paper"],
-			"notable examples": ["5", "0"],
-			"notable artists": ["0"]
+			"mediums": ["charcoal", "pen on paper", "pencil on paper"],
+			"notable_examples": ["5", "0"],
+			"notable_artists": ["0"]
 		},
 		{
 			"name": "print",
 			"type_id": "2",
-			"meduims": ["engraving", "screenprinting"],
-			"notable examples": ["1"],
-			"notable artists": ["1"]
+			"mediums": ["engraving", "screenprinting"],
+			"notable_examples": ["1"],
+			"notable_artists": ["1"]
 		},
 		{
 			"name": "ceramics",
 			"type_id": "3",
-			"meduims": ["faience"],
-			"notable examples": ["3"],
-			"notable artists": []
+			"mediums": ["faience"],
+			"notable_examples": ["3"],
+			"notable_artists": []
 		},
 		{
 			"name": "photograph",
 			"type_id": "4",
-			"meduims": ["documentary photography"],
-			"notable examples": ["4"],
-			"notable artists": ["3"]
+			"mediums": ["documentary photography"],
+			"notable_examples": ["4"],
+			"notable_artists": ["3"]
 		}
 	]
 }

@@ -15,7 +15,7 @@
       iframe.id = 'iframe';
       iframe.style.display = 'none';
       document.body.appendChild(iframe);
-      iframe.src = 'static/JSONs/artists.json';
+      iframe.src = 'static/JSONs/venues.json';
 
       var iframe2 = document.createElement('iframe');
       iframe2.id = 'iframe2';
@@ -27,8 +27,8 @@
       var json2;
 
       setTimeout(function() {
-        var text = document.getElementById('iframe').contentDocument.body.firstChild.innerHTML;
-        json = JSON.parse(text);
+        var venues = document.getElementById('iframe').contentDocument.body.firstChild.innerHTML;
+        json = JSON.parse(venues);
 
         var works = document.getElementById('iframe2').contentDocument.body.firstChild.innerHTML;
         json2 = JSON.parse(works);
@@ -38,14 +38,9 @@
           for(var key2 in val) {
             var obj = val[key2];
             if(obj.name === name) {
-              result += obj.culture + "<br>";
-              if(obj.death === "null") {
-                result += "born " + obj.birth + " (" + obj.birthplace + ")<br>";
-              }
-              else {
-                result += "born " + obj.birth + " (" + obj.birthplace + ")<br>";
-                result += "died " + obj.death + " (" + obj.deathplace + ")<br>";
-              }
+              result += obj.city + "<br>";
+              result += obj.country + "<br>";
+              result += obj.address + "<br>";
               result += "<h2>Works</h2><br>";
               for(var i in json2) {
                 var val2 = json2[i];
@@ -56,7 +51,6 @@
                   }
                 }
               }
-              result += "<img src=" + obj.primaryimageurl + "><br><br>";
             }
           }
         }
