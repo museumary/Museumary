@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% set css_name = "/static/css/about.css" %}
+{% set css_name = "css/model.css" %}
 {% block content %}
 
     <h1>Artists</h1>
@@ -19,7 +19,9 @@
         for (var key in json) {
           var val = json[key];
           for(var key2 in val) {
-            i += val[key2].name + "<br><br>";
+            var name = val[key2].name;
+            var URIname = encodeURI(name);
+            i += "<a href=artist?name=" + URIname + ">" + name + "</a><br><br>";
           }
         }
         document.querySelector('.results').innerHTML = i;

@@ -1,8 +1,8 @@
-{ "works" : [ 
+{ "works" : [
 			{
 				"work_id": "0",
                 "name": "The Wounded Veteran",
-                "artist": "Vincent can Gogh",
+                "artist": "Vincent van Gogh",
                 "type": "drawing",
                 "date": "c. 1882-1883",
                 "culture": "Dutch",

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% set css_name = "css/about.css" %}
+{% set css_name = "css/model.css" %}
 {% block content %}
 
     <h1>Venues</h1>
@@ -19,7 +19,7 @@
         for (var key in json) {
           var val = json[key];
           for(var key2 in val) {
-            i += val[key2].name + "<br><br>";
+            i += "<a href=venue?name=" + encodeURI(val[key2].name) + ">" + val[key2].name + "</a><br><br>";
           }
         }
         document.querySelector('.results').innerHTML = i;
