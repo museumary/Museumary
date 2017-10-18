@@ -1,6 +1,7 @@
 """
 Main file where app-engine runs the website
 """
+
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -64,6 +65,9 @@ def artist():
 
 @app.route('/work')
 def work():
+    """
+    A work page
+    """
     return render_template('work.html')
 
 
