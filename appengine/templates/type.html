@@ -47,12 +47,39 @@
           var val = json[key];
           for(var key2 in val) {
             var obj = val[key2];
+
+         
             if(obj.name === name) {
+              //Youtube video keys for each art type
+              var video = "";
+              var painting = "qWmF-bJj5Xs";
+              var drawing = "5RVNzUPTlVs";
+              var print = "GbBbhG40fDE";
+              var ceramics = "XRDAGeJ_OIE";
+              var photograph = "7ZVyNjKSr0M";
+              if(name === "painting") {
+                video = painting;
+              }
+              if(name === "drawing") {
+                video = drawing;
+              }
+              if(name === "print") {
+                video = print;
+              }
+              if(name === "ceramics") {
+                video = ceramics;
+              }
+              if(name === "photograph") {
+                video = photograph;
+              }
+
+              result += "<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/" + video + "?autoplay=1\"></iframe><br>";
+
               for(var med in obj.mediums) {
                 result += obj.mediums[med] + "<br>";
               }
-
-              result += "<br><h2>Notable Works</h2><br>"
+              
+              result += "<br><h2>Notable Works</h2><br>";
               for(var i in json2) {
                 var val2 = json2[i];
                 for(var j in val2) {
