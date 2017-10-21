@@ -33,9 +33,9 @@
 	},
 	{
 		"venue_id": "4",
-		"name": "Finish National Gallery",
+		"name": "Finnish National Gallery",
 		"country" : "Finland",
-		"city": "Helenski",
+		"city": "Helsinki",
 		"work_ids": ["6"],
 		"address": "Kaivokatu 2, 00100 Helsinki, Finland"
 	}
