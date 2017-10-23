@@ -3,12 +3,14 @@ Main file where app-engine runs the website
 """
 
 from flask import Flask, render_template, jsonify
+from flask_io import FlaskIO, fields
 from flask_sqlalchemy import SQLAlchemy
 from os import environ
 import models
 from models import Artist, Work, ArtType, Venue, Medium
 
 app = Flask(__name__)
+io = FlaskIO(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -96,20 +98,20 @@ def type():
 
 # @app.route('/api/work/', methods=['GET'])
 # @io.from_query('page', fields.Integer(missing=1))
-# @io.from_query('works_per_page', fields.Integer(missing=25))
+# @io.from_query('entries_per_page', fields.Integer(missing=25))
 # def get_works():
 #     """
 #     API GET request for all works of art in the database
 #     """
 #     works = Work.query
 #     num_works = len(works)
-#     num_pages = num_works // works_per_page + 1
+#     num_pages = num_works // entries_per_page + 1
 
 #     # if(sort_by):
 #     # if(filter):
 
 #     # set the number of works given in the response
-#     if works_per_page:
+#     if entries_per_page:
 #         works = works.limit(works_per_page)
 #     # set the offset for response pagination
 #     if page:
@@ -117,11 +119,12 @@ def type():
 
 #     info = {
 #         "page":page,
-#         "works_per_page":works_per_page,
-#         "num_works":num_works,
+#         "entries_per_page":entries_per_page,
+#         "num_pages":num_pages,
+#         "num_entries":num_works,
 #     }
 
-#     return jsonify({"info":info, "works":works.all()})
+#     return jsonify({"info":info, "objects":works.all()})
 
 
 # @app.route('/api/work/<int:work_id>', methods=['GET'])
@@ -186,16 +189,37 @@ def get_venue_data(venue):
 
 
 @app.route('/api/art_type/', methods=['GET'])
-def get_art_types():
+@io.from_query('page', fields.Integer(missing=1))
+@io.from_query('entries_per_page', fields.Integer(missing=25))
+def get_art_types(page, entries_per_page):
     """
     API GET request for all the art_types in the database
     """
-    art_types = ArtType.query.all()
+    art_types = ArtType.query
+    num_entries = len(art_types.all())
+    num_pages = num_entries // entries_per_page + 1
+
+    # set the number of works given in the response
+    if entries_per_page:
+        art_types = art_types.limit(entries_per_page)
+    # set the offset for response pagination
+    if page:
+        art_types = art_types.offset(page)
+
+    info = {
+        'page': page,
+        'entries_per_page': entries_per_page,
+        'num_pages': num_pages,
+        'num_entries': num_entries
+    }
+
+    art_types = art_types.all()
+
     results = []
     for art_type in art_types:
         results.append(get_art_type_data(art_type))
 
-    return jsonify({'art_types':results})
+    return jsonify({"info":info, "objects":results})
 
 
 
