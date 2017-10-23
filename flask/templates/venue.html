@@ -41,13 +41,19 @@
               result += obj.city + "<br>";
               result += obj.country + "<br>";
               result += obj.address + "<br>";
+              var parameters = "&maptype=satellite&zoom=19";
+              var add = obj.address.replace(/, /g, "");
+              add = add.replace(/ /g, "+");
+              result += "<iframe width=\"500\" height=\"300\" frameborder=\"0\" style=\"border:0\" src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q=" + add + parameters + "\" allowfullscreen align=\"center\"></iframe><br>"
+
               result += "<h2>Works</h2><br>";
               for(var i in json2) {
                 var val2 = json2[i];
                 for(var j in val2) {
                   var work = val2[j];
                   if(obj.work_ids.includes(work.work_id)) {
-                    result += "<a href=work?name=" + encodeURI(work.name) + ">" + work.name + "</a><br><br>";
+                    result += "<a href=work?name=" + encodeURI(work.name) + ">" + work.name + "</a><br>";
+                    result += "<img src=" + work.primaryimageurl + "><br><br>";
                   }
                 }
               }
