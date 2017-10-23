@@ -2,11 +2,16 @@
 Main file where app-engine runs the website
 """
 
-from flask import Flask, render_template
-from models import db, Artist, Work, ArtType, Venue, Medium
+from flask import Flask, render_template, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from os import environ
+import models
+from models import Artist, Work, ArtType, Venue, Medium
 
 app = Flask(__name__)
-
+app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URI']
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
 @app.route('/')
 def index():
@@ -89,88 +94,136 @@ def type():
 
 # API requests
 
-@app.route('/api/work', methods=['GET'])
-@io.from_query('page', fields.Integer(missing=1))
-@io.from_query('works_per_page', fields.Integer(missing=25))
-def get_works():
-    """
-    API GET request for all works of art in the database
-    """
-    works = Work.query
-    num_works = len(works)
-    num_pages = num_works // works_per_page + 1
+# @app.route('/api/work/', methods=['GET'])
+# @io.from_query('page', fields.Integer(missing=1))
+# @io.from_query('works_per_page', fields.Integer(missing=25))
+# def get_works():
+#     """
+#     API GET request for all works of art in the database
+#     """
+#     works = Work.query
+#     num_works = len(works)
+#     num_pages = num_works // works_per_page + 1
 
-    # if(sort_by):
-    # if(filter):
+#     # if(sort_by):
+#     # if(filter):
 
-    # set the number of works given in the response
-    if works_per_page:
-        works = works.limit(works_per_page)
-    # set the offset for response pagination
-    if page:
-        works = works.offset(page)
+#     # set the number of works given in the response
+#     if works_per_page:
+#         works = works.limit(works_per_page)
+#     # set the offset for response pagination
+#     if page:
+#         works = works.offset(page)
 
-    info = {
-        "page":page,
-        "works_per_page":works_per_page,
-        "num_works":num_works,
-    }
+#     info = {
+#         "page":page,
+#         "works_per_page":works_per_page,
+#         "num_works":num_works,
+#     }
 
-    return jsonify({"info":info, "works":works.all()})
-
-
-@app.route('/api/work/<int:work_id>', methods=['GET'])
-def get_work(work_id):
-    """
-    API GET request for a single work given work id
-    """
-    return Work.query.filter_by(id=work_id).first()
+#     return jsonify({"info":info, "works":works.all()})
 
 
-@app.route('/api/artist', methods=['GET'])
-def get_artists():
-    """
-    API GET request for all artists in the database
-    """
+# @app.route('/api/work/<int:work_id>', methods=['GET'])
+# def get_work(work_id):
+#     """
+#     API GET request for a single work given work id
+#     """
+#     return Work.query.filter_by(id=work_id).first()
 
-@app.route('/api/artist/<int:artist_id', methods=['GET'])
-def get_artist(artist_id):
-    """
-    API GET request for a single artist given its id
-    """
-    return Artist.query.filter_by(id=artist_id).first()
 
-@app.route('/api/venue', methods=['GET'])
+# @app.route('/api/artist/', methods=['GET'])
+# def get_artists():
+#     """
+#     API GET request for all artists in the database
+#     """
+
+
+
+# @app.route('/api/artist/<int:artist_id', methods=['GET'])
+# def get_artist(artist_id):
+#     """
+#     API GET request for a single artist given its id
+#     """
+#     return Artist.query.filter_by(id=artist_id).first()
+
+
+@app.route('/api/venue/', methods=['GET'])
 def get_venues():
     """
     API GET request for all museums in the database
     """
+    venues = Venue.query.all()
+    results = []
+    for venue in venues:
+        results.append(get_venue_data(venue))
 
-@app.route('/api/venue/<int:venue_id', methods=['GET'])
+    return jsonify({'venues':results})
+
+
+
+@app.route('/api/venue/<int:venue_id>', methods=['GET'])
 def get_venue(venue_id):
     """
     API GET request for a single museum given its id
     """
-    return Venue.query.filter_by(id=venue_id).first()
+    venue = Venue.query.filter_by(id=venue_id).first()
+    result = get_venue_data(venue)
+    return jsonify(result)
+
+def get_venue_data(venue):
+    result = {
+        'id':       venue.id,
+        'name':     venue.name,
+        'street':   venue.street,
+        'city':     venue.city,
+        'country':  venue.country,
+        'zipcode':  venue.zipcode,
+        'work_ids': [work.id for work in venue.works]
+    }
+    return result
+
+
 
 @app.route('/api/art_type/', methods=['GET'])
 def get_art_types():
     """
     API GET request for all the art_types in the database
     """
+    art_types = ArtType.query.all()
+    results = []
+    for art_type in art_types:
+        results.append(get_art_type_data(art_type))
+
+    return jsonify({'art_types':results})
+
+
 
 @app.route('/api/art_type/<int:art_type_id>', methods=['GET'])
-def get_art_type():
+def get_art_type(art_type_id):
     """
     API GET request for a single art_type given its id
     """
-    return ArtType.query.filter_by(id=art_type_id).first()
+    art_type = ArtType.query.filter_by(id=art_type_id).first()
+    result = get_art_type_data(art_type)
+    return jsonify(result)
 
-# @app.route('/api/medium', methods=['GET'])
+def get_art_type_data(art_type):
+    result = {
+        'id':           art_type.id,
+        'name':         art_type.name,
+        'artist_ids':   [artist.id for artist in art_type.artists],
+        'medium_ids':   [medium.id for medium in art_type.media],
+        'work_ids':     [work.id for work in art_type.works]
+    }
+    return result
+
+# @app.route('/api/medium/', methods=['GET'])
 # def get_mediums():
 #     """
 #     API GET request for a single art_type given its id
 #     """
+
 # @app.route('/api/medium/<int:medium_id')
 
 
