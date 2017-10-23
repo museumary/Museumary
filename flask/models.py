@@ -1,17 +1,13 @@
-"""
-Future Flask API File
-"""
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.declarative import declarative_base
-
+from os import environ
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://test:test123@localhost/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-Base = declarative_base()
 
 
 artist_to_art_type = db.Table(
@@ -62,7 +58,7 @@ class ArtType(db.Model):
         'Artist',
         secondary=artist_to_art_type, 
         lazy='subquery',
-        backref=db.backref('artist', lazy=True)
+        backref=db.backref('art_types', lazy=True)
     )
 
     def __repr__(self):
@@ -76,9 +72,10 @@ class Medium(db.Model):
     name = db.Column(db.String(128))
     art_type_id = db.Column(db.Integer, db.ForeignKey('art_type.id'))
     art_type = db.relationship("ArtType", back_populates="media")
+    works = db.relationship("Work", back_populates="medium")
 
     def __repr__(self):
-        return '<Media %s>' % self.name
+        return '<Medium %s>' % self.name
 
 
 class Work(db.Model):
@@ -89,13 +86,17 @@ class Work(db.Model):
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
     artist = db.relationship("Artist", backref="works")
     art_type_id = db.Column(db.Integer, db.ForeignKey('art_type.id'))
+    medium = db.relationship("Medium", back_populates="works")
+    medium_id = db.Column(db.Integer, db.ForeignKey('medium.id'))
     date = db.Column(db.String(128))
     venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
     venue = db.relationship("Venue", back_populates="works")
     image_url = db.Column(db.String(512))
+    description = db.Column(db.String(1024))
 
     def __repr__(self):
         return '<Work %s>' % self.name
 
-
+if __name__=='__main__':
+    db.create_all()
 
