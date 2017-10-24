@@ -5,6 +5,7 @@ Main file where app-engine runs the website
 from flask import Flask, render_template, jsonify
 from flask_io import FlaskIO, fields
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
 from os import environ
 import models
 from models import Artist, Work, ArtType, Venue, Medium
