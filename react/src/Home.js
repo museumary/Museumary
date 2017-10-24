@@ -1,10 +1,10 @@
 import React from 'react';
-import Carousel from './Carousel'
+import CarouselInstance from './CarouselInstance'
 
 const Home = () => {
   	return (
   		<div className="Home">
-        	<Carousel />
+        	<CarouselInstance />
         </div>);
 };
 
