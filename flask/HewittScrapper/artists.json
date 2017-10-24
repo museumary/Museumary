@@ -1,0 +1,67 @@
+{
+	"Artists": [{
+		"image_url": "None",
+		"name": "Edward McKnight Kauffer",
+		"birth": "1890",
+		"birthplace": "New York City, NY",
+		"death": "1954",
+		"culture": "United States",
+		"deathplace": "Great Falls, MT"
+	}, {
+		"image_url": "https://images.collection.cooperhewitt.org/96180_4d4d8af94fdf2c32_b.jpg",
+		"name": "John Rombola",
+		"birth": "Unknown",
+		"birthplace": "None",
+		"death": "1933",
+		"culture": "United States",
+		"deathplace": "None"
+	}, {
+		"image_url": "None",
+		"name": "William Hunt Diederich",
+		"birth": "1884",
+		"birthplace": "None",
+		"death": "1953",
+		"culture": "United States",
+		"deathplace": "None"
+	}, {
+		"image_url": "None",
+		"name": "Romolo Achille Liverani",
+		"birth": "1809",
+		"birthplace": "Faenza, Italy",
+		"death": "1872",
+		"culture": "Italy",
+		"deathplace": "Faenza, Italy"
+	}, {
+		"image_url": "None",
+		"name": "Daniel Marot",
+		"birth": "1661",
+		"birthplace": "Paris, France",
+		"death": "1752",
+		"culture": "France",
+		"deathplace": "The Hague, Netherlands"
+	}, {
+		"image_url": "None",
+		"name": "Henry Dreyfuss",
+		"birth": "1904",
+		"birthplace": "Brooklyn, New York City, NY",
+		"death": "1972",
+		"culture": "United States",
+		"deathplace": "South Pasadena, CA"
+	}, {
+		"image_url": "None",
+		"name": "Felice Giani",
+		"birth": "1758",
+		"birthplace": "San Sebastiano Curone, Italy",
+		"death": "1823",
+		"culture": "Italy",
+		"deathplace": "Rome, Italy"
+	}, {
+		"image_url": "None",
+		"name": "Ando Hiroshige",
+		"birth": "1797",
+		"birthplace": "Edo",
+		"death": "1858",
+		"culture": "Japan",
+		"deathplace": "Edo"
+	}]
+}

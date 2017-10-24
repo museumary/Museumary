@@ -5,6 +5,7 @@ Main file where app-engine runs the website
 from flask import Flask, render_template, jsonify
 from flask_io import FlaskIO, fields
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
 from os import environ
 import models
 from models import Artist, Work, ArtType, Venue, Medium
@@ -122,12 +123,13 @@ def get_works(**kwargs):
     order = kwargs['order']
 
     works = Work.query
+    num_entries = len(works.all())
 
-    # if order_by:
-    #     if order == 'ascending':
-    #         works = works.order_by(getattr(Work, order_by))
-    #     elif order == 'descending':
-    #         works = works.order_by(desc(getattr(Work, order_by)))
+    if order_by:
+        if order == 'ascending':
+            works = works.order_by(getattr(Work, order_by))
+        elif order == 'descending':
+            works = works.order_by(desc(getattr(Work, order_by)))
 
     # if(filter):
 
@@ -136,14 +138,14 @@ def get_works(**kwargs):
         works = works.limit(entries_per_page)
     # set the offset for response pagination
     if page:
-        works = works.offset(page)
+        offset = (page - 1) * entries_per_page
+        works = works.offset(offset)
 
     works = works.all()
     results = []
     for work in works:
         results.append(get_work_data(work))
 
-    num_entries = len(works)
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
@@ -188,19 +190,21 @@ def get_artists(**kwargs):
     order = kwargs['order']
 
     artists = Artist.query
+    num_entries = len(artists.all())
 
-    # if order_by:
-    #     if order == 'ascending':
-    #         artists = artists.order_by(getattr(Artist, order_by))
-    #     elif order == 'descending':
-    #         artists = artists.order_by(desc(getattr(Artist, order_by)))
+    if order_by:
+        if order == 'ascending':
+            artists = artists.order_by(getattr(Artist, order_by))
+        elif order == 'descending':
+            artists = artists.order_by(desc(getattr(Artist, order_by)))
 
     # set the number of works given in the response
     if entries_per_page:
         artists = artists.limit(entries_per_page)
     # set the offset for response pagination
     if page:
-        artists = artists.offset(page)
+        offset = (page - 1) * entries_per_page
+        artists = artists.offset(offset)
 
     artists = artists.all()
 
@@ -208,7 +212,6 @@ def get_artists(**kwargs):
     for artist in artists:
         results.append(get_artist_data(artist))
 
-    num_entries = len(works)
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
@@ -254,26 +257,27 @@ def get_venues(**kwargs):
     order = kwargs['order']
 
     venues = Venue.query
+    num_entries = len(venues.all())
 
-    # if order_by:
-    #     if order == 'ascending':
-    #         venues = venues.order_by(getattr(Venue, order_by))
-    #     elif order == 'descending':
-    #         venues = venues.order_by(desc(getattr(Venue, order_by)))
+    if order_by:
+        if order == 'ascending':
+            venues = venues.order_by(getattr(Venue, order_by))
+        elif order == 'descending':
+            venues = venues.order_by(desc(getattr(Venue, order_by)))
 
     # set the number of works given in the response
     if entries_per_page:
         venues = venues.limit(entries_per_page)
     # set the offset for response pagination
     if page:
-        venues = venues.offset(page)
+        offset = (page - 1) * entries_per_page
+        venues = venues.offset(offset)
 
     venues = venues.all()
     results = []
     for venue in venues:
         results.append(get_venue_data(venue))
 
-    num_entries = len(venues)
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({'info':info, 'objects':results})
@@ -297,7 +301,7 @@ def get_venue_data(venue):
         'city':     venue.city,
         'country':  venue.country,
         'zipcode':  venue.zipcode,
-        # 'work_ids': [work.id for work in venue.works]
+        'work_ids': [work.id for work in venue.works]
     }
     return result
 
@@ -318,19 +322,21 @@ def get_art_types(**kwargs):
     order = kwargs['order']
 
     art_types = ArtType.query
+    num_entries = len(art_types.all())
 
-    # if order_by:
-    #     if order == 'ascending':
-    #         art_types = art_types.order_by(getattr(ArtType, order_by))
-    #     elif order == 'descending':
-    #         art_types = art_types.order_by(desc(getattr(ArtType, order_by)))
+    if order_by:
+        if order == 'ascending':
+            art_types = art_types.order_by(getattr(ArtType, order_by))
+        elif order == 'descending':
+            art_types = art_types.order_by(desc(getattr(ArtType, order_by)))
 
     # set the number of works given in the response
     if entries_per_page:
         art_types = art_types.limit(entries_per_page)
     # set the offset for response pagination
     if page:
-        art_types = art_types.offset(page)
+        offset = (page - 1) * entries_per_page
+        art_types = art_types.offset(offset)
 
     art_types = art_types.all()
 
@@ -338,7 +344,6 @@ def get_art_types(**kwargs):
     for art_type in art_types:
         results.append(get_art_type_data(art_type))
 
-    num_entries = len(art_types)
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
@@ -381,19 +386,21 @@ def get_mediums(**kwargs):
     order = kwargs['order']
 
     media = Medium.query
+    num_entries = len(media.all())
 
-    # if order_by:
-    #     if order == 'ascending':
-    #         media = media.order_by(getattr(Medium, order_by))
-    #     elif order == 'descending':
-    #         media = media.order_by(desc(getattr(Medium, order_by)))
+    if order_by:
+        if order == 'ascending':
+            media = media.order_by(getattr(Medium, order_by))
+        elif order == 'descending':
+            media = media.order_by(desc(getattr(Medium, order_by)))
 
     # set the number of works given in the response
     if entries_per_page:
         media = media.limit(entries_per_page)
     # set the offset for response pagination
     if page:
-        media = media.offset(page)
+        offset = (page - 1) * entries_per_page
+        media = media.offset(offset)
 
     media = media.all()
 
@@ -401,9 +408,8 @@ def get_mediums(**kwargs):
     for medium in media:
         results.append(get_medium_data(medium))
 
-    num_entries = len(media)
     info = get_info(page, entries_per_page, num_entries)
-    
+
     return jsonify({"info":info, "objects":results})
 
 
