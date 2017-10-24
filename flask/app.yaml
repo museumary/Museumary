@@ -1,13 +1,13 @@
 runtime: python
 env: flex
-entrypoint: gunicorn -b :$PORT appengine.main:app
+entrypoint: gunicorn -b :$PORT main:app
 
 runtime_config:
   python_version: 3
 
-# env_variables:
-#   SQLALCHEMY_DATABASE_URI: >-
-#     postgresql+psycopg2://postgres:pendragon@/arthur?host=/cloudsql/organic-area-180723:us-central1:arthur
+env_variables:
+  DATABASE_URI: >-
+    postgresql+psycopg2://postgres:pendragon@/arthur?host=/cloudsql/organic-area-180723:us-central1:arthur
 
-# beta_settings:
-#     cloud_sql_instances: organic-area-180723:us-central1:arthur
+beta_settings:
+    cloud_sql_instances: organic-area-180723:us-central1:arthur

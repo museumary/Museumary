@@ -15,6 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+
 @app.route('/')
 def index():
     """
@@ -108,14 +109,26 @@ def get_info(page, entries_per_page, num_entries):
 @app.route('/api/work/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=25))
-def get_works(page, entries_per_page):
+@io.from_query('order_by', fields.String(missing="name"))
+@io.from_query('order', fields.String(missing="ascending"))
+# @io.from_query('filter', fields.String(missing="None"))
+def get_works(**kwargs):
     """
     API GET request for all works of art in the database
     """
-    works = Work.query
-    num_entries = len(works.all())
+    page = kwargs['page']
+    entries_per_page = kwargs['entries_per_page']
+    order_by = kwargs['order_by']
+    order = kwargs['order']
 
-    # if(sort_by):
+    works = Work.query
+
+    # if order_by:
+    #     if order == 'ascending':
+    #         works = works.order_by(getattr(Work, order_by))
+    #     elif order == 'descending':
+    #         works = works.order_by(desc(getattr(Work, order_by)))
+
     # if(filter):
 
     # set the number of works given in the response
@@ -130,6 +143,7 @@ def get_works(page, entries_per_page):
     for work in works:
         results.append(get_work_data(work))
 
+    num_entries = len(works)
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
@@ -141,7 +155,7 @@ def get_work(work_id):
     """
     API GET request for a single work given work id
     """
-    work = Work.query.filter_by(id=work_id).first()
+    work = Work.query.filter_by(id=work_id).first_or_404()
     result = get_work_data(work)
     return jsonify(result)
 
@@ -162,12 +176,24 @@ def get_work_data(work):
 @app.route('/api/artist/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=25))
-def get_artists(page, entries_per_page):
+@io.from_query('order_by', fields.String(missing="name"))
+@io.from_query('order', fields.String(missing="ascending"))
+def get_artists(**kwargs):
     """
     API GET request for all artists in the database
     """
+    page = kwargs['page']
+    entries_per_page = kwargs['entries_per_page']
+    order_by = kwargs['order_by']
+    order = kwargs['order']
+
     artists = Artist.query
-    num_entries = len(artists.all())
+
+    # if order_by:
+    #     if order == 'ascending':
+    #         artists = artists.order_by(getattr(Artist, order_by))
+    #     elif order == 'descending':
+    #         artists = artists.order_by(desc(getattr(Artist, order_by)))
 
     # set the number of works given in the response
     if entries_per_page:
@@ -176,13 +202,14 @@ def get_artists(page, entries_per_page):
     if page:
         artists = artists.offset(page)
 
-    info = get_info(page, entries_per_page, num_entries)
-
     artists = artists.all()
 
     results = []
     for artist in artists:
         results.append(get_artist_data(artist))
+
+    num_entries = len(works)
+    info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
 
@@ -193,7 +220,7 @@ def get_artist(artist_id):
     """
     API GET request for a single artist given its id
     """
-    artist = Artist.query.filter_by(id=artist_id).first()
+    artist = Artist.query.filter_by(id=artist_id).first_or_404()
     result = get_artist_data(artist)
     return jsonify(result)
 
@@ -213,16 +240,41 @@ def get_artist_data(artist):
 
 
 @app.route('/api/venue/', methods=['GET'])
-def get_venues():
+@io.from_query('page', fields.Integer(missing=1))
+@io.from_query('entries_per_page', fields.Integer(missing=25))
+@io.from_query('order_by', fields.String(missing="name"))
+@io.from_query('order', fields.String(missing="ascending"))
+def get_venues(**kwargs):
     """
     API GET request for all museums in the database
     """
-    venues = Venue.query.all()
+    page = kwargs['page']
+    entries_per_page = kwargs['entries_per_page']
+    order_by = kwargs['order_by']
+    order = kwargs['order']
+
+    venues = Venue.query
+
+    # if order_by:
+    #     if order == 'ascending':
+    #         venues = venues.order_by(getattr(Venue, order_by))
+    #     elif order == 'descending':
+    #         venues = venues.order_by(desc(getattr(Venue, order_by)))
+
+    # set the number of works given in the response
+    if entries_per_page:
+        venues = venues.limit(entries_per_page)
+    # set the offset for response pagination
+    if page:
+        venues = venues.offset(page)
+
+    venues = venues.all()
     results = []
     for venue in venues:
         results.append(get_venue_data(venue))
 
-    info = get_info(1, 25, len(venues))
+    num_entries = len(venues)
+    info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({'info':info, 'objects':results})
 
@@ -233,7 +285,7 @@ def get_venue(venue_id):
     """
     API GET request for a single museum given its id
     """
-    venue = Venue.query.filter_by(id=venue_id).first()
+    venue = Venue.query.filter_by(id=venue_id).first_or_404()
     result = get_venue_data(venue)
     return jsonify(result)
 
@@ -254,12 +306,24 @@ def get_venue_data(venue):
 @app.route('/api/art_type/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=25))
-def get_art_types(page, entries_per_page):
+@io.from_query('order_by', fields.String(missing="name"))
+@io.from_query('order', fields.String(missing="ascending"))
+def get_art_types(**kwargs):
     """
     API GET request for all the art_types in the database
     """
+    page = kwargs['page']
+    entries_per_page = kwargs['entries_per_page']
+    order_by = kwargs['order_by']
+    order = kwargs['order']
+
     art_types = ArtType.query
-    num_entries = len(art_types.all())
+
+    # if order_by:
+    #     if order == 'ascending':
+    #         art_types = art_types.order_by(getattr(ArtType, order_by))
+    #     elif order == 'descending':
+    #         art_types = art_types.order_by(desc(getattr(ArtType, order_by)))
 
     # set the number of works given in the response
     if entries_per_page:
@@ -268,13 +332,14 @@ def get_art_types(page, entries_per_page):
     if page:
         art_types = art_types.offset(page)
 
-    info = get_info(page, entries_per_page, num_entries)
-
     art_types = art_types.all()
 
     results = []
     for art_type in art_types:
         results.append(get_art_type_data(art_type))
+
+    num_entries = len(art_types)
+    info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
 
@@ -285,7 +350,7 @@ def get_art_type(art_type_id):
     """
     API GET request for a single art_type given its id
     """
-    art_type = ArtType.query.filter_by(id=art_type_id).first()
+    art_type = ArtType.query.filter_by(id=art_type_id).first_or_404()
     result = get_art_type_data(art_type)
     return jsonify(result)
 
@@ -304,12 +369,24 @@ def get_art_type_data(art_type):
 @app.route('/api/medium/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=25))
-def get_mediums(page, entries_per_page):
+@io.from_query('order_by', fields.String(missing="name"))
+@io.from_query('order', fields.String(missing="ascending"))
+def get_mediums(**kwargs):
     """
     API GET request for all media types
     """
+    page = kwargs['page']
+    entries_per_page = kwargs['entries_per_page']
+    order_by = kwargs['order_by']
+    order = kwargs['order']
+
     media = Medium.query
-    num_entries = len(media.all())
+
+    # if order_by:
+    #     if order == 'ascending':
+    #         media = media.order_by(getattr(Medium, order_by))
+    #     elif order == 'descending':
+    #         media = media.order_by(desc(getattr(Medium, order_by)))
 
     # set the number of works given in the response
     if entries_per_page:
@@ -318,13 +395,15 @@ def get_mediums(page, entries_per_page):
     if page:
         media = media.offset(page)
 
-    info = get_info(page, entries_per_page, num_entries)
     media = media.all()
 
     results = []
     for medium in media:
         results.append(get_medium_data(medium))
 
+    num_entries = len(media)
+    info = get_info(page, entries_per_page, num_entries)
+    
     return jsonify({"info":info, "objects":results})
 
 
@@ -334,7 +413,7 @@ def get_medium(medium_id):
     """
     API GET request for a single medium given its id
     """
-    medium = Medium.query.filter_by(id=medium_id).first()
+    medium = Medium.query.filter_by(id=medium_id).first_or_404()
     result = get_medium_data(medium)
     return jsonify(result)
 
@@ -345,7 +424,6 @@ def get_medium_data(medium):
         'art_type_id': medium.art_type_id,
         'work_ids': [work.id for work in medium.works]
     }
-
 
 
 if __name__ == '__main__':
