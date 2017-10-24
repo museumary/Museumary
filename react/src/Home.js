@@ -1,12 +1,10 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Carousel from './Carousel'
-
+import CarouselInstance from './CarouselInstance'
 
 const Home = () => {
   	return (
   		<div className="Home">
-        	<Carousel />
+        	<CarouselInstance />
         </div>);
 };
 
