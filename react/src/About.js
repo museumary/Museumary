@@ -1,5 +1,6 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom';
+import style from './About.css';
 import Josh from './static/images/josh_profile.jpg';
 import Kelly from './static/images/kelly_profile.jpg';
 import Kenny from './static/images/kenny_profile.jpg';
@@ -76,7 +77,7 @@ const About = () => {
                 </p>
               </div>
             </div>
-            
+
             <div className="page-header"></div>
 
             <div className="container">
