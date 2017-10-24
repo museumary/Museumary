@@ -1,14 +1,10 @@
 import React from 'react';
-<<<<<<< HEAD
 import { Switch, Route } from 'react-router-dom'
 import Josh from './static/images/josh_profile.jpg';
 import Kelly from './static/images/kelly_profile.jpg';
 import Kenny from './static/images/kenny_profile.jpg';
 import Trenton from './static/images/trenton_profile.jpg';
 import Max from './static/images/max_profile.jpg';
-=======
-// import { Switch, Route } from 'react-router-dom'
->>>>>>> upstream/master
 
 const About = () => {
   return (
@@ -64,20 +60,12 @@ const About = () => {
                 <div className="col-md-3"></div>
               </div>
             </div>
-<<<<<<< HEAD
 
             <div className="page-header"/>
 
             <div className="container">
               <h1>Stats</h1>
               <div className="row">
-=======
-            
-            <div class="page-header"></div>
-            <div class="container">
-              <h1>Stats</h1>
-              <div class="row">
->>>>>>> upstream/master
                 <p><strong>Total No. of Commits:</strong> 39<br/><strong>Total No. of Issues:</strong> 15
                   <br/><strong>Total No. of Tests:</strong> 0</p>
                 <p><a href="http://docs.museumary.apiary.io/#"><strong>Apiary API</strong></a>
@@ -88,7 +76,6 @@ const About = () => {
                 </p>
               </div>
             </div>
-<<<<<<< HEAD
             
             <div className="page-header"></div>
 
@@ -102,20 +89,6 @@ const About = () => {
                   <a href="http://www.harvardartmuseums.org/collections/api"><p><strong>Harvard Art Museum API</strong></p></a>
                 </div>
                 <div className="col-md-4">
-=======
-
-            <div class="page-header"></div>
-            <div class="container">
-              <h1>Data Sources</h1>
-              <div class="row">
-                <div class="col-md-4">
-                  <a href="https://collection.cooperhewitt.org/api/"><p><strong>Cooper Hewitt API</strong></p></a>
-                </div>
-                <div class="col-md-4">
-                  <a href="http://www.harvardartmuseums.org/collections/api"><p><strong>Harvard Art Museum API</strong></p></a>
-                </div>
-                <div class="col-md-4">
->>>>>>> upstream/master
                   <a href="http://kokoelmat.fng.fi/api/v2support/docs/#/documentation"><p><strong>Finnish National Gallery API</strong></p></a>
                 </div>
                 <div><p>As it is now, our sources are a being used for the database information. We have not started actually scraping the data and therefore had to manually get the information. For the future projects we will scrape the information automatically.</p></div>
@@ -124,7 +97,6 @@ const About = () => {
               <br/>
 
               <h1>Tools Used</h1>
-<<<<<<< HEAD
               <div className="row">
                 <div className="col-md-4">
                   <p><strong>Required Tools:</strong><br/>Apiary, Bootstrap, React, Flask, GitHub, Trello, PlanItPoker, and Slack</p>
@@ -133,16 +105,6 @@ const About = () => {
                   <p><strong>Additional Tools:</strong><br/>Jinja</p>
                 </div>
                 <div className="col-md-4">
-=======
-              <div class="row">
-                <div class="col-md-4">
-                  <p><strong>Required Tools:</strong><br/>Apiary, Bootstrap, React, Flask, GitHub, Trello, PlanItPoker, and Slack</p>
-                </div>
-                <div class="col-md-4">
-                  <p><strong>Additional Tools:</strong><br/>Jinja</p>
-                </div>
-                <div class="col-md-4">
->>>>>>> upstream/master
                   <p><strong>Tools Descriptions:</strong><br/>For an in depth description of our tools used, see the below link to our technical report.</p>
                 </div>
               </div>
@@ -152,15 +114,11 @@ const About = () => {
               </div>
             </div>
             <br/><br/><br/>
-<<<<<<< HEAD
           </div>
         
 
 
           );
-=======
-          </div>);
->>>>>>> upstream/master
 };
 
 export default About;
