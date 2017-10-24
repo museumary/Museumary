@@ -136,7 +136,8 @@ def get_works(**kwargs):
         works = works.limit(entries_per_page)
     # set the offset for response pagination
     if page:
-        works = works.offset(page)
+        offset = (page - 1) * entries_per_page
+        works = works.offset(offset)
 
     works = works.all()
     results = []
@@ -189,18 +190,19 @@ def get_artists(**kwargs):
 
     artists = Artist.query
 
-    # if order_by:
-    #     if order == 'ascending':
-    #         artists = artists.order_by(getattr(Artist, order_by))
-    #     elif order == 'descending':
-    #         artists = artists.order_by(desc(getattr(Artist, order_by)))
+    if order_by:
+        if order == 'ascending':
+            artists = artists.order_by(getattr(Artist, order_by))
+        elif order == 'descending':
+            artists = artists.order_by(desc(getattr(Artist, order_by)))
 
     # set the number of works given in the response
     if entries_per_page:
         artists = artists.limit(entries_per_page)
     # set the offset for response pagination
     if page:
-        artists = artists.offset(page)
+        offset = (page - 1) * entries_per_page
+        artists = artists.offset(offset)
 
     artists = artists.all()
 
@@ -255,18 +257,19 @@ def get_venues(**kwargs):
 
     venues = Venue.query
 
-    # if order_by:
-    #     if order == 'ascending':
-    #         venues = venues.order_by(getattr(Venue, order_by))
-    #     elif order == 'descending':
-    #         venues = venues.order_by(desc(getattr(Venue, order_by)))
+    if order_by:
+        if order == 'ascending':
+            venues = venues.order_by(getattr(Venue, order_by))
+        elif order == 'descending':
+            venues = venues.order_by(desc(getattr(Venue, order_by)))
 
     # set the number of works given in the response
     if entries_per_page:
         venues = venues.limit(entries_per_page)
     # set the offset for response pagination
     if page:
-        venues = venues.offset(page)
+        offset = (page - 1) * entries_per_page
+        venues = venues.offset(offset)
 
     venues = venues.all()
     results = []
@@ -319,18 +322,19 @@ def get_art_types(**kwargs):
 
     art_types = ArtType.query
 
-    # if order_by:
-    #     if order == 'ascending':
-    #         art_types = art_types.order_by(getattr(ArtType, order_by))
-    #     elif order == 'descending':
-    #         art_types = art_types.order_by(desc(getattr(ArtType, order_by)))
+    if order_by:
+        if order == 'ascending':
+            art_types = art_types.order_by(getattr(ArtType, order_by))
+        elif order == 'descending':
+            art_types = art_types.order_by(desc(getattr(ArtType, order_by)))
 
     # set the number of works given in the response
     if entries_per_page:
         art_types = art_types.limit(entries_per_page)
     # set the offset for response pagination
     if page:
-        art_types = art_types.offset(page)
+        offset = (page - 1) * entries_per_page
+        art_types = art_types.offset(offset)
 
     art_types = art_types.all()
 
@@ -382,18 +386,19 @@ def get_mediums(**kwargs):
 
     media = Medium.query
 
-    # if order_by:
-    #     if order == 'ascending':
-    #         media = media.order_by(getattr(Medium, order_by))
-    #     elif order == 'descending':
-    #         media = media.order_by(desc(getattr(Medium, order_by)))
+    if order_by:
+        if order == 'ascending':
+            media = media.order_by(getattr(Medium, order_by))
+        elif order == 'descending':
+            media = media.order_by(desc(getattr(Medium, order_by)))
 
     # set the number of works given in the response
     if entries_per_page:
         media = media.limit(entries_per_page)
     # set the offset for response pagination
     if page:
-        media = media.offset(page)
+        offset = (page - 1) * entries_per_page
+        media = media.offset(offset)
 
     media = media.all()
 
