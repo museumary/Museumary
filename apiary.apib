@@ -8,12 +8,14 @@ specific artwork, artist, location, and type of art.
 
 ## group Artwork Collection
 
-## All Works [/work{?page,entries_per_page}/]
+## All Works [/work{?page,entries_per_page,order_by,order}/]
 ### List All Artworks [GET]
 
 + Parameters
     + page (optional, integer) ...index of the page being requested; default=1
     + entries_per_page (optional, integer) ...number of entries to be returned; default=25
+    + order_by (optional, String) ...attribute to order the entries by; default="name"
+    + order (optional, String) ...sort by either 'ascending' or 'descending'; default='ascending'
 
 + Response 200 (application/json)
 
@@ -84,12 +86,14 @@ specific artwork, artist, location, and type of art.
           
 ## group Artist Collection
 
-## All Artists [/artist{?page,entries_per_page}/]
+## All Artists [/artist{?page,entries_per_page,order_by,order}/]
 ### List All Artists [GET]
 
 + Parameters
     + page (optional, integer) ...index of the page being requested; default=1
     + entries_per_page (optional, integer) ...number of entries to be returned; default=25
+    + order_by (optional, String) ...attribute to order the entries by; default="name"
+    + order (optional, String) ...sort by either 'ascending' or 'descending'; default='ascending'
 
 + Response 200 (application/json)
 
@@ -168,12 +172,14 @@ specific artwork, artist, location, and type of art.
 
 ## group Venues
 
-## All Venues [/venue{?page,entries_per_page}/]
+## All Venues [/venue{?page,entries_per_page,order_by,order}/]
 ### List All Venues [GET]
 
 + Parameters
     + page (optional, integer) ...index of the page being requested; default=1
     + entries_per_page (optional, integer) ...number of entries to be returned; default=25
+    + order_by (optional, String) ...attribute to order the entries by; default="name"
+    + order (optional, String) ...sort by either 'ascending' or 'descending'; default='ascending'
 
 + Response 200 (application/json)
 
@@ -258,12 +264,14 @@ specific artwork, artist, location, and type of art.
 
 ## group Art Type
 
-## All Art Types [/art_type{?page,entries_per_page}/]
+## All Art Types [/art_type{?page,entries_per_page,order_by,order}/]
 ### List All Types [GET]
 
 + Parameters
     + page (optional, integer) ...index of the page being requested; default=1
     + entries_per_page (optional, integer) ...number of entries to be returned; default=25
+    + order_by (optional, String) ...attribute to order the entries by; default="name"
+    + order (optional, String) ...sort by either 'ascending' or 'descending'; default='ascending'
 
 + Response 200 (application/json)
 
