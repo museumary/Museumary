@@ -208,7 +208,7 @@ def get_artists(**kwargs):
     for artist in artists:
         results.append(get_artist_data(artist))
 
-    num_entries = len(works)
+    num_entries = len(artists)
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
@@ -297,7 +297,7 @@ def get_venue_data(venue):
         'city':     venue.city,
         'country':  venue.country,
         'zipcode':  venue.zipcode,
-        # 'work_ids': [work.id for work in venue.works]
+        'work_ids': [work.id for work in venue.works]
     }
     return result
 
@@ -403,7 +403,7 @@ def get_mediums(**kwargs):
 
     num_entries = len(media)
     info = get_info(page, entries_per_page, num_entries)
-    
+
     return jsonify({"info":info, "objects":results})
 
 
