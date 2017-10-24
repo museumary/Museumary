@@ -123,12 +123,13 @@ def get_works(**kwargs):
     order = kwargs['order']
 
     works = Work.query
+    num_entries = len(works.all())
 
-    # if order_by:
-    #     if order == 'ascending':
-    #         works = works.order_by(getattr(Work, order_by))
-    #     elif order == 'descending':
-    #         works = works.order_by(desc(getattr(Work, order_by)))
+    if order_by:
+        if order == 'ascending':
+            works = works.order_by(getattr(Work, order_by))
+        elif order == 'descending':
+            works = works.order_by(desc(getattr(Work, order_by)))
 
     # if(filter):
 
@@ -145,7 +146,6 @@ def get_works(**kwargs):
     for work in works:
         results.append(get_work_data(work))
 
-    num_entries = len(works)
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
@@ -190,6 +190,7 @@ def get_artists(**kwargs):
     order = kwargs['order']
 
     artists = Artist.query
+    num_entries = len(artists.all())
 
     if order_by:
         if order == 'ascending':
@@ -211,7 +212,6 @@ def get_artists(**kwargs):
     for artist in artists:
         results.append(get_artist_data(artist))
 
-    num_entries = len(artists)
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
@@ -257,6 +257,7 @@ def get_venues(**kwargs):
     order = kwargs['order']
 
     venues = Venue.query
+    num_entries = len(venues.all())
 
     if order_by:
         if order == 'ascending':
@@ -277,7 +278,6 @@ def get_venues(**kwargs):
     for venue in venues:
         results.append(get_venue_data(venue))
 
-    num_entries = len(venues)
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({'info':info, 'objects':results})
@@ -322,6 +322,7 @@ def get_art_types(**kwargs):
     order = kwargs['order']
 
     art_types = ArtType.query
+    num_entries = len(art_types.all())
 
     if order_by:
         if order == 'ascending':
@@ -343,7 +344,6 @@ def get_art_types(**kwargs):
     for art_type in art_types:
         results.append(get_art_type_data(art_type))
 
-    num_entries = len(art_types)
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
@@ -386,6 +386,7 @@ def get_mediums(**kwargs):
     order = kwargs['order']
 
     media = Medium.query
+    num_entries = len(media.all())
 
     if order_by:
         if order == 'ascending':
@@ -407,7 +408,6 @@ def get_mediums(**kwargs):
     for medium in media:
         results.append(get_medium_data(medium))
 
-    num_entries = len(media)
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
