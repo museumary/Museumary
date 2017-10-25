@@ -15,7 +15,7 @@ ignored_creators = [
 	'after', 'attributed', 'style', 'house', 'follower', 'circle'
 ]
 
-ignored_values = ['active', 'ca.', 'died']
+ignored_values = ['active', 'ca.', 'AH/AD', 'century']
 
 def valid_item(item):
 	# for key in REQUIREMENTS:
@@ -44,13 +44,38 @@ def parse_artist_culture(artist_raw):
 	artist_raw = artist_raw[lparen+1:rparen].replace(',', '').split()
 	culture = artist_raw[0]
 
-	if culture not in ignored_values and culture not in s and not any(char.isdigit() for char in culture):
+	if culture not in ignored_values and not any(char.isdigit() for char in culture):
 		return culture
 
 	return None
 
-def parse_artist_dates(artist_raw):
-	return ''
+
+def parse_artist_dates(artist_raw, birth=None, death=None):
+	culture = parse_artist_culture(artist_raw)
+
+	lparen = artist_raw.find('(')
+	rparen = artist_raw.find(')')
+
+	artist_raw = artist_raw[lparen+1:rparen].replace(',', '') #.replace(' - ', '-')
+	if culture:
+		artist_raw = artist_raw.replace(culture, '')
+
+	for i in ignored_values:
+		if i in artist_raw:
+			return None, None
+
+	artist_raw = artist_raw.split()
+
+	if 'born' in artist_raw:
+		index = artist_raw.index('born')
+		if index+1 < len(artist_raw):
+			birth = artist_raw[index+1]
+	else:
+		artist_raw = ''.join(artist_raw).split('-')
+		if len(artist_raw) == 2:
+			birth, death = artist_raw
+
+	return birth, death
 
 def get_artist_entry(item):
 	artist_raw = item.get('Creator')
@@ -59,11 +84,15 @@ def get_artist_entry(item):
 	artist = Artist.query.filter_by(name=name).first()
 
 	if not artist:
+		birth, death = parse_artist_dates(artist_raw)
+
 		artist = Artist()
 		artist.name = parse_artist_name(artist_raw)
 		artist.culture = parse_artist_culture(artist_raw)
+		artist.birth = birth
+		artist.death = death
 
-		db.session.add(artist)
+		# db.session.add(artist)
 
 	return artist
 
@@ -82,6 +111,7 @@ def get_venue_entry(item):
 
 def get_arttype_entry(item):
 	arttype_raw = item.get('Classification')
+
 	arttype = ArtType.query.filter_by(name=artist_raw).first()
 
 	if not arttype:
@@ -121,18 +151,14 @@ def get_work_entry(item):
 	work.description = description[:1024] if description else None
 	work.image_url = image_url
 
-    # art_type_id = db.Column(db.Integer, db.ForeignKey('art_type.id'))
-    # medium = db.relationship("Medium", back_populates="works")
-    # medium_id = db.Column(db.Integer, db.ForeignKey('medium.id'))
-
 	return work
 
 
 if __name__ == '__main__':
-	NUM_PAGES = 1
+	NUM_PAGES = 40
 	params = dict(apikey=WALTER_KEY)
 
-	# venue = Venue.query.filter_by(name='The Walters Art Museum').first()
+	venue = get_venue_entry()
 
 	s = []
 	for i in range(1, NUM_PAGES+1):
@@ -144,50 +170,31 @@ if __name__ == '__main__':
 			if not valid_item(item):
 				continue
 
-			print(item.get('Medium'))
-			print(item.get('Classification'))
+			if Work.query.filter_by(name=item.get('Title')).first():
+			 	continue
 
-			# work = get_work_entry(item)
+			work = get_work_entry(item) # need to set artype, and medium
+			artist = get_artist_entry(item)
+			medium = get_medium_entry(item)
+			arttype = get_arttype_entry(item)
 
-			# print(work.name)
-			# print(work.description)
-			# print(work.image_url)
+			work.venue = venue
+			work.artist = artist
+			work.medium = medium
 
-			# artist_raw = item.get('Creator')
-			# lparen = artist_raw.find('(')
-			# rparen = artist_raw.find(')')
+			# arttype.works.add work
+			# arttype.artists.add artist
+			# arttype.media.add medium
 
-			# artist_raw = artist_raw[lparen+1:rparen].replace(',', '').replace(' - ', '-')
-			# for i in ignored_values:
-			# 	artist_raw = artist_raw.replace(i, '')
-			# artist_raw = artist_raw.split()
-
-			# print(artist_raw)
-
-			# print(item.get('PrimaryImage').get('Raw'))
-
-			# if Work.query.filter_by(name=item.get('Title')).first():
-			# 	continue
-
-			# print(item.get('Medium')) #Query database
-			# print(item.get('Classification')) #artype
-
-			# work = get_work_entry(item) # need to set artype, and medium
-			# artist = get_artist_entry(item)
-
-			# work.venue = venue
-			# work.artist = artist
-
-			# db.session.add(work)
+			db.session.add(work)
 
 		if not json.get('NextPage'):
 			break
 
+	with open('artist_cultures.txt', 'w') as f:
+		for i in s:
+			f.write(i+'\n')
+
 	# db.session.commit()
-
-	# with open('ehnicities.txt', 'w') as f:
-	# 	for i in s:
-	# 		f.write(i + '\n')
-
 
 
