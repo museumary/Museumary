@@ -1,8 +1,12 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
+import style from './CarouselInstance.css';
+
 import Guernica from './static/images/Guernica.jpg';
 import Starry_Night from './static/images/Starry_Night.jpg';
 import American_Gothic from './static/images/American_Gothic.jpg';
+import Tsunami from './static/images/Tsunami.jpg';
+import Creation_Adam from './static/images/Creation_of_Adam.jpg';
 
 const CarouselInstance = () => {
   return (
@@ -27,6 +31,13 @@ const CarouselInstance = () => {
           <Carousel.Caption>
             <h3>American Gothic</h3>
             <p>Grant Wood, 1930</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="carousel-image" src={ Creation_Adam } alt={"The Creation of Adam"} width="3200" height="1200"/>
+          <Carousel.Caption>
+            <h3>The Creation of Adam</h3>
+            <p>Michelangelo, 1512</p>
           </Carousel.Caption>
         </Carousel.Item>
         </Carousel>

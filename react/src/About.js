@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import style from './About.css';
+
 import Josh from './static/images/josh_profile.jpg';
 import Kelly from './static/images/kelly_profile.jpg';
 import Kenny from './static/images/kenny_profile.jpg';
@@ -11,7 +12,7 @@ const About = () => {
   return (
           <div className="About">
             <div className="page-header">
-              <h1>Culture. Just a click away.</h1>
+              <h1><strong>Culture. Just a click away.</strong></h1>
               <p>Here at Museumary (a working title), we are dedicated to building and maintaining an internet database of art.<br/>Familiarize yourself with art from around the world. Our database gives you access to a large assortment of artistic pieces.<br/> Feel free to browse our collection.</p>
               <br/>
             </div>
