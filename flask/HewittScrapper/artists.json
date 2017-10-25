@@ -10,19 +10,19 @@
 	}, {
 		"image_url": "https://images.collection.cooperhewitt.org/96180_4d4d8af94fdf2c32_b.jpg",
 		"name": "John Rombola",
-		"birth": "Unknown",
-		"birthplace": "None",
+		"birth": "1933",
+		"birthplace": "Unknown",
 		"death": "1933",
 		"culture": "United States",
-		"deathplace": "None"
+		"deathplace": "Unknown"
 	}, {
 		"image_url": "None",
 		"name": "William Hunt Diederich",
 		"birth": "1884",
-		"birthplace": "None",
+		"birthplace": "unknown",
 		"death": "1953",
 		"culture": "United States",
-		"deathplace": "None"
+		"deathplace": "Unknown"
 	}, {
 		"image_url": "None",
 		"name": "Romolo Achille Liverani",
