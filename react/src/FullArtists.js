@@ -1,5 +1,4 @@
 import React from 'react';
-import ArtistLink from './ArtistLink';
 
 class FullArtists extends React.Component {
 	constructor() {
@@ -16,8 +15,6 @@ class FullArtists extends React.Component {
   render() {
 		if(this.state.items.objects){
 			var arr = [];
-			console.log("THINGS IN OBJECTS:");
-			console.log(this.state.items.objects);
 			this.state.items.objects.forEach(function(obj) {
 				arr.push(obj);
 			});
@@ -25,9 +22,8 @@ class FullArtists extends React.Component {
 							{
 								arr.map(
 									function(obj) {
-										console.log(obj.id);
-										console.log(obj.name);
-										return <ArtistLink id={obj.id} name={obj.name} />;
+										var url = '/artists/' + obj.id;
+										return <div><a href={url}>{obj.name}</a><br/></div>;
 									}
 								)
 							}
