@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import requests
-from API_KEYS import WALTER_KEY, REQUIREMENTS
+from API_KEYS import WALTER_KEY#, REQUIREMENTS
 from models import db, Work, Artist, ArtType, Venue, Medium
 
 BASE_URL = 'http://api.thewalters.org/v1/'
@@ -14,6 +14,7 @@ ignored_creators = [
 	'venetian', 'irish', 'near', 'copy', 'workshop', 'master', 'painter',
 	'after', 'attributed', 'style', 'house', 'follower', 'circle'
 ]
+
 ignored_values = ['active', 'ca.', 'died']
 
 def valid_item(item):
@@ -73,6 +74,36 @@ def get_artist_entry(item):
     # culture = db.Column(db.String(64))
     # image_url = db.Column(db.String(512))
 
+def get_venue_entry(item):
+	venue = Venue.query.filter_by(name='The Walters Art Museum').first()
+	assert venue
+
+	return venue
+
+def get_arttype_entry(item):
+	arttype_raw = item.get('Classification')
+	arttype = ArtType.query.filter_by(name=artist_raw).first()
+
+	if not arttype:
+		arttype = ArtType()
+		arttype.name = artist_raw
+
+		#db.session.add(arttype)
+
+	return arttype
+
+def get_medium_entry(item):
+	medium_raw = item.get('Medium')
+	medium = Medium.query.filter_by(name=medium_raw).first()
+
+	if not medium:
+		medium = Medium()
+		medium.name = medium_raw
+
+		#db.session.add(medium)
+
+	return medium
+
 def get_work_entry(item):
 	work = Work()
 
@@ -86,13 +117,8 @@ def get_work_entry(item):
 	image_url = item.get('PrimaryImage').get('Raw')
 
 	work.name = item.get('Title')
-	work.date = '%s-%s' % (b_year, e_year)
-
-	if not description:
-		work.description = None
-	else:
-		work.description = description if len(description) <= 1024 else description[:1024]
-
+	work.date = '{}-{}'.format(b_year, e_year)
+	work.description = description[:1024] if description else None
 	work.image_url = image_url
 
     # art_type_id = db.Column(db.Integer, db.ForeignKey('art_type.id'))
@@ -102,12 +128,11 @@ def get_work_entry(item):
 	return work
 
 
-
 if __name__ == '__main__':
-	NUM_PAGES = 5
+	NUM_PAGES = 1
 	params = dict(apikey=WALTER_KEY)
 
-	venue = Venue.query.filter_by(name='The Walters Art Museum').first()
+	# venue = Venue.query.filter_by(name='The Walters Art Museum').first()
 
 	s = []
 	for i in range(1, NUM_PAGES+1):
@@ -118,6 +143,15 @@ if __name__ == '__main__':
 		for item in json['Items']:
 			if not valid_item(item):
 				continue
+
+			print(item.get('Medium'))
+			print(item.get('Classification'))
+
+			# work = get_work_entry(item)
+
+			# print(work.name)
+			# print(work.description)
+			# print(work.image_url)
 
 			# artist_raw = item.get('Creator')
 			# lparen = artist_raw.find('(')
@@ -132,24 +166,24 @@ if __name__ == '__main__':
 
 			# print(item.get('PrimaryImage').get('Raw'))
 
-			if Work.query.filter_by(name=item.get('Title')).first():
-				continue
+			# if Work.query.filter_by(name=item.get('Title')).first():
+			# 	continue
 
 			# print(item.get('Medium')) #Query database
 			# print(item.get('Classification')) #artype
 
-			work = get_work_entry(item) # need to set artype, and medium
-			artist = get_artist_entry(item)
+			# work = get_work_entry(item) # need to set artype, and medium
+			# artist = get_artist_entry(item)
 
-			work.venue = venue
-			work.artist = artist
+			# work.venue = venue
+			# work.artist = artist
 
-			db.session.add(work)
+			# db.session.add(work)
 
 		if not json.get('NextPage'):
 			break
 
-	db.session.commit()
+	# db.session.commit()
 
 	# with open('ehnicities.txt', 'w') as f:
 	# 	for i in s:
