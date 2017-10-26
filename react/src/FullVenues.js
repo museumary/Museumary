@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class FullVenues extends React.Component {
 	constructor() {
@@ -23,7 +24,7 @@ class FullVenues extends React.Component {
 								arr.map(
 									function(obj) {
                     var url = '/venues/' + obj.id;
-										return <div><a href={url}>{obj.name}</a><br/></div>;
+										return <div><Link to={url} activeClassName="active">{obj.name}</Link><br/><br/></div>;
 									}
 								)
 							}
