@@ -6,8 +6,8 @@ import Venue from './Venue';
 const Venues = () => {
   return (<div className="Venues">
             <Switch>
-              <Route exact path='/Venues' component={FullVenues} />
-              <Route path='/Venues/:number' component={Venue} />
+              <Route exact path='/venues' component={FullVenues} />
+              <Route path='/venues/:number' component={Venue} />
             </Switch>
           </div>);
 };
