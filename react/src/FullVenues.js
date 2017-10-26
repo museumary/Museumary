@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class FullVenues extends React.Component {
 	constructor() {
@@ -6,7 +7,7 @@ class FullVenues extends React.Component {
  		 this.state={items:[]};
   }
   componentDidMount(){
-  	fetch(`http://museumary.me/api/venue`)
+  	fetch(`http://api-dot-organic-area-180723.appspot.com/venue`)
  		.then(result=>result.json())
     .then(items=>this.setState({items}))
   }
@@ -23,7 +24,7 @@ class FullVenues extends React.Component {
 								arr.map(
 									function(obj) {
                     var url = '/venues/' + obj.id;
-										return <div><a href={url}>{obj.name}</a><br/></div>;
+										return <div><Link to={url} activeClassName="active">{obj.name}</Link><br/><br/></div>;
 									}
 								)
 							}

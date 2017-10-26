@@ -79,4 +79,31 @@ def populate_artists():
 
 	db.session.commit()
 
+def append_art_type():
+	artists = []
+	with open('artists.json') as f:    
+		data = j.load(f)
+	artists = data["Artists"]
+
+	for artist in artists:
+		artist = Artist.query.filter_by(name=artist.get("name")).first()
+		print(artist)
+		for work in artist.works:
+			print(work)
+			
+			art_type = work.art_type
+			medium = work.medium
+			print(art_type)
+			print(medium)
+
+			if art_type not in artist.art_types:
+				artist.art_types.append(art_type)
+			if medium not in art_type.media:
+				art_type.media.append(medium)
+
+	db.session.commit()	
+
+append_art_type()
+
+
 
