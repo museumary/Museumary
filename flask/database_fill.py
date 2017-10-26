@@ -39,7 +39,7 @@ def clear_urls():
 
 
 def scrape_artist_wiki_images():
-    artists = Artist.query.offset(100).all()
+    artists = Artist.query.limit(100).all()
     index = 0
 
     for artist in artists:
