@@ -6,3 +6,26 @@ body {
 .page-header {
     text-align: center;
 }
+
+.jumbotron {
+    margin-top: -20px;
+    margin-bottom: -20px;
+    background-image: 
+}
+
+.jumbotron a {
+    color: purple; 
+    text-decoration: none;
+    
+}
+
+.jumbotron a:visited {
+    color: purple; 
+    text-decoration: none;
+    
+}
+
+.divider {
+    background: linear-gradient(black, #3b3a30);
+    height: 60px;
+}

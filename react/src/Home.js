@@ -7,9 +7,7 @@ const Home = () => {
   	return (
   		<div className="Home">
         	<CarouselInstance />
-        	<div className="Home-banner">
-        		
-        	</div>
+        	<div className="Home-banner"/>
         	<Twitter />
         </div>);
 };
