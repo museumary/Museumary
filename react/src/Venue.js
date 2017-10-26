@@ -19,8 +19,13 @@ class Venue extends React.Component {
       //  Do all React code within this div. 'Venue_obj' is the object that
       //  associated with this Venue page, you should be able to access it
       //  like any other JSON
+      var parameters = "&maptype=satellite&zoom=19";
+      var add = venue_obj.address.replace(/, /g, "");
+      add = add.replace(/ /g, "+");
+      var map_location = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q=" + add + parameters;
 			return <div className="Venue">
-              {venue_obj.name}
+              <h1>{venue_obj.name}</h1>
+              <iframe width="500" height="300" frameborder="0" style="border:0" src={ map_location } allowfullscreen align="center"></iframe>
 						</div>;
 		}
 		else {

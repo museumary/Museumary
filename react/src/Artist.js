@@ -20,7 +20,7 @@ class Artist extends React.Component {
       //  associated with this artist page, you should be able to access it
       //  like any other JSON
 			return <div className="Artist">
-              {artist_obj.name}
+              <h1>{artist_obj.name}</h1>
 						</div>;
 		}
 		else {

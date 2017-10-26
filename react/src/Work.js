@@ -20,7 +20,8 @@ class Work extends React.Component {
       //  associated with this Work page, you should be able to access it
       //  like any other JSON
 			return <div className="Work">
-              {work_obj.name}
+              <h1>{work_obj.name}</h1>
+              <img src={ work_obj.image_url} />
 						</div>;
 		}
 		else {
