@@ -7,7 +7,7 @@ class FullArtists extends React.Component {
  		 this.state={items:[]};
   }
   componentDidMount(){
-  	fetch(`http://museumary.me/api/artist`)
+  	fetch(`http://api-dot-organic-area-180723.appspot.com/artist`)
  		.then(result=>result.json())
     .then(items=>this.setState({items}))
   }

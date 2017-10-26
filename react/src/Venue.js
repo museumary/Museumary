@@ -7,7 +7,7 @@ class Venue extends React.Component {
   }
   componentDidMount(){
     const venue_id = parseInt(this.props.match.params.number, 10)
-  	fetch(`http://museumary.me/api/venue/` + venue_id)
+  	fetch(`http://api-dot-organic-area-180723.appspot.com/venue/` + venue_id)
  		.then(result=>result.json())
     .then(items=>this.setState({items}))
   }

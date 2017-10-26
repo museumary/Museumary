@@ -7,7 +7,7 @@ class FullVenues extends React.Component {
  		 this.state={items:[]};
   }
   componentDidMount(){
-  	fetch(`http://museumary.me/api/venue`)
+  	fetch(`http://api-dot-organic-area-180723.appspot.com/venue`)
  		.then(result=>result.json())
     .then(items=>this.setState({items}))
   }

@@ -7,7 +7,7 @@ class FullTypes extends React.Component {
  		 this.state={items:[]};
   }
   componentDidMount(){
-  	fetch(`http://museumary.me/api/type`)
+  	fetch(`http://api-dot-organic-area-180723.appspot.com/medium`)
  		.then(result=>result.json())
     .then(items=>this.setState({items}))
   }
