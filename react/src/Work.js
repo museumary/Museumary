@@ -39,7 +39,7 @@ class Work extends React.Component {
 							<Link to={'/artists/' + work_obj.artist_id} activeClassName="active">artist</Link><br/>
 							<Link to={'/types/' + work_obj.medium_id} activeClassName="active">medium</Link><br/>
 							<Link to={'/venue/' + work_obj.venue_id} activeClassName="active">venue</Link><br/>
-							<img src={work_obj.image_url} />
+							<img src={work_obj.image_url} alt= {work_obj.name}/>
 						</div>;
 		}
 		else {

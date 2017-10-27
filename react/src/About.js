@@ -12,14 +12,15 @@ import Max from './static/images/max_profile.jpg';
 const About = () => {
   return (
           <div className="About">
-            <div className="jumbotron">
+            <div className="jumbotron"/>
+            <div className="divider"/>
+            <div className="page-header">
               <h1><strong>Culture<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">.</a> Just a click away.</strong></h1>
               <p>Here at Museumary, we are dedicated to building and maintaining an internet database of art.<br/>Familiarize yourself with art from around the world. Our database gives you access to a large assortment of artistic pieces.<br/> Feel free to browse our collection, or scroll down for some team information!</p>
               <br/>
             </div>
-            <div className="divider"/>
             <div className="container">
-              <h1><strong>Members of Team <br/> Museumary</strong></h1>
+              <h1><strong>Members of Team Museumary</strong></h1>
               <div className="row">
                 <div className="col-md-6">
                   <h2>Kenny Le</h2>
