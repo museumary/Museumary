@@ -8,7 +8,7 @@ class FullWorks extends React.Component {
  		 this.state={items:[]};
   }
   componentDidMount(){
-  	fetch(`http://api.museumary.me/work/`)
+  	fetch(`http://api.museumary.me/work?entries_per_page=5000`)
  		.then(result=>result.json())
     .then(items=>this.setState({items}))
   }
