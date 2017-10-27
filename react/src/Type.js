@@ -7,7 +7,7 @@ class Type extends React.Component {
   }
   componentDidMount(){
     const type_id = parseInt(this.props.match.params.number, 10)
-  	fetch(`http://api-dot-organic-area-180723.appspot.com/medium/` + type_id)
+  	fetch(`http://api.museumary.me/art_type/` + type_id)
  		.then(result=>result.json())
     .then(items=>this.setState({items}))
   }

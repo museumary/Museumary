@@ -7,9 +7,20 @@ class FullArtists extends React.Component {
  		 this.state={items:[]};
   }
   componentDidMount(){
-  	fetch(`http://api-dot-organic-area-180723.appspot.com/artist`)
+  	fetch(`http://api.museumary.me/artist`)
  		.then(result=>result.json())
-    .then(items=>this.setState({items}))
+    .then(items=> {
+			this.setState({items})
+			this.setState({vararray: []})
+
+			items.work_ids.forEach(function(work) {
+				fetch('http://api.museumary.me/work/' + work.id)
+		    .then(result=>result.json())
+		    .then(responseJson=>this.setState({
+					artist: this.state.vararray.concat([responseJson])
+				}))
+			})
+		})
   }
 
 

@@ -7,7 +7,7 @@ class Venue extends React.Component {
   }
   componentDidMount(){
     const venue_id = parseInt(this.props.match.params.number, 10)
-  	fetch(`http://api-dot-organic-area-180723.appspot.com/venue/` + venue_id)
+  	fetch(`http://api.museumary.me/venue/` + venue_id)
  		.then(result=>result.json())
     .then(items=>this.setState({items}))
   }
@@ -20,7 +20,7 @@ class Venue extends React.Component {
       //  associated with this Venue page, you should be able to access it
       //  like any other JSON
       var parameters = "&maptype=satellite&zoom=19";
-      var add = venue_obj.address.replace(/, /g, "");
+      var add = venue_obj.street.replace(/, /g, "");
       add = add.replace(/ /g, "+");
       var map_location = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q=" + add + parameters;
 			return <div className="Venue">
