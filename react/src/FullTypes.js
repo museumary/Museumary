@@ -20,15 +20,24 @@ class FullTypes extends React.Component {
 				arr.push(obj);
 			});
 			return <div className="FullTypes">
-							{
-								arr.map(
-									function(obj) {
-                    var url = '/types/' + obj.id;
-										return <div><Link to={url} activeClassName="active">{obj.name}</Link><br/><br/></div>;
-									}
-								)
-							}
-						</div>;
+						<div className="container">
+							<div className="row">
+								{
+									arr.map(
+										function(obj) {
+	                    					var url = '/types/' + obj.id;
+											return <div className="col-md-3">
+														<Link to={url} activeClassName="active">{obj.name}</Link>
+														<br/><br/>
+													</div>;
+										}
+									)
+								}
+							</div>
+							<br/>
+							<br/>
+						</div>
+					</div>;
 		}
 		else {
 			return <div className="FullTypes"></div>;
