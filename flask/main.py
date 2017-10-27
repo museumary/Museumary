@@ -2,7 +2,7 @@
 Main file where app-engine runs the website
 """
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, make_response
 from flask_io import FlaskIO, fields
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -12,91 +12,17 @@ import models
 from models import Artist, Work, ArtType, Venue, Medium
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 io = FlaskIO(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-
-@app.route('/')
-def index():
-    """
-    Home and root directory of our site
-    """
-    return render_template('home.html')
-
-
-@app.route('/about')
-def about():
-    """
-    The about page
-    """
-    return render_template('about.html')
-
-
-@app.route('/types')
-def art_forms():
-    """
-    The types of artworks
-    """
-    return render_template('types.html')
-
-
-@app.route('/venues')
-def venues():
-    """
-    The venues pages
-    """
-    return render_template('venues.html')
-
-
-@app.route('/works')
-def works():
-    """
-    The artworks page
-    """
-    return render_template('works.html')
-
-
-@app.route('/artists')
-def artists():
-    """
-    The artists page
-    """
-    return render_template('artists.html')
-
-
-@app.route('/artist')
-def artist():
-    """
-    A artist page
-    """
-    return render_template('artist.html')
-
-
-@app.route('/work')
-def work():
-    """
-    A work page
-    """
-    return render_template('work.html')
-
-
-@app.route('/venue')
-def venue():
-    """
-    A venue page
-    """
-    return render_template('venue.html')
-
-
-@app.route('/type')
-def type():
-    """
-    A type of artwork
-    """
-    return render_template('type.html')
+# @app.route('/', defaults={'path': ''})
+# @app.route('/<path:path>')
+# def index(path):
+#     return make_response('index.html')
+    
 
 # API requests
 
@@ -109,7 +35,7 @@ def get_info(page, entries_per_page, num_entries):
     }
 
 
-@app.route('/api/work/', methods=['GET'])
+@app.route('/work/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=25))
 @io.from_query('order_by', fields.String(missing="name"))
@@ -154,7 +80,7 @@ def get_works(**kwargs):
 
 
 
-@app.route('/api/work/<int:work_id>', methods=['GET'])
+@app.route('/work/<int:work_id>', methods=['GET'])
 def get_work(work_id):
     """
     API GET request for a single work given work id
@@ -177,7 +103,7 @@ def get_work_data(work):
 
 
 
-@app.route('/api/artist/', methods=['GET'])
+@app.route('/artist/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=25))
 @io.from_query('order_by', fields.String(missing="name"))
@@ -220,7 +146,7 @@ def get_artists(**kwargs):
 
 
 
-@app.route('/api/artist/<int:artist_id>', methods=['GET'])
+@app.route('/artist/<int:artist_id>', methods=['GET'])
 def get_artist(artist_id):
     """
     API GET request for a single artist given its id
@@ -244,7 +170,7 @@ def get_artist_data(artist):
     }
 
 
-@app.route('/api/venue/', methods=['GET'])
+@app.route('/venue/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=25))
 @io.from_query('order_by', fields.String(missing="name"))
@@ -286,7 +212,7 @@ def get_venues(**kwargs):
 
 
 
-@app.route('/api/venue/<int:venue_id>', methods=['GET'])
+@app.route('/venue/<int:venue_id>', methods=['GET'])
 def get_venue(venue_id):
     """
     API GET request for a single museum given its id
@@ -309,7 +235,7 @@ def get_venue_data(venue):
 
 
 
-@app.route('/api/art_type/', methods=['GET'])
+@app.route('/art_type/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=25))
 @io.from_query('order_by', fields.String(missing="name"))
@@ -352,7 +278,7 @@ def get_art_types(**kwargs):
 
 
 
-@app.route('/api/art_type/<int:art_type_id>', methods=['GET'])
+@app.route('/art_type/<int:art_type_id>', methods=['GET'])
 def get_art_type(art_type_id):
     """
     API GET request for a single art_type given its id
@@ -373,7 +299,7 @@ def get_art_type_data(art_type):
 
 
 
-@app.route('/api/medium/', methods=['GET'])
+@app.route('/medium/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=25))
 @io.from_query('order_by', fields.String(missing="name"))
@@ -416,7 +342,7 @@ def get_mediums(**kwargs):
 
 
 
-@app.route('/api/medium/<int:medium_id>', methods=['GET'])
+@app.route('/medium/<int:medium_id>', methods=['GET'])
 def get_medium(medium_id):
     """
     API GET request for a single medium given its id

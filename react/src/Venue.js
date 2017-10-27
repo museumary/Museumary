@@ -29,7 +29,9 @@ class Venue extends React.Component {
       var map_location = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q=" + add + parameters;
 			return <div className="Venue">
               <h1>{venue_obj.name}</h1>
-              <iframe width="500" height="300" frameborder="0" src={ map_location } allowfullscreen align="center"></iframe>
+              <iframe width="500" height="300" frameborder="0" src={ map_location } allowfullscreen align="center"></iframe><br/>
+              <p><strong>Address:</strong> {venue_obj.street} {venue_obj.city} {venue_obj.country}</p><br/><br/>
+              
 						</div>;
 		}
 		else {
