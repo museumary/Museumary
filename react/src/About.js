@@ -27,14 +27,14 @@ const About = () => {
                   <img src={ Kenny } className="img-rounded" alt="Kenny" width="256" height="256" />
                   <p>Hello, Kenny here! I am a Computer Science major at UT and I am graduating this year. I really appreciate the group leader.</p>
                   <p><strong>Responsibilities:</strong><br/> With the backend team, worked on setting up our domain. Focused on quality assurance to maintain a well constructed website.</p>
-                  <p><strong>No. of Commits:</strong> 8<br/><strong>No. of Issues:</strong> 3<br/><strong>No. of Tests:</strong> 0</p>
+                  <p><strong>No. of Commits:</strong> 18<br/><strong>No. of Issues:</strong> 9<br/><strong>No. of Tests:</strong> 2</p>
                 </div>
                 <div className="col-md-6">
                   <h2>Josh Morris</h2>
                   <img src={ Josh } className="img-rounded" alt="Josh" width="256" height="256" />
                   <p>4th year Computer Science major at the University of Texas at Austin. I enjoy Mexican food, being active, and playing Rocket League.</p>
                   <p><strong>Responsibilities:</strong><br/> Worked on creating the database and structuring it to JSON format. Worked with the backend team.</p>
-                  <p><strong>No. of Commits:</strong> 4<br/><strong>No. of Issues:</strong> 2<br/><strong>No. of Tests:</strong> 0</p>
+                  <p><strong>No. of Commits:</strong> 9<br/><strong>No. of Issues:</strong> 3<br/><strong>No. of Tests:</strong> 8</p>
                 </div>
               </div>
               <div className="row">
@@ -43,14 +43,14 @@ const About = () => {
                   <img src={ Kelly } className="img-rounded" alt="Kelly" width="256" height="256" />
                   <p>3rd year Computer Science major at UT. I am 20 years old and I have 3 cats. There names are Poncho, Magpie, Pigeon.</p>
                   <p><strong>Responsibilities:</strong><br/> Designed our apiary.io. Used Flask and other tools for backend work.</p>
-                  <p><strong>No. of Commits:</strong> 11<br/><strong>No. of Issues:</strong> 7<br/><strong>No. of Tests:</strong> 0</p>
+                  <p><strong>No. of Commits:</strong> 29<br/><strong>No. of Issues:</strong> 13<br/><strong>No. of Tests:</strong> 5</p>
                 </div>
                 <div className="col-md-6">
                   <h2>Trenton Strahan</h2>
                   <img src={ Trenton } className="img-rounded" alt="Trenton" width="256" height="256" />
                   <p>A 4th year Computer Science major at UT with a minor in RTF. Very excited for Software Engineering this semester. Big sports fan. Houston sports for life!</p>
-                  <p><strong>Responsibilities:</strong><br/> Designed and built the home page and the about page. Coordinated with team as teh group leader.</p>
-                  <p><strong>No. of Commits:</strong> 11<br/><strong>No. of Issues:</strong> 1<br/><strong>No. of Tests:</strong> 0</p>
+                  <p><strong>Responsibilities:</strong><br/> Designed and built the home page and the about page. Coordinated with team as the group leader.</p>
+                  <p><strong>No. of Commits:</strong> 32<br/><strong>No. of Issues:</strong> 3<br/><strong>No. of Tests:</strong> 0</p>
                 </div>
               </div>
               <div className="row">
@@ -59,8 +59,8 @@ const About = () => {
                   <h2>Max West</h2>
                   <img src={ Max } className="img-rounded" alt="Max" width="256" height="256" />
                   <p>This is my 4th year as a Computer Science major at UT. After graduation I am moving to Seattle to work for Amazon Publishing. I like long walks on the beach and Ruby on Rails.</p>
-                  <p><strong>Responsibility:</strong> "insert here"</p>
-                  <p><strong>No. of Commits:</strong>  "insert here"<br/><strong>No. of Issues:</strong> "insert here"<br/><strong>No. of Tests:</strong> "insert here"</p>
+                  <p><strong>Responsibility:</strong><br/> Used React to build the front end of the website. Queried the database for information and then displayed that accordingly.</p>
+                  <p><strong>No. of Commits:</strong>  25<br/><strong>No. of Issues:</strong> 4<br/><strong>No. of Tests:</strong> 0</p>
                 </div>
                 <div className="col-md-3"></div>
               </div>
@@ -71,8 +71,8 @@ const About = () => {
             <div className="container">
               <h1>Stats</h1>
               <div className="row">
-                <p><strong>Total No. of Commits:</strong> 39<br/><strong>Total No. of Issues:</strong> 15
-                  <br/><strong>Total No. of Tests:</strong> 0</p>
+                <p><strong>Total No. of Commits:</strong> 146<br/><strong>Total No. of Issues:</strong> 31
+                  <br/><strong>Total No. of Tests:</strong> 15</p>
                 <p><a href="http://docs.museumary.apiary.io/#"><strong>Apiary API</strong></a>
                   <br/>
                   <a href="https://github.com/museumary/Museumary"><strong>GitHub Repo</strong></a>
@@ -107,7 +107,7 @@ const About = () => {
                   <p><strong>Required Tools:</strong><br/>Apiary, Bootstrap, React, Flask, GitHub, Trello, PlanItPoker, and Slack</p>
                 </div>
                 <div className="col-md-4">
-                  <p><strong>Additional Tools:</strong><br/>Jinja</p>
+                  <p><strong>Additional Tools:</strong><br/>Jinja, W3Schools</p>
                 </div>
                 <div className="col-md-4">
                   <p><strong>Tools Descriptions:</strong><br/>For an in depth description of our tools used, see the below link to our technical report.</p>
