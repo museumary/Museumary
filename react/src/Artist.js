@@ -19,9 +19,6 @@ class Artist extends React.Component {
 				.then(result=>result.json())
 				.then(responseJson=>this.setState({work_arr: this.state.work_arr.concat([responseJson])}))
 			}
-
-			console.log('here');
-			console.log(this.state.work_arr);
 		})
   }
 
@@ -30,7 +27,6 @@ class Artist extends React.Component {
     var artist_obj = this.state.items;
 		var work_list = this.state.work_arr;
 		if(artist_obj && work_list && work_list.length > 0){
-			console.log(work_list);
       //  Do all React code within this div. 'artist_obj' is the object that
       //  associated with this artist page, you should be able to access it
       //  like any other JSON
