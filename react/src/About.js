@@ -12,10 +12,10 @@ import Max from './static/images/max_profile.jpg';
 const About = () => {
   return (
           <div className="About">
+            <h1><strong>Culture<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">.</a> Just a click away.</strong></h1>
             <div className="jumbotron"/>
             <div className="divider"/>
             <div className="page-header">
-              <h1><strong>Culture<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">.</a> Just a click away.</strong></h1>
               <p>Here at Museumary, we are dedicated to building and maintaining an internet database of art.<br/>Familiarize yourself with art from around the world. Our database gives you access to a large assortment of artistic pieces.<br/> Feel free to browse our collection, or scroll down for some team information!</p>
               <br/>
             </div>
@@ -82,7 +82,7 @@ const About = () => {
               </div>
             </div>
 
-            <div className="page-header"></div>
+            <div className="page-header"/>
 
             <div className="container">
               <h1>Data Sources</h1>

@@ -41,7 +41,7 @@ class FullArtists extends React.Component {
 												var url = '/artists/' + obj.id;
 												return <div className="col-md-3">
 															<Link to={url} activeClassName="active"><strong>{obj.name}</strong></Link><br/>
-															<img src={obj.image_url} alt={obj.name} width="200" height="300"/><br/><br/>
+															<img src={obj.image_url} width="200" height="300"/><br/><br/>
 													   </div>;
 													   <br/>
 											}

@@ -1,5 +1,20 @@
 import React from 'react';
 
+import Harvard from './static/images/Harvard.jpg';
+import iHarvard from './static/images/Harvard_interior.jpg';
+
+import Cooper from './static/images/Cooper.jpg';
+import iCooper from './static/images/Cooper_interior.jpg';
+
+import Auckland from './static/images/Auckland.jpg';
+import iAuckland from './static/images/Auckland_interior.jpg';
+
+import Finnish from './static/images/Finnish.jpg';
+import iFinnish from './static/images/Finnish_interior.jpg';
+
+import Walters from './static/images/Walters.jpg';
+import iWalters from './static/images/Walters_interior.jpg';
+
 class Venue extends React.Component {
 	constructor() {
   	super();
@@ -19,19 +34,57 @@ class Venue extends React.Component {
       //  Do all React code within this div. 'Venue_obj' is the object that
       //  associated with this Venue page, you should be able to access it
       //  like any other JSON
-      var parameters = "&maptype=satellite&zoom=19";
 
+      //Google Maps
+      var parameters = "&maptype=satellite&zoom=19";
       var street = "";
-      console.log(venue_obj.street);
       if(venue_obj.street)
         street = venue_obj.street.replace(/ /g, "+");
-
       var add =  street + "," + venue_obj.city + "," + venue_obj.country;
-
       var map_location = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q=" + add + parameters;
+
+      //Museum Images
+      var url ="";
+      var iurl = "";
+      if(venue_obj.name === "Harvard Art Museum")
+      {
+        url = Harvard;
+        iurl = iHarvard;
+      }
+      else if(venue_obj.name === "Auckland Museum")
+      {
+        url = Auckland;
+        iurl = iAuckland;
+      }
+      else if(venue_obj.name === "Finnish National Gallery")
+      {
+        url = Finnish;
+        iurl = iFinnish;
+      }
+      else if(venue_obj.name === "The Walters Art Museum")
+      {
+        url = Walters;
+        iurl = iWalters;
+      }
+      else {
+        url = Cooper;
+        iurl = iCooper;
+      }
 			return <div className="Venue">
               <h1>{venue_obj.name}</h1>
-              <iframe width="500" height="300" frameborder="0" src={ map_location } allowfullscreen align="center"></iframe><br/>
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-6">
+                    <img src={ url } width="500" height="300"/>
+                  </div>
+                  <div className="col-md-6">
+                    <img src={ iurl } width="500" height="300"/>
+                  </div>
+                </div>
+              </div>
+              <br/>
+              <br/>
+              <iframe width="800" height="600" frameborder="0" src={ map_location } allowfullscreen align="center"></iframe><br/>
               <p><strong>Address:</strong> {venue_obj.street} {venue_obj.city} {venue_obj.country}</p><br/><br/>
               
 						</div>;

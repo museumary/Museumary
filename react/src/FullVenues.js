@@ -28,7 +28,8 @@ class FullVenues extends React.Component {
 	                    					var url = '/venues/' + obj.id;
 											return <div className="col-md-3">
 														<Link to={url} activeClassName="active">{obj.name}</Link>
-														<img src={obj.image_url} alt={obj.name} width="200" height="300"/><br/><br/>
+														<br/>
+														<br/>
 													</div>;
 										}
 									)
