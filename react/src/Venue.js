@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Harvard from './static/images/Harvard.jpg';
 import iHarvard from './static/images/Harvard_interior.jpg';
@@ -22,15 +23,26 @@ class Venue extends React.Component {
   }
   componentDidMount(){
     const venue_id = parseInt(this.props.match.params.number, 10)
+		this.setState({work_arr: []});
   	fetch(`http://api.museumary.me/venue/` + venue_id)
  		.then(result=>result.json())
-    .then(items=>this.setState({items}))
+    .then(items=> {
+			this.setState({items})
+
+
+			for (var i = 0, len = items.work_ids.length; i < len; i++) {
+				fetch('http://api.museumary.me/work/' + items.work_ids[i])
+				.then(result=>result.json())
+				.then(responseJson=>this.setState({work_arr: this.state.work_arr.concat([responseJson])}))
+			}
+		})
   }
 
 
   render() {
     var venue_obj = this.state.items;
-		if(venue_obj){
+		var work_list = this.state.work_arr;
+		if(venue_obj && work_list && work_list.length > 0){
       //  Do all React code within this div. 'Venue_obj' is the object that
       //  associated with this Venue page, you should be able to access it
       //  like any other JSON
@@ -86,7 +98,14 @@ class Venue extends React.Component {
               <br/>
               <iframe width="800" height="600" frameborder="0" src={ map_location } allowfullscreen align="center"></iframe><br/>
               <p><strong>Address:</strong> {venue_obj.street} {venue_obj.city} {venue_obj.country}</p><br/><br/>
-              
+							{
+								work_list.map(
+									function(obj) {
+										var url = '/works/' + obj.id;
+										return <div><Link to={url} activeClassName="active">{obj.name}</Link><br/><br/></div>;
+									}
+								)
+							}
 						</div>;
 		}
 		else {

@@ -115,12 +115,12 @@ const About = () => {
               </div>
               <br/><br/><br/>
               <div>
-                <p>To read more about the tools used, our API, and the APIs used visit our technical report <a href="https://utexas.box.com/s/vd7fp4iccgq81thvhvmh3g1gioednu68"><strong>here</strong></a></p>
+                <p>To read more about the tools used, our API, and the APIs used visit our technical report <a href="https://utexas.box.com/s/vd7fp4iccgq81thvhvmh3g1gioednu68"><strong>here</strong></a> and <a href="https://utexas.box.com/s/dqdsxrdrsb72qdutnek4kgxbiz9r5qg4"><strong>UML</strong></a></p>
               </div>
             </div>
             <br/><br/><br/>
           </div>
-        
+
 
 
           );
