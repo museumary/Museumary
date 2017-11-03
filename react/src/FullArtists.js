@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './Full.css';
+import Pagination from 'react-js-pagination';
 
 
 class FullArtists extends React.Component {
 	constructor() {
   	super();
- 		 this.state={items:[]};
+ 		 this.state={
+ 		 	items:[],
+ 		 	activePage: 3
+ 		 };
+ 		 this.handlePageChange = this.handlePageChange.bind(this);
   }
   componentDidMount(){
   	fetch(`http://api.museumary.me/artist`)
@@ -15,14 +20,13 @@ class FullArtists extends React.Component {
 			this.setState({items})
 			this.setState({vararray: []})
 
-			items.work_ids.forEach(function(work) {
-				fetch('http://api.museumary.me/work/' + work.id)
-		    .then(result=>result.json())
-		    .then(responseJson=>this.setState({
-					artist: this.state.vararray.concat([responseJson])
-				}))
-			})
+			
 		})
+  }
+
+  handlePageChange(pageNumber) {
+  	console.log(`active page is ${pageNumber}`);
+  	this.setState({activePage: pageNumber});
   }
 
 
@@ -50,7 +54,15 @@ class FullArtists extends React.Component {
 							</div>
 							<br/>
 							<br/>
+							
 						</div>
+						<Pagination
+							activePage={this.state.activePage}
+							itemsCountPerPage={10}
+					        totalItemsCount={450}
+					        pageRangeDisplayed={5}
+					        onChange={this.handlePageChange}
+					    />
 					</div>;
 		}
 		else {

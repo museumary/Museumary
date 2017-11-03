@@ -28,7 +28,8 @@ class FullTypes extends React.Component {
 	                    					var url = '/types/' + obj.id;
 											return <div className="col-md-3">
 														<Link to={url} activeClassName="active">{obj.name}</Link>
-														<br/><br/>
+														<br/>
+														<br/>
 													</div>;
 										}
 									)

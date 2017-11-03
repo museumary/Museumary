@@ -1,3 +1,14 @@
 body {
 	text-align: center;
 }
+
+.row {
+	height: 320px;
+	width: 100%;
+}
+
+.col-md-3 {
+	border: 1px solid black;
+	height: 340px;
+	margin: 0px;
+}

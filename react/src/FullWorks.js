@@ -28,8 +28,10 @@ class FullWorks extends React.Component {
 										function(obj) {
 	                    					var url = '/works/' + obj.id;
 											return <div className="col-md-3">
-														<Link to={url} activeClassName="active">{obj.name}</Link>
-														<img src={obj.image_url} width="200" height="300"/><br/><br/>
+														<Link to={url} activeClassName="active">{("" + obj.name)}</Link>
+														<img src={obj.image_url} width="200" height="300"/>
+														<br/>
+														<br/>
 													</div>;
 										}
 									)
