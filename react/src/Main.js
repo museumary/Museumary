@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
-import Artists from './Artists';
-import Venues from './Venues';
-import Types from './Types';
-import Works from './Works';
-import About from './About';
+import Artists from './components/Artists';
+import Venues from './components/Venues';
+import Types from './components/Types';
+import Works from './components/Works';
+import About from './components/About';
 
 const Main = () => {
   return (<div className='Main'>

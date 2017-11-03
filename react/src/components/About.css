@@ -1,0 +1,45 @@
+body {
+    font-family: Mukta;
+    text-align: center;
+}
+
+h1 {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.page-header {
+    text-align: center;
+    font-size: 20px;
+}
+
+.jumbotron {
+    height: 300px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-position: center;
+    background-size: contain;
+    background-image: url(../static/images/Louvre.jpg);
+    opacity: .3;
+}
+
+.jumbotron a {
+    color: purple;
+    text-decoration: none;
+
+}
+
+.jumbotron a:visited {
+    color: purple;
+    text-decoration: none;
+
+}
+
+.jumbotron h1 {
+    opacity: 1;
+}
+
+.divider {
+    background: linear-gradient(black, #3b3a30);
+    height: 60px;
+}
