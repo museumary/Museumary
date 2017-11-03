@@ -20,6 +20,7 @@ class FullWorks extends React.Component {
 			this.state.items.objects.forEach(function(obj) {
 				arr.push(obj);
 			});
+
 			return <div className="FullWorks">
 						<div className="container">
 							<div className="row">
@@ -27,9 +28,18 @@ class FullWorks extends React.Component {
 									arr.map(
 										function(obj) {
 	                    					var url = '/works/' + obj.id;
+	                    					var cont = "";
+	                    					if(obj.name.length > 25)
+	                    					{
+	                    						cont = "..."; 
+	                    					}
 											return <div className="col-md-3">
-														<Link to={url} activeClassName="active">{("" + obj.name)}</Link>
-														<img src={obj.image_url} width="200" height="300"/>
+														<Link to={url} activeClassName="active"><strong>{obj.name.substring(0, 25) + cont}</strong></Link>
+														<br/>
+														<Link to={url} activeClassName="active">
+																<img src={obj.image_url} className="img-rounded" width="200" height="300"/>
+														</Link>
+														<br/>
 														<br/>
 														<br/>
 													</div>;

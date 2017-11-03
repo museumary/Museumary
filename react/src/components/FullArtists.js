@@ -18,14 +18,10 @@ class FullArtists extends React.Component {
  		.then(result=>result.json())
     .then(items=> {
 			this.setState({items})
-<<<<<<< HEAD:react/src/FullArtists.js
+
 			this.setState({vararray: []})
 
-			
-		})
-=======
 		});
->>>>>>> upstream/development:react/src/components/FullArtists.js
   }
 
   handlePageChange(pageNumber) {
@@ -49,7 +45,12 @@ class FullArtists extends React.Component {
 												var url = '/artists/' + obj.id;
 												return <div className="col-md-3">
 															<Link to={url} activeClassName="active"><strong>{obj.name}</strong></Link><br/>
-															<img src={obj.image_url} width="200" height="300"/><br/><br/>
+															<Link to={url} activeClassName="active">
+																<img src={obj.image_url} className="img-rounded" width="200" height="300"/>
+															</Link>
+															<br/>
+															<br/>
+															<br/>
 													   </div>;
 													   <br/>
 											}

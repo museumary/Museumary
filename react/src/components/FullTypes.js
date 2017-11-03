@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import style from './Full.css';
+
 
 class FullTypes extends React.Component {
 	constructor() {
@@ -27,7 +29,7 @@ class FullTypes extends React.Component {
 										function(obj) {
 	                    					var url = '/types/' + obj.id;
 											return <div className="col-md-3">
-														<Link to={url} activeClassName="active">{obj.name}</Link>
+														<Link to={url} activeClassName="active"><strong>{obj.name}</strong></Link>
 														<br/>
 														<br/>
 													</div>;
