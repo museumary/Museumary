@@ -2,11 +2,11 @@ import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import style from './CarouselInstance.css';
 
-import Guernica from './static/images/Guernica.jpg';
-import Starry_Night from './static/images/Starry_Night.jpg';
-import American_Gothic from './static/images/American_Gothic.jpg';
-import Tsunami from './static/images/Tsunami.jpg';
-import Creation_Adam from './static/images/Creation_of_Adam.jpg';
+import Guernica from '../static/images/Guernica.jpg';
+import Starry_Night from '../static/images/Starry_Night.jpg';
+import American_Gothic from '../static/images/American_Gothic.jpg';
+import Tsunami from '../static/images/Tsunami.jpg';
+import Creation_Adam from '../static/images/Creation_of_Adam.jpg';
 
 const CarouselInstance = () => {
   return (

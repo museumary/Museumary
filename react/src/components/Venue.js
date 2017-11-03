@@ -1,20 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Harvard from './static/images/Harvard.jpg';
-import iHarvard from './static/images/Harvard_interior.jpg';
+import Harvard from '../static/images/Harvard.jpg';
+import iHarvard from '../static/images/Harvard_interior.jpg';
 
-import Cooper from './static/images/Cooper.jpg';
-import iCooper from './static/images/Cooper_interior.jpg';
+import Cooper from '../static/images/Cooper.jpg';
+import iCooper from '../static/images/Cooper_interior.jpg';
 
-import Auckland from './static/images/Auckland.jpg';
-import iAuckland from './static/images/Auckland_interior.jpg';
+import Auckland from '../static/images/Auckland.jpg';
+import iAuckland from '../static/images/Auckland_interior.jpg';
 
-import Finnish from './static/images/Finnish.jpg';
-import iFinnish from './static/images/Finnish_interior.jpg';
+import Finnish from '../static/images/Finnish.jpg';
+import iFinnish from '../static/images/Finnish_interior.jpg';
 
-import Walters from './static/images/Walters.jpg';
-import iWalters from './static/images/Walters_interior.jpg';
+import Walters from '../static/images/Walters.jpg';
+import iWalters from '../static/images/Walters_interior.jpg';
 
 class Venue extends React.Component {
 	constructor() {
