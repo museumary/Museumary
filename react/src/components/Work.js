@@ -38,12 +38,18 @@ class Work extends React.Component {
       //  associated with this Work page, you should be able to access it
       //  like any other JSON
 			return <div className="Work">
-              <h1>{work_obj.name}</h1><br/>
-							<Link to={'/artists/' + work_obj.artist_id} activeClassName="active">{artist_obj.name}</Link><br/>
-							{medium_obj.name}<br/>
-							<Link to={'/venues/' + work_obj.venue_id} activeClassName="active">{venue_obj.name}</Link><br/>
-							<img src={work_obj.image_url} />
-						</div>;
+              			<h1>{work_obj.name}</h1>
+              			<br/>
+              			<img src={work_obj.image_url} className="img-rounded" width="300" height="450"/>
+              			<br/>
+						<Link to={'/artists/' + work_obj.artist_id} activeClassName="active"><strong>Artist: </strong>{artist_obj.name}</Link>
+						<br/>
+						<strong>Art Type: </strong>
+						<br/>
+						<Link to={'/venues/' + work_obj.venue_id} activeClassName="active"><strong>Venue: </strong>{venue_obj.name}</Link>
+						<br/>
+							
+					</div>;
 		}
 		else {
 			return <div className="Work"></div>;

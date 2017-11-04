@@ -32,7 +32,7 @@ class Artist extends React.Component {
       //  like any other JSON
 			var life = artist_obj.birth + " (" + artist_obj.birthplace + ")";
 			if(artist_obj.death) {
-				life += " - " + artist_obj.death + "(" + artist_obj.deathplace + ")";
+				life += " - " + artist_obj.death + " (" + artist_obj.deathplace + ")";
 			}
 			var img_url = "";
 			if(!artist_obj.image_url) {
@@ -42,19 +42,29 @@ class Artist extends React.Component {
 				img_url = artist_obj.image_url;
 			}
 			return <div className="Artist">
-              <h1>{artist_obj.name}</h1><br/>
-							{artist_obj.culture}<br/>
-							{life}<br/>
-							<h3>Works</h3><br/>
+              			<h1>{artist_obj.name}</h1>
+              			<br/>
+              			<img src={img_url} className="img-rounded" width="300" height="450"/>
+              			<br/>
+						<strong>Culture: </strong>{artist_obj.culture}
+						<br/>
+						<strong>Birth/Death: </strong>{life}
+						<br/>
+							
+							<h3><strong>Notable Works</strong></h3>
 							{
 								work_list.map(
 									function(obj) {
 										var url = '/works/' + obj.id;
-										return <div><Link to={url} activeClassName="active">{obj.name}</Link><br/><br/></div>;
+										return <div>
+												<Link to={url} activeClassName="active">{obj.name}</Link>
+												<br/>
+												<br/>
+											</div>;
 									}
 								)
 							}
-							<img src={img_url} />
+							
 						</div>;
 		}
 		else {
