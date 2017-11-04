@@ -3,8 +3,9 @@ Main file where app-engine runs the website
 """
 
 from flask import Flask, render_template, jsonify, make_response
-from flask_io import FlaskIO, fields
+from flask_io import FlaskIO, fields, Schema
 from flask_cors import CORS
+from flask_restful import marshal_with
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from os import environ
@@ -18,15 +19,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# @app.route('/', defaults={'path': ''})
-# @app.route('/<path:path>')
-# def index(path):
-#     return make_response('index.html')
-    
-
-# API requests
-
 def get_info(page, entries_per_page, num_entries):
+    """
+    Fill in information for responses containing
+    page number, entries_per_page, and total pages and entries
+    """
     return {
         'page': page,
         'entries_per_page': entries_per_page,
@@ -34,13 +31,16 @@ def get_info(page, entries_per_page, num_entries):
         'num_entries': num_entries
     }
 
+#-------------------#
+# Work API Requests #
+#-------------------#
 
 @app.route('/work/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=25))
 @io.from_query('order_by', fields.String(missing="name"))
 @io.from_query('order', fields.String(missing="ascending"))
-# @io.from_query('filter', fields.String(missing="None"))
+@io.from_query('startswith', fields.String(missing=None))
 def get_works(**kwargs):
     """
     API GET request for all works of art in the database
@@ -49,6 +49,8 @@ def get_works(**kwargs):
     entries_per_page = kwargs['entries_per_page']
     order_by = kwargs['order_by']
     order = kwargs['order']
+    startswith = kwargs['startswith']
+    # filters = kwargs['filters']
 
     works = Work.query
     num_entries = len(works.all())
@@ -59,7 +61,10 @@ def get_works(**kwargs):
         elif order == 'descending':
             works = works.order_by(desc(getattr(Work, order_by)))
 
-    # if(filter):
+    if startswith:
+        works = works.filter(Work.name.startswith(startswith))
+
+    # if filter_attr:
 
     # set the number of works given in the response
     if entries_per_page:
@@ -77,8 +82,7 @@ def get_works(**kwargs):
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
-
-
+    # return filters
 
 @app.route('/work/<int:work_id>', methods=['GET'])
 def get_work(work_id):
@@ -101,7 +105,9 @@ def get_work_data(work):
         'image_url': work.image_url
     }
 
-
+#---------------------#
+# Artist API Requests #
+#---------------------#
 
 @app.route('/artist/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
@@ -144,8 +150,6 @@ def get_artists(**kwargs):
 
     return jsonify({"info":info, "objects":results})
 
-
-
 @app.route('/artist/<int:artist_id>', methods=['GET'])
 def get_artist(artist_id):
     """
@@ -169,6 +173,9 @@ def get_artist_data(artist):
         'work_ids': [work.id for work in artist.works]
     }
 
+#--------------------#
+# Venue API Requests #
+#--------------------#
 
 @app.route('/venue/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
@@ -210,8 +217,6 @@ def get_venues(**kwargs):
 
     return jsonify({'info':info, 'objects':results})
 
-
-
 @app.route('/venue/<int:venue_id>', methods=['GET'])
 def get_venue(venue_id):
     """
@@ -233,7 +238,9 @@ def get_venue_data(venue):
     }
     return result
 
-
+#----------------------#
+# ArtType API Requests #
+#----------------------#
 
 @app.route('/art_type/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
@@ -276,8 +283,6 @@ def get_art_types(**kwargs):
 
     return jsonify({"info":info, "objects":results})
 
-
-
 @app.route('/art_type/<int:art_type_id>', methods=['GET'])
 def get_art_type(art_type_id):
     """
@@ -297,7 +302,9 @@ def get_art_type_data(art_type):
     }
     return result
 
-
+#---------------------#
+# Medium API Requests #
+#---------------------#
 
 @app.route('/medium/', methods=['GET'])
 @io.from_query('page', fields.Integer(missing=1))
@@ -339,8 +346,6 @@ def get_mediums(**kwargs):
     info = get_info(page, entries_per_page, num_entries)
 
     return jsonify({"info":info, "objects":results})
-
-
 
 @app.route('/medium/<int:medium_id>', methods=['GET'])
 def get_medium(medium_id):
