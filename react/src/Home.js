@@ -5,10 +5,10 @@ import style from './Home.css'
 
 const Home = () => {
   	return (
-  		<div className="Home">
-        	<CarouselInstance />
-        	<div className="Home-banner"/>
-        	<Twitter />
+        <div className="Home">
+            <CarouselInstance />
+            <div className="Home-banner"/>
+            <Twitter />
         </div>);
 };
 
