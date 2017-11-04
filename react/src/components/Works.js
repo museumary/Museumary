@@ -6,8 +6,8 @@ import Work from './Work';
 const Works = () => {
   return (<div className="Works">
             <Switch>
-              <Route exact path='/works' component={FullWorks} />
-              <Route path='/works/:number' component={Work} />
+                <Route exact path='/works' component={FullWorks} />
+                <Route path='/works/:number' component={Work} />
             </Switch>
           </div>);
 };

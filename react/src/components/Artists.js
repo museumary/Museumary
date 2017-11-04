@@ -6,8 +6,8 @@ import Artist from './Artist';
 const Artists = () => {
   return (<div className="Artists">
             <Switch>
-              <Route exact path='/artists' component={FullArtists} />
-              <Route path='/artists/:number' component={Artist} />
+                <Route exact path='/artists' component={FullArtists} />
+                <Route path='/artists/:number' component={Artist} />
             </Switch>
           </div>);
 };
