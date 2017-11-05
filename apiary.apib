@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: api.museumary.me/
 
 # Museumary
 
@@ -8,7 +8,7 @@ specific artwork, artist, location, and type of art.
 
 ## group Artwork Collection
 
-## All Works [/work{?page,entries_per_page,order_by,order}/]
+## All Works [/work{?page,entries_per_page,order_by,order,startswith,art_type,medium,venue}/]
 ### List All Artworks [GET]
 
 + Parameters
@@ -16,6 +16,10 @@ specific artwork, artist, location, and type of art.
     + entries_per_page (optional, integer) ...number of entries to be returned; default=25
     + order_by (optional, String) ...attribute to order the entries by; default="name"
     + order (optional, String) ...sort by either 'ascending' or 'descending'; default='ascending'
+    + startswith (optional, String) ...filter works by starting letter or substring; default=None
+    + art_type (optional, String) ...filter works by art type; default=None
+    + medium (optional, String) ...filter works by medium; default=None
+    + venue (optional, String) ...filter works by venue; default=None
 
 + Response 200 (application/json)
 
@@ -86,7 +90,7 @@ specific artwork, artist, location, and type of art.
           
 ## group Artist Collection
 
-## All Artists [/artist{?page,entries_per_page,order_by,order}/]
+## All Artists [/artist{?page,entries_per_page,order_by,order,startswith,culture}/]
 ### List All Artists [GET]
 
 + Parameters
@@ -94,6 +98,8 @@ specific artwork, artist, location, and type of art.
     + entries_per_page (optional, integer) ...number of entries to be returned; default=25
     + order_by (optional, String) ...attribute to order the entries by; default="name"
     + order (optional, String) ...sort by either 'ascending' or 'descending'; default='ascending'
+    + startswith (optional, String) ...filter artists by starting letter or substring; default=None
+    + culture (optional, String) ...filter artists by culture; default=None
 
 + Response 200 (application/json)
 
@@ -107,7 +113,7 @@ specific artwork, artist, location, and type of art.
                     "num_pages": 300
                 },
                 
-                "artists": [
+                "objects": [
                     {
                         "id": 0,
                         "name": "Vincent van Gogh",
@@ -172,7 +178,7 @@ specific artwork, artist, location, and type of art.
 
 ## group Venues
 
-## All Venues [/venue{?page,entries_per_page,order_by,order}/]
+## All Venues [/venue{?page,entries_per_page,order_by,order,startswith,country}/]
 ### List All Venues [GET]
 
 + Parameters
@@ -180,6 +186,8 @@ specific artwork, artist, location, and type of art.
     + entries_per_page (optional, integer) ...number of entries to be returned; default=25
     + order_by (optional, String) ...attribute to order the entries by; default="name"
     + order (optional, String) ...sort by either 'ascending' or 'descending'; default='ascending'
+    + startswith (optional, String) ...filter venues by first letter or substring; default=None
+    + country (optional, String) ...filter venues by country; default=None
 
 + Response 200 (application/json)
 
@@ -193,7 +201,7 @@ specific artwork, artist, location, and type of art.
                     "num_pages": 1
                 },
                 
-                "venues": [
+                "objects": [
                     {
                         "id": 0,
                         "name": "Harvard Art Museum",
@@ -264,7 +272,7 @@ specific artwork, artist, location, and type of art.
 
 ## group Art Type
 
-## All Art Types [/art_type{?page,entries_per_page,order_by,order}/]
+## All Art Types [/art_type{?page,entries_per_page,order_by,order,startswith,medium}/]
 ### List All Types [GET]
 
 + Parameters
@@ -272,6 +280,8 @@ specific artwork, artist, location, and type of art.
     + entries_per_page (optional, integer) ...number of entries to be returned; default=25
     + order_by (optional, String) ...attribute to order the entries by; default="name"
     + order (optional, String) ...sort by either 'ascending' or 'descending'; default='ascending'
+    + startswith (optional, String) ...filter art types by first letter or substring; default=None
+    + medium (optional, String) ...filter art types by medium; default=None
 
 + Response 200 (application/json)
 
@@ -285,7 +295,7 @@ specific artwork, artist, location, and type of art.
                     "num_pages": 180
                 },
                 
-                "types": [
+                "objects": [
                     {
                         "id": 0,
                         "name": "painting",
@@ -340,4 +350,66 @@ specific artwork, artist, location, and type of art.
                 "medium_ids": [11, 16],
                 "artist_ids": [26, 38, 67],
                 "work_ids": [13, 15, 29]
+            }
+            
+## group Medium
+
+## All Media [/medium{?page,entries_per_page,order_by,order}/]
+### List All Types [GET]
+
++ Parameters
+    + page (optional, integer) ...index of the page being requested; default=1
+    + entries_per_page (optional, integer) ...number of entries to be returned; default=25
+    + order_by (optional, String) ...attribute to order the entries by; default="name"
+    + order (optional, String) ...sort by either 'ascending' or 'descending'; default='ascending'
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "info": {
+                    "page": 1,
+                    "entries_per_page": 3,
+                    "num_entries": 600,
+                    "num_pages": 200
+                },
+                
+                "objects": [
+                    {
+                        "id": 0,
+                        "name": "bronze",
+                        "art_type_id": 307,
+                        "work_ids": [605, 361]
+                    },
+                    {
+                        "id": 1,
+                        "name": "Acrylic paint on canvas",
+                        "art_type_id": 104,
+                        "work_ids": [561]
+                    },
+                    {
+                        "id": 2,
+                        "name": "agate, gold",
+                        "art_type_id": 170,
+                        "work_ids": [203, 340, 602]
+                    }
+                ]
+            }
+
+## Single Medium [/medium/{medium_id}]
+### Specific Type [GET]
+
++ Parameters
+    + medium_id (required, integer) ...ID of the requested art form
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id": 2,
+                "name": "agate, gold",
+                "art_type_id": 170,
+                "work_ids": [203, 340, 602]
             }
