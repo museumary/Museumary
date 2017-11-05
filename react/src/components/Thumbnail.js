@@ -1,29 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import style from './Full.css';
 
 export default class Thumbnail extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            name: '',
-            image: '',
-            url: ''
-        }
-    }
-
-    componentDidMount() {
-        this.setState({
-            name: this.props.name,
-            image: this.props.image,
-            url: this.props.url
-        })
-    }
-
     render() {
-        const name = this.state.name
-        const image = this.state.image
-        const url = this.state.url
+        const name = this.props.name
+        const image = this.props.image_url
+        const url = this.props.url
 
         return (
             <div className='col-md-3'>

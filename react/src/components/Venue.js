@@ -16,101 +16,98 @@ import iFinnish from '../static/images/Finnish_interior.jpg';
 import Walters from '../static/images/Walters.jpg';
 import iWalters from '../static/images/Walters_interior.jpg';
 
+const MUSEUMS = [
+    [Harvard, iHarvard],
+    [Walters, iWalters],
+    [Auckland, iAuckland],
+    [Cooper, iCooper],
+    [Finnish, iFinnish]
+]
+
 class Venue extends React.Component {
-    constructor() {
-        super();
-        this.state={items:[]};
+    constructor(props) {
+        super(props);
+        this.state={
+            venue:[],
+            works:[]
+        };
+        this.museum_url = '';
+        this.imuseum_url = '';
+        this.map_location = '';
     }
-    componentDidMount(){
+
+    componentDidMount() {
         const venue_id = parseInt(this.props.match.params.number, 10)
-        this.setState({work_arr: []});
+
+        if(1 <= venue_id && venue_id <= 5) {
+            let museum = MUSEUMS[venue_id-1]
+            this.museum_url = museum[0]
+            this.imuseum_url = museum[1]
+        }
+
         fetch(`http://api.museumary.me/venue/` + venue_id)
             .then(result=>result.json())
-            .then(items=> {
-                this.setState({items})
+            .then(venue=> {
+                this.setState({ venue })
 
-                for (var i = 0, len = items.work_ids.length; i < len; i++) {
-                    fetch('http://api.museumary.me/work/' + items.work_ids[i])
+                let street = "";
+                if(venue.street)
+                    street = venue.street.replace(/ /g, "+");
+                const add =  street + "," + venue.city + "," + venue.country;
+                this.map_location = this.props.base_url + add + this.props.parameters;
+
+                for (var i = 0, len = venue.work_ids.length; i < len; i++) {
+                    fetch('http://api.museumary.me/work/' + venue.work_ids[i])
                         .then(result=>result.json())
-                        .then(responseJson=>this.setState({work_arr: this.state.work_arr.concat([responseJson])}))
+                        .then(responseJson=>this.setState({works: this.state.works.concat([responseJson])}))
                 }
             })
     }
 
-
     render() {
-        var venue_obj = this.state.items;
-        var work_list = this.state.work_arr;
+        var venue_obj = this.state.venue;
+        var work_list = this.state.works;
+
         if(venue_obj && work_list && work_list.length > 0){
             //  Do all React code within this div. 'Venue_obj' is the object that
             //  associated with this Venue page, you should be able to access it
             //  like any other JSON
 
-            //Google Maps
-            var parameters = "&maptype=satellite&zoom=19";
-            var street = "";
-            if(venue_obj.street)
-                street = venue_obj.street.replace(/ /g, "+");
-            var add =  street + "," + venue_obj.city + "," + venue_obj.country;
-            var map_location = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q=" + add + parameters;
+            let works = work_list.map(function(obj) {
+                const url = '/works/' + obj.id;
+                return <div key={obj.id}><Link to={url}>{obj.name}</Link><br/><br/></div>;
+            })
 
-            //Museum Images
-            var url ="";
-            var iurl = "";
-            if(venue_obj.name === "Harvard Art Museum")
-            {
-                url = Harvard;
-                iurl = iHarvard;
-            }
-            else if(venue_obj.name === "Auckland Museum")
-            {
-                url = Auckland;
-                iurl = iAuckland;
-            }
-            else if(venue_obj.name === "Finnish National Gallery")
-            {
-                url = Finnish;
-                iurl = iFinnish;
-            }
-            else if(venue_obj.name === "The Walters Art Museum")
-            {
-                url = Walters;
-                iurl = iWalters;
-            }
-            else {
-                url = Cooper;
-                iurl = iCooper;
-            }
-            return <div className="Venue">
+            return (
+                <div className="Venue">
                         <h1>{venue_obj.name}</h1>
                             <div className="container">
                                 <div className="row">
                                     <div className="col-md-6">
-                                        <img src={ url } width="500" height="300"/>
+                                        <img src={ this.museum_url } width="500" height="300"/>
                                     </div>
                                     <div className="col-md-6">
-                                        <img src={ iurl } width="500" height="300"/>
+                                        <img src={ this.imuseum_url } width="500" height="300"/>
                                     </div>
                                 </div>
                             </div>
                             <br/>
                             <br/>
-                            <iframe width="800" height="600" frameborder="0" src={ map_location } allowfullscreen align="center"></iframe><br/>
+                            <iframe width="800" height="600" frameBorder="0" src={ this.map_location } allowFullScreen align="center"></iframe><br/>
                             <p><strong>Address:</strong> {venue_obj.street} {venue_obj.city} {venue_obj.country}</p><br/><br/>
-                            {
-                                work_list.map(
-                                    function(obj) {
-                                        var url = '/works/' + obj.id;
-                                        return <div><Link to={url} activeClassName="active">{obj.name}</Link><br/><br/></div>;
-                                    }
-                                )
-                            }
-                            </div>;
+                            {works}
+                            </div>
+            );
         }
         else {
             return <div className="Venue"></div>;
         }
     }
+}
+
+Venue.defaultProps = {
+    parameters: '&maptype=satellite&zoom=19',
+    base_url: 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q='
 }
 
 export default Venue;
