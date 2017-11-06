@@ -1,17 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Thumbnail from './Thumbnail'
+import Pagination from './Pagination'
+
+const defaultProps = {
+    initialPage: 1,
+    entries_per_page: 16,
+    url: 'http://api.museumary.me/work?'
+}
 
 class FullWorks extends React.Component {
-    constructor() {
-        super();
-        this.state={items:[]};
+    constructor(props) {
+        super(props);
+        this.state={
+            items: [],
+            activePage: 1,
+            numPages: 0,
+        };
+
+        this.loadPage = this.loadPage.bind(this)
     }
 
-    componentDidMount(){
-        fetch(`http://api.museumary.me/work?entries_per_page=24`)
-            .then(result=>result.json())
-            .then(items=>this.setState({ items }))
+    componentDidMount() {
+        this.loadPage(this.props.initialPage)
+    }
+
+    loadPage(pageNumber) {
+        const num_entries = 'entries_per_page='+this.props.entries_per_page
+        const page = 'page=' + pageNumber
+
+        return (
+            fetch(this.props.url+num_entries+'&'+page)
+                .then(result=>result.json())
+                .then(items=> {
+                    const numPages = items.info.num_pages;
+                    this.setState({ items: items, activePage: pageNumber, numPages: numPages })
+                })
+        );
     }
 
     render() {
@@ -23,20 +48,29 @@ class FullWorks extends React.Component {
                 arr.push(<Thumbnail name={name} image_url={obj.image_url} url={url} key={obj.id} />);
             });
 
-            return <div className="FullWorks">
-                        <div className="container">
-                            <div className="row">
-                                {arr}
-                            </div>
-                            <br/>
-                            <br/>
+            return (
+                <div className="FullWorks">
+                    <div className="container">
+                        <div className="row">
+                            {arr}
                         </div>
-                </div>;
+                        <br/>
+                        <br/>
+                    </div>
+                    <Pagination
+                        activePage={this.state.activePage}
+                        numPages={this.state.numPages}
+                        loadPage={this.loadPage}
+                    />
+                </div>
+            );
         }
         else {
             return <div className="FullWorks"></div>;
         }
     }
 }
+
+FullWorks.defaultProps = defaultProps
 
 export default FullWorks;
