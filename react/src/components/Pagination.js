@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './Pagination.css'
 
@@ -24,7 +24,13 @@ export default class Pagination extends React.Component {
         }
 
         buttonText = buttonText.map(number => {
-            return <button type='button' className={number === this.props.activePage ? 'active' : ''} key={number}>{number}</button>
+            const my_class = number === this.props.activePage ? 'active': ''
+
+            return (
+                <button type='button' key={number} className={my_class}>
+                    {number}
+                </button>
+            );
         })
 
         return (

@@ -8,80 +8,72 @@ class FullArtists extends React.Component {
     static defaultProps = {
         initialPage: 1,
         entries_per_page: 16,
-        url: 'http://api.museumary.me/artist'
+        url: 'http://api.museumary.me/artist?'
     }
 
     constructor() {
         super();
         this.state={
             items: [],
-            displayItems: [],
             activePage: 1,
             numPages: 0,
             loading: true
         };
+
+        this.numPages = 0;
     }
 
     componentDidMount() {
-        const num_entries = this.props.entries_per_page
+        this.loadPage(this.props.initialPage)
+        .then(result => this.numPages = this.state.items.info.num_pages)
+    }
 
-        fetch(`http://api.museumary.me/artist?entries_per_page=`+num_entries)
-            .then(result=>{
-                return result.json()
-            })
-            .then(items=> {
-                const numPages = items.info.num_pages;
-                this.setState({ items: items, numPages: numPages })
-            });
+    loadPage(pageNumber) {
+        const num_entries = 'entries_per_page='+this.props.entries_per_page
+        const page = 'page=' + pageNumber
+
+        return (
+            fetch(this.props.url+num_entries+'&'+page)
+                .then(result=>result.json())
+                .then(items=> {
+                    this.setState({ items: items, activePage: pageNumber })
+                })
+        );
     }
 
     incPage = () => {
         console.log('inc page')
+        const newPage = this.state.activePage + 1;
 
-        if(this.state.activePage < this.state.numPages) {
-            this.setState({ activePage: this.state.activePage + 1 })
-        }
-        else {
-            console.log('not incrementing. ')
-            console.log('active ' + this.state.activePage)
-            console.log('numpages: ' + this.state.numPages)
+        if(this.state.activePage < this.numPages) {
+            this.loadPage(newPage)
         }
     };
 
     decPage = () => {
         console.log('dec page.')
+        const newPage = this.state.activePage - 1;
+
 
         if(this.state.activePage > 1) {
-            this.setState({ activePage: this.state.activePage - 1 })
-        }
-        else {
-            console.log('not dec. ')
-            console.log('active ' + this.state.activePage)
-            console.log('numpages: ' + this.state.numPages)
+            this.loadPage(newPage)
         }
     };
 
     firstPage = () => {
         console.log('f page.')
+        const newPage = this.props.initialPage;
 
-        if(this.state.activePage != this.props.initialPage) {
-            this.setState({ activePage: this.props.initialPage })
-        }
-        else {
-            console.log('not resetting. ')
-            console.log('active ' + this.state.activePage)
-            console.log('numpages: ' + this.state.numPages)
+        if(this.state.activePage !== newPage) {
+            this.loadPage(newPage)
         }
     };
 
     lastPage = () => {
-        if(this.state.activePage != this.state.numPages) {
-            this.setState({ activePage: this.state.numPages })
-        }
-        else {
-            console.log('not advancing. ')
-            console.log('active ' + this.state.activePage)
-            console.log('numpages: ' + this.state.numPages)
+        const newPage = this.numPages;
+
+        if(this.state.activePage !== this.numPages) {
+            this.loadPage(newPage)
         }
     };
 
@@ -108,7 +100,7 @@ class FullArtists extends React.Component {
                    </div>
                    <Pagination
                         activePage={this.state.activePage}
-                        numPages={this.state.numPages}
+                        numPages={this.numPages}
                         incPage={this.incPage}
                         decPage={this.decPage}
                         firstPage={this.firstPage}
