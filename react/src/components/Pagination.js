@@ -9,8 +9,12 @@ export default class Pagination extends React.Component {
     };
 
     getPage(pageNumber) {
-        if(pageNumber !== this.props.activePage &&
-            1 <= pageNumber && pageNumber <= this.numPages) {
+        let {
+            activePage,
+            numPages
+        } = this.props
+
+        if(pageNumber !== activePage && 1 <= pageNumber && pageNumber <= numPages) {
             this.props.loadPage(pageNumber)
         }
     }
@@ -41,7 +45,7 @@ export default class Pagination extends React.Component {
         } = this.props
 
         const buttonText = this.buildButtonText().map(number => {
-            const my_class = number === this.props.activePage ? 'active': ''
+            const my_class = number === activePage ? 'active': ''
 
             return (
                 <button type='button' key={number}

@@ -17,7 +17,6 @@ class FullArtists extends React.Component {
             items: [],
             activePage: 1,
             numPages: 0,
-            loading: true
         };
 
         this.numPages = 0;
@@ -26,10 +25,11 @@ class FullArtists extends React.Component {
 
     componentDidMount() {
         this.loadPage(this.props.initialPage)
-            .then(result => this.numPages = this.state.items.info.num_pages)
     }
 
     loadPage(pageNumber) {
+        console.log('load page')
+
         const num_entries = 'entries_per_page='+this.props.entries_per_page
         const page = 'page=' + pageNumber
 
@@ -37,7 +37,8 @@ class FullArtists extends React.Component {
             fetch(this.props.url+num_entries+'&'+page)
                 .then(result=>result.json())
                 .then(items=> {
-                    this.setState({ items: items, activePage: pageNumber })
+                    const numPages = items.info.num_pages;
+                    this.setState({ items: items, activePage: pageNumber, numPages: numPages })
                 })
         );
     }
@@ -61,7 +62,7 @@ class FullArtists extends React.Component {
                    </div>
                    <Pagination
                         activePage={this.state.activePage}
-                        numPages={this.numPages}
+                        numPages={this.state.numPages}
                         loadPage={this.loadPage}
                    />
                </div>
