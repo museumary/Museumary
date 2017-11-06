@@ -29,7 +29,7 @@ class FullVenues extends React.Component {
             this.state.items.objects.forEach(function(obj) {
                 const url = '/venues/' + obj.id
                 const image_url = MUSEUMS[obj.id-1] //this.props.museum_images[obj.id-1]
-                arr.push(<Thumbnail name={obj.name} image_url={image_url} url={url} key={obj.id} />);
+                arr.push(<Thumbnail name={obj.name} image_url={image_url} url={url} key={obj.id} type="venue" description_id={obj.id}/>);
             });
 
             return (

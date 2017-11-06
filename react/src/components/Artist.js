@@ -52,10 +52,10 @@ class Artist extends React.Component {
             return (
                 <div className="Artist">
                     <h1>{artist_obj.name}</h1><br/>
-                    <img src={image_url} /><br/>
-                    {artist_obj.culture}<br/>
-                    {life}<br/>
-                    <h3>Works</h3>
+                    <img src={image_url} className="img-rounded" width="300" height="450"/><br/>
+                    <strong>Culture: </strong>{artist_obj.culture}<br/>
+                    <strong>Birth/Death: </strong>{life}<br/>
+                    <h3><strong>Notable Works</strong></h3>
                     {works}
                 </div>
             );

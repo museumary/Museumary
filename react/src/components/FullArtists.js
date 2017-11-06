@@ -4,22 +4,21 @@ import style from './Full.css';
 import Thumbnail from './Thumbnail'
 import Pagination from './Pagination'
 
-class FullArtists extends React.Component {
-    static defaultProps = {
-        initialPage: 1,
-        entries_per_page: 16,
-        url: 'http://api.museumary.me/artist?'
-    }
+const defaultProps = {
+    initialPage: 1,
+    entries_per_page: 16,
+    url: 'http://api.museumary.me/artist?'
+}
 
-    constructor() {
-        super();
+class FullArtists extends React.Component {
+    constructor(props) {
+        super(props);
         this.state={
             items: [],
             activePage: 1,
             numPages: 0,
         };
 
-        this.numPages = 0;
         this.loadPage = this.loadPage.bind(this)
     }
 
@@ -28,8 +27,6 @@ class FullArtists extends React.Component {
     }
 
     loadPage(pageNumber) {
-        console.log('load page')
-
         const num_entries = 'entries_per_page='+this.props.entries_per_page
         const page = 'page=' + pageNumber
 
@@ -73,5 +70,7 @@ class FullArtists extends React.Component {
         }
     }
 }
+
+FullArtists.defaultProps = defaultProps;
 
 export default FullArtists;

@@ -65,5 +65,6 @@ export default class Pagination extends React.Component {
                 <button type="button" onClick={() => this.getPage(numPages)}>>></button>
             </ul>
         );
+
     };
 }

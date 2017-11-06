@@ -18,7 +18,7 @@ class FullWorks extends React.Component {
         if(this.state.items.objects){
             var arr = [];
             this.state.items.objects.forEach(function(obj) {
-                const url = '/works'+obj.id
+                const url = '/works/'+obj.id
                 const name = obj.name.substring(0, 25) + (obj.name.length > 25 ? '...': '')
                 arr.push(<Thumbnail name={name} image_url={obj.image_url} url={url} key={obj.id} />);
             });
