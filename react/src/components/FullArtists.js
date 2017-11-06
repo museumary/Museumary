@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './Full.css';
-import Thumbnail from './Thumbnail'
+import Thumbnail from './Thumbnail';
+import Pagination from './Pagination'
 
 class FullArtists extends React.Component {
     constructor() {
@@ -24,19 +25,21 @@ class FullArtists extends React.Component {
         if(this.state.items.objects){
             var arr = [];
             this.state.items.objects.forEach(function(obj) {
-                const url = '/artists' + obj.id
+                const url = '/artists/' + obj.id
                 arr.push(<Thumbnail name={obj.name} image_url={obj.image_url} url={url} key={obj.id} />);
             });
 
             return (
                 <div className="FullArtists">
-                    <div className="container">
-                        <div className="row">
-                            {arr}
-                        </div>
-                        <br/>
-                        <br/>
-                   </div>
+                    
+                      <div className="container">
+                          <div className="row">
+                              {arr}
+                          </div>
+                          <br/>
+                          <br/>
+                      </div>
+                      <Pagination initialPage="1" />
                </div>
            );
         }

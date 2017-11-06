@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Thumbnail from './Thumbnail';
 
 import Harvard from '../static/images/Harvard.jpg';
 import iHarvard from '../static/images/Harvard_interior.jpg';
@@ -56,7 +57,7 @@ class Venue extends React.Component {
                 const add =  street + "," + venue.city + "," + venue.country;
                 this.map_location = this.props.base_url + add + this.props.parameters;
 
-                for (var i = 0, len = venue.work_ids.length; i < len; i++) {
+                for (var i = 0, len = venue.work_ids.length; i < 4; i++) {
                     fetch('http://api.museumary.me/work/' + venue.work_ids[i])
                         .then(result=>result.json())
                         .then(responseJson=>this.setState({works: this.state.works.concat([responseJson])}))
@@ -75,28 +76,40 @@ class Venue extends React.Component {
 
             let works = work_list.map(function(obj) {
                 const url = '/works/' + obj.id;
-                return <div key={obj.id}><Link to={url}>{obj.name}</Link><br/><br/></div>;
+                const name = obj.name.substring(0, 25) + (obj.name.length > 25 ? '...': '')
+                return <Thumbnail name={name} image_url={obj.image_url} url={url} key={obj.id} />;
             })
 
             return (
                 <div className="Venue">
                         <h1>{venue_obj.name}</h1>
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <img src={ this.museum_url } width="500" height="300"/>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <img src={ this.imuseum_url } width="500" height="300"/>
-                                    </div>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <img src={ this.museum_url } className="img-rounded" width="500" height="300"/>
+                                </div>
+                                <div className="col-md-6">
+                                    <img src={ this.imuseum_url } className="img-rounded" width="500" height="300"/>
                                 </div>
                             </div>
-                            <br/>
-                            <br/>
-                            <iframe width="800" height="600" frameBorder="0" src={ this.map_location } allowFullScreen align="center"></iframe><br/>
-                            <p><strong>Address:</strong> {venue_obj.street} {venue_obj.city} {venue_obj.country}</p><br/><br/>
-                            {works}
+                        </div>
+                        <br/>
+                        <br/>
+                        
+                        
+                        <h2><strong>Gallery of Works</strong></h2><br/>
+                        <div className="container">
+                            <div className="row">
+                                {works}
                             </div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <iframe width="800" height="600" frameBorder="0" src={ this.map_location } allowFullScreen align="center"></iframe><br/>
+                        <p><strong>Address:</strong> {venue_obj.street} {venue_obj.city} {venue_obj.country}</p><br/><br/>
+                </div>
             );
         }
         else {

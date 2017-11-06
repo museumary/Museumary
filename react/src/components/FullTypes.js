@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './Full.css';
+import Thumbnail from './Thumbnail';
 
 
 class FullTypes extends React.Component {
@@ -18,24 +19,15 @@ class FullTypes extends React.Component {
     render() {
         if(this.state.items.objects){
             var arr = [];
+
             this.state.items.objects.forEach(function(obj) {
-                arr.push(obj);
+                const url = '/types/' + obj.id
+                arr.push(<Thumbnail name={obj.name} image_url={obj.works} url={url} key={obj.id} />);
             });
             return <div className="FullTypes">
                         <div className="container">
                             <div className="row">
-                                {
-                                    arr.map(
-                                        function(obj) {
-                                            var url = '/types/' + obj.id;
-                                            return <div className="col-md-3">
-                                                        <Link to={url} activeClassName="active"><strong>{obj.name}</strong></Link>
-                                                        <br/>
-                                                        <br/>
-                                                </div>;
-                                        }
-                                    )
-                                }
+                                {arr}
                             </div>
                             <br/>
                             <br/>

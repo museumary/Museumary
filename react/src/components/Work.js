@@ -24,6 +24,10 @@ class Work extends React.Component {
                 fetch('http://api.museumary.me/medium/' + items.medium_id)
                     .then(result=>result.json())
                     .then(responseJson=>this.setState({medium: responseJson}))
+
+                fetch('http://api.museumary.me/medium/' + items.art_type_id)
+                    .then(result=>result.json())
+                    .then(responseJson=>this.setState({type: responseJson}))
             })
     }
 
@@ -32,6 +36,7 @@ class Work extends React.Component {
         var artist_obj = this.state.artist;
         var venue_obj = this.state.venue;
         var medium_obj = this.state.medium;
+        var type_obj = this.state.type;
         if(work_obj && artist_obj && venue_obj && medium_obj){
             //  Do all React code within this div. 'Work_obj' is the object that
             //  associated with this Work page, you should be able to access it
@@ -39,9 +44,9 @@ class Work extends React.Component {
             return <div className="Work">
                       <h1>{work_obj.name}</h1><br/>
                       <img src={work_obj.image_url} className="img-rounded" width="300" height="450"/><br/>
-                      <Link to={'/artists/' + work_obj.artist_id} activeClassName="active">{artist_obj.name}</Link><br/>
-                      <strong>Art Type: </strong>{medium_obj.name}<br/> 
-                      <Link to={'/venues/' + work_obj.venue_id} activeClassName="active">{venue_obj.name}</Link><br/>      
+                      <strong>Artist: </strong><Link to={'/artists/' + work_obj.artist_id} activeClassName="active">{artist_obj.name}</Link><br/>
+                      <strong>Medium : </strong>{medium_obj.name}<br/> 
+                      <strong>Venue: </strong><Link to={'/venues/' + work_obj.venue_id} activeClassName="active">{venue_obj.name}</Link><br/>      
                   </div>;
         }
         else {
