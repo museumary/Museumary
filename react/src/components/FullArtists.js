@@ -24,7 +24,7 @@ class FullArtists extends React.Component {
         if(this.state.items.objects){
             var arr = [];
             this.state.items.objects.forEach(function(obj) {
-                const url = '/artists' + obj.id
+                const url = '/artists/' + obj.id
                 arr.push(<Thumbnail name={obj.name} image_url={obj.image_url} url={url} key={obj.id} />);
             });
 
