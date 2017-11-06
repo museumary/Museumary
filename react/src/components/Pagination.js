@@ -8,26 +8,45 @@ export default class Pagination extends React.Component {
         buttonIndexs: [-2, -1, 0, 1, 2]
     };
 
+    getPage(pageNumber) {
+        if(pageNumber !== this.props.activePage &&
+            1 <= pageNumber && pageNumber <= this.numPages) {
+            this.props.loadPage(pageNumber)
+        }
+    }
+
+    buildButtonText() {
+        let {
+            activePage,
+            numPages,
+            defaultButtonText,
+            buttonIndexs
+        } = this.props
+
+        if(activePage <= 3) {
+            return defaultButtonText;
+        }
+
+        if(activePage > numPages - 2) {
+            activePage = numPages - 2;
+        }
+
+        return buttonIndexs.map(index => activePage+index);
+    }
+
     render() {
-        let buttonText = []
-        let baseNumber = this.props.activePage
+        const {
+            activePage,
+            numPages
+        } = this.props
 
-        if(baseNumber < 3) {
-            buttonText = this.props.defaultButtonText
-        }
-        else {
-            if(baseNumber > this.props.numPages - 2) {
-                baseNumber = this.props.numPages - 2;
-            }
-
-            buttonText = this.props.buttonIndexs.map(index => baseNumber+index)
-        }
-
-        buttonText = buttonText.map(number => {
+        const buttonText = this.buildButtonText().map(number => {
             const my_class = number === this.props.activePage ? 'active': ''
 
             return (
-                <button type='button' key={number} className={my_class}>
+                <button type='button' key={number}
+                        className={my_class}
+                        onClick={() => this.getPage(number)}>
                     {number}
                 </button>
             );
@@ -35,11 +54,11 @@ export default class Pagination extends React.Component {
 
         return (
             <ul>
-                <button type="button" onClick={this.props.firstPage}>{"<<"}</button>
-                <button type="button" onClick={this.props.decPage}>{"<"}</button>
+                <button type="button" onClick={() => this.getPage(1)}>{"<<"}</button>
+                <button type="button" onClick={() => this.getPage(activePage - 1)}>{"<"}</button>
                 {buttonText}
-                <button type="button" onClick={this.props.incPage}>></button>
-                <button type="button" onClick={this.props.lastPage}>>></button>
+                <button type="button" onClick={() => this.getPage(activePage + 1)}>></button>
+                <button type="button" onClick={() => this.getPage(numPages)}>>></button>
             </ul>
         );
     };

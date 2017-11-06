@@ -21,11 +21,12 @@ class FullArtists extends React.Component {
         };
 
         this.numPages = 0;
+        this.loadPage = this.loadPage.bind(this)
     }
 
     componentDidMount() {
         this.loadPage(this.props.initialPage)
-        .then(result => this.numPages = this.state.items.info.num_pages)
+            .then(result => this.numPages = this.state.items.info.num_pages)
     }
 
     loadPage(pageNumber) {
@@ -40,46 +41,6 @@ class FullArtists extends React.Component {
                 })
         );
     }
-
-    incPage = () => {
-        console.log('inc page')
-        const newPage = this.state.activePage + 1;
-
-        if(this.state.activePage < this.numPages) {
-            this.loadPage(newPage)
-        }
-    };
-
-    decPage = () => {
-        console.log('dec page.')
-        const newPage = this.state.activePage - 1;
-
-
-        if(this.state.activePage > 1) {
-            this.loadPage(newPage)
-        }
-    };
-
-    firstPage = () => {
-        console.log('f page.')
-        const newPage = this.props.initialPage;
-
-        if(this.state.activePage !== newPage) {
-            this.loadPage(newPage)
-        }
-    };
-
-    lastPage = () => {
-        const newPage = this.numPages;
-
-        if(this.state.activePage !== this.numPages) {
-            this.loadPage(newPage)
-        }
-    };
-
-    changePage = () => {
-        console.log('c page.')
-    };
 
     render() {
         if(this.state.items.objects){
@@ -101,10 +62,7 @@ class FullArtists extends React.Component {
                    <Pagination
                         activePage={this.state.activePage}
                         numPages={this.numPages}
-                        incPage={this.incPage}
-                        decPage={this.decPage}
-                        firstPage={this.firstPage}
-                        lastPage={this.lastPage}
+                        loadPage={this.loadPage}
                    />
                </div>
            );
