@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import style from './Full.css';
-<<<<<<< HEAD
-import Thumbnail from './Thumbnail'
+import Thumbnail from './Thumbnail';
 import Pagination from './Pagination'
 
 const defaultProps = {
@@ -10,22 +9,14 @@ const defaultProps = {
     entries_per_page: 16,
     url: 'http://api.museumary.me/artist?'
 }
-=======
-import Thumbnail from './Thumbnail';
->>>>>>> 5cc9b242af9d3862671e8464c08f5949907aef57
 
 class FullArtists extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-<<<<<<< HEAD
             items: [],
             activePage: 1,
             numPages: 0,
-=======
-            items:[],
-            activePage: 1,
->>>>>>> 5cc9b242af9d3862671e8464c08f5949907aef57
         };
 
         this.loadPage = this.loadPage.bind(this)
