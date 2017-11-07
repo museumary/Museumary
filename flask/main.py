@@ -5,7 +5,6 @@ Main file where app-engine runs the website
 from flask import Flask, render_template, jsonify, make_response
 from flask_io import FlaskIO, fields
 from flask_cors import CORS
-from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from os import environ
@@ -18,7 +17,6 @@ io = FlaskIO(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
 def get_info(page, entries_per_page, num_entries):
     """

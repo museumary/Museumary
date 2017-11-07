@@ -1,7 +1,9 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from sqlalchemy.ext.declarative import declarative_base
 from os import environ
+from sqlalchemy_searchable import make_searchable, search, SearchQueryMixin
+from sqlalchemy_utils.types import TSVectorType
 
 
 app = Flask(__name__)
@@ -9,6 +11,18 @@ app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+make_searchable()
+
+class ArtistQuery(BaseQuery, SearchQueryMixin):
+    pass
+class VenueQuery(BaseQuery, SearchQueryMixin):
+    pass
+class ArtTypeQuery(BaseQuery, SearchQueryMixin):
+    pass
+class MediumQuery(BaseQuery, SearchQueryMixin):
+    pass
+class WorkQuery(BaseQuery, SearchQueryMixin):
+    pass
 
 artist_to_art_type = db.Table(
     'artist_to_art_type',
@@ -17,6 +31,7 @@ artist_to_art_type = db.Table(
 )
 
 class Artist(db.Model):
+    query_class = ArtistQuery
     __tablename__ = 'artist'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -28,11 +43,14 @@ class Artist(db.Model):
     culture = db.Column(db.String(64))
     image_url = db.Column(db.String(512))
 
+    search_vector = db.Column(TSVectorType('name', 'birthplace', 'deathplace', 'culture'))
+
     def __repr__(self):
         return '<Artist %s>' % self.name
 
 
 class Venue(db.Model):
+    query_class = VenueQuery
     __tablename__ = 'venue'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -43,11 +61,14 @@ class Venue(db.Model):
     zipcode  = db.Column(db.String(64))
     works = db.relationship("Work", back_populates="venue")
 
+    search_vector = db.Column(TSVectorType('name', 'street', 'city', 'country', 'zipcode'))
+
     def __repr__(self):
         return '<Venue %s>' % self.name
 
 
 class ArtType(db.Model):
+    query_class = ArtTypeQuery
     __tablename__ = 'art_type'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -61,11 +82,14 @@ class ArtType(db.Model):
         backref=db.backref('art_types', lazy=True)
     )
 
+    search_vector = db.Column(TSVectorType('name'))
+
     def __repr__(self):
         return '<ArtType %s>' % self.name
 
 
 class Medium(db.Model):
+    query_class = MediumQuery
     __tablename__ = 'medium'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -74,11 +98,14 @@ class Medium(db.Model):
     art_type = db.relationship("ArtType", back_populates="media")
     works = db.relationship("Work", back_populates="medium")
 
+    search_vector = db.Column(TSVectorType('name'))
+
     def __repr__(self):
         return '<Medium %s>' % self.name
 
 
 class Work(db.Model):
+    query_class = WorkQuery
     __tablename__ = 'work'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -94,9 +121,13 @@ class Work(db.Model):
     image_url = db.Column(db.String(512))
     description = db.Column(db.String(1024))
 
+    search_vector = db.Column(TSVectorType('name', 'date'))
+
     def __repr__(self):
         return '<Work %s>' % self.name
 
 if __name__=='__main__':
+    db.configure_mappers()
     db.create_all()
+    db.session.commit()
 
