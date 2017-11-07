@@ -6,6 +6,7 @@ import Venues from './components/Venues';
 import Types from './components/Types';
 import Works from './components/Works';
 import About from './components/About';
+import SearchResults from './components/SearchResults';
 
 const Main = () => {
   return (<div className='Main'>
@@ -16,6 +17,7 @@ const Main = () => {
               <Route path='/types' component={Types}/>
               <Route path='/works' component={Works}/>
               <Route path='/about' component={About}/>
+              <Route path='/results' component={SearchResults}/>
             </Switch>
           </div>);
 };
