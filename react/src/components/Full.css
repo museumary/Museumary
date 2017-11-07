@@ -8,9 +8,16 @@ body {
 }
 
 .col-md-3 {
-	/*border: 1px solid black;*/
 	height: 340px;
 	margin: 0px;
+}
+
+.col-md-12 {
+	height: 340px;
+	padding-top: 20px;
+	padding-bottom: 0px;
+
+	vertical-align: middle;
 }
 
 a {
