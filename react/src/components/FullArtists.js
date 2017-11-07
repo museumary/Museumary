@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import style from './Full.css';
-import Thumbnail from './Thumbnail'
+import Thumbnail from './Thumbnail';
 
 class FullArtists extends React.Component {
     constructor() {
         super();
         this.state={
             items:[],
-            activePage: 1
+            activePage: 1,
         };
     }
 
