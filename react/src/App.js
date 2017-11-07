@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Main from './Main';
+import Search from './components/Search';
 
 const App = () => {
   return (<div className="App">
