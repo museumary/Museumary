@@ -413,3 +413,93 @@ specific artwork, artist, location, and type of art.
                 "art_type_id": 170,
                 "work_ids": [203, 340, 602]
             }
+            
+## group Search
+
+Request returns query matches from the given model category ordered by relevance.
+
+## Categorical Query [/search/{?query,page,entries_per_page,category}]
+### Query Result [GET]
++ Parameters
+    + query (required, string) ...query string to be searched for in the database
+    + category (optional, string) ...Model category to search; i.e. artist, work, art_type, venue; default='artist'
+    + page (optional, integer) ...index of the page being requested; default=1
+    + entries_per_page (optional, integer) ...number of entries to be returned; default=25
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "info": {
+                    "page": 1,
+                    "entries_per_page": 3,
+                    "num_entries": 30,
+                    "num_pages": 10
+                },
+                
+                "objects": [
+                    "objects": [
+                        {
+                          "art_types": [
+                            "Painting & Drawing"
+                          ],
+                          "birth": 1826,
+                          "birthplace": "Naples, Italy",
+                          "culture": "Italian",
+                          "death": 1899,
+                          "deathplace": "Naples, Italy",
+                          "id": 7895,
+                          "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Alberto_Pasini_%28attr.%29_-_Oriental_landscape_with_Mosque.jpg",
+                          "name": "Alberto Pasini",
+                          "works": [
+                            "Damascus",
+                            "Muslims at Prayer on Housetop"
+                          ]
+                        },
+                        {
+                          "art_types": [
+                            "Drawing"
+                          ],
+                          "birth": 1915,
+                          "birthplace": "Citta di Castello, Umbria",
+                          "culture": "Italian",
+                          "death": 1995,
+                          "deathplace": "Nice, France",
+                          "id": 4389,
+                          "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Alberto_Burri%2C_photographed_by_Nanda_Lanfranco.jpg",
+                          "name": "Alberto Burri",
+                          "works": [
+                            "Combustione"
+                          ]
+                        },
+                        {
+                          "art_types": [
+                            "Photograph"
+                          ],
+                          "birth": 1897,
+                          "birthplace": "W\u00fcrzburg",
+                          "culture": "German",
+                          "death": 1966,
+                          "deathplace": "Wamel bei Soest",
+                          "id": 4830,
+                          "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Foxglove_%28Fingerhut%29_Albert_Renger-Patzsch.jpg",
+                          "name": "Albert Renger-Patzsch",
+                          "works": [
+                            "Marienkirche, Stargard (Interior: choir)",
+                            "Heiligen-Geist Hospital, L\u00fcbeck (Exterior: gabels and towers)",
+                            "Marienkirche, Salzwedel (Interior)",
+                            "Nikolaikirche, Stralsund (exterior)",
+                            "Marienkirche, Danzig (Exterior: tower)",
+                            "Marienkirche, Stargard (Exterior: choir from the east)",
+                            "Marienkirche, Greifswald (Interior)",
+                            "Stralsund, Marienkirche (Exterior: west)",
+                            "Johanneskirche, L\u00fcneburg (Interior)",
+                            "Nikolaikirche, L\u00fcneburg (Interior: nave vaulting)",
+                            "Marienkirche, Danzig (Interior: vaulting)",
+                            "Marienkirche, L\u00fcbeck (Exterior: view of nave and choir)",
+                            "View of Rooftops from the Tower of Marienkirche, L\u00fcbeck"
+                          ]
+                        }
+                ]
+            }
