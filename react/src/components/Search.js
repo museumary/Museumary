@@ -23,12 +23,17 @@ class Search extends React.Component {
         }
     }
 
+    onButtonClick(event) {
+        this.setState({redirect: true})
+    }
+
     textChange(event) {
         this.setState({search_value: event.target.value});
     }
 
     render() {
         if(this.state.redirect) {
+            this.setState({redirect: false})
             return <Redirect to={{
                 pathname: '/results',
                 state: { search: this.state.search_value }
@@ -37,16 +42,16 @@ class Search extends React.Component {
         else {
             return (
                 <div class="input-group">
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         name="name"
-                        class="form-control" 
+                        class="form-control"
                         placeholder="Search"
                         onChange={this.textChange.bind(this)}
                         onKeyDown={this.onInputKeyPress.bind(this)}
                     />
                     <div class="input-group-btn">
-                      <button class="btn btn-default" type="submit">
+                      <button class="btn btn-default" onClick={this.onButtonClick.bind(this)}>
                         <i class="glyphicon glyphicon-search"></i>
                       </button>
                     </div>
