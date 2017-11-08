@@ -1,76 +1,90 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Thumbnail from './Thumbnail'
 import Pagination from './Pagination'
 
+import WorksPage from './Pages/WorksPage'
+import WorksFilter from './Filters/WorksFilter'
+
 const defaultProps = {
-    initialPage: 1,
-    entries_per_page: 16,
-    url: 'http://api.museumary.me/work?'
+    params: {
+        page: 1,
+        entries_per_page: 16,
+        order_by: "name",
+        order: "ascending",
+        startswith: "",
+        art_type: "",
+        medium: "",
+        venue: ""
+    }
 }
 
 class FullWorks extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            items: [],
-            page: 1,
-            numPages: 0,
+            params: this.props.params,
+            numPages: 0
         };
 
-        this.changePage = this.changePage.bind(this)
-    }
-
-    componentDidMount() {
-        this.changePage(this.props.initialPage)
+        this.changePage = this.changePage.bind(this);
+        this.applyFilter = this.applyFilter.bind(this);
+        this.changeNumPages = this.changeNumPages.bind(this);
     }
 
     changePage(pageNumber) {
-        const num_entries = 'entries_per_page='+this.props.entries_per_page
-        const page = 'page=' + pageNumber
+        let params = Object.assign({}, this.state.params);
+        params.page = pageNumber;
 
-        return (
-            fetch(this.props.url+num_entries+'&'+page)
-                .then(result=>result.json())
-                .then(items=> {
-                    const numPages = items.info.num_pages;
-                    this.setState({ items: items, page: pageNumber, numPages: numPages })
-                })
-        );
+        this.setState({ params: params });
+    }
+
+    applyFilter(newParams) {
+        let params = Object.assign({}, this.state.params);
+
+        for(var param in newParams) {
+            params[param] = newParams[param]
+        }
+
+        this.setState({ params: params })
+    }
+
+    changeNumPages(numPages) {
+        this.setState({ numPages: numPages })
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        const params = this.state.params;
+        const newParams = nextState.params;
+
+        for(var param in params) {
+            if(params[param] !== newParams[param]) {
+                return true;
+            }
+        }
+
+        return this.state.numPages !== nextState.numPages;
     }
 
     render() {
-        if(this.state.items.objects){
-            var arr = [];
-            this.state.items.objects.forEach(function(obj) {
-                const url = '/works/'+obj.id
-                const name = obj.name.substring(0, 25) + (obj.name.length > 25 ? '...': '')
-                arr.push(<Thumbnail name={name} image_url={obj.image_url} url={url} key={obj.id} />);
-            });
-
-            return (
-                <div className="FullWorks">
-                    <div className="container">
-                        <div className="row">
-                            {arr}
-                        </div>
-                        <br/>
-                        <br/>
-                    </div>
-                    <Pagination
-                        page={this.state.page}
-                        numPages={this.state.numPages}
-                        changePage={this.changePage}
-                    />
-                </div>
-            );
-        }
-        else {
-            return <div className="FullWorks"></div>;
-        }
+        return (
+            <div className="FullWorks">
+                <WorksFilter
+                    applyFilter={this.applyFilter}
+                />
+                <WorksPage
+                    params={this.state.params}
+                    changePage={this.changePage}
+                    changeNumPages={this.changeNumPages}
+                />
+                 <Pagination
+                    page={this.state.params.page}
+                    numPages={this.state.numPages}
+                    changePage={this.changePage}
+                />
+            </div>
+        );
     }
 }
 
-FullWorks.defaultProps = defaultProps
+FullWorks.defaultProps = defaultProps;
 
 export default FullWorks;

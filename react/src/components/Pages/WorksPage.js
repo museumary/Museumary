@@ -8,16 +8,16 @@ const defaultProps = {
         order_by: "name",
         order: "ascending",
         startswith: "",
-        medium: ""
+        art_type: "",
+        medium: "",
+        venue: ""
     },
 
-    work_url: 'http://api.museumary.me/work/',
-
-    instance_url: '/types/',
-    base_url: 'http://api.museumary.me/art_type?'
+    base_url: 'http://api.museumary.me/work/?',
+    instance_url: '/works/'
 }
 
-class TypesPage extends React.Component {
+class WorksPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -56,30 +56,21 @@ class TypesPage extends React.Component {
     }
 
     loadItems(items, numPages) {
-        Promise.all(items.map((artType) => {
-            const work_ids = artType.work_ids;
-            const id = work_ids[Math.floor(Math.random()*work_ids.length)];
+        const parsedItems = items.map(obj => {
+            const obj_url = this.props.instance_url + obj.id
+            const obj_name = obj.name.substring(0, 25) + (obj.name.length > 25 ? '...': '')
 
-            return fetch(this.props.work_url+id)
-        }))
-        .then(responses => Promise.all(responses.map(res => res.json())))
-        .then(works => {
-            const parsedItems = works.map((work, index) => {
-                let type = items[index]
-
-                const url = this.props.instance_url + type.id
-                return (
-                    <Thumbnail
-                        name={type.name}
-                        image_url={work.image_url}
-                        url={url}
-                        key={type.id} />
-                );
-            })
-
-            this.setState({ items: parsedItems, numPages: numPages })
-            this.props.changeNumPages(numPages);
+            return (
+                <Thumbnail
+                    name={obj_name}
+                    image_url={obj.image_url}
+                    url={obj_url}
+                    key={obj.id} />
+            );
         })
+
+        this.setState({ items: parsedItems, numPages: numPages })
+        this.props.changeNumPages(numPages);
     }
 
     render() {
@@ -100,6 +91,6 @@ class TypesPage extends React.Component {
     }
 }
 
-TypesPage.defaultProps = defaultProps
+WorksPage.defaultProps = defaultProps
 
-export default TypesPage
+export default WorksPage
