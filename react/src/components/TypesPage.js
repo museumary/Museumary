@@ -82,9 +82,11 @@ class TypesPage extends React.Component {
             });
 
             return (
-                <div className="container">
-                    <div className="row">
-                        {arr}
+                <div>
+                    <div className="container">
+                        <div className="row">
+                            {arr}
+                        </div>
                     </div>
                     <Pagination
                         page={this.props.params.page}
