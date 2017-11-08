@@ -5,7 +5,6 @@ Main file where app-engine runs the website
 from flask import Flask, render_template, jsonify, make_response
 from flask_io import FlaskIO, fields, Schema
 from flask_cors import CORS
-from flask_restful import marshal_with
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_searchable import search, parse_search_query
 from sqlalchemy import desc
@@ -25,10 +24,15 @@ def get_info(page, entries_per_page, num_entries):
     Fill in information for responses containing
     page number, entries_per_page, and total pages and entries
     """
+    num_pages = num_entries // entries_per_page
+
+    if num_entries % entries_per_page:
+        num_pages += 1
+
     return {
         'page': page,
         'entries_per_page': entries_per_page,
-        'num_pages': num_entries // entries_per_page + 1,
+        'num_pages': num_pages,
         'num_entries': num_entries
     }
 
@@ -379,7 +383,8 @@ def get_medium_data(medium):
 # Search API Requests #
 #---------------------#
 
-@app.route('/search/<string:query>', methods=['GET'])
+@app.route('/search/', methods=['GET'])
+@io.from_query('query', fields.String(missing=" "))
 @io.from_query('category', fields.String(missing="artist"))
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=10))
@@ -550,10 +555,10 @@ def build_art_type_search_result(art_types):
     results = []
     for art_type in art_types:
         entry = {
-            'id':           art_type.id,
-            'name':         art_type.name,
-            'artists':      [artist.name for artist in art_type.artists],
-            'media':        [medium.name for medium in art_type.media],
+            'id':        art_type.id,
+            'name':      art_type.name,
+            'artists':   [artist.name for artist in art_type.artists],
+            'media':     [medium.name for medium in art_type.media],
             'works':     [work.name for work in art_type.works]
         }
         results.append(entry)
