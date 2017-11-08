@@ -3,69 +3,85 @@ import { Link, Redirect } from 'react-router-dom';
 import style from './Full.css';
 import Thumbnail from './Thumbnail';
 import Pagination from './Pagination'
+import ArtistsPage from './Pages/ArtistsPage'
+import ArtistsFilter from './Filters/ArtistsFilter'
 
 const defaultProps = {
-    initialPage: 1,
-    entries_per_page: 16,
-    url: 'http://api.museumary.me/artist?'
+    params: {
+        page: 1,
+        entries_per_page: 16,
+        order_by: "name",
+        order: "ascending",
+        startswith: "",
+        culture: ""
+    }
 }
 
 class FullArtists extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            items: [],
-            page: 1,
-            numPages: 0,
+            params: this.props.params,
+            numPages: 0
         };
 
-        this.changePage = this.changePage.bind(this)
-    }
-
-    componentDidMount() {
-        this.changePage(this.props.initialPage)
+        this.changePage = this.changePage.bind(this);
+        this.applyFilter = this.applyFilter.bind(this);
+        this.changeNumPages = this.changeNumPages.bind(this);
     }
 
     changePage(pageNumber) {
-        const num_entries = 'entries_per_page='+this.props.entries_per_page
-        const page = 'page=' + pageNumber
+        let params = Object.assign({}, this.state.params);
+        params.page = pageNumber;
 
-        fetch(this.props.url+num_entries+'&'+page)
-            .then(result=>result.json())
-            .then(items=> {
-                const numPages = items.info.num_pages;
-                this.setState({ items: items, page: pageNumber, numPages: numPages })
-            })
+        this.setState({ params: params });
+    }
+
+    applyFilter(newParams) {
+        let params = Object.assign({}, this.state.params);
+
+        for(var param in newParams) {
+            params[param] = newParams[param]
+        }
+
+        this.setState({ params: params })
+    }
+
+    changeNumPages(numPages) {
+        this.setState({ numPages: numPages })
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        const params = this.state.params;
+        const newParams = nextState.params;
+
+        for(var param in params) {
+            if(params[param] !== newParams[param]) {
+                return true;
+            }
+        }
+
+        return this.state.numPages !== nextState.numPages;
     }
 
     render() {
-        if(this.state.items.objects){
-            var arr = [];
-            this.state.items.objects.forEach(function(obj) {
-                const url = '/artists/' + obj.id
-                arr.push(<Thumbnail name={obj.name} image_url={obj.image_url} url={url} key={obj.id} />);
-            });
-
-            return (
-                <div className="FullArtists">
-                    <div className="container">
-                        <div className="row">
-                            {arr}
-                        </div>
-                        <br/>
-                        <br/>
-                   </div>
-                   <Pagination
-                        page={this.state.page}
-                        numPages={this.state.numPages}
-                        changePage={this.changePage}
-                   />
-               </div>
-           );
-        }
-        else {
-            return <div className="FullArtists"></div>;
-        }
+        return (
+            <div className="FullArtists">
+                <ArtistsFilter
+                    applyFilter={this.applyFilter}
+                />
+                <ArtistsPage
+                    params={this.state.params}
+                    changePage={this.changePage}
+                    changeNumPages={this.changeNumPages}
+                />
+                 <Pagination
+                    page={this.state.params.page}
+                    numPages={this.state.numPages}
+                    changePage={this.changePage}
+                />
+            </div>
+        );
     }
 }
 

@@ -3,7 +3,6 @@ import Thumbnail from './Thumbnail';
 import Pagination from './Pagination';
 import TypesPage from './Pages/TypesPage';
 import TypesFilter from './Filters/TypesFilter';
-// import style from './Select.css'
 
 const defaultProps = {
     params: {
@@ -35,7 +34,6 @@ class FullTypes extends React.Component {
 
         this.setState({ params: params });
     }
-
 
     applyFilter(newParams) {
         let params = Object.assign({}, this.state.params);
