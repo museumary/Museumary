@@ -60,12 +60,18 @@ class WorksPage extends React.Component {
             const obj_url = this.props.instance_url + obj.id
             const obj_name = obj.name.substring(0, 25) + (obj.name.length > 25 ? '...': '')
 
+            const venue = obj.venue
+            const artist = obj.artist
+            const details = ["Artist: " + artist, "Date: " + obj.date, "Venue: " + venue]
+
             return (
                 <Thumbnail
                     name={obj_name}
                     image_url={obj.image_url}
                     url={obj_url}
-                    key={obj.id} />
+                    key={obj.id} 
+                    details={details}/>
+
             );
         })
 

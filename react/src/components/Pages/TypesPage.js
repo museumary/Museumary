@@ -68,12 +68,14 @@ class TypesPage extends React.Component {
                 let type = items[index]
 
                 const url = this.props.instance_url + type.id
+                const details = ["Detail: content", "Detail: content", "Detail: content"]
                 return (
                     <Thumbnail
                         name={type.name}
                         image_url={work.image_url}
                         url={url}
-                        key={type.id} />
+                        key={type.id} 
+                        details={details}/>
                 );
             })
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import style from './Full.css';
+import style from './Thumbnail.css';
 
 const Harvard = "Ever since their founding, the Harvard Art Museums have been dedicated to advancing and supporting learning at Harvard University, in the local community, and around the world. The museums have played a leading role in the development of art history, conservation, and conservation science, and in the evolution of the art museum as an institution."
 const Cooper = "A 21st-century museum housed in New York City’s landmark Carnegie Mansion, Cooper Hewitt offers four floors of galleries dedicated to all disciplines of design, a permanent collection of more than 210,000 design objects fully digitized and available online, and a world-class design library. In addition to producing major special exhibitions, the museum continually refreshes the installation of objects from its collection of product design, decorative arts, works on paper, graphic design, textiles, wallcoverings, and digital materials."
@@ -48,7 +48,16 @@ export default class Thumbnail extends React.Component {
                 <div className='col-md-3'>
                     <Link to={url} activeClassName="active">
                         <strong>{name}</strong><br/>
-                        <img src={image} className="img-rounded" width="200" height="300"/>
+                        <div className="thumbnail-container">
+                            <img src={image} className="img-rounded" width="200" height="300"/>
+                            <div className="overlay">
+                                <div className="text">
+                                    {this.props.details[0]}<br/>
+                                    {this.props.details[1]}<br/>
+                                    {this.props.details[2]}<br/>
+                                </div>
+                            </div>
+                        </div>
                     </Link>
                     <br/>
                     <br/>
