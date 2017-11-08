@@ -2,55 +2,69 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './Pagination.css'
 
-export default class Pagination extends React.Component {
-    static defaultProps = {
-        defaultButtonText: [1, 2, 3, 4, 5],
-        buttonIndexs: [-2, -1, 0, 1, 2]
-    };
+const defaultProps = {
+    defaultButtonText: [1, 2, 3, 4, 5],
+    buttonIndexs: [-2, -1, 0, 1, 2]
+};
 
-    getPage(pageNumber) {
-        let {
-            activePage,
-            numPages
-        } = this.props
-
-        if(pageNumber !== activePage && 1 <= pageNumber && pageNumber <= numPages) {
-            this.props.loadPage(pageNumber)
+class Pagination extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            buttonText: props.defaultButtonText
         }
     }
 
-    buildButtonText() {
+    getPage(pageNumber) {
         let {
-            activePage,
+            page,
+            numPages
+        } = this.props
+
+        if(pageNumber !== page && 1 <= pageNumber && pageNumber <= numPages) {
+            this.props.changePage(pageNumber)
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.page !== nextProps.page) {
+            this.buildButtonText(nextProps);
+        }
+    }
+
+    buildButtonText(props) {
+        let {
+            page,
             numPages,
             defaultButtonText,
             buttonIndexs
-        } = this.props
+        } = props
 
-        if(activePage <= 3) {
-            return defaultButtonText;
+        if(page <= 3) {
+            return this.setState({ buttonText: defaultButtonText });
         }
 
-        if(activePage > numPages - 2) {
-            activePage = numPages - 2;
+        if(page > numPages - 2) {
+            page = numPages - 2;
         }
 
-        return buttonIndexs.map(index => activePage+index);
+        this.setState({ buttonText: buttonIndexs.map(index => page+index) });
     }
 
     render() {
         const {
-            activePage,
+            page,
             numPages
         } = this.props
 
-        const buttonText = this.buildButtonText().map(number => {
-            const my_class = number === activePage ? 'active': ''
+        const buttonText = this.state.buttonText.map(number => {
+            const my_class = number === page ? 'active': ''
 
             return (
-                <button type='button' key={number}
+                <button type='button'
                         className={my_class}
-                        onClick={() => this.getPage(number)}>
+                        onClick={() => this.getPage(number)}
+                        key={number}>
                     {number}
                 </button>
             );
@@ -58,13 +72,16 @@ export default class Pagination extends React.Component {
 
         return (
             <ul>
-                <button type="button" onClick={() => this.getPage(1)}>{"<<"}</button>
-                <button type="button" onClick={() => this.getPage(activePage - 1)}>{"<"}</button>
+                <button type="button" onClick={() => this.getPage(1)} key={"<<"}>{"<<"}</button>
+                <button type="button" onClick={() => this.getPage(page - 1)} key={"<"}>{"<"}</button>
                 {buttonText}
-                <button type="button" onClick={() => this.getPage(activePage + 1)}>></button>
-                <button type="button" onClick={() => this.getPage(numPages)}>>></button>
+                <button type="button" onClick={() => this.getPage(page + 1)} key=">" >></button>
+                <button type="button" onClick={() => this.getPage(numPages)} key=">>" >>></button>
             </ul>
         );
 
     };
 }
+
+Pagination.defaultProps = defaultProps
+export default Pagination
