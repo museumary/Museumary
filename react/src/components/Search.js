@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import style from './../Header.css';
 
 class Search extends React.Component {
     constructor() {
@@ -35,14 +36,19 @@ class Search extends React.Component {
         }
         else {
             return (
-                <div className="SearchBox">
-                    <div className="container">
-                        <input
-                            type="text"
-                            name="name"
-                            onChange={this.textChange.bind(this)}
-                            onKeyDown={this.onInputKeyPress.bind(this)}
-                        />
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        name="name"
+                        class="form-control" 
+                        placeholder="Search"
+                        onChange={this.textChange.bind(this)}
+                        onKeyDown={this.onInputKeyPress.bind(this)}
+                    />
+                    <div class="input-group-btn">
+                      <button class="btn btn-default" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                      </button>
                     </div>
                 </div>
             );

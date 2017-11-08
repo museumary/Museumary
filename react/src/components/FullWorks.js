@@ -14,18 +14,18 @@ class FullWorks extends React.Component {
         super(props);
         this.state={
             items: [],
-            activePage: 1,
+            page: 1,
             numPages: 0,
         };
 
-        this.loadPage = this.loadPage.bind(this)
+        this.changePage = this.changePage.bind(this)
     }
 
     componentDidMount() {
-        this.loadPage(this.props.initialPage)
+        this.changePage(this.props.initialPage)
     }
 
-    loadPage(pageNumber) {
+    changePage(pageNumber) {
         const num_entries = 'entries_per_page='+this.props.entries_per_page
         const page = 'page=' + pageNumber
 
@@ -34,7 +34,7 @@ class FullWorks extends React.Component {
                 .then(result=>result.json())
                 .then(items=> {
                     const numPages = items.info.num_pages;
-                    this.setState({ items: items, activePage: pageNumber, numPages: numPages })
+                    this.setState({ items: items, page: pageNumber, numPages: numPages })
                 })
         );
     }
@@ -58,9 +58,9 @@ class FullWorks extends React.Component {
                         <br/>
                     </div>
                     <Pagination
-                        activePage={this.state.activePage}
+                        page={this.state.page}
                         numPages={this.state.numPages}
-                        loadPage={this.loadPage}
+                        changePage={this.changePage}
                     />
                 </div>
             );
