@@ -19,14 +19,14 @@ class FullArtists extends React.Component {
             numPages: 0,
         };
 
-        this.loadPage = this.loadPage.bind(this)
+        this.changePage = this.changePage.bind(this)
     }
 
     componentDidMount() {
-        this.loadPage(this.props.initialPage)
+        this.changePage(this.props.initialPage)
     }
 
-    loadPage(pageNumber) {
+    changePage(pageNumber) {
         const num_entries = 'entries_per_page='+this.props.entries_per_page
         const page = 'page=' + pageNumber
 
@@ -60,7 +60,7 @@ class FullArtists extends React.Component {
                    <Pagination
                         page={this.state.page}
                         numPages={this.state.numPages}
-                        loadPage={this.loadPage}
+                        changePage={this.changePage}
                    />
                </div>
            );
