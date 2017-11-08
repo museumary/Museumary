@@ -8,8 +8,8 @@ const defaultProps = {
         entries_per_page: 16,
         order_by: "name",
         order: "ascending",
-        startswith: "None",
-        medium: "None"
+        startswith: "",
+        medium: ""
     },
 
     work_url: 'http://api.museumary.me/work/',
@@ -35,7 +35,7 @@ class TypesPage extends React.Component {
         const nextParams = nextProps.params
 
         for(var key in params) {
-            if(params[key] !== nextProps[key]) {
+            if(params[key] !== nextParams[key]) {
                 return this.loadPage(nextParams)
             }
         }
@@ -44,9 +44,7 @@ class TypesPage extends React.Component {
     loadPage(params) {
         let arr = []
         for(var key in params) {
-            if(params[key] !== 'None') {
-                arr.push(key+'='+params[key])
-            }
+            arr.push(key+'='+params[key])
         }
 
         fetch(this.props.type_url+arr.join('&'))

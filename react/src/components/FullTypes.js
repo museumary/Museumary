@@ -2,6 +2,7 @@ import React from 'react';
 import Thumbnail from './Thumbnail'
 import Pagination from './Pagination'
 import TypesPage from './TypesPage'
+import TypesFilter from './TypesFilter'
 import style from './Select.css'
 
 const defaultProps = {
@@ -10,8 +11,8 @@ const defaultProps = {
         entries_per_page: 16,
         order_by: "name",
         order: "ascending",
-        startswith: "None",
-        medium: "None"
+        startswith: "",
+        medium: ""
     }
 }
 
@@ -21,45 +22,42 @@ class FullTypes extends React.Component {
         this.state = props.params;
 
         this.changePage = this.changePage.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.applyFilter = this.applyFilter.bind(this);
     }
 
     changePage(pageNumber) {
         this.setState({ page: pageNumber });
     }
 
-    handleChange(event) {
-        let state = this.state
-        state[event.target.name] = event.target.value;
+
+    applyFilter(newState) {
+        let state = Object.assign({}, this.state);
+
+        for(var param in newState) {
+            state[param] = newState[param]
+        }
 
         this.setState(state)
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        const state = this.state;
+
+        for(var param in state) {
+            if(state[param] !== nextState[param]) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     render() {
         return (
             <div className="FullTypes">
-                <div className="container" align="right">
-                    <div className="select">
-                        {"Order By: "}
-                        <select
-                            name="order_by"
-                            value={this.state.order_by}
-                            onChange={this.handleChange}>
-                            <option value="name"> Name </option>
-                            <option value="id"> ID </option>
-                        </select>
-                        {"\t\tOrder:  "}
-                        <select
-                            name="order"
-                            value={this.state.order}
-                            onChange={this.handleChange}>
-                            <option value="ascending"> Ascending </option>
-                            <option value="descending"> Descending </option>
-                        </select>
-                        <br/>
-                        <br/>
-                    </div>
-                </div>
+                <TypesFilter
+                    applyFilter={this.applyFilter}
+                />
                 <TypesPage
                     params={this.state}
                     changePage={this.changePage}
