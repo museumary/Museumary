@@ -84,4 +84,5 @@ class Pagination extends React.Component {
 }
 
 Pagination.defaultProps = defaultProps
+
 export default Pagination

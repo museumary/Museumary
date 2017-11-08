@@ -1,6 +1,5 @@
 import React from 'react';
-import Thumbnail from './Thumbnail'
-import Pagination from './Pagination'
+import Thumbnail from '../Thumbnail';
 
 const defaultProps = {
     params: {
@@ -8,8 +7,8 @@ const defaultProps = {
         entries_per_page: 16,
         order_by: "name",
         order: "ascending",
-        startswith: "None",
-        medium: "None"
+        startswith: "",
+        medium: ""
     },
 
     work_url: 'http://api.museumary.me/work/',
@@ -30,13 +29,12 @@ class TypesPage extends React.Component {
         this.loadPage(this.props.params)
     }
 
-
     componentWillReceiveProps(nextProps) {
         const params = this.props.params
         const nextParams = nextProps.params
 
         for(var key in params) {
-            if(params[key] !== nextProps[key]) {
+            if(params[key] !== nextParams[key]) {
                 return this.loadPage(nextParams)
             }
         }
@@ -45,59 +43,57 @@ class TypesPage extends React.Component {
     loadPage(params) {
         let arr = []
         for(var key in params) {
-            if(params[key] !== 'None') {
-                arr.push(key+'='+params[key])
-            }
+            arr.push(key+'='+params[key])
         }
 
         fetch(this.props.type_url+arr.join('&'))
             .then(result=>result.json())
             .then(items=> {
-                const numPages = items.info.num_pages;
-                this.setState({ items: items, numPages: numPages }, this.loadWorks(items))
+                this.loadItems(items.objects, items.info.num_pages)
             })
     }
 
-    loadWorks(items) {
-        Promise.all(items.objects.map((artType) => {
+    loadItems(items, numPages) {
+        Promise.all(items.map((artType) => {
             const work_ids = artType.work_ids;
             const id = work_ids[Math.floor(Math.random()*work_ids.length)];
+
             return fetch(this.props.work_url+id)
         }))
         .then(responses => Promise.all(responses.map(res => res.json())))
         .then(works => {
-            works.map((work, index) => {
-                items.objects[index].image_url = work.image_url;
+            const parsedItems = works.map((work, index) => {
+                let type = items[index]
+
+                const url = '/types/' + type.id
+                return (
+                    <Thumbnail
+                        name={type.name}
+                        image_url={work.image_url}
+                        url={url}
+                        key={type.id} />
+                );
             })
+
+            this.setState({ items: parsedItems, numPages: numPages })
+            this.props.changeNumPages(numPages);
         })
-        .then(() => this.setState({ items: items }))
     }
 
     render() {
-        if(this.state.items && this.state.items.objects) {
-            let arr = [];
-            this.state.items.objects.forEach(function(obj) {
-                const url = '/types/' + obj.id
-                arr.push(<Thumbnail name={obj.name} image_url={obj.image_url} url={url} key={obj.id}/>)
-            });
-
+        if(this.state.items) {
             return (
-                <div>
-                    <div className="container">
-                        <div className="row">
-                            {arr}
-                        </div>
+                <div className="container">
+                    <div className="row">
+                        {this.state.items}
                     </div>
-                    <Pagination
-                        page={this.props.params.page}
-                        numPages={this.state.numPages}
-                        changePage={this.props.changePage}
-                    />
                 </div>
             );
         }
         else {
-            return <div />
+            return (
+                <div><h1>Loading</h1></div>
+            );
         }
     }
 }

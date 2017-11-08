@@ -30,14 +30,12 @@ class FullArtists extends React.Component {
         const num_entries = 'entries_per_page='+this.props.entries_per_page
         const page = 'page=' + pageNumber
 
-        return (
-            fetch(this.props.url+num_entries+'&'+page)
-                .then(result=>result.json())
-                .then(items=> {
-                    const numPages = items.info.num_pages;
-                    this.setState({ items: items, page: pageNumber, numPages: numPages })
-                })
-        );
+        fetch(this.props.url+num_entries+'&'+page)
+            .then(result=>result.json())
+            .then(items=> {
+                const numPages = items.info.num_pages;
+                this.setState({ items: items, page: pageNumber, numPages: numPages })
+            })
     }
 
     render() {

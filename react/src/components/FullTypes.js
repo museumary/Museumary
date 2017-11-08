@@ -1,8 +1,9 @@
 import React from 'react';
-import Thumbnail from './Thumbnail'
-import Pagination from './Pagination'
-import TypesPage from './TypesPage'
-import style from './Select.css'
+import Thumbnail from './Thumbnail';
+import Pagination from './Pagination';
+import TypesPage from './Pages/TypesPage';
+import TypesFilter from './Filters/TypesFilter';
+// import style from './Select.css'
 
 const defaultProps = {
     params: {
@@ -10,50 +11,73 @@ const defaultProps = {
         entries_per_page: 16,
         order_by: "name",
         order: "ascending",
-        startswith: "None",
-        medium: "None"
+        startswith: "",
+        medium: ""
     }
 }
 
 class FullTypes extends React.Component {
     constructor(props) {
         super(props);
-        this.state = props.params
+        this.state = {
+            params: props.params,
+            numPages: 0
+        };
 
-        this.changePage = this.changePage.bind(this)
-        this.handleChange = this.handleChange.bind(this)
+        this.changePage = this.changePage.bind(this);
+        this.applyFilter = this.applyFilter.bind(this);
+        this.changeNumPages = this.changeNumPages.bind(this);
     }
 
     changePage(pageNumber) {
-        this.setState({ page: pageNumber })
+        let params = Object.assign({}, this.state.params);
+        params.page = pageNumber;
+
+        this.setState({ params: params });
     }
 
-    handleChange(event) {
-        let state = this.state
-        state[event.target.name] = event.target.value;
 
-        this.setState(state)
+    applyFilter(newParams) {
+        let params = Object.assign({}, this.state.params);
+
+        for(var param in newParams) {
+            params[param] = newParams[param]
+        }
+
+        this.setState({ params: params })
+    }
+
+    changeNumPages(numPages) {
+        this.setState({ numPages: numPages })
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        const params = this.state.params;
+        const newParams = nextState.params;
+
+        for(var param in params) {
+            if(params[param] !== newParams[param]) {
+                return true;
+            }
+        }
+
+        return this.state.numPages !== nextState.numPages;
     }
 
     render() {
         return (
             <div className="FullTypes">
-                <div className="container">
-                    <div className="select" align="right">
-                        {"Order:  "}
-                        <select
-                            name="order"
-                            value={this.state.order}
-                            onChange={this.handleChange}>
-                            <option value="ascending"> Ascending </option>
-                            <option value="descending"> Descending </option>
-                        </select>
-                        <br/>
-                        <br/>
-                    </div>
-                </div>
+                <TypesFilter
+                    applyFilter={this.applyFilter}
+                />
                 <TypesPage
-                    params={this.state}
+                    params={this.state.params}
+                    changePage={this.changePage}
+                    changeNumPages={this.changeNumPages}
+                />
+                 <Pagination
+                    page={this.state.params.page}
+                    numPages={this.state.numPages}
                     changePage={this.changePage}
                 />
             </div>
