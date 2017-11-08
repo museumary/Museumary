@@ -7,7 +7,7 @@ import Pagination from './Pagination';
 const defaultProps = {
     initialPage: 1,
     entries_per_page: 16,
-    url: 'http://api.museumary.me/search/'
+    url: 'http://api.museumary.me/search?'
 }
 
 class SearchResults extends React.Component {
@@ -29,11 +29,11 @@ class SearchResults extends React.Component {
     changePage(pageNumber) {
         const num_entries = 'entries_per_page='+this.props.entries_per_page
         const page = 'page=' + pageNumber
-        const query = this.props.location.state.search
+        const query = 'query=' + this.props.location.state.search
 
-        console.log(this.props.url+query+'?'+page+'&'+num_entries);
+        console.log(this.props.url+query+'&'+page+'&'+num_entries);
         return (
-            fetch(this.props.url+query+'?'+page+'&'+num_entries)
+            fetch(this.props.url+query+'&'+page+'&'+num_entries)
                 .then(result=>result.json())
                 .then(items=> {
                     const numPages = items.info.num_pages;

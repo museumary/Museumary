@@ -10,8 +10,19 @@ const defaultProps = {
 class Pagination extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            buttonText: props.defaultButtonText
+        if(props.numPages && props.numPages < 5) {
+            var arr = []
+            for(var i = 1; i <= props.numPages; i++) {
+                arr.push(i)
+            }
+            this.state = {
+                buttonText: arr
+            }
+        }
+        else {
+            this.state = {
+                buttonText: props.defaultButtonText
+            }
         }
     }
 
@@ -40,12 +51,21 @@ class Pagination extends React.Component {
             buttonIndexs
         } = props
 
-        if(page <= 3) {
-            return this.setState({ buttonText: defaultButtonText });
+        if(numPages < 5) {
+            var arr = []
+            for(var i = 1; i <= numPages; i++) {
+                arr.push(i)
+            }
+            return this.setState({ buttonText: arr });
         }
+        else {
+            if(page <= 3) {
+                return this.setState({ buttonText: defaultButtonText });
+            }
 
-        if(page > numPages - 2) {
-            page = numPages - 2;
+            if(page > numPages - 2) {
+                page = numPages - 2;
+            }
         }
 
         this.setState({ buttonText: buttonIndexs.map(index => page+index) });
