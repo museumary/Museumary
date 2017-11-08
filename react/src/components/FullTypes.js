@@ -1,9 +1,9 @@
 import React from 'react';
-import Thumbnail from './Thumbnail'
-import Pagination from './Pagination'
-import TypesPage from './TypesPage'
-import TypesFilter from './TypesFilter'
-import style from './Select.css'
+import Thumbnail from './Thumbnail';
+import Pagination from './Pagination';
+import TypesPage from './Pages/TypesPage';
+import TypesFilter from './Filters/TypesFilter';
+// import style from './Select.css'
 
 const defaultProps = {
     params: {
@@ -19,37 +19,49 @@ const defaultProps = {
 class FullTypes extends React.Component {
     constructor(props) {
         super(props);
-        this.state = props.params;
+        this.state = {
+            params: props.params,
+            numPages: 0
+        };
 
         this.changePage = this.changePage.bind(this);
         this.applyFilter = this.applyFilter.bind(this);
+        this.changeNumPages = this.changeNumPages.bind(this);
     }
 
     changePage(pageNumber) {
-        this.setState({ page: pageNumber });
+        let params = Object.assign({}, this.state.params);
+        params.page = pageNumber;
+
+        this.setState({ params: params });
     }
 
 
-    applyFilter(newState) {
-        let state = Object.assign({}, this.state);
+    applyFilter(newParams) {
+        let params = Object.assign({}, this.state.params);
 
-        for(var param in newState) {
-            state[param] = newState[param]
+        for(var param in newParams) {
+            params[param] = newParams[param]
         }
 
-        this.setState(state)
+        this.setState({ params: params })
+    }
+
+    changeNumPages(numPages) {
+        this.setState({ numPages: numPages })
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        const state = this.state;
+        const params = this.state.params;
+        const newParams = nextState.params;
 
-        for(var param in state) {
-            if(state[param] !== nextState[param]) {
+        for(var param in params) {
+            if(params[param] !== newParams[param]) {
                 return true;
             }
         }
 
-        return false;
+        return this.state.numPages !== nextState.numPages;
     }
 
     render() {
@@ -59,7 +71,13 @@ class FullTypes extends React.Component {
                     applyFilter={this.applyFilter}
                 />
                 <TypesPage
-                    params={this.state}
+                    params={this.state.params}
+                    changePage={this.changePage}
+                    changeNumPages={this.changeNumPages}
+                />
+                 <Pagination
+                    page={this.state.params.page}
+                    numPages={this.state.numPages}
                     changePage={this.changePage}
                 />
             </div>

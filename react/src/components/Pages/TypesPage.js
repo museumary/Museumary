@@ -1,6 +1,5 @@
 import React from 'react';
-import Thumbnail from './Thumbnail'
-import Pagination from './Pagination'
+import Thumbnail from '../Thumbnail';
 
 const defaultProps = {
     params: {
@@ -50,12 +49,12 @@ class TypesPage extends React.Component {
         fetch(this.props.type_url+arr.join('&'))
             .then(result=>result.json())
             .then(items=> {
-                this.loadWorks(items.objects, items.info.num_pages)
+                this.loadItems(items.objects, items.info.num_pages)
             })
     }
 
-    loadWorks(artTypes, numPages) {
-        Promise.all(artTypes.map((artType) => {
+    loadItems(items, numPages) {
+        Promise.all(items.map((artType) => {
             const work_ids = artType.work_ids;
             const id = work_ids[Math.floor(Math.random()*work_ids.length)];
 
@@ -63,8 +62,8 @@ class TypesPage extends React.Component {
         }))
         .then(responses => Promise.all(responses.map(res => res.json())))
         .then(works => {
-            const items = works.map((work, index) => {
-                let type = artTypes[index]
+            const parsedItems = works.map((work, index) => {
+                let type = items[index]
 
                 const url = '/types/' + type.id
                 return (
@@ -76,29 +75,25 @@ class TypesPage extends React.Component {
                 );
             })
 
-            this.setState({ items: items, numPages: numPages })
+            this.setState({ items: parsedItems, numPages: numPages })
+            this.props.changeNumPages(numPages);
         })
     }
 
     render() {
         if(this.state.items) {
             return (
-                <div>
-                    <div className="container">
-                        <div className="row">
-                            {this.state.items}
-                        </div>
+                <div className="container">
+                    <div className="row">
+                        {this.state.items}
                     </div>
-                    <Pagination
-                        page={this.props.params.page}
-                        numPages={this.state.numPages}
-                        changePage={this.props.changePage}
-                    />
                 </div>
             );
         }
         else {
-            return <div />
+            return (
+                <div><h1>Loading</h1></div>
+            );
         }
     }
 }

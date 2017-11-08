@@ -41,9 +41,10 @@ class Pagination extends React.Component {
         } = props
 
         if(page <= 3) {
-            page = 3;
+            return this.setState({ buttonText: defaultButtonText });
         }
-        else if(page > numPages - 2) {
+
+        if(page > numPages - 2) {
             page = numPages - 2;
         }
 
@@ -83,4 +84,5 @@ class Pagination extends React.Component {
 }
 
 Pagination.defaultProps = defaultProps
+
 export default Pagination
