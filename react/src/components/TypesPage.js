@@ -30,7 +30,6 @@ class TypesPage extends React.Component {
         this.loadPage(this.props.params)
     }
 
-
     componentWillReceiveProps(nextProps) {
         const params = this.props.params
         const nextParams = nextProps.params
@@ -53,39 +52,43 @@ class TypesPage extends React.Component {
         fetch(this.props.type_url+arr.join('&'))
             .then(result=>result.json())
             .then(items=> {
-                const numPages = items.info.num_pages;
-                this.setState({ items: items, numPages: numPages }, this.loadWorks(items))
+                this.loadWorks(items.objects, items.info.num_pages)
             })
     }
 
-    loadWorks(items) {
-        Promise.all(items.objects.map((artType) => {
+    loadWorks(artTypes, numPages) {
+        Promise.all(artTypes.map((artType) => {
             const work_ids = artType.work_ids;
             const id = work_ids[Math.floor(Math.random()*work_ids.length)];
+
             return fetch(this.props.work_url+id)
         }))
         .then(responses => Promise.all(responses.map(res => res.json())))
         .then(works => {
-            works.map((work, index) => {
-                items.objects[index].image_url = work.image_url;
+            const items = works.map((work, index) => {
+                let type = artTypes[index]
+
+                const url = '/types' + type.id
+                return (
+                    <Thumbnail
+                        name={type.name}
+                        image_url={work.image_url}
+                        url={url}
+                        key={type.id} />
+                );
             })
+
+            this.setState({ items: items, numPages: numPages })
         })
-        .then(() => this.setState({ items: items }))
     }
 
     render() {
-        if(this.state.items && this.state.items.objects) {
-            let arr = [];
-            this.state.items.objects.forEach(function(obj) {
-                const url = '/types/' + obj.id
-                arr.push(<Thumbnail name={obj.name} image_url={obj.image_url} url={url} key={obj.id}/>)
-            });
-
+        if(this.state.items) {
             return (
                 <div>
                     <div className="container">
                         <div className="row">
-                            {arr}
+                            {this.state.items}
                         </div>
                     </div>
                     <Pagination

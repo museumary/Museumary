@@ -18,14 +18,14 @@ const defaultProps = {
 class FullTypes extends React.Component {
     constructor(props) {
         super(props);
-        this.state = props.params
+        this.state = props.params;
 
-        this.changePage = this.changePage.bind(this)
-        this.handleChange = this.handleChange.bind(this)
+        this.changePage = this.changePage.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     changePage(pageNumber) {
-        this.setState({ page: pageNumber })
+        this.setState({ page: pageNumber });
     }
 
     handleChange(event) {
@@ -38,9 +38,17 @@ class FullTypes extends React.Component {
     render() {
         return (
             <div className="FullTypes">
-                <div className="container">
-                    <div className="select" align="right">
+                <div className="container" align="right">
+                    <div className="select">
                         {"Order:  "}
+                        <select
+                            name="order"
+                            value={this.state.order}
+                            onChange={this.handleChange}>
+                            <option value="ascending"> Ascending </option>
+                            <option value="descending"> Descending </option>
+                        </select>
+                        {"\t\tOrder:  "}
                         <select
                             name="order"
                             value={this.state.order}
