@@ -68,7 +68,7 @@ class TypesPage extends React.Component {
             const items = works.map((work, index) => {
                 let type = artTypes[index]
 
-                const url = '/types' + type.id
+                const url = '/types/' + type.id
                 return (
                     <Thumbnail
                         name={type.name}

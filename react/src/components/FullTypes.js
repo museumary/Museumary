@@ -40,13 +40,13 @@ class FullTypes extends React.Component {
             <div className="FullTypes">
                 <div className="container" align="right">
                     <div className="select">
-                        {"Order:  "}
+                        {"Order By: "}
                         <select
-                            name="order"
-                            value={this.state.order}
+                            name="order_by"
+                            value={this.state.order_by}
                             onChange={this.handleChange}>
-                            <option value="ascending"> Ascending </option>
-                            <option value="descending"> Descending </option>
+                            <option value="name"> Name </option>
+                            <option value="id"> ID </option>
                         </select>
                         {"\t\tOrder:  "}
                         <select
