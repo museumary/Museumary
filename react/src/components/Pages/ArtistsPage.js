@@ -56,13 +56,16 @@ class ArtistsPage extends React.Component {
     loadItems(items, numPages) {
         const parsedItems = items.map(obj => {
             const obj_url = this.props.instance_url + obj.id
+            const details = ["Born: " + obj.birth, "Died: " + (obj.death ? obj.death : "n/a"), "Culture: " + obj.culture]
+
 
             return (
                 <Thumbnail
                     name={obj.name}
                     image_url={obj.image_url}
                     url={obj_url}
-                    key={obj.id} />
+                    key={obj.id} 
+                    details={details}/>
             );
         })
 
