@@ -77,7 +77,14 @@ class Venue extends React.Component {
             let works = work_list.map(function(obj) {
                 const url = '/works/' + obj.id;
                 const name = obj.name.substring(0, 25) + (obj.name.length > 25 ? '...': '')
-                return <Thumbnail name={name} image_url={obj.image_url} url={url} key={obj.id} />;
+                return (
+                    <Thumbnail
+                        name={name}
+                        image_url={obj.image_url}
+                        url={url}
+                        key={obj.id}
+                        details={[name, "NA", "NA"]}/>
+                );
             })
 
             return (
@@ -95,8 +102,8 @@ class Venue extends React.Component {
                         </div>
                         <br/>
                         <br/>
-                        
-                        
+
+
                         <h2><strong>Gallery of Works</strong></h2><br/>
                         <div className="container">
                             <div className="row">
