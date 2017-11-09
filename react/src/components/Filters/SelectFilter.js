@@ -33,14 +33,6 @@ export default class OrderByFilter extends React.Component {
         }
     }
 
-    constructor(props) {
-        super(props)
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.props.value !== nextProps.value;
-    }
-
     render() {
         let attr_list = this.props.attributes;
 
