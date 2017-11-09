@@ -44,7 +44,9 @@ class FullWorks extends React.Component {
             params[param] = newParams[param]
         }
 
-        this.setState({ params: params })
+        this.setState({
+            params: params
+        })
     }
 
     changeNumPages(numPages) {
