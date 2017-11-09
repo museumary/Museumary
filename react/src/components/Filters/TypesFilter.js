@@ -1,8 +1,6 @@
 import React from 'react';
 
 const defaultProps = {
-        // page: 1,
-        // entries_per_page: 16,
         order_by: "name",
         order: "ascending",
         startswith: "",

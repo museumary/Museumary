@@ -13,8 +13,8 @@ const defaultProps = {
 
     work_url: 'http://api.museumary.me/work/',
 
-    instance_url: '/types/',
-    base_url: 'http://api.museumary.me/art_type?'
+    base_url: 'http://api.museumary.me/art_type?',
+    instance_url: '/types/'
 }
 
 class TypesPage extends React.Component {
@@ -91,6 +91,7 @@ class TypesPage extends React.Component {
                     <div className="row">
                         {this.state.items}
                     </div>
+                    <br/>
                 </div>
             );
         }

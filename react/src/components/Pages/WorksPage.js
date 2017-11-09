@@ -86,6 +86,7 @@ class WorksPage extends React.Component {
                     <div className="row">
                         {this.state.items}
                     </div>
+                    <br/>
                 </div>
             );
         }

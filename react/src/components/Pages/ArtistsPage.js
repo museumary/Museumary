@@ -12,7 +12,7 @@ const defaultProps = {
     },
 
     base_url: 'http://api.museumary.me/artist?',
-    instance_url: '/artist/'
+    instance_url: '/artists/'
 }
 
 class ArtistsPage extends React.Component {
@@ -80,6 +80,8 @@ class ArtistsPage extends React.Component {
                     <div className="row">
                         {this.state.items}
                     </div>
+                    <br/>
+                    <br/>
                 </div>
             );
         }

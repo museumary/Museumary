@@ -75,6 +75,7 @@ class FullWorks extends React.Component {
                     changePage={this.changePage}
                     changeNumPages={this.changeNumPages}
                 />
+                <br/>
                  <Pagination
                     page={this.state.params.page}
                     numPages={this.state.numPages}
