@@ -16,17 +16,16 @@ export default class Thumbnail extends React.Component {
         const image = this.props.image_url
         const url = this.props.url
         const type = this.props.type
-        var description = DESCRIPTION[this.props.description_id - 1]
-
 
         if(type == "venue")
         {
+            const description = DESCRIPTION[this.props.description_id - 1]
             return (
                 <div className='col-md-12' style={style}>
-                    <Link to={url} activeClassName="active"> 
+                    <Link to={url} activeClassName="active">
                         <img src={image} className="img-rounded" width="400" height="250" align="left"/><br/>
                     </Link>
-                  
+
                     <div className='venue-description'>
                         <Link to={url} activeClassName="active">
                             <h3><strong>{name}</strong></h3>
@@ -37,9 +36,6 @@ export default class Thumbnail extends React.Component {
                     </div>
                     <br/>
                 </div>
-             
-
-        
             )
         }
         else
@@ -52,9 +48,9 @@ export default class Thumbnail extends React.Component {
                             <img src={image} className="img-rounded" width="200" height="300"/>
                             <div className="overlay">
                                 <div className="text">
-                                    {this.props.details[0]}<br/>
-                                    {this.props.details[1]}<br/>
-                                    {this.props.details[2]}<br/>
+                                    {this.props.details ? this.props.details[0] : ""}<br/>
+                                    {this.props.details ? this.props.details[1] : ""}<br/>
+                                    {this.props.details ? this.props.details[2] : ""}<br/>
                                 </div>
                             </div>
                         </div>
@@ -65,6 +61,6 @@ export default class Thumbnail extends React.Component {
             )
         }
 
-        
+
     }
 }
