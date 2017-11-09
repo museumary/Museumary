@@ -45,7 +45,10 @@ class WorksPage extends React.Component {
     loadPage(params) {
         let arr = []
         for(var key in params) {
-            arr.push(key+'='+params[key])
+            const val = params[key].toString()
+            if(val !== "" && val.toLowerCase() !== "none") {
+                arr.push(key+'='+params[key])
+            }
         }
 
         fetch(this.props.base_url+arr.join('&'))
@@ -69,7 +72,7 @@ class WorksPage extends React.Component {
                     name={obj_name}
                     image_url={obj.image_url}
                     url={obj_url}
-                    key={obj.id} 
+                    key={obj.id}
                     details={details}/>
 
             );

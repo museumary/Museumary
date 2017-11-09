@@ -1,5 +1,4 @@
 import React from 'react';
-
 import OrderByFilter from './OrderByFilter'
 
 const defaultProps = {
@@ -30,10 +29,16 @@ class ArtistsFilter extends React.Component {
     }
 
     applyFilter(event) {
-        if(event.target.name === 'Reset')
+        if(event.target.name === "Reset") {
+            this.cultureRef.value = "";
+            this.startswithRef.value = "";
+
+            this.setState(this.props.params)
             this.props.applyFilter(this.props.params)
-        else
+        }
+        else {
             this.props.applyFilter(this.state)
+        }
     }
 
     handleChange(event) {
@@ -47,26 +52,28 @@ class ArtistsFilter extends React.Component {
         return (
             <div className="container">
                 <div align="middle">
-
                     <strong> Starts With: </strong>
                     <input
                         type="text"
                         name="startswith"
+                        ref={el => this.startswithRef = el}
                         onChange={this.handleChange}
                     />
+                    &nbsp;&nbsp;
                     <strong> Culture </strong>
                     <input
                         type="text"
                         name="culture"
+                        ref={el => this.cultureRef = el}
                         onChange={this.handleChange}
                     />
-
+                    &nbsp;&nbsp;
                     <strong> Order By </strong>
                     <OrderByFilter
                         value={this.state.order_by}
                         attributes={this.props.attributes}
                         handleChange={this.handleChange} />
-
+                    &nbsp;&nbsp;
                     <strong> Order </strong>
                     <select
                         name="order"
