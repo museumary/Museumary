@@ -12,7 +12,8 @@ const defaultProps = {
     },
 
     attributes: {
-        name: "Name"
+        name: "Name",
+        date: "Date"
     },
 
     venues: {
@@ -38,10 +39,12 @@ class ArtistsFilter extends React.Component {
         if(event.target.name === "Reset") {
             this.mediumRef.value = "";
             this.artTypeRef.value = "";
-            this.startswithRef.value = "";
 
             this.setState(this.props.params)
-            this.props.applyFilter(this.props.params)
+            let newParams = this.props.params;
+            newParams.page = 1;
+
+            this.props.applyFilter(newParams);
         }
         else {
             this.props.applyFilter(this.state)
@@ -59,14 +62,6 @@ class ArtistsFilter extends React.Component {
         return (
             <div className="container">
                 <div align="middle">
-                    <strong> Starts With: </strong>
-                    <input
-                        type="text"
-                        name="startswith"
-                        ref={el => this.startswithRef = el}
-                        onChange={this.handleChange}
-                    />
-                    &nbsp;&nbsp;
                     <strong> Art Type: </strong>
                     <input
                         type="text"
@@ -88,6 +83,12 @@ class ArtistsFilter extends React.Component {
                         name="venue"
                         value={this.state.venue}
                         attributes={this.props.venues}
+                        handleChange={this.handleChange} />
+                    &nbsp;&nbsp;
+                    <strong> Starts With: </strong>
+                    <SelectFilter
+                        name="startswith"
+                        value={this.state.startswith}
                         handleChange={this.handleChange} />
                     &nbsp;&nbsp;
                     <strong> Order By: </strong>
