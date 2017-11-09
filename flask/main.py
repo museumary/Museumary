@@ -383,11 +383,7 @@ def get_medium_data(medium):
 # Search API Requests #
 #---------------------#
 
-@app.route('/search/', methods=['GET'])
-@io.from_query('query', fields.String(missing=" "))
-# @io.from_query('category', fields.String(missing="artist"))
-# @io.from_query('page', fields.Integer(missing=1))
-# @io.from_query('entries_per_page', fields.Integer(missing=10))
+@app.route('/search/<string:query>', methods=['GET'])
 def query_search(query):
     """
     API request for general search queries
