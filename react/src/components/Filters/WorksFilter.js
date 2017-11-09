@@ -1,5 +1,5 @@
 import React from 'react';
-import OrderByFilter from './OrderByFilter'
+import SelectFilter from './SelectFilter'
 
 const defaultProps = {
     params: {
@@ -12,7 +12,7 @@ const defaultProps = {
     },
 
     attributes: {
-
+        name: "Name"
     },
 
     venues: {
@@ -67,7 +67,7 @@ class ArtistsFilter extends React.Component {
                         onChange={this.handleChange}
                     />
                     &nbsp;&nbsp;
-                    <strong> Art Type </strong>
+                    <strong> Art Type: </strong>
                     <input
                         type="text"
                         name="art_type"
@@ -75,7 +75,7 @@ class ArtistsFilter extends React.Component {
                         onChange={this.handleChange}
                     />
                     &nbsp;&nbsp;
-                    <strong> Medium </strong>
+                    <strong> Medium: </strong>
                     <input
                         type="text"
                         name="medium"
@@ -83,20 +83,21 @@ class ArtistsFilter extends React.Component {
                         onChange={this.handleChange}
                     />
                     &nbsp;&nbsp;
-                    <strong> Venue </strong>
-                    <OrderByFilter
+                    <strong> Venue: </strong>
+                    <SelectFilter
                         name="venue"
                         value={this.state.venue}
                         attributes={this.props.venues}
                         handleChange={this.handleChange} />
                     &nbsp;&nbsp;
-                    <strong> Order By </strong>
-                    <OrderByFilter
+                    <strong> Order By: </strong>
+                    <SelectFilter
+                        name="order_by"
                         value={this.state.order_by}
                         attributes={this.props.attributes}
                         handleChange={this.handleChange} />
                     &nbsp;&nbsp;
-                    <strong> Order </strong>
+                    <strong> Order: </strong>
                     <select
                         name="order"
                         value={this.state.order}

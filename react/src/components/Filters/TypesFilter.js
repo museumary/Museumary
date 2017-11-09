@@ -1,5 +1,5 @@
 import React from "react";
-import OrderByFilter from './OrderByFilter'
+import SelectFilter from './SelectFilter'
 
 const defaultProps = {
     params: {
@@ -10,6 +10,7 @@ const defaultProps = {
     },
 
     attributes: {
+        name: "Name"
     }
 }
 
@@ -63,7 +64,7 @@ class TypesFilter extends React.Component {
                     />
                     &nbsp;&nbsp;
                     <strong> Order By </strong>
-                    <OrderByFilter
+                    <SelectFilter
                         value={this.state.order_by}
                         attributes={this.props.attributes}
                         handleChange={this.handleChange} />
