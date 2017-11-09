@@ -416,15 +416,10 @@ specific artwork, artist, location, and type of art.
             
 ## group Search
 
-Request returns query matches from the given model category ordered by relevance.
-
-## Categorical Query [/search/{?query,page,entries_per_page,category}]
+## Categorical Query [/search/{query}]
 ### Query Result [GET]
 + Parameters
     + query (required, string) ...query string to be searched for in the database
-    + category (optional, string) ...Model category to search; i.e. artist, work, art_type, venue; default='artist'
-    + page (optional, integer) ...index of the page being requested; default=1
-    + entries_per_page (optional, integer) ...number of entries to be returned; default=10
 
 + Response 200 (application/json)
 
@@ -432,10 +427,7 @@ Request returns query matches from the given model category ordered by relevance
     
             {
                 "info": {
-                    "page": 1,
-                    "entries_per_page": 3,
-                    "num_entries": 30,
-                    "num_pages": 10
+                    "num_entries": 3
                 },
                 
                 "objects": [
