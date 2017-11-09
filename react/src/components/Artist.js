@@ -6,7 +6,7 @@ class Artist extends React.Component {
         super();
         this.state={
             items:[],
-            work_arr: []
+            work_arr:[]
         };
     }
     componentDidMount(){
