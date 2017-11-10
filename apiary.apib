@@ -416,10 +416,12 @@ specific artwork, artist, location, and type of art.
             
 ## group Search
 
-## Categorical Query [/search/{query}]
+## Search Query [/search/{?query,page,entries_per_page}]
 ### Query Result [GET]
 + Parameters
     + query (required, string) ...query string to be searched for in the database
+    + page (optional, integer) ...index of the  apage to be returned; default=1
+    + entries_per_page (optional, integer) ...number of entries to be returned; default=10
 
 + Response 200 (application/json)
 
@@ -427,7 +429,10 @@ specific artwork, artist, location, and type of art.
     
             {
                 "info": {
-                    "num_entries": 3
+                    "page": 1,
+                    "entries_per_page": 3,
+                    "num_entries": 9,
+                    "num_pages": 3
                 },
                 
                 "objects": [
