@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import Highlighter from 'react-highlight-words';
+import style from './Full.css';
 import Thumbnail from './Thumbnail';
 import Pagination from './Pagination';
 
@@ -17,16 +18,17 @@ class SearchResults extends React.Component {
             items: [],
             page: 1,
             numPages: 0,
+            oldQuery: this.props.location.state.search
         };
 
         this.changePage = this.changePage.bind(this)
     }
     componentDidMount(){
-        // http://api.museumary.me/search/alb?page=1&entries_per_page=16 < example query
         this.changePage(this.props.initialPage)
     }
 
     changePage(pageNumber) {
+        this.setState({ oldQuery: this.props.location.state.search})
         const num_entries = 'entries_per_page='+this.props.entries_per_page
         const page = 'page=' + pageNumber
         const query = this.props.location.state.search
@@ -43,26 +45,28 @@ class SearchResults extends React.Component {
 
 
     render() {
+        if(this.state.oldQuery !== this.props.location.state.search) {
+            this.changePage(1);
+            return <div>Searching for {this.props.location.state.search}...</div>;
+        }
         if(this.state.items.objects){
             var arr = [];
             this.state.items.objects.forEach(function(obj) {
                 var url = '';
                 if(obj.category === 'art_type') {
-                    url = '/types/'
+                    url = '/types/' + obj.id
                 }
                 else {
                     url = "/" + obj.category + "s/" + obj.id
                 }
                 // replace(this.props.location.state.search, "<b>"+this.props.location.state.search+"</b>")
                 var description = obj.description;
-                console.log(obj.description.length);
                 if(500 < obj.description.length ) {
-                    console.log("shortening");
                     var lowerQuery = this.props.location.state.search.toLowerCase();
                     var words = obj.description.split(" ");
                     description = '';
                     for(var i = 0; i < words.length; i++) {
-                        if(words[i].toLowerCase() === lowerQuery) {
+                        if(words[i].toLowerCase().includes(lowerQuery)) {
                             description = description + words[i]
                             i++
                             if(words.length - 7 >= 0) {
@@ -114,16 +118,14 @@ class SearchResults extends React.Component {
                     <div className="container">
                         <div className="row">
                             {arr}
+                            <Pagination
+                                 page={this.state.page}
+                                 numPages={this.state.items.info.num_pages}
+                                 changePage={this.changePage}
+                            />
                         </div>
                         <br/>
                         <br/>
-                   </div>
-                   <div>
-                       <Pagination
-                            page={this.state.page}
-                            numPages={this.state.items.info.num_pages}
-                            changePage={this.changePage}
-                       />
                    </div>
                </div>
            );

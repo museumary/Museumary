@@ -16,7 +16,6 @@ class Search extends React.Component {
     onInputKeyPress(event) {
         switch (event.keyCode) {
             case 13:
-                console.log(this.state.search_value);
                 this.setState({redirect: true})
                 event.preventDefault();
                 break;
