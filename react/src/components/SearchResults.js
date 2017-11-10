@@ -28,7 +28,6 @@ class SearchResults extends React.Component {
     }
 
     changePage(pageNumber) {
-        this.setState({ oldQuery: this.props.location.state.search})
         const num_entries = 'entries_per_page='+this.props.entries_per_page
         const page = 'page=' + pageNumber
         const query = this.props.location.state.search
@@ -39,6 +38,9 @@ class SearchResults extends React.Component {
                 .then(items=> {
                     const numPages = items.info.num_pages;
                     this.setState({ items: items, page: pageNumber, numPages: numPages })
+                    if(this.state.oldQuery !== this.props.location.state.search) {
+                        this.setState({ oldQuery: this.props.location.state.search})
+                    }
                 })
         );
     }
