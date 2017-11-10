@@ -51,8 +51,8 @@ const About = () => {
                 <div className="col-md-6">
                     <img src={ Trenton } className="img-circle" alt="Trenton" width="256" height="256" />
                     <h2><strong>Trenton Strahan</strong></h2>
-                    <p>A 4th year Computer Science major at UT with a minor in RTF. Very excited for Software Engineering this semester. Big sports fan. Houston sports for life!</p>
-                    <p><strong>Responsibilities:</strong><br/> Designed and built the home page and the about page. Coordinated with team as the group leader.</p>
+                    <p>A 4th year Computer Science major at UT with a minor in RTF. Very excited for Software Engineering this semester. Houston sports fan. Go 'Stros!</p>
+                    <p><strong>Responsibilities:</strong><br/> Designed and built the home page and the about page. Worked as a frontend designer. Helped with pagination and model pages.</p>
                     <p><strong>No. of Commits:</strong> 32<br/><strong>No. of Issues:</strong> 3<br/><strong>No. of Tests:</strong> 0</p>
                 </div>
             </div>
@@ -93,7 +93,14 @@ const About = () => {
                     <div className="col-md-4">
                         <a href="http://kokoelmat.fng.fi/api/v2support/docs/#/documentation"><p><strong>Finnish National Gallery API</strong></p></a>
                     </div>
-                <div><p>INSERT SCRAPING INFO</p></div>
+                    <div>
+                      <p>
+                        In order to populate our database with with many instances of each model, we wrote various data scraping scripts to extract information from websites. 
+                        Each scraping script focused on pulling out data from a different museum’s website. We chose to write a unique script for each website largely because 
+                        the api’s for each museum differed  wildly. For more information about the process we went through to scrape our data, please refer to our technical report below.
+                      </p>
+                    </div>
+                    
               </div>
 
               <br/>

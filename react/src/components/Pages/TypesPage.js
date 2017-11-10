@@ -17,6 +17,11 @@ const defaultProps = {
     instance_url: '/types/'
 }
 
+var works_count = 0
+var artists_count = 0
+
+
+
 class TypesPage extends React.Component {
     constructor(props) {
         super(props)
@@ -59,16 +64,19 @@ class TypesPage extends React.Component {
         Promise.all(items.map((artType) => {
             const work_ids = artType.work_ids;
             const id = work_ids[Math.floor(Math.random()*work_ids.length)];
-
+            works_count = work_ids.length
             return fetch(this.props.work_url+id)
         }))
         .then(responses => Promise.all(responses.map(res => res.json())))
         .then(works => {
             const parsedItems = works.map((work, index) => {
                 let type = items[index]
-
-                const url = this.props.instance_url + type.id
-                const details = ["Detail: content", "Detail: content", "Detail: content"]
+                const url = this.props.instance_url + type.id 
+                console.log(type)
+                const works_count = type.work_ids.length
+                const artists_count = type.artist_ids.length
+                const medium_count = type.medium_ids.length
+                const details = ["Artists: " + artists_count, "Works: " + works_count, "Mediums: " + medium_count]
                 return (
                     <Thumbnail
                         name={type.name}

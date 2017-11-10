@@ -65,7 +65,7 @@ class WorksPage extends React.Component {
 
             const venue = obj.venue
             const artist = obj.artist
-            const details = ["Artist: " + artist, "Date: " + obj.date, "Venue: " + venue]
+            const details = ["Artist: " + (artist.length > 7 ? (artist.substring(0,artist.indexOf(" "))) : artist), "Date: " + obj.date, "Venue: " + (venue.length > 7 ? (venue.substring(0,7)) : venue)]
 
             return (
                 <Thumbnail
