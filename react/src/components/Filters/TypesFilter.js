@@ -3,6 +3,7 @@ import SelectFilter from './SelectFilter'
 
 const defaultProps = {
     params: {
+        // page: 1,
         order_by: "name",
         order: "ascending",
         startswith: "",
@@ -26,10 +27,13 @@ class TypesFilter extends React.Component {
     applyFilter(event) {
         if(event.target.name === "Reset") {
             this.mediumRef.value = "";
-            this.startswithRef.value = "";
 
             this.setState(this.props.params)
-            this.props.applyFilter(this.props.params)
+
+            let newParams = this.props.params;
+            newParams.page = 1;
+
+            this.props.applyFilter(newParams);
         }
         else {
             this.props.applyFilter(this.state)
@@ -47,14 +51,6 @@ class TypesFilter extends React.Component {
         return (
             <div className="container">
                 <div align="middle">
-                    <strong> Starts With: </strong>
-                    <input
-                        type="text"
-                        name="startswith"
-                        ref={el => this.startswithRef = el}
-                        onChange={this.handleChange}
-                    />
-                    &nbsp;&nbsp;
                     <strong> Medium </strong>
                     <input
                         type="text"
@@ -63,8 +59,15 @@ class TypesFilter extends React.Component {
                         onChange={this.handleChange}
                     />
                     &nbsp;&nbsp;
+                    <strong> Starts With: </strong>
+                    <SelectFilter
+                        name="startswith"
+                        value={this.state.startswith}
+                        handleChange={this.handleChange} />
+                    &nbsp;&nbsp;
                     <strong> Order By </strong>
                     <SelectFilter
+                        name="order_by"
                         value={this.state.order_by}
                         attributes={this.props.attributes}
                         handleChange={this.handleChange} />

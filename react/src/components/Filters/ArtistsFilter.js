@@ -31,10 +31,13 @@ class ArtistsFilter extends React.Component {
     applyFilter(event) {
         if(event.target.name === "Reset") {
             this.cultureRef.value = "";
-            this.startswithRef.value = "";
 
             this.setState(this.props.params)
-            this.props.applyFilter(this.props.params)
+
+            let newParams = this.props.params;
+            newParams.page = 1;
+
+            this.props.applyFilter(newParams);
         }
         else {
             this.props.applyFilter(this.state)
@@ -52,14 +55,6 @@ class ArtistsFilter extends React.Component {
         return (
             <div className="container">
                 <div align="middle">
-                    <strong> Starts With: </strong>
-                    <input
-                        type="text"
-                        name="startswith"
-                        ref={el => this.startswithRef = el}
-                        onChange={this.handleChange}
-                    />
-                    &nbsp;&nbsp;
                     <strong> Culture </strong>
                     <input
                         type="text"
@@ -67,6 +62,12 @@ class ArtistsFilter extends React.Component {
                         ref={el => this.cultureRef = el}
                         onChange={this.handleChange}
                     />
+                    &nbsp;&nbsp;
+                    <strong> Starts With: </strong>
+                    <SelectFilter
+                        name="startswith"
+                        value={this.state.startswith}
+                        handleChange={this.handleChange} />
                     &nbsp;&nbsp;
                     <strong> Order By </strong>
                     <SelectFilter

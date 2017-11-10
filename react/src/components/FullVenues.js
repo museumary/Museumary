@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './Full.css';
 import Thumbnail from './Thumbnail'
+import {VenuesPage} from './Pages'
+import {VenuesFilter} from './Filters'
 
 import Harvard from '../static/images/Harvard.jpg';
 import Cooper from '../static/images/Cooper.jpg';
@@ -11,43 +13,78 @@ import Walters from '../static/images/Walters.jpg';
 
 const MUSEUMS = [Harvard, Walters, Auckland, Cooper, Finnish]
 
+const defaultProps = {
+    params: {
+        order_by: "name",
+        order: "ascending",
+        startswith: "",
+        country: ""
+    }
+}
+
 class FullVenues extends React.Component {
     constructor(props) {
         super(props);
-        this.state={items:[]};
+        this.state={
+            params: this.props.params,
+        };
+
+        this.changePage = this.changePage.bind(this);
+        this.applyFilter = this.applyFilter.bind(this);
     }
 
-    componentDidMount(){
-        fetch(`http://api.museumary.me/venue`)
-            .then(result=>result.json())
-            .then(items=>this.setState({ items }))
+    componentDidMount() {
+        this.setState({ params: this.props.params })
+    }
+
+    changePage(pageNumber) {
+        let params = Object.assign({}, this.state.params);
+        params.page = pageNumber;
+
+        this.setState({ params: params });
+    }
+
+    applyFilter(newParams) {
+        console.log(newParams);
+        console.log(this.state.params);
+
+        let params = Object.assign({}, this.state.params);
+
+        for(var param in newParams) {
+            params[param] = newParams[param]
+        }
+
+        this.setState({ params: params })
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        const params = this.state.params;
+        const newParams = nextState.params;
+
+        for(var param in params) {
+            if(params[param] !== newParams[param]) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     render() {
-        if(this.state.items.objects){
-            var arr = [];
-            this.state.items.objects.forEach(function(obj) {
-                const url = '/venues/' + obj.id
-                const image_url = MUSEUMS[obj.id-1] //this.props.museum_images[obj.id-1]
-                arr.push(<Thumbnail name={obj.name} image_url={image_url} url={url} key={obj.id} type="venue" description_id={obj.id}/>);
-            });
-
             return (
                 <div className="FullVenues">
-                    <div className="container">
-                        <div className="row">
-                            {arr}
-                        </div>
-                        <br/>
-                        <br/>
-                    </div>
+                    <VenuesFilter
+                        applyFilter={this.applyFilter}
+                    />
+                    <VenuesPage
+                        params={this.state.params}
+                        changePage={this.changePage}
+                    />
                 </div>
             );
-        }
-        else {
-            return <div className="FullVenues"></div>;
-        }
     }
 }
+
+FullVenues.defaultProps = defaultProps;
 
 export default FullVenues;

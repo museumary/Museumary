@@ -21,20 +21,25 @@ export default class Thumbnail extends React.Component {
         {
             const description = DESCRIPTION[this.props.description_id - 1]
             return (
-                <div className='col-md-12' style={style}>
-                    <Link to={url} activeClassName="active">
-                        <img src={image} className="img-rounded" width="400" height="250" align="left"/><br/>
-                    </Link>
-
-                    <div className='venue-description'>
-                        <Link to={url} activeClassName="active">
-                            <h3><strong>{name}</strong></h3>
+                <div className="container">
+                    <div className='col-md-4' style={style}>
+                        <Link to={url} activeClassName="active"> 
+                            <img src={image} className="img-rounded" width="350" height="300" align="left"/><br/>
                         </Link>
-                        <p>
-                            {description}
-                        </p>
+                        <br/>
                     </div>
-                    <br/>
+                    <div className='col-md-8' style={style}>  
+                        <div className='venue-description'>
+                            <Link to={url} activeClassName="active">
+                                <h3><strong>{name}</strong></h3>
+                            </Link>
+                            <div className="description">
+                                {description}
+                            </div>
+                        </div>
+                    
+                        <br/>
+                    </div>
                 </div>
             )
         }

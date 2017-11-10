@@ -19,7 +19,7 @@ class Type extends React.Component {
         fetch(`http://api.museumary.me/art_type/` + type_id)
             .then(result=>result.json())
             .then(items=>{
-                for (var i = 0, len = items.medium_ids.length; i < len; i++) {
+                for (var i = 0, len = Math.min(items.medium_ids.length, 10); i < len; i++) {
                     fetch('http://api.museumary.me/medium/' + items.medium_ids[i])
                         .then(result=>result.json())
                         .then(responseJson=>this.setState({med_arr: this.state.med_arr.concat([responseJson])}))
