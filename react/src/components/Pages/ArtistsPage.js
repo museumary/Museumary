@@ -1,5 +1,6 @@
 import React from 'react';
 import Thumbnail from '../Thumbnail';
+import Gentleman from '../../static/images/Gentleman.png'
 
 const defaultProps = {
     params: {
@@ -12,7 +13,7 @@ const defaultProps = {
     },
 
     base_url: 'http://api.museumary.me/artist?',
-    instance_url: '/artist/'
+    instance_url: '/artists/'
 }
 
 class ArtistsPage extends React.Component {
@@ -55,14 +56,19 @@ class ArtistsPage extends React.Component {
 
     loadItems(items, numPages) {
         const parsedItems = items.map(obj => {
-            const obj_url = this.props.instance_url + obj.id
-            const details = ["Born: " + obj.birth, "Died: " + (obj.death ? obj.death : "n/a"), "Culture: " + obj.culture]
+            const obj_url = this.props.instance_url + obj.id;
+            const details = ["Born: " + obj.birth, "Died: " + (obj.death ? obj.death : "n/a"), "Culture: " + obj.culture];
 
+            let obj_image_url = obj.image_url;
+
+            if(!obj_image_url) {
+                obj_image_url = Gentleman;
+            }
 
             return (
                 <Thumbnail
                     name={obj.name}
-                    image_url={obj.image_url}
+                    image_url={obj_image_url}
                     url={obj_url}
                     key={obj.id} 
                     details={details}/>
@@ -80,6 +86,8 @@ class ArtistsPage extends React.Component {
                     <div className="row">
                         {this.state.items}
                     </div>
+                    <br/>
+                    <br/>
                 </div>
             );
         }

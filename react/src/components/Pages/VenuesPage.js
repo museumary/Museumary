@@ -1,5 +1,13 @@
 import React from 'react';
+
 import Thumbnail from '../Thumbnail';
+import Harvard from '../../static/images/Harvard.jpg';
+import Cooper from '../../static/images/Cooper.jpg';
+import Auckland from '../../static/images/Auckland.jpg';
+import Finnish from '../../static/images/Finnish.jpg';
+import Walters from '../../static/images/Walters.jpg';
+
+const MUSEUMS = [Harvard, Walters, Auckland, Cooper, Finnish]
 
 const defaultProps = {
     params: {
@@ -8,22 +16,20 @@ const defaultProps = {
         order_by: "name",
         order: "ascending",
         startswith: "",
-        art_type: "",
-        medium: "",
-        venue: ""
+        country: ""
     },
 
-    base_url: 'http://api.museumary.me/work/?',
-    instance_url: '/works/'
+    base_url: 'http://api.museumary.me/venue?',
+    instance_url: '/venue/'
 }
 
-class WorksPage extends React.Component {
+class VenuesPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             items: [],
-            numPages: 0
         }
+
         this.loadPage = this.loadPage.bind(this)
     }
 
@@ -51,44 +57,42 @@ class WorksPage extends React.Component {
             }
         }
 
-        fetch(this.props.base_url+arr.join('&'))
+        console.log('params to fetch: ' + arr)
+
+        fetch('http://api.museumary.me/venue?'+arr.join('&'))
             .then(result=>result.json())
             .then(items=> {
-                this.loadItems(items.objects, items.info.num_pages)
+                this.loadItems(items.objects);
             })
+            .catch(error => console.log(error))
     }
 
-    loadItems(items, numPages) {
-        const parsedItems = items.map(obj => {
-            const obj_url = this.props.instance_url + obj.id
-            const obj_name = obj.name.substring(0, 25) + (obj.name.length > 25 ? '...': '')
-
-            const venue = obj.venue
-            const artist = obj.artist
-            const details = ["Artist: " + artist, "Date: " + obj.date, "Venue: " + venue]
-
-            return (
-                <Thumbnail
-                    name={obj_name}
-                    image_url={obj.image_url}
-                    url={obj_url}
-                    key={obj.id} 
-                    key={obj.id}
-                    details={details}/>
-
-            );
-        })
-
-        this.setState({ items: parsedItems, numPages: numPages })
-        this.props.changeNumPages(numPages);
+    loadItems(items) {
+        this.setState({ items: items })
     }
 
     render() {
         if(this.state.items) {
+            let arr = [];
+            this.state.items.forEach(function(obj) {
+                const url = '/venues/' + obj.id
+                const image_url = MUSEUMS[obj.id-1] //this.props.museum_images[obj.id-1]
+
+                arr.push(
+                    <Thumbnail
+                        name={obj.name}
+                        image_url={image_url}
+                        url={url}
+                        key={obj.id}
+                        type="venue"
+                        description_id={obj.id}/>
+                );
+            });
+
             return (
                 <div className="container">
                     <div className="row">
-                        {this.state.items}
+                        {arr}
                     </div>
                     <br/>
                 </div>
@@ -102,6 +106,6 @@ class WorksPage extends React.Component {
     }
 }
 
-WorksPage.defaultProps = defaultProps
+VenuesPage.defaultProps = defaultProps;
 
-export default WorksPage
+export default VenuesPage

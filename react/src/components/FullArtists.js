@@ -4,7 +4,7 @@ import style from './Full.css';
 import Thumbnail from './Thumbnail';
 import Pagination from './Pagination'
 import ArtistsPage from './Pages/ArtistsPage'
-import ArtistsFilter from './Filters/ArtistsFilter'
+import { ArtistsFilter } from './Filters'
 
 const defaultProps = {
     params: {
@@ -75,6 +75,7 @@ class FullArtists extends React.Component {
                     changePage={this.changePage}
                     changeNumPages={this.changeNumPages}
                 />
+                <br/>
                  <Pagination
                     page={this.state.params.page}
                     numPages={this.state.numPages}

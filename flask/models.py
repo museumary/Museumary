@@ -42,6 +42,7 @@ class Artist(db.Model):
     deathplace = db.Column(db.String(128))
     culture = db.Column(db.String(64))
     image_url = db.Column(db.String(512))
+    description = db.Column(db.Text)
 
     search_vector = db.Column(TSVectorType('name', 'birthplace', 'deathplace', 'culture'))
 
@@ -60,6 +61,7 @@ class Venue(db.Model):
     country = db.Column(db.String(64))
     zipcode  = db.Column(db.String(64))
     works = db.relationship("Work", back_populates="venue")
+    description = db.Column(db.Text)
 
     search_vector = db.Column(TSVectorType('name', 'street', 'city', 'country', 'zipcode'))
 
@@ -75,6 +77,7 @@ class ArtType(db.Model):
     name = db.Column(db.String(128))
     media = db.relationship("Medium", back_populates="art_type")
     works = db.relationship("Work", backref="art_type")
+    description = db.Column(db.Text)
     artists = db.relationship(
         'Artist',
         secondary=artist_to_art_type, 
@@ -119,7 +122,7 @@ class Work(db.Model):
     venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
     venue = db.relationship("Venue", back_populates="works")
     image_url = db.Column(db.String(512))
-    description = db.Column(db.String(1024))
+    description = db.Column(db.Text)
 
     search_vector = db.Column(TSVectorType('name', 'date'))
 

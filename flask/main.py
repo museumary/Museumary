@@ -5,7 +5,6 @@ Main file where app-engine runs the website
 from flask import Flask, render_template, jsonify, make_response
 from flask_io import FlaskIO, fields, Schema
 from flask_cors import CORS
-from flask_restful import marshal_with
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_searchable import search, parse_search_query
 from sqlalchemy import desc
@@ -25,10 +24,15 @@ def get_info(page, entries_per_page, num_entries):
     Fill in information for responses containing
     page number, entries_per_page, and total pages and entries
     """
+    num_pages = num_entries // entries_per_page
+
+    if num_entries % entries_per_page:
+        num_pages += 1
+
     return {
         'page': page,
         'entries_per_page': entries_per_page,
-        'num_pages': num_entries // entries_per_page + 1,
+        'num_pages': num_pages,
         'num_entries': num_entries
     }
 
@@ -104,7 +108,9 @@ def get_work_data(work):
         'medium_id': work.medium_id,
         'date': work.date,
         'venue_id': work.venue_id,
-        'image_url': work.image_url
+        'image_url': work.image_url,
+        'venue': work.venue.name,
+        'artist': work.artist.name
     }
 
 #---------------------#
@@ -380,30 +386,71 @@ def get_medium_data(medium):
 #---------------------#
 
 @app.route('/search/<string:query>', methods=['GET'])
-@io.from_query('category', fields.String(missing="artist"))
 @io.from_query('page', fields.Integer(missing=1))
 @io.from_query('entries_per_page', fields.Integer(missing=10))
-def query_search(query, category, page, entries_per_page):
+def query_search(query, page, entries_per_page):
     """
     API request for general search queries
     """
     results = []
 
-    if category == 'artist':
-        results = query_artists(query)
-    if category == 'work':
-        results = query_works(query)
-    if category == 'venue':
-        results = query_venues(query)
-    if category == 'art_type':
-        results = query_art_types(query)
+    artist_results = query_artists(query)
+    work_results = query_works(query)    
+    venue_results = query_venues(query)   
+    art_type_results = query_art_types(query) 
+
+    results = combine_results(  artist_results,
+                                work_results,
+                                venue_results,
+                                art_type_results )   
 
     num_entries = len(results)
     info = get_info(page, entries_per_page, num_entries)
     offset = (page - 1) * entries_per_page
     results = results[offset:offset + entries_per_page]
 
-    return jsonify({"info": info, "objects": results})
+    response = build_search_response(results)
+
+    return jsonify({"info": info, "objects": response})
+
+def combine_results(*objects):
+    result = []
+
+    lengths = []
+    for item in objects:
+        lengths.append(len(item))
+
+    maxlen = max(lengths)
+
+    for x in range(maxlen):
+        for y in range(len(objects)):
+            if x < lengths[y]:
+                result.append(objects[y][x])
+
+    return result
+
+def build_search_response(objects):
+    json = []
+    for obj in objects:
+        t = type(obj)
+        entry = {
+            'id': obj.id,
+            'name': obj.name,
+            'description': obj.description
+        }
+
+        if(t == Artist):
+            entry['category'] = 'artist'
+        elif(t == Venue):
+            entry['category'] = 'venue'
+        elif(t == Work):
+            entry['category'] = 'work'
+        elif(t == ArtType):
+            entry['category'] = 'art_type'
+
+        json.append(entry)
+
+    return json
 
 def query_artists(query):
     combined_sv =   Artist.search_vector |\
@@ -428,38 +475,18 @@ def query_artists(query):
                         if artist not in primary_search]
 
     results = primary_search + filtered_artists
-    return build_artist_search_result(results)
-
-def build_artist_search_result(artists):
-    results = []
-    for artist in artists:
-        entry = {
-            "id":           artist.id,
-            "name":         artist.name,
-            'birth':        artist.birth,
-            'death':        artist.death,
-            'birthplace':   artist.birthplace,
-            'deathplace':   artist.deathplace,
-            'culture':      artist.culture,
-            'image_url':    artist.image_url,
-            'works':        [work.name for work in artist.works],
-            'art_types':    [art_type.name for art_type in artist.art_types]
-        }
-        results.append(entry)
     return results
 
 def query_works(query):
     combined_sv =   Work.search_vector     |\
                     Artist.search_vector   |\
                     ArtType.search_vector  |\
-                    Medium.search_vector   |\
                     Venue.search_vector
 
     primary_search = Work.query.search(query, sort=True).all()
     secondary_search = ( Work.query
                          .join(Artist)
                          .join(ArtType)
-                         .join(Medium)
                          .join(Venue)
                          .filter(
                             combined_sv.match(
@@ -472,22 +499,6 @@ def query_works(query):
                         if work not in primary_search]
 
     results = primary_search + filtered_works
-    return build_work_search_result(results)
-
-def build_work_search_result(works):
-    results = []
-    for work in works:
-        entry = {
-            'id':           work.id,
-            'name':         work.name,
-            'artist':       work.artist.name,
-            'art_type':     work.art_type.name,
-            'medium':       work.medium.name,
-            'date':         work.date,
-            'venue':        work.venue.name,
-            'image_url':    work.image_url
-        }
-        results.append(entry)
     return results
 
 def query_venues(query):
@@ -507,21 +518,6 @@ def query_venues(query):
                         if venue not in primary_search]
 
     results = primary_search + filtered_venues
-    return build_venue_search_result(results)
-
-def build_venue_search_result(venues):
-    results = []
-    for venue in venues:
-        entry = {
-            'id':       venue.id,
-            'name':     venue.name,
-            'street':   venue.street,
-            'city':     venue.city,
-            'country':  venue.country,
-            'zipcode':  venue.zipcode,
-            'works':    [work.name for work in venue.works]
-        }
-        results.append(entry)
     return results
 
 def query_art_types(query):
@@ -544,19 +540,6 @@ def query_art_types(query):
                         if art_type not in primary_search]
 
     results = primary_search + filtered_types
-    return build_art_type_search_result(results)
-
-def build_art_type_search_result(art_types):
-    results = []
-    for art_type in art_types:
-        entry = {
-            'id':           art_type.id,
-            'name':         art_type.name,
-            'artists':      [artist.name for artist in art_type.artists],
-            'media':        [medium.name for medium in art_type.media],
-            'works':     [work.name for work in art_type.works]
-        }
-        results.append(entry)
     return results
 
 

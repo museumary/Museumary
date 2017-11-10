@@ -1,12 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { Carousel } from 'react-bootstrap';
+import style from './CarouselInstance.css';
 
 class Artist extends React.Component {
     constructor() {
         super();
         this.state={
             items:[],
-            work_arr: []
+            work_arr:[]
         };
     }
     componentDidMount(){
@@ -30,10 +32,26 @@ class Artist extends React.Component {
         var artist_obj = this.state.items;
         var work_list = this.state.work_arr;
 
-        if(artist_obj && work_list && work_list.length > 0){
+        if(artist_obj && work_list && work_list.length > 0) {
             //  Do all React code within this div. 'artist_obj' is the object that
             //  associated with this artist page, you should be able to access it
             //  like any other JSON
+            const carouselItems = work_list.slice(0, 10).map(function(obj) {
+                return (
+                    <Carousel.Item key={obj.id}>
+                        <a href={"/works/"+obj.id} onClick={() => {}} >
+                            <div>
+                                <img className="workimage" src={obj.image_url} alt={obj.name} width="350" height="350" />
+                            </div>
+                        </a>
+                        <Carousel.Caption>
+                            <p>{obj.name}</p>
+                            <p>{obj.date}</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                );
+            })
+
             var life = artist_obj.birth + " (" + artist_obj.birthplace + ")";
             if(artist_obj.death) {
                 life += " - " + artist_obj.death + "(" + artist_obj.deathplace + ")";
@@ -46,7 +64,7 @@ class Artist extends React.Component {
 
             let works = work_list.map(function(obj) {
                 let url = '/works/' + obj.id
-                return <div><Link to={url} activeClassName="active">{obj.name}</Link><br/></div>;
+                return <div key={obj.id} ><Link to={url} >{obj.name}</Link><br/></div>;
             })
 
             return (
@@ -56,6 +74,13 @@ class Artist extends React.Component {
                     <strong>Culture: </strong>{artist_obj.culture}<br/>
                     <strong>Birth/Death: </strong>{life}<br/>
                     <h3><strong>Notable Works</strong></h3>
+                    <br/>
+                    <div className="CarouselInstance">
+                            <Carousel>
+                                {carouselItems}
+                            </Carousel>
+                        <br/>
+                    </div>
                     {works}
                 </div>
             );

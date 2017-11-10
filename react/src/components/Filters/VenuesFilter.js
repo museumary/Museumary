@@ -6,27 +6,25 @@ const defaultProps = {
         order_by: "name",
         order: "ascending",
         startswith: "",
-        art_type: "",
-        medium: "",
-        venue: "None"
+        country: ""
     },
 
     attributes: {
         name: "Name",
-        date: "Date"
+        country: "Country",
+        city: "City",
+        street: "Street"
     },
 
-    venues: {
+    country: {
         "None": "All",
-        "Harvard Art Museum": "Harvard",
-        "The Walters Art Museum": "Walters",
-        "Auckland Museum": "Auckland",
-        "Cooper Hewitt, Smithsonian Design Museum": "Cooper",
-        "Finnish National Gallery": "Finnish"
+        "USA": "USA",
+        "Finland": "Finland",
+        "New Zealand": "New Zealand",
     }
 }
 
-class ArtistsFilter extends React.Component {
+class VenuesFilter extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.props.params;
@@ -36,17 +34,14 @@ class ArtistsFilter extends React.Component {
     }
 
     applyFilter(event) {
+        console.log("apply")
+
         if(event.target.name === "Reset") {
-            this.mediumRef.value = "";
-            this.artTypeRef.value = "";
-
             this.setState(this.props.params)
-            let newParams = this.props.params;
-            newParams.page = 1;
-
-            this.props.applyFilter(newParams);
+            this.props.applyFilter(this.props.params);
         }
         else {
+            console.log(this.state)
             this.props.applyFilter(this.state)
         }
     }
@@ -62,29 +57,6 @@ class ArtistsFilter extends React.Component {
         return (
             <div className="container">
                 <div align="middle">
-                    <strong> Art Type: </strong>
-                    <input
-                        type="text"
-                        name="art_type"
-                        ref={el => this.artTypeRef = el}
-                        onChange={this.handleChange}
-                    />
-                    &nbsp;&nbsp;
-                    <strong> Medium: </strong>
-                    <input
-                        type="text"
-                        name="medium"
-                        ref={el => this.mediumRef = el}
-                        onChange={this.handleChange}
-                    />
-                    &nbsp;&nbsp;
-                    <strong> Venue: </strong>
-                    <SelectFilter
-                        name="venue"
-                        value={this.state.venue}
-                        attributes={this.props.venues}
-                        handleChange={this.handleChange} />
-                    &nbsp;&nbsp;
                     <strong> Starts With: </strong>
                     <SelectFilter
                         name="startswith"
@@ -96,6 +68,13 @@ class ArtistsFilter extends React.Component {
                         name="order_by"
                         value={this.state.order_by}
                         attributes={this.props.attributes}
+                        handleChange={this.handleChange} />
+                    &nbsp;&nbsp;
+                    <strong> Country: </strong>
+                    <SelectFilter
+                        name="country"
+                        value={this.state.country}
+                        attributes={this.props.country}
                         handleChange={this.handleChange} />
                     &nbsp;&nbsp;
                     <strong> Order: </strong>
@@ -128,6 +107,6 @@ class ArtistsFilter extends React.Component {
     }
 }
 
-ArtistsFilter.defaultProps = defaultProps;
+VenuesFilter.defaultProps = defaultProps;
 
-export default ArtistsFilter;
+export default VenuesFilter;
