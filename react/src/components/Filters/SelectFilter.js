@@ -1,57 +1,55 @@
 import React from 'react';
 
+const ALPHABET = {
+    "None": "All",
+    "A":"A",
+    "B":"B",
+    "C":"C",
+    "D":"D",
+    "E":"E",
+    "F":"F",
+    "G":"G",
+    "H":"H",
+    "I":"I",
+    "J":"J",
+    "K":"K",
+    "L":"L",
+    "M":"M",
+    "N":"N",
+    "O":"O",
+    "P":"P",
+    "Q":"Q",
+    "R":"R",
+    "S":"S",
+    "T":"T",
+    "U":"U",
+    "V":"V",
+    "W":"W",
+    "X":"X",
+    "Y":"Y",
+    "Z":"Z"
+}
+
 export default class OrderByFilter extends React.PureComponent {
-    static defaultProps = {
-        alphabet: {
-            "None": "All",
-            "A":"A",
-            "B":"B",
-            "C":"C",
-            "D":"D",
-            "E":"E",
-            "F":"F",
-            "G":"G",
-            "H":"H",
-            "I":"I",
-            "J":"J",
-            "K":"K",
-            "L":"L",
-            "M":"M",
-            "N":"N",
-            "O":"O",
-            "P":"P",
-            "Q":"Q",
-            "R":"R",
-            "S":"S",
-            "T":"T",
-            "U":"U",
-            "V":"V",
-            "W":"W",
-            "X":"X",
-            "Y":"Y",
-            "Z":"Z"
-        }
-    }
-
     render() {
-        let attr_list = this.props.attributes;
+        let {name, value, attributes, handleChange} = this.props;
 
-        if(this.props.name === "startswith") {
-            attr_list = this.props.alphabet;
+        if(name === "startswith") {
+            attributes = ALPHABET;
         }
 
-        let arr = []
-        for(var attr in attr_list) {
+        let arr = [];
+        for(var attr in attributes) {
             arr.push(
-                <option value={attr} key={attr}>{attr_list[attr]}</option>
+                <option value={attr} key={attr}>{attributes[attr]}</option>
             );
         }
 
         return (
             <select
-                name={this.props.name}
-                value={this.props.value}
-                onChange={this.props.handleChange} >
+                name={name}
+                value={value}
+                onChange={handleChange}>
                 {arr}
             </select>
         );

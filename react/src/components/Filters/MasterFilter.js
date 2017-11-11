@@ -1,11 +1,11 @@
 import React from 'react';
 import SelectFilter from './SelectFilter';
 
-export default function MasterFilter(WrappedFilter) {
+function MasterFilter(WrappedFilter) {
     return class MasterFilterClass extends React.Component {
         constructor(props) {
             super(props);
-            this.state = this.props.params;
+            this.state = props.defaultParams;
 
             this.applyFilter = this.applyFilter.bind(this);
             this.handleChange = this.handleChange.bind(this);
@@ -13,12 +13,8 @@ export default function MasterFilter(WrappedFilter) {
 
         applyFilter(event) {
             if(event.target.name === "Reset") {
-                this.setState(this.props.params)
-
-                let newParams = Object.assign({}, this.props.params);
-                newParams.page = 1;
-
-                this.props.applyFilter(newParams);
+                this.setState(this.props.defaultParams)
+                this.props.applyFilter(this.props.defaultParams)
             }
             else {
                 this.props.applyFilter(this.state)
@@ -32,23 +28,23 @@ export default function MasterFilter(WrappedFilter) {
         render() {
             const bindFunctions = {
                 applyFilter: this.applyFilter,
-                handleChange: this.handleChange,
+                handleChange: this.handleChange
             }
 
             return (
                 <div className="container">
                     <div align="middle">
-                        <WrappedFilter
-                            {...this.state}
-                            {...bindFunctions}
-                            attributes={this.props.attributes}>
-                         &nbsp;&nbsp;
                         <strong> Starts With: </strong>
                         <SelectFilter
                             name="startswith"
                             value={this.state.startswith}
                             handleChange={this.handleChange} />
                         &nbsp;&nbsp;
+                        <WrappedFilter
+                            {...this.state}
+                            {...this.props}
+                            {...bindFunctions} />
+                         &nbsp;&nbsp;
                         <strong> Order By </strong>
                         <SelectFilter
                             name="order_by"
@@ -64,7 +60,6 @@ export default function MasterFilter(WrappedFilter) {
                             <option value="ascending"> Ascending </option>
                             <option value="descending"> Descending </option>
                         </select>
-                        </WrappedFilter>
                     </div>
                     <br/>
                     <div>
@@ -87,4 +82,7 @@ export default function MasterFilter(WrappedFilter) {
         }
     }
 }
+
+export default MasterFilter;
+
 
