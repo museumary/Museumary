@@ -45,6 +45,8 @@ class ArtistsFilter extends React.Component {
     }
 
     handleChange(event) {
+        console.log(event.target.name)
+
         let state = Object.assign({}, this.state);
         state[event.target.name] = event.target.value;
 
@@ -71,6 +73,7 @@ class ArtistsFilter extends React.Component {
                     &nbsp;&nbsp;
                     <strong> Order By </strong>
                     <SelectFilter
+                        name="order_by"
                         value={this.state.order_by}
                         attributes={this.props.attributes}
                         handleChange={this.handleChange} />
