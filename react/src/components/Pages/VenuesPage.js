@@ -1,6 +1,6 @@
 import React from 'react';
-
 import Thumbnail from '../Thumbnail';
+
 import Harvard from '../../static/images/Harvard.jpg';
 import Cooper from '../../static/images/Cooper.jpg';
 import Auckland from '../../static/images/Auckland.jpg';

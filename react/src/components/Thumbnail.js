@@ -17,18 +17,18 @@ export default class Thumbnail extends React.Component {
         const url = this.props.url
         const type = this.props.type
 
-        if(type == "venue")
+        if(type === "venue")
         {
             const description = DESCRIPTION[this.props.description_id - 1]
             return (
                 <div className="container">
                     <div className='col-md-4' style={style}>
-                        <Link to={url} activeClassName="active"> 
-                            <img src={image} className="img-rounded" width="350" height="300" align="left"/><br/>
+                        <Link to={url} activeClassName="active">
+                            <img src={image} alt="Loading" className="img-rounded" width="350" height="300" align="left"/><br/>
                         </Link>
                         <br/>
                     </div>
-                    <div className='col-md-8' style={style}>  
+                    <div className='col-md-8' style={style}>
                         <div className='venue-description'>
                             <Link to={url} activeClassName="active">
                                 <h3><strong>{name}</strong></h3>
@@ -37,7 +37,6 @@ export default class Thumbnail extends React.Component {
                                 {description}
                             </div>
                         </div>
-                    
                         <br/>
                     </div>
                 </div>
@@ -50,7 +49,7 @@ export default class Thumbnail extends React.Component {
                     <Link to={url} activeClassName="active">
                         <strong>{name}</strong><br/>
                         <div className="thumbnail-container">
-                            <img src={image} className="img-rounded" width="200" height="300"/>
+                            <img src={image} alt="Loading" className="img-rounded" width="200" height="300"/>
                             <div className="overlay">
                                 <div className="text">
                                     {this.props.details ? this.props.details[0] : ""}<br/>

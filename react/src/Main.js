@@ -9,17 +9,19 @@ import About from './components/About';
 import SearchResults from './components/SearchResults';
 
 const Main = () => {
-  return (<div className='Main'>
+    return (
+        <div className='Main'>
             <Switch>
-              <Route exact path='/' component={Home}/>
-              <Route path='/artists' component={Artists}/>
-              <Route path='/venues' component={Venues}/>
-              <Route path='/types' component={Types}/>
-              <Route path='/works' component={Works}/>
-              <Route path='/about' component={About}/>
-              <Route path='/results' component={SearchResults}/>
+                <Route exact path='/' component={Home}/>
+                <Route path='/artists' component={Artists}/>
+                <Route path='/venues' component={Venues}/>
+                <Route path='/types' component={Types}/>
+                <Route path='/works' component={Works}/>
+                <Route path='/about' component={About}/>
+                <Route path='/results' component={SearchResults}/>
             </Switch>
-          </div>);
+        </div>
+    );
 };
 
 export default Main;

@@ -70,7 +70,7 @@ class ArtistsPage extends React.Component {
                     name={obj.name}
                     image_url={obj_image_url}
                     url={obj_url}
-                    key={obj.id} 
+                    key={obj.id}
                     details={details}/>
             );
         })

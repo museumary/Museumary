@@ -1,10 +1,7 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import style from './Full.css';
-import Thumbnail from './Thumbnail';
 import Pagination from './Pagination'
-import ArtistsPage from './Pages/ArtistsPage'
 import { ArtistsFilter } from './Filters'
+import { ArtistsPage } from './Pages'
 
 const defaultProps = {
     params: {

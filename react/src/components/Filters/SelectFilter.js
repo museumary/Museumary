@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class OrderByFilter extends React.Component {
+export default class OrderByFilter extends React.PureComponent {
     static defaultProps = {
         alphabet: {
             "None": "All",

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import style from './Pagination.css'
 
 const defaultProps = {
@@ -83,6 +82,7 @@ class Pagination extends React.Component {
             return (
                 <button type='button'
                         className={my_class}
+                        style={style}
                         onClick={() => this.getPage(number)}
                         key={number}>
                     {number}

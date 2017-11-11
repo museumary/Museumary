@@ -33,10 +33,12 @@ class Search extends React.Component {
     render() {
         if(this.state.redirect) {
             this.setState({redirect: false})
-            return <Redirect to={{
-                pathname: '/results',
-                state: { search: this.state.search_value }
-            }} />;
+            return (
+                <Redirect to={{
+                    pathname: '/results',
+                    state: { search: this.state.search_value }
+                }} />
+            );
         }
         else {
             return (
@@ -50,9 +52,9 @@ class Search extends React.Component {
                         onKeyDown={this.onInputKeyPress.bind(this)}
                     />
                     <div class="input-group-btn">
-                      <button class="btn btn-default" onClick={this.onButtonClick.bind(this)}>
-                        <i class="glyphicon glyphicon-search"></i>
-                      </button>
+                        <button class="btn btn-default" onClick={this.onButtonClick.bind(this)}>
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
                     </div>
                 </div>
             );

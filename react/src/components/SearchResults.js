@@ -51,6 +51,7 @@ class SearchResults extends React.Component {
             this.changePage(1);
             return <div>Searching for {this.props.location.state.search}...</div>;
         }
+
         if(this.state.items.objects){
             var arr = [];
             this.state.items.objects.forEach(function(obj) {

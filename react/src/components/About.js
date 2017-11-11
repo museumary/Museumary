@@ -1,6 +1,4 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { Carousel } from 'react-bootstrap';
 import style from './About.css';
 
 import Josh from '../static/images/josh_profile.jpg';
@@ -95,12 +93,12 @@ const About = () => {
                     </div>
                     <div>
                       <p>
-                        In order to populate our database with with many instances of each model, we wrote various data scraping scripts to extract information from websites. 
-                        Each scraping script focused on pulling out data from a different museum’s website. We chose to write a unique script for each website largely because 
+                        In order to populate our database with with many instances of each model, we wrote various data scraping scripts to extract information from websites.
+                        Each scraping script focused on pulling out data from a different museum’s website. We chose to write a unique script for each website largely because
                         the api’s for each museum differed  wildly. For more information about the process we went through to scrape our data, please refer to our technical report below.
                       </p>
                     </div>
-                    
+
               </div>
 
               <br/>

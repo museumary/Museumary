@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Thumbnail from './Thumbnail';
 
 import Harvard from '../static/images/Harvard.jpg';
@@ -24,6 +23,11 @@ const MUSEUMS = [
     [Cooper, iCooper],
     [Finnish, iFinnish]
 ]
+
+const defaultProps = {
+    parameters: '&maptype=satellite&zoom=19',
+    base_url: 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q='
+}
 
 class Venue extends React.Component {
     constructor(props) {
@@ -57,7 +61,7 @@ class Venue extends React.Component {
                 const add =  street + "," + venue.city + "," + venue.country;
                 this.map_location = this.props.base_url + add + this.props.parameters;
 
-                for (var i = 0, len = venue.work_ids.length; i < 4; i++) {
+                for (var i = 0; i < 4; i++) {
                     fetch('http://api.museumary.me/work/' + venue.work_ids[i])
                         .then(result=>result.json())
                         .then(responseJson=>this.setState({works: this.state.works.concat([responseJson])}))
@@ -81,6 +85,7 @@ class Venue extends React.Component {
                     <Thumbnail
                         name={name}
                         image_url={obj.image_url}
+                        alt="Loading"
                         url={url}
                         key={obj.id}
                         details={[name, "NA", "NA"]}/>
@@ -89,33 +94,32 @@ class Venue extends React.Component {
 
             return (
                 <div className="Venue">
-                        <h1>{venue_obj.name}</h1>
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <img src={ this.museum_url } className="img-rounded" width="500" height="300"/>
-                                </div>
-                                <div className="col-md-6">
-                                    <img src={ this.imuseum_url } className="img-rounded" width="500" height="300"/>
-                                </div>
+                    <h1>{venue_obj.name}</h1>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-6">
+                                <img src={ this.museum_url } alt="Harvard" className="img-rounded" width="500" height="300"/>
                             </div>
+                            <div className="col-md-6">
+                                <img src={ this.imuseum_url } alt="Harvard Interior" className="img-rounded" width="500" height="300"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <h2><strong>Gallery of Works</strong></h2><br/>
+                    <div className="container">
+                        <div className="row">
+                            {works}
                         </div>
                         <br/>
                         <br/>
-
-
-                        <h2><strong>Gallery of Works</strong></h2><br/>
-                        <div className="container">
-                            <div className="row">
-                                {works}
-                            </div>
-                            <br/>
-                            <br/>
-                        </div>
-                        <br/>
-                        <br/>
-                        <iframe width="800" height="600" frameBorder="0" src={ this.map_location } allowFullScreen align="center"></iframe><br/>
-                        <p><strong>Address:</strong> {venue_obj.street} {venue_obj.city} {venue_obj.country}</p><br/><br/>
+                    </div>
+                    <br/>
+                    <br/>
+                    <iframe width="800" height="600" frameBorder="0" src={ this.map_location } allowFullScreen align="center"></iframe><br/>
+                    <p><strong>Address:</strong> {venue_obj.street} {venue_obj.city} {venue_obj.country}</p><br/><br/>
                 </div>
             );
         }
@@ -125,9 +129,6 @@ class Venue extends React.Component {
     }
 }
 
-Venue.defaultProps = {
-    parameters: '&maptype=satellite&zoom=19',
-    base_url: 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q='
-}
+Venue.defaultProps = defaultProps;
 
 export default Venue;

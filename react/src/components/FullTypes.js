@@ -1,5 +1,4 @@
 import React from 'react';
-import Thumbnail from './Thumbnail';
 import Pagination from './Pagination';
 import TypesPage from './Pages/TypesPage';
 import TypesFilter from './Filters/TypesFilter';
