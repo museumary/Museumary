@@ -4,13 +4,22 @@ import { ArtistsFilter } from './Filters'
 import { ArtistsPage } from './Pages'
 
 const defaultProps = {
-    params: {
+    defaultParams: {
         page: 1,
         entries_per_page: 16,
         order_by: "name",
         order: "ascending",
         startswith: "",
         culture: ""
+    },
+
+    attributes: {
+        name: "Name",
+        birth: "Birth",
+        death: "Death",
+        birthplace: "Birth Place",
+        deathplace: "Death Place",
+        culture: "Culture"
     }
 }
 
@@ -18,7 +27,7 @@ class FullArtists extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            params: this.props.params,
+            params: props.defaultParams,
             numPages: 0
         };
 
@@ -35,13 +44,7 @@ class FullArtists extends React.Component {
     }
 
     applyFilter(newParams) {
-        let params = Object.assign({}, this.state.params);
-
-        for(var param in newParams) {
-            params[param] = newParams[param]
-        }
-
-        this.setState({ params: params })
+        this.setState({ params: newParams })
     }
 
     changeNumPages(numPages) {
@@ -65,6 +68,7 @@ class FullArtists extends React.Component {
         return (
             <div className="FullArtists">
                 <ArtistsFilter
+                    {...this.props}
                     applyFilter={this.applyFilter}
                 />
                 <ArtistsPage
@@ -73,7 +77,7 @@ class FullArtists extends React.Component {
                     changeNumPages={this.changeNumPages}
                 />
                 <br/>
-                 <Pagination
+                <Pagination
                     page={this.state.params.page}
                     numPages={this.state.numPages}
                     changePage={this.changePage}

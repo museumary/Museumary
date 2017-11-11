@@ -4,13 +4,17 @@ import TypesPage from './Pages/TypesPage';
 import TypesFilter from './Filters/TypesFilter';
 
 const defaultProps = {
-    params: {
+    defaultParams: {
         page: 1,
         entries_per_page: 16,
         order_by: "name",
         order: "ascending",
         startswith: "",
         medium: ""
+    },
+
+    attributes: {
+        name: "Name"
     }
 }
 
@@ -18,7 +22,7 @@ class FullTypes extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            params: props.params,
+            params: props.defaultParams,
             numPages: 0
         };
 
@@ -35,13 +39,7 @@ class FullTypes extends React.Component {
     }
 
     applyFilter(newParams) {
-        let params = Object.assign({}, this.state.params);
-
-        for(var param in newParams) {
-            params[param] = newParams[param]
-        }
-
-        this.setState({ params: params })
+        this.setState({ params: newParams })
     }
 
     changeNumPages(numPages) {
@@ -65,6 +63,7 @@ class FullTypes extends React.Component {
         return (
             <div className="FullTypes">
                 <TypesFilter
+                    {...this.props}
                     applyFilter={this.applyFilter}
                 />
                 <TypesPage
