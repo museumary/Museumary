@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Pagination.css'
+import './Pagination.css'
 
 const defaultProps = {
     defaultButtonText: [1, 2, 3, 4, 5],
@@ -82,7 +82,6 @@ class Pagination extends React.Component {
             return (
                 <button type='button'
                         className={my_class}
-                        style={style}
                         onClick={() => this.getPage(number)}
                         key={number}>
                     {number}

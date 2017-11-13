@@ -1,9 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Highlighter from 'react-highlight-words';
-import style from './Full.css';
 import Thumbnail from './Thumbnail';
 import Pagination from './Pagination';
+import './Full.css';
 
 const defaultProps = {
     initialPage: 1,

@@ -1,5 +1,6 @@
 import React from 'react';
 import Pagination from './Pagination'
+
 import { ArtistsFilter } from './Filters'
 import { ArtistsPage } from './Pages'
 

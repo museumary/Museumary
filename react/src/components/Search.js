@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import style from './../Header.css';
+import './../Header.css';
 
 class Search extends React.Component {
     constructor() {

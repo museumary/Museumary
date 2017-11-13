@@ -1,6 +1,6 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
-import style from './CarouselInstance.css';
+import './CarouselInstance.css';
 
 class Type extends React.Component {
     constructor(props) {
@@ -62,7 +62,7 @@ class Type extends React.Component {
                     <h1>{type_obj.name}</h1>
                     <br/>
                     <div className="container">
-                        <div className="CarouselInstance" sytle={style}>
+                        <div className="CarouselInstance">
                             <Carousel>
                                 {carouselItems}
                             </Carousel>

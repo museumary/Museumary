@@ -1,5 +1,6 @@
 import React from 'react';
 import Pagination from './Pagination';
+
 import { TypesPage } from './Pages';
 import { TypesFilter } from './Filters';
 
