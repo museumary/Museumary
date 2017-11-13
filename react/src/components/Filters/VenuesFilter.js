@@ -1,6 +1,13 @@
 /*
-    Filter Venues through its unique attributes:
-        country
+    VenuesFilter.js
+        Filter Venues through its unique attributes.
+
+    State:
+        Stateless Component
+
+    Props / Attributes:
+        country -- which country is the venue in
+        handleChange -- callback function to masterfilter to change state
 */
 
 import React from 'react';

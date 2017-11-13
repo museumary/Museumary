@@ -1,8 +1,15 @@
 /*
-    Filter Works through its unique attributes:
-        venue
-        medium
-        art_type
+    WorksFilter.js
+        Filter Works through its unique attributes.
+
+    State:
+        Stateless Component
+
+    Props / Attributes:
+        venue -- which venue is the work in
+        medium -- what medium is the work
+        art_type -- what art type is the work
+        handleChange -- callback function to masterfilter to change state
 */
 
 import React from 'react';

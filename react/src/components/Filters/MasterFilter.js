@@ -46,7 +46,8 @@ function MasterFilter(WrappedFilter) {
         */
         applyFilter(event) {
             // if the event is to reset, set everything to the default parameters
-            // state is immutable so we cant call this.state after setState
+            // setState is not guaranteed to immediately execute
+            // so we can't call this.state right after - unless in callback function
             if(event.target.name === "Reset") {
                 this.setState(this.props.defaultParams)
                 this.props.applyFilter(this.props.defaultParams)
@@ -70,11 +71,6 @@ function MasterFilter(WrappedFilter) {
                         <apply filter> <reset>
         */
         render() {
-            const bindFunctions = {
-                applyFilter: this.applyFilter,
-                handleChange: this.handleChange
-            }
-
             return (
                 <div className="container">
                     <div align="middle">
@@ -86,8 +82,8 @@ function MasterFilter(WrappedFilter) {
                         &nbsp;&nbsp;
                         <WrappedFilter
                             {...this.state}
-                            {...this.props}
-                            {...bindFunctions} />
+                            attributes={this.props.attributes}
+                            handleChange={this.handleChange} />
                          &nbsp;&nbsp;
                         <strong> Order By: </strong>
                         <SelectFilter

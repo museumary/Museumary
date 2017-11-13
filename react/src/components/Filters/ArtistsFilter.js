@@ -1,6 +1,13 @@
 /*
-    Filter Artists through its unique attributes:
-        culture
+    ArtistsFilter.js
+        Filter Artists through its unique attributes.
+
+    State:
+        Stateless Component
+
+    Props / Attributes:
+        culture -- what is the artist's culture
+        handleChange -- callback function to masterfilter to change state
 */
 
 import React from 'react';

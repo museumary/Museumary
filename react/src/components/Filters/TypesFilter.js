@@ -1,6 +1,13 @@
 /*
-    Filter ArtTypes through its unique attributes:
-        medium
+    TypesFilter.js
+        Filter ArtTypes through its unique attributes.
+
+    State:
+        Stateless Component
+
+    Props / Attributes:
+        medium -- the medium of the art type
+        handleChange -- callback function to masterfilter to change state
 */
 
 import React from 'react';
