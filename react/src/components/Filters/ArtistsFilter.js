@@ -1,21 +1,22 @@
-import React from 'react';
-import MasterFilter from './MasterFilter';
+/*
+    Filter Artists through its unique attributes:
+        culture
+*/
 
-const ArtistFilter = MasterFilter(
-    class ArtistFilterClass extends React.PureComponent {
-        render() {
-            return (
-                <span>
-                    <strong> Culture </strong>
-                    <input
-                        type="text"
-                        name="culture"
-                        value={this.props.culture}
-                        onChange={this.props.handleChange}
-                    />
-                </span>
-            );
-        }
-});
+import React from 'react';
+
+const ArtistFilter = ({ culture, handleChange }) => {
+    return (
+        <span>
+            <strong> Culture: </strong>
+            <input
+                type="text"
+                name="culture"
+                value={culture}
+                onChange={handleChange}
+            />
+        </span>
+    );
+}
 
 export default ArtistFilter;

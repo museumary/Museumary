@@ -1,8 +1,8 @@
 import React from 'react';
 import Pagination from './Pagination'
 
-import WorksPage from './Pages/WorksPage'
-import WorksFilter from './Filters/WorksFilter'
+import { WorksPage } from './Pages'
+import { WorksFilter } from './Filters'
 
 const defaultProps = {
     defaultParams: {
@@ -19,15 +19,6 @@ const defaultProps = {
     attributes: {
         name: "Name",
         date: "Date"
-    },
-
-    venuesList: {
-        "None": "All",
-        "Harvard Art Museum": "Harvard",
-        "The Walters Art Museum": "Walters",
-        "Auckland Museum": "Auckland",
-        "Cooper Hewitt, Smithsonian Design Museum": "Cooper",
-        "Finnish National Gallery": "Finnish"
     }
 }
 

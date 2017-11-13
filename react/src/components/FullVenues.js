@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './Full.css';
 import Thumbnail from './Thumbnail'
-import {VenuesPage} from './Pages'
-import {VenuesFilter} from './Filters'
+import { VenuesPage } from './Pages'
+import { VenuesFilter } from './Filters'
 
 const defaultProps = {
     defaultParams: {
@@ -18,13 +18,6 @@ const defaultProps = {
         country: "Country",
         city: "City",
         street: "Street"
-    },
-
-    countryList: {
-        "None": "All",
-        "USA": "USA",
-        "Finland": "Finland",
-        "New Zealand": "New Zealand"
     }
 }
 

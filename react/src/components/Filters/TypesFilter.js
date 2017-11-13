@@ -1,23 +1,22 @@
-import React from 'react';
-import SelectFilter from './SelectFilter';
-import MasterFilter from './MasterFilter';
+/*
+    Filter ArtTypes through its unique attributes:
+        medium
+*/
 
-const TypesFilter = MasterFilter(
-    class TypesFilterClass extends React.Component {
-        render() {
-            return (
-                <span>
-                    <strong> Medium </strong>
-                    <input
-                        type="text"
-                        name="medium"
-                        value={this.props.medium}
-                        onChange={this.props.handleChange}
-                    />
-                </span>
-            );
-        }
-    }
-);
+import React from 'react';
+
+const TypesFilter = ({ medium, handleChange }) => {
+    return (
+        <span>
+            <strong> Medium: </strong>
+            <input
+                type="text"
+                name="medium"
+                value={medium}
+                onChange={handleChange}
+            />
+        </span>
+    );
+}
 
 export default TypesFilter;
