@@ -78,6 +78,7 @@ class ArtType(db.Model):
     media = db.relationship("Medium", back_populates="art_type")
     works = db.relationship("Work", backref="art_type")
     description = db.Column(db.Text)
+    image_url = db.Column(db.Text)
     artists = db.relationship(
         'Artist',
         secondary=artist_to_art_type, 

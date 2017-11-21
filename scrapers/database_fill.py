@@ -77,8 +77,15 @@ def scrape_artist_wiki_images():
         except:
             continue
 
-        
+def fill_type_image_urls():
+    art_types = ArtType.query.all()
+    for art_type in art_types:
+        print(art_type.name)
+        # print(art_type.works[0].image_url)
+        # art_type.image_url = art_type.works[0].image_url
+    # db.session.commit()
 
 if __name__=='__main__':
     # clear_urls()
-    scrape_artist_wiki_images()
+    # scrape_artist_wiki_images()
+    fill_type_image_urls()
