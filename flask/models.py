@@ -11,8 +11,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+# makes the database compatible with sqlalchemy_searchable
 make_searchable()
 
+# Query classes used to allow sqlalchemy syntax when searching
 class ArtistQuery(BaseQuery, SearchQueryMixin):
     pass
 class VenueQuery(BaseQuery, SearchQueryMixin):
@@ -24,6 +26,10 @@ class MediumQuery(BaseQuery, SearchQueryMixin):
 class WorkQuery(BaseQuery, SearchQueryMixin):
     pass
 
+"""
+Join table for the many-to-many association
+between artists and art_types
+"""
 artist_to_art_type = db.Table(
     'artist_to_art_type',
     db.Column('artist_id', db.Integer, db.ForeignKey('artist.id'), primary_key=True),
@@ -31,6 +37,9 @@ artist_to_art_type = db.Table(
 )
 
 class Artist(db.Model):
+    """
+    Database model for artists.
+    """
     query_class = ArtistQuery
     __tablename__ = 'artist'
 
@@ -51,6 +60,9 @@ class Artist(db.Model):
 
 
 class Venue(db.Model):
+    """
+    Database model for art venues.
+    """
     query_class = VenueQuery
     __tablename__ = 'venue'
 
@@ -70,6 +82,9 @@ class Venue(db.Model):
 
 
 class ArtType(db.Model):
+    """
+    Database model for art types.
+    """
     query_class = ArtTypeQuery
     __tablename__ = 'art_type'
 
@@ -93,6 +108,12 @@ class ArtType(db.Model):
 
 
 class Medium(db.Model):
+    """
+    Database model for mediums.
+
+    Used to handle the many-to-one association
+    between mediums and art types.
+    """
     query_class = MediumQuery
     __tablename__ = 'medium'
 
@@ -109,6 +130,9 @@ class Medium(db.Model):
 
 
 class Work(db.Model):
+    """
+    Database model for art works.
+    """
     query_class = WorkQuery
     __tablename__ = 'work'
 
@@ -131,6 +155,11 @@ class Work(db.Model):
         return '<Work %s>' % self.name
 
 if __name__=='__main__':
+    """
+    Set up the database by configuring mappers used for search,
+    creating tables based on the mdoel schema defined here,
+    and commiting the changes
+    """
     db.configure_mappers()
     db.create_all()
     db.session.commit()
