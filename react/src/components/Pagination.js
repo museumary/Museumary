@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import style from './Pagination.css'
+import './Pagination.css'
 
 const defaultProps = {
     defaultButtonText: [1, 2, 3, 4, 5],

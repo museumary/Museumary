@@ -72,7 +72,6 @@ class WorksPage extends React.Component {
                     name={obj_name}
                     image_url={obj.image_url}
                     url={obj_url}
-                    key={obj.id} 
                     key={obj.id}
                     details={details}/>
 

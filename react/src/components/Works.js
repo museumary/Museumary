@@ -4,12 +4,14 @@ import FullWorks from './FullWorks';
 import Work from './Work';
 
 const Works = () => {
-  return (<div className="Works">
+    return (
+        <div className="Works">
             <Switch>
                 <Route exact path='/works' component={FullWorks} />
                 <Route path='/works/:number' component={Work} />
             </Switch>
-          </div>);
+        </div>
+    );
 };
 
 export default Works;

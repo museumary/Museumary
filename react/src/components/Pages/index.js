@@ -1,11 +1,5 @@
-import ArtistsPage from './ArtistsPage';
-import TypesPage from './TypesPage';
-import WorksPage from './WorksPage';
-import VenuesPage from './VenuesPage';
 
-module.exports = {
-    ArtistsPage,
-    TypesPage,
-    WorksPage,
-    VenuesPage
-}
+export {default as ArtistsPage} from './ArtistsPage'
+export {default as TypesPage} from './TypesPage'
+export {default as WorksPage} from './WorksPage'
+export {default as VenuesPage} from './VenuesPage'

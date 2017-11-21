@@ -1,9 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Highlighter from 'react-highlight-words';
-import style from './Full.css';
 import Thumbnail from './Thumbnail';
 import Pagination from './Pagination';
+import './Full.css';
 
 const defaultProps = {
     initialPage: 1,
@@ -51,6 +51,7 @@ class SearchResults extends React.Component {
             this.changePage(1);
             return <div>Searching for {this.props.location.state.search}...</div>;
         }
+
         if(this.state.items.objects){
             var arr = [];
             this.state.items.objects.forEach(function(obj) {

@@ -1,11 +1,11 @@
 import React from 'react';
 import Pagination from './Pagination'
 
-import WorksPage from './Pages/WorksPage'
-import WorksFilter from './Filters/WorksFilter'
+import { WorksPage } from './Pages'
+import { WorksFilter } from './Filters'
 
 const defaultProps = {
-    params: {
+    defaultParams: {
         page: 1,
         entries_per_page: 16,
         order_by: "name",
@@ -14,6 +14,11 @@ const defaultProps = {
         art_type: "",
         medium: "",
         venue: ""
+    },
+
+    attributes: {
+        name: "Name",
+        date: "Date"
     }
 }
 
@@ -21,7 +26,7 @@ class FullWorks extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            params: this.props.params,
+            params: props.defaultParams,
             numPages: 0
         };
 
@@ -38,15 +43,7 @@ class FullWorks extends React.Component {
     }
 
     applyFilter(newParams) {
-        let params = Object.assign({}, this.state.params);
-
-        for(var param in newParams) {
-            params[param] = newParams[param]
-        }
-
-        this.setState({
-            params: params
-        })
+        this.setState({ params: newParams })
     }
 
     changeNumPages(numPages) {
@@ -70,6 +67,7 @@ class FullWorks extends React.Component {
         return (
             <div className="FullWorks">
                 <WorksFilter
+                    {...this.props}
                     applyFilter={this.applyFilter}
                 />
                 <WorksPage

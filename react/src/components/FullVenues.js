@@ -1,24 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import style from './Full.css';
 import Thumbnail from './Thumbnail'
-import {VenuesPage} from './Pages'
-import {VenuesFilter} from './Filters'
 
-import Harvard from '../static/images/Harvard.jpg';
-import Cooper from '../static/images/Cooper.jpg';
-import Auckland from '../static/images/Auckland.jpg';
-import Finnish from '../static/images/Finnish.jpg';
-import Walters from '../static/images/Walters.jpg';
+import { Link } from 'react-router-dom';
+import { VenuesPage } from './Pages'
+import { VenuesFilter } from './Filters'
 
-const MUSEUMS = [Harvard, Walters, Auckland, Cooper, Finnish]
+import './Full.css';
 
 const defaultProps = {
-    params: {
+    defaultParams: {
         order_by: "name",
         order: "ascending",
         startswith: "",
         country: ""
+    },
+
+    attributes: {
+        name: "Name",
+        country: "Country",
+        city: "City",
+        street: "Street"
     }
 }
 
@@ -26,15 +27,11 @@ class FullVenues extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            params: this.props.params,
+            params: props.defaultParams
         };
 
         this.changePage = this.changePage.bind(this);
         this.applyFilter = this.applyFilter.bind(this);
-    }
-
-    componentDidMount() {
-        this.setState({ params: this.props.params })
     }
 
     changePage(pageNumber) {
@@ -45,16 +42,7 @@ class FullVenues extends React.Component {
     }
 
     applyFilter(newParams) {
-        console.log(newParams);
-        console.log(this.state.params);
-
-        let params = Object.assign({}, this.state.params);
-
-        for(var param in newParams) {
-            params[param] = newParams[param]
-        }
-
-        this.setState({ params: params })
+        this.setState({ params: newParams })
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -74,6 +62,7 @@ class FullVenues extends React.Component {
             return (
                 <div className="FullVenues">
                     <VenuesFilter
+                        {...this.props}
                         applyFilter={this.applyFilter}
                     />
                     <VenuesPage

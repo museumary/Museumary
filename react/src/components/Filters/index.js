@@ -1,11 +1,23 @@
-import ArtistsFilter from './ArtistsFilter'
-import TypesFilter from './TypesFilter'
-import WorksFilter from './WorksFilter'
-import VenuesFilter from './VenuesFilter'
+/*
+    Export file for all model filters.
+        Artists
+        Types
+        Works
+        Venues
+*/
 
-module.exports = {
-    ArtistsFilter,
-    TypesFilter,
-    WorksFilter,
-    VenuesFilter
-}
+// Higher order component filter that acts as the base for every other.
+import MasterFilter from './MasterFilter';
+
+// Import filters from each file
+import ArtistsFilterBase from './ArtistsFilter';
+import TypesFilterBase from './TypesFilter';
+import WorksFilterBase from './WorksFilter';
+import VenuesFilterBase from './VenuesFilter';
+
+// Export the filter wrapped in the Master Filter
+export const ArtistsFilter = MasterFilter(ArtistsFilterBase);
+export const TypesFilter = MasterFilter(TypesFilterBase);
+export const WorksFilter = MasterFilter(WorksFilterBase);
+export const VenuesFilter = MasterFilter(VenuesFilterBase);
+

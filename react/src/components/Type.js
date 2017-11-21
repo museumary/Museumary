@@ -1,7 +1,6 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
-import style from './CarouselInstance.css';
-import Thumbnail from './Thumbnail'
+import './CarouselInstance.css';
 
 class Type extends React.Component {
     constructor(props) {
@@ -25,7 +24,7 @@ class Type extends React.Component {
                         .then(responseJson=>this.setState({med_arr: this.state.med_arr.concat([responseJson])}))
                 }
 
-                const length = items.work_ids.length; // Math.min(items.work_ids.length, 4);
+                const length = items.work_ids.length;
 
                 for (var j = 0; j < length; j++) {
                     fetch('http://api.museumary.me/work/' + items.work_ids[j])

@@ -4,12 +4,14 @@ import FullVenues from './FullVenues';
 import Venue from './Venue';
 
 const Venues = () => {
-  return (<div className="Venues">
+    return (
+        <div className="Venues">
             <Switch>
-                <Route exact path='/venues' component={FullVenues} />
-                <Route path='/venues/:number' component={Venue} />
+                <Route exact path='/venues/:number' component={Venue} />
+                <Route path='/venues' component={FullVenues} />
             </Switch>
-          </div>);
+        </div>
+    );
 };
 
 export default Venues;
