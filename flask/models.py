@@ -1,3 +1,7 @@
+"""
+File where our database models are declared and defined
+"""
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from sqlalchemy.ext.declarative import declarative_base

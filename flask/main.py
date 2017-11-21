@@ -1,5 +1,5 @@
 """
-Main file where app-engine runs the website
+Main file where the REST API is defined
 """
 
 from flask import Flask, render_template, jsonify, make_response
@@ -100,6 +100,9 @@ def get_work(work_id):
     return jsonify(result)
 
 def get_work_data(work):
+    """
+    Build and return a dictionary from the information given in work
+    """
     return {
         'id': work.id,
         'name': work.name,
@@ -173,6 +176,9 @@ def get_artist(artist_id):
     return jsonify(result)
 
 def get_artist_data(artist):
+    """
+    Build and return a dictionary from the information given in artist
+    """
     return {
         'id': artist.id,
         'name': artist.name,
@@ -244,6 +250,9 @@ def get_venue(venue_id):
     return jsonify(result)
 
 def get_venue_data(venue):
+    """
+    Build and return a dictionary from the information given in venue
+    """
     result = {
         'id':       venue.id,
         'name':     venue.name,
@@ -316,6 +325,9 @@ def get_art_type(art_type_id):
     return jsonify(result)
 
 def get_art_type_data(art_type):
+    """
+    Build and return a dictionary from the information given in art_type
+    """
     result = {
         'id':           art_type.id,
         'name':         art_type.name,
@@ -374,6 +386,9 @@ def get_medium(medium_id):
     return jsonify(result)
 
 def get_medium_data(medium):
+    """
+    Build and return a dictionary from the information given in medium
+    """
     return {
         'id':           medium.id,
         'name':         medium.name,
@@ -414,6 +429,10 @@ def query_search(query, page, entries_per_page):
     return jsonify({"info": info, "objects": response})
 
 def combine_results(*objects):
+    """
+    Combine the search results from multiple tables into
+    one set of results
+    """
     result = []
 
     lengths = []
@@ -430,6 +449,9 @@ def combine_results(*objects):
     return result
 
 def build_search_response(objects):
+    """
+    Build an API response from the search results
+    """
     json = []
     for obj in objects:
         t = type(obj)
@@ -453,6 +475,9 @@ def build_search_response(objects):
     return json
 
 def query_artists(query):
+    """
+    Query database artists for a matching term
+    """
     combined_sv =   Artist.search_vector |\
                     Work.search_vector   |\
                     ArtType.search_vector
@@ -478,6 +503,9 @@ def query_artists(query):
     return results
 
 def query_works(query):
+    """
+    Query database works for a matching term
+    """
     combined_sv =   Work.search_vector     |\
                     Artist.search_vector   |\
                     ArtType.search_vector  |\
@@ -502,6 +530,9 @@ def query_works(query):
     return results
 
 def query_venues(query):
+    """
+    Query database venues for a matching term
+    """
     combined_sv = Venue.search_vector | Work.search_vector
 
     primary_search = Venue.query.search(query, sort=True).all()
@@ -521,6 +552,9 @@ def query_venues(query):
     return results
 
 def query_art_types(query):
+    """
+    Query database art types for a matching term
+    """
     combined_sv =   ArtType.search_vector |\
                     Work.search_vector    |\
                     Medium.search_vector
