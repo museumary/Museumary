@@ -8,33 +8,50 @@ Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
 
 ---
 
-## Trenton Strahan
+### Trenton Strahan
 
 watch out its trenton oooOOOoOoOo
 
 ---
 
-## Max West
+### Max West
 
 watch out its max oooOOOoOoOo
 
 ---
 
-## Josh Morris
+### Josh Morris
 
 watch out its josh oooOOOoOoOo
 
 ---
 
-## Kelly Nguyen
+### Kelly Nguyen
 
 watch out its kelly oooOOOoOoOo
 
 ---
 
-## Kenny Le
+### Kenny Le
 
 watch out its kenny oooOOOoOoOo
 
 ---
+
+## Demonstration
+
+---
+
+## Self Critique
+
+search fails for queries with too many results
+problems with mobile site?
+
+---
+
+## Other Critique
+
+---
+
+## Visualization
 
