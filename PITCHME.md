@@ -1,0 +1,114 @@
+# Museumary
+
+Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
+
+---
+
+## Introductions
+
+---
+
+### Trenton Strahan
+
+watch out its trenton oooOOOoOoOo
+
+---
+
+### Max West
+
+watch out its max oooOOOoOoOo
+
+---
+
+### Josh Morris
+
+watch out its josh oooOOOoOoOo
+
+---
+
+### Kelly Nguyen
+
+* About Me
+    * I am a loving mother to my cats Magpie and Rorschach (and my roommate's cats Pigeon and Poncho) and my dog Bear
+    * They are my only hobby because I don't have time for anything else
+    * I also like Tom Hanks and sushi
+* Project Responsibilities
+    * Writing and documenting the RESTful API
+    * Setting up and filling the database
+    * Implementing search on the backend
+
+---
+
+### Kenny Le
+
+watch out its kenny oooOOOoOoOo
+
+---
+
+## Demonstration
+
+---
+
+## Self Critique
+
+---
+
+### What did we do well?
+
+
+
+---
+
+### What did we learn?
+
+* What a web application is comprised of in terms of front-end and back-end and how the two interact with each other
+* What a RESTful API is and how to write one
+* How to define database models, set up a Postgres database, and manipulate it using SQL and an ORM like SQLAlchemy
+* *insert stuff about front end*
+
+---
+
+### What can we do better?
+
+* Search
+    * Our search time outs for queries with too many results because it does the whole query at once (i.e. query="drawing")
+* Data
+    * There weren't many good RESTful API sources for our topic
+    * We have limited data on artists and not many well-known artists since our source APIs are limited to the works contained in a specific museum
+    * Artists don't have data on all their works, only the works in the museums we scraped
+    * Data on only five museums
+* Mobile Site
+    * Hamburger menu doesn't work
+    * On desktop when the window is resized, mobile settings are applied and the paging buttons move to the middle of the screen
+
+---
+
+### What puzzles us?
+
+* Search
+    * How to search across multiple tables and have the combined results sorted by relevancy (Our method was kind of hacky)
+
+---
+
+## Critique of endangered-animals.me
+
+---
+
+### What did they do well?
+
+---
+
+### What did we learn from their website?
+
+---
+
+### What can they do better?
+
+---
+
+### What puzzles us about their website?
+
+---
+
+## Visualization
+
