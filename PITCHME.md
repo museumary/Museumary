@@ -6,25 +6,25 @@ Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
 
 ## Introductions
 
----
++++
 
 ### Trenton Strahan
 
 watch out its trenton oooOOOoOoOo
 
----
++++
 
 ### Max West
 
 watch out its max oooOOOoOoOo
 
----
++++
 
 ### Josh Morris
 
 watch out its josh oooOOOoOoOo
 
----
++++
 
 ### Kelly Nguyen
 
@@ -37,7 +37,7 @@ watch out its josh oooOOOoOoOo
     * Setting up and filling the database
     * Implementing search on the backend
 
----
++++
 
 ### Kenny Le
 
@@ -51,11 +51,11 @@ watch out its kenny oooOOOoOoOo
 
 ## Self Critique
 
----
++++
 
 ### What did we do well?
 
----
++++
 
 ### What did we learn?
 
@@ -70,16 +70,21 @@ watch out its kenny oooOOOoOoOo
 
 * Search
     * Our search time outs for queries with too many results because it does the whole query at once (i.e. query="drawing")
+* Mobile Site
+    * Hamburger menu doesn't work
+    * On desktop when the window is resized, mobile settings are applied and the paging buttons move to the middle of the screen
+
++++
+
+### What can we do better? (continued)
+
 * Data
     * There weren't many good RESTful API sources for our topic
     * We have limited data on artists and not many well-known artists since our source APIs are limited to the works contained in a specific museum
     * Artists don't have data on all their works, only the works in the museums we scraped
     * Data on only five museums
-* Mobile Site
-    * Hamburger menu doesn't work
-    * On desktop when the window is resized, mobile settings are applied and the paging buttons move to the middle of the screen
 
----
++++
 
 ### What puzzles us?
 
@@ -90,19 +95,19 @@ watch out its kenny oooOOOoOoOo
 
 ## Critique of endangered-animals.me
 
----
++++
 
 ### What did they do well?
 
----
++++
 
 ### What did we learn from their website?
 
----
++++
 
 ### What can they do better?
 
----
++++
 
 ### What puzzles us about their website?
 
