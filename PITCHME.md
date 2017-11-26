@@ -51,12 +51,62 @@ watch out its kenny oooOOOoOoOo
 
 ## Self Critique
 
-search fails for queries with too many results
-problems with mobile site?
+---
+
+### What did we do well?
+
+
 
 ---
 
-## Other Critique
+### What did we learn?
+
+* What a web application is comprised of in terms of front-end and back-end and how the two interact with each other
+* What a RESTful API is and how to write one
+* How to define database models, set up a Postgres database, and manipulate it using SQL and an ORM like SQLAlchemy
+* *insert stuff about front end*
+
+---
+
+### What can we do better?
+
+* Search
+    * Our search time outs for queries with too many results because it does the whole query at once (i.e. query="drawing")
+* Data
+    * There weren't many good RESTful API sources for our topic
+    * We have limited data on artists and not many well-known artists since our source APIs are limited to the works contained in a specific museum
+    * Artists don't have data on all their works, only the works in the museums we scraped
+    * Data on only five museums
+* Mobile Site
+    * Hamburger menu doesn't work
+    * On desktop when the window is resized, mobile settings are applied and the paging buttons move to the middle of the screen
+
+---
+
+### What puzzles us?
+
+* Search
+    * How to search across multiple tables and have the combined results sorted by relevancy (Our method was kind of hacky)
+
+---
+
+## Critique of endangered-animals.me
+
+---
+
+### What did they do well?
+
+---
+
+### What did we learn from their website?
+
+---
+
+### What can they do better?
+
+---
+
+### What puzzles us about their website?
 
 ---
 
