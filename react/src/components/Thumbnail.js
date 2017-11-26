@@ -12,6 +12,11 @@ const DESCRIPTION = [Harvard, Walter, Auckland, Cooper, Finnish]
 
 const Thumbnail = ({ name, image_url, url, type, description_id, details=["N/A", "N/A", "N/A"] }) => {
     if(type === "venue") {
+        /* 
+            Venue thumbnail is treated differently because there are only 5 venues
+            An image positioned on the right side
+            The name and description of the venue positioned on the left side
+        */
         const description = DESCRIPTION[description_id - 1]
 
         return (
@@ -37,6 +42,11 @@ const Thumbnail = ({ name, image_url, url, type, description_id, details=["N/A",
         )
     }
     else {
+        /* 
+            Thumbnail used for Artists, Works, and Types pages 
+            Consists of an image and a name
+            When mouse hovers over thumbnail, displays extra information
+        */
         return(
             <div className='col-md-3'>
                 <Link to={url} activeClassName="active">

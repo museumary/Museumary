@@ -12,6 +12,7 @@ class Type extends React.Component {
         };
     }
 
+    /* Fetches the data from our database and parses it accordingly */
     componentDidMount() {
         const type_id = parseInt(this.props.match.params.number, 10)
 

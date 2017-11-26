@@ -8,6 +8,7 @@ const Header = () => {
             <nav className="navbar navbar-inverse navbar-static-top">
                 <div className="container">
                     <HeaderIcon />
+                    {/* Search bar in Navbar */}
                     <form class="navbar-form navbar-left">
                         <Search />
                     </form>
@@ -18,6 +19,7 @@ const Header = () => {
     );
 };
 
+/* Link to Home and title of site */
 const HeaderIcon = () => {
     return (
         <div className="navbar-header">
@@ -32,6 +34,7 @@ const HeaderIcon = () => {
     );
 }
 
+/* Links to model pages */
 const HeaderModelLinks = () => {
     return (
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

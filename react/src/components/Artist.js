@@ -10,6 +10,8 @@ class Artist extends React.Component {
             work_arr:[]
         };
     }
+
+    /* Fetches the data from our database and parses it accordingly */
     componentDidMount(){
         const artist_id = parseInt(this.props.match.params.number, 10)
 
@@ -51,16 +53,19 @@ class Artist extends React.Component {
                 );
             })
 
+            // Life and death of artist
             var life = artist_obj.birth + " (" + artist_obj.birthplace + ")";
             if(artist_obj.death) {
                 life += " - " + artist_obj.death + "(" + artist_obj.deathplace + ")";
             }
 
+            // Image url of artist
             var image_url = artist_obj.image_url;
             if(!image_url) {
                 image_url = work_list[0].image_url;
             }
 
+            // List of works
             let works = work_list.map(function(obj) {
                 let url = '/works/' + obj.id
                 return <div key={obj.id} ><Link to={url} >{obj.name}</Link><br/></div>;

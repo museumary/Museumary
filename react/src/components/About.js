@@ -10,6 +10,7 @@ import Max from '../static/images/max_profile.jpg';
 const About = () => {
     return (
         <div className="About">
+            {/* Page Header: Description of site, intended users, and purpose */}
             <h1><strong>Culture<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">.</a> Just a click away.</strong></h1>
             <div className="jumbotron"/>
             <div className="divider"/>
@@ -17,6 +18,8 @@ const About = () => {
                 <p>Here at Museumary, we are dedicated to building and maintaining an internet database of art.<br/>Familiarize yourself with art from around the world. Our database gives you access to a large assortment of artistic pieces.<br/> Feel free to browse our collection, or scroll down for some team information!</p>
                 <br/>
             </div>
+
+            {/* Group Name and Members */}
             <div className="container">
                 <h1><strong>Members of Team Museumary</strong></h1>
                 <div className="row">
@@ -65,6 +68,7 @@ const About = () => {
               </div>
             </div>
 
+            {/* Stats */}
             <div className="page-header"/>
             <h1>Stats</h1>
             <p><strong>Total No. of Commits:</strong> 232<br/><strong>Total No. of Issues:</strong> 52
@@ -79,7 +83,9 @@ const About = () => {
 
             <div className="page-header"/>
 
+            
             <div className="container">
+                {/* Data */}
                 <h1>Data Sources</h1>
                 <div className="row">
                     <div className="col-md-4">
@@ -98,30 +104,29 @@ const About = () => {
                         the api’s for each museum differed  wildly. For more information about the process we went through to scrape our data, please refer to our technical report below.
                       </p>
                     </div>
+                </div>
+                <br/>
 
-              </div>
-
-              <br/>
-
-              <h1>Tools Used</h1>
-              <div className="row">
-                  <div className="col-md-4">
-                      <p><strong>Required Tools:</strong><br/>Apiary, Bootstrap, React, Flask, GitHub, Trello, PlanItPoker, and Slack</p>
-                  </div>
-                  <div className="col-md-4">
-                      <p><strong>Additional Tools:</strong><br/>Jinja, W3Schools</p>
-                  </div>
-                  <div className="col-md-4">
-                      <p><strong>Tools Descriptions:</strong><br/>For an in depth description of our tools used, see the below link to our technical report.</p>
-                  </div>
-              </div>
-              <br/><br/><br/>
-              <div>
-                <p>To read more about the tools used, our API, and the APIs used visit our technical report <a href="https://utexas.box.com/s/fwnt1oocmlbve93yc60xickosb1i2crv"><strong>here</strong></a> and <a href="https://utexas.box.com/s/dqdsxrdrsb72qdutnek4kgxbiz9r5qg4"><strong>UML</strong></a></p>
-              </div>
-          </div>
-          <br/><br/><br/>
-      </div>);
+                {/* Tools */}
+                <h1>Tools Used</h1>
+                <div className="row">
+                    <div className="col-md-4">
+                        <p><strong>Required Tools:</strong><br/>Apiary, Bootstrap, React, Flask, GitHub, Trello, PlanItPoker, and Slack</p>
+                    </div>
+                    <div className="col-md-4">
+                        <p><strong>Additional Tools:</strong><br/>Jinja, W3Schools</p>
+                    </div>
+                    <div className="col-md-4">
+                        <p><strong>Tools Descriptions:</strong><br/>For an in depth description of our tools used, see the below link to our technical report.</p>
+                    </div>
+                </div>
+                <br/><br/><br/>
+                <div>
+                  <p>To read more about the tools used, our API, and the APIs used visit our technical report <a href="https://utexas.box.com/s/fwnt1oocmlbve93yc60xickosb1i2crv"><strong>here</strong></a> and <a href="https://utexas.box.com/s/dqdsxrdrsb72qdutnek4kgxbiz9r5qg4"><strong>UML</strong></a></p>
+                </div>
+            </div>
+            <br/><br/><br/>
+        </div>);
 };
 
 export default About;

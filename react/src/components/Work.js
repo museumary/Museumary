@@ -6,6 +6,8 @@ class Work extends React.Component {
         super();
         this.state={items:[]};
     }
+
+    /* Fetches the data from our database and parses it accordingly */
     componentDidMount(){
         const work_id = parseInt(this.props.match.params.number, 10)
         fetch(`http://api.museumary.me/work/` + work_id)

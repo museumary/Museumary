@@ -6,11 +6,16 @@ import Starry_Night from '../static/images/Starry_Night.jpg';
 import American_Gothic from '../static/images/American_Gothic.jpg';
 import Creation_Adam from '../static/images/Creation_of_Adam.jpg';
 
+
 const CarouselInstance = () => {
+    /*
+    Carousel Component: to be used throughout the website
+    */
     return (
         <div className="CarouselInstance">
             <Carousel>
                 <Carousel.Item>
+                    {/* Carousel Item: takes image and caption */}
                     <img className="carousel-image" src={ Guernica } alt={"Guernica"} width="3200" height="1200"/>
                     <Carousel.Caption>
                         <h3>Guernica</h3>

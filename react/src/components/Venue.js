@@ -41,6 +41,7 @@ class Venue extends React.Component {
         this.map_location = '';
     }
 
+    /* Fetches the data from our database and parses it accordingly */
     componentDidMount() {
         const venue_id = parseInt(this.props.match.params.number, 10)
 
@@ -55,6 +56,7 @@ class Venue extends React.Component {
             .then(venue=> {
                 this.setState({ venue })
 
+                // Street address of venue
                 let street = "";
                 if(venue.street)
                     street = venue.street.replace(/ /g, "+");
