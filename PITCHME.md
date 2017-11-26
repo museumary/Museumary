@@ -55,8 +55,6 @@ watch out its kenny oooOOOoOoOo
 
 ### What did we do well?
 
-
-
 ---
 
 ### What did we learn?
@@ -66,7 +64,7 @@ watch out its kenny oooOOOoOoOo
 * How to define database models, set up a Postgres database, and manipulate it using SQL and an ORM like SQLAlchemy
 * *insert stuff about front end*
 
----
++++
 
 ### What can we do better?
 
