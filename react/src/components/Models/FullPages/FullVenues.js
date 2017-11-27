@@ -2,6 +2,12 @@
 import React from 'react';
 import Page from 'components/Page';
 
+import FullPage from 'containers/FullPage';
+import PageLoader from 'containers/PageLoader'
+
+import { VenuesFilter } from 'components/Filters'
+import { VenuesParams } from 'DefaultParameters'
+
 import Harvard from 'static/images/Harvard.jpg';
 import Cooper from 'static/images/Cooper.jpg';
 import Auckland from 'static/images/Auckland.jpg';
@@ -23,4 +29,4 @@ const VenuesParser = ({ items, instance_url }) => {
     return <Page items={parsedItems} />
 }
 
-export default VenuesParser;
+export default FullPage(VenuesParams, PageLoader(VenuesParser, VenuesFilter));

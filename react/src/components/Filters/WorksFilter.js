@@ -13,8 +13,9 @@
 */
 
 import React from 'react';
-import SelectFilter from './SelectFilter';
 import BaseFilter from './BaseFilter'
+import SelectFilter from './SelectFilter';
+import MasterFilter from 'containers/MasterFilter'
 
 /*
     Define a Venues list with its corresponding value
@@ -33,7 +34,7 @@ const VENUES_LIST = {
     'Finnish National Gallery': 'Finnish'
 }
 
-const WorksFilter = ({ art_type, medium, venue, handleChange }) => {
+const WorksFilter = BaseFilter(({ art_type, medium, venue, handleChange }) => {
     return (
         <span>
             <strong> Art Type: </strong>
@@ -61,7 +62,7 @@ const WorksFilter = ({ art_type, medium, venue, handleChange }) => {
             &nbsp;&nbsp;
         </span>
     );
-}
+});
 
 // Export the filter enhanced by the BaseFilter
-export default BaseFilter(WorksFilter);
+export default MasterFilter(WorksFilter);

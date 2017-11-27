@@ -11,8 +11,9 @@
 */
 
 import React from 'react';
-import SelectFilter from './SelectFilter';
 import BaseFilter from './BaseFilter'
+import SelectFilter from './SelectFilter';
+import MasterFilter from 'containers/MasterFilter'
 
 /*
     Define a Country list with its corresponding value
@@ -29,7 +30,7 @@ const COUNTRY_LIST = {
     'New Zealand': 'New Zealand'
 }
 
-const VenuesFilter = ({ country, handleChange }) => {
+const VenuesFilter = BaseFilter(({ country, handleChange }) => {
     return (
         <span>
             <strong> Country: </strong>
@@ -40,7 +41,7 @@ const VenuesFilter = ({ country, handleChange }) => {
                 handleChange={handleChange} />
         </span>
     );
-}
+});
 
 // Export the filter enhanced by the BaseFilter
-export default BaseFilter(VenuesFilter);
+export default MasterFilter(VenuesFilter);

@@ -1,12 +1,12 @@
 
 import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
-import './CarouselInstance.css';
+import 'components/CarouselInstance.css';
 
 class Type extends Component {
     constructor(props) {
         super(props);
-        this.state={ items:[], med_arr:[], work_arr:[] };
+        this.state={ items: [], med_arr: [], work_arr: [] };
     }
 
     /* Fetches the data from our database and parses it accordingly */

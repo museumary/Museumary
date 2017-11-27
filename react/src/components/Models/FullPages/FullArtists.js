@@ -1,6 +1,11 @@
 
 import React from 'react';
 import Page from 'components/Page';
+import FullPage from 'containers/FullPage';
+import PageLoader from 'containers/PageLoader'
+
+import { ArtistsFilter } from 'components/Filters'
+import { ArtistsParams } from 'DefaultParameters'
 
 import Gentleman from 'static/images/Gentleman.png'
 
@@ -13,7 +18,8 @@ const ArtistsParser = ({ items, instance_url }) => {
         return item;
     })
 
-    return <Page items={parsedItems} />
+    return <Page items={ parsedItems } />
 }
 
-export default ArtistsParser;
+export default FullPage(ArtistsParams, PageLoader(ArtistsParser, ArtistsFilter));
+

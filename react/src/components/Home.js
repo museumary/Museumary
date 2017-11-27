@@ -1,6 +1,6 @@
 import React from 'react';
-import CarouselInstance from './components/CarouselInstance';
-import Twitter from './components/Twitter';
+import CarouselInstance from './CarouselInstance';
+import Twitter from './Twitter';
 
 const Home = () => {
   	return (

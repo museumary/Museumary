@@ -12,8 +12,9 @@
 
 import React from 'react';
 import BaseFilter from './BaseFilter'
+import MasterFilter from 'containers/MasterFilter'
 
-const ArtistFilter = ({ culture, handleChange }) => {
+const ArtistFilter = BaseFilter(({ culture, handleChange }) => {
     return (
         <span>
             <strong> Culture: </strong>
@@ -25,7 +26,7 @@ const ArtistFilter = ({ culture, handleChange }) => {
             />
         </span>
     );
-}
+});
 
 // Export the filter enhanced by the BaseFilter
-export default BaseFilter(ArtistFilter);
+export default MasterFilter(ArtistFilter);

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 class Work extends Component {
     constructor() {
         super();
-        this.state = { items:[] };
+        this.state = { items: [] };
     }
 
     /* Fetches the data from our database and parses it accordingly */

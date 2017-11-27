@@ -6,14 +6,11 @@ import { Carousel } from 'react-bootstrap';
 class Artist extends Component {
     constructor() {
         super();
-        this.state={
-            items:[],
-            work_arr:[]
-        };
+        this.state = { items: [], work_arr: [] };
     }
 
     /* Fetches the data from our database and parses it accordingly */
-    componentDidMount(){
+    componentDidMount() {
         const artist_id = parseInt(this.props.match.params.number, 10)
 
         fetch(`http://api.museumary.me/artist/` + artist_id)

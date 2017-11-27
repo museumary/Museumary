@@ -12,8 +12,9 @@
 
 import React from 'react';
 import BaseFilter from './BaseFilter'
+import MasterFilter from 'containers/MasterFilter'
 
-const TypesFilter = ({ medium, handleChange }) => {
+const TypesFilter = BaseFilter(({ medium, handleChange }) => {
     return (
         <span>
             <strong> Medium: </strong>
@@ -25,7 +26,7 @@ const TypesFilter = ({ medium, handleChange }) => {
             />
         </span>
     );
-};
+});
 
 // Export the filter enhanced by the BaseFilter
-export default BaseFilter(TypesFilter);
+export default MasterFilter(TypesFilter);
