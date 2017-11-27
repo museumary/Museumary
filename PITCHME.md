@@ -76,7 +76,7 @@ watch out its kenny oooOOOoOoOo
 
 +++
 
-### What can we do better? (continued)
+### (continued)
 
 * Data
     * There weren't many good RESTful API sources for our topic
@@ -99,13 +99,25 @@ watch out its kenny oooOOOoOoOo
 
 ### What did they do well?
 
+* Search
+    * Very fast search results that appear on the model pages themselves
+
 +++
 
 ### What did we learn from their website?
 
+* They did everything in javascript??
+
 +++
 
 ### What can they do better?
+
+* Model Pages
+    * Too much data is shown on the model page with multiple instances
+    * We think it should be more condensed and expanded upon in the individual instance page
+* Filtering and Search
+    * It seems a little bit overkill to have a general search as well as search functions for every attribute of every model
+    * It would be nice to be able to search multiple models at once rather than one at a time
 
 +++
 
