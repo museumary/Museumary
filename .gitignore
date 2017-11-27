@@ -4,3 +4,4 @@ __pycache__
 *.pyc
 **/node_modules/
 flask-app.yaml
+geckodriver.log
