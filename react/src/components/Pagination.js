@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { Component } from 'react';
 import './Pagination.css'
 
 const defaultProps = {
@@ -8,7 +9,7 @@ const defaultProps = {
     half: 2
 };
 
-class Pagination extends React.Component {
+class Pagination extends Component {
     constructor(props) {
         super(props)
         this.state = { buttonText: [] }
@@ -72,5 +73,4 @@ class Pagination extends React.Component {
 }
 
 Pagination.defaultProps = defaultProps
-
 export default Pagination

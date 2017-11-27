@@ -1,8 +1,9 @@
-import React from 'react';
+
+import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import './../Header.css';
 
-class Search extends React.Component {
+class Search extends Component {
     constructor() {
         super();
         this.state={

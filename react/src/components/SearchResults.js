@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { Component } from 'react';
 import Highlighter from 'react-highlight-words';
 import Thumbnail from './Thumbnail';
 import Pagination from './Pagination';
@@ -12,26 +13,27 @@ const defaultProps = {
     url: 'http://api.museumary.me/search/'
 }
 
-class SearchResults extends React.Component {
+class SearchResults extends Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             items: [],
             page: 1,
             numPages: 0,
             oldQuery: this.props.location.state.search
         };
 
-        this.changePage = this.changePage.bind(this)
+        this.changePage = this.changePage.bind(this);
     }
-    componentDidMount(){
-        this.changePage(this.props.initialPage)
+
+    componentDidMount() {
+        this.changePage(this.props.initialPage);
     }
 
     changePage(pageNumber) {
-        const num_entries = 'entries_per_page='+this.props.entries_per_page
-        const page = 'page=' + pageNumber
-        const query = this.props.location.state.search
+        const num_entries = 'entries_per_page='+this.props.entries_per_page;
+        const page = 'page=' + pageNumber;
+        const query = this.props.location.state.search;
 
         return (
             fetch(this.props.url+query+'?'+page+'&'+num_entries)

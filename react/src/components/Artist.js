@@ -1,8 +1,9 @@
-import React from 'react';
+
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap';
 
-class Artist extends React.Component {
+class Artist extends Component {
     constructor() {
         super();
         this.state={
@@ -27,7 +28,6 @@ class Artist extends React.Component {
                 }
             })
     }
-
 
     render() {
         var artist_obj = this.state.items;
