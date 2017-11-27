@@ -1,6 +1,6 @@
 
 import React from 'react';
-import style from './About.css';
+import 'static/css/About.css';
 
 import Josh from 'static/images/josh_profile.jpg';
 import Kelly from 'static/images/kelly_profile.jpg';

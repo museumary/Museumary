@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import './Pagination.css'
+import 'static/css/Pagination.css'
 
 const defaultProps = {
     page: 1,

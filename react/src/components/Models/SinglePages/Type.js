@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
-import 'components/CarouselInstance.css';
+import 'static/css/CarouselInstance.css';
 
 class Type extends Component {
     constructor(props) {

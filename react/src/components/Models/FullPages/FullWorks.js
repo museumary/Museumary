@@ -1,10 +1,8 @@
 
 import React from 'react';
 import Page from 'components/Page';
-
 import FullPage from 'containers/FullPage';
 import PageLoader from 'containers/PageLoader'
-
 import { WorksFilter } from 'components/Filters'
 import { WorksParams } from 'DefaultParameters'
 

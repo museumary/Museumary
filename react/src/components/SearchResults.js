@@ -5,7 +5,7 @@ import Thumbnail from './Thumbnail';
 import Pagination from './Pagination';
 
 import { Link } from 'react-router-dom';
-import './Full.css';
+import 'static/css/Full.css';
 
 const defaultProps = {
     initialPage: 1,

@@ -1,9 +1,7 @@
 
 import React from 'react';
-
 import Page from 'components/Page'
 import Pagination from 'components/Pagination';
-
 import { TypesFilter } from 'components/Filters';
 
 const defaultProps = {
