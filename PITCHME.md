@@ -41,7 +41,13 @@ watch out its josh oooOOOoOoOo
 
 ### Kenny Le
 
-watch out its kenny oooOOOoOoOo
+* About Me
+    * I like to watch League at 5 AM
+    * I live in the basement lab
+    * I like fruit snacks
+* Project Responsibilities
+    * Front-end react
+    * Pagination, refactoring, filtering, sorting
 
 ---
 
