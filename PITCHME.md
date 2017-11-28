@@ -115,7 +115,9 @@ Unit Tests
 ### What puzzles us?
 * Search
     * How to search across multiple tables and have the combined results sorted by relevancy (Our method was kind of hacky)
-* 
+* Some aspects of using Selenium to test our GUI were confusing
+* Figuring out how to deploy multiple apps to our GCP project was difficult and confusing
+* Javascript is hard :(
 
 ---
 
