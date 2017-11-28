@@ -67,8 +67,8 @@ Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
 ---
 
 ## Demonstration
-Navigate
-Search
+Navigate, 
+Search, 
 Unit Tests
 
 ---
@@ -114,7 +114,7 @@ Unit Tests
 
 ---
 
-## Critique of endangered-animals.me
+## Critique of \nendangered-animals
 
 +++
 
