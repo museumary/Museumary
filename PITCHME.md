@@ -113,6 +113,12 @@ Unit Tests
 
 +++
 
+### (continued)
+* Caching
+    * Currently our site is constantly making API requests when the page is changed. If we implemented caching on the front-end, then all we would have to do is modify the displayed data upon a page change which would speed things up
+
++++
+
 ### What puzzles us?
 * Search
     * How to search across multiple tables and have the combined results sorted by relevancy (Our method was kind of hacky)
