@@ -45,7 +45,7 @@ Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
 
 ### Kelly Nguyen
 * About Me
-    * I am a loving mother to my cats Magpie and Rorschach (and my roommate's cats Pigeon and Poncho) and my dog Bear
+    * I am a loving mother to my many cats and my dog, Bear
     * They are my only hobby because I don't have time for anything else
     * I also like Tom Hanks and sushi
 * Project Responsibilities
