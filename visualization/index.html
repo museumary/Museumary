@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<head>
-    <link rel="stylesheet" href="Modal.css">
-</head>
+<link rel="stylesheet" href="Modal.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <script type='text/javascript' src="http://d3js.org/d3.v3.min.js"></script>
 <script type='text/javascript' src="http://d3js.org/topojson.v1.min.js"></script>
@@ -17,27 +16,36 @@
     <!-- The Modal -->
     <div id="Modal" class="modal">
         <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-                <div class="w3-bar w3-border-bottom">
-                    <button class="tablink button" onclick="openModel(event, 'Animals')">Animals</button>
-                    <button class="tablink button" onclick="openModel(event, 'Habitats')">Habitats</button>
-                    <button class="tablink button" onclick="openModel(event, 'Threats')">Threats</button>
+        <div class="modal-content  w3-animate-zoom">
+            <header class="w3-container w3-blue">
+                <h2>
+                    <span id='CountryHeader'>Hello</span>
+                    <img id='FlagImage' src='https://i.imgur.com/oFtScJt.png' alt="Mountain View" style="max-height: 30px; margin-top: 5px;" />
+                    <span class="close">&times;</span>
+                </h2>
+            </header>
+                <div class="w3-border-bottom w3-border-top">
+                    <button class="tablink w3-bar-item w3-button" onclick="openModel(event, 'Animals')">Animals</button>
+                    <button class="tablink w3-bar-item w3-button" onclick="openModel(event, 'Habitats')">Habitats</button>
+                    <button class="tablink w3-bar-item w3-button" onclick="openModel(event, 'Threats')">Threats</button>
                 </div>
 
-            <div id="Animals" class="container city">
-               <h1>London</h1>
-               <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+            <div id="Animals" class="w3-container city">
+                <h2> Animals </h2>
+                <div id="AnimalsText" >
+                    <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
             </div>
 
-            <div id="Habitats" class="container city">
+            <div id="Habitats" class="w3-container city">
                <h1>Paris</h1>
                <p>Paris is the capital of France.</p>
                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
 
-            <div id="Threats" class="container city">
+            <div id="Threats" class="w3-container city">
                <h1>Tokyo</h1>
                <p>Tokyo is the capital of Japan.</p><br>
             </div>
@@ -72,7 +80,8 @@
                     var country_code = geography.id;
                     try {
                         var url = url_mappings[country_code].country_url
-                        httpGetAsync(url, displayModal);
+                        // httpGetAsync(url, displayModal);
+                        displayModal(null)
                     }
                     catch (TypeError) {
                         console.error("No Data on " + geography.properties.name)
@@ -85,7 +94,7 @@
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function() {
                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                    callback(xmlHttp.responseText);
+                    callback(JSON.parse(xmlHttp.responseText));
                 }
             };
 
@@ -93,30 +102,26 @@
             xmlHttp.send();
         }
 
-        function displayModal(data){
-            formatAnimals(data);
-            formatHabitats(data);
+        function displayModal(data) {
+            // Replace with data.flag and image src
+            document.getElementById('FlagImage').src = "https://vignette.wikia.nocookie.net/althistory/images/4/4d/Random_flag.png/revision/latest?cb=20140108043235"
+            document.getElementById('CountryHeader').innerText = 'Bello'
+
+            // formatAnimals(data);
+            // formatHabitats(data);
             modal.style.display = "block";
         }
 
         function formatAnimals(data) {
-            // console.log(data);
-            var obj = JSON.parse(data);
-            var output = "";
-            for( i = 0; i < obj.assoc_animals.length; i++ ) {
-                output = output + (obj.assoc_animals[i] + (obj.assoc_animals.length > 1 ? ", " : ""));
-            }
-
-            document.getElementById('Animals').innerHTML = output
-            // alert([output].join(''));
+            let animal_output = data.assoc_animals.join('<br/>');
+            document.getElementById('AnimalsText').innerHTML = animal_output
         }
 
         function formatHabitats(data) {
             // console.log(data);
-            var obj = JSON.parse(data);
             var output = "";
-            for( i = 0; i < obj.assoc_habitats.length; i++ ) {
-                output = output + (obj.assoc_habitats[i] + (obj.assoc_habitats.length > 1 ? ", " : ""));
+            for( i = 0; i < data.assoc_habitats.length; i++ ) {
+                output = output + (data.assoc_habitats[i] + (data.assoc_habitats.length > 1 ? ", " : ""));
             }
 
             document.getElementById('Habitats').innerHTML = output
