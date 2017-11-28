@@ -10,10 +10,6 @@ var PageLoader = (Parser, Filter) => class extends Component {
         this.state = { loading: true, info: {}, objects: [] }
     }
 
-    componentDidMount() {
-        this.loadPage(this.props.params);
-    }
-
     componentWillReceiveProps(nextProps) {
         this.loadPage(nextProps.params);
     }

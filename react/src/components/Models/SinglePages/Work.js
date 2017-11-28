@@ -51,8 +51,8 @@ class Work extends Component {
                     <h1>{work_obj.name}</h1>
                     <img src={work_obj.image_url} alt="Loading" className="img-rounded" width="auto" height="450"/><br/><br/>
                     <strong>Artist: </strong><Link to={'/artists/' + work_obj.artist_id} activeClassName="active">{artist_obj.name}</Link><br/>
-                    <strong>Medium: </strong>{medium_obj.name}<br/>
                     <strong>ArtType: </strong><Link to={'/types/' + work_obj.art_type_id} activeClassName="active">{art_type_obj.name}</Link><br/>
+                    <strong>Medium: </strong>{medium_obj.name}<br/>
                     <strong>Venue: </strong><Link to={'/venues/' + work_obj.venue_id} activeClassName="active">{venue_obj.name}</Link><br/>
                 </div>
             );

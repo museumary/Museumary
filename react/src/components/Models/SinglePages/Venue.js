@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Thumbnail from 'components/Thumbnail';
 
 import Harvard from 'static/images/Harvard.jpg';
@@ -18,11 +19,11 @@ import Walters from 'static/images/Walters.jpg';
 import iWalters from 'static/images/Walters_interior.jpg';
 
 const MUSEUMS = [
-    [Harvard, iHarvard],
-    [Walters, iWalters],
-    [Auckland, iAuckland],
-    [Cooper, iCooper],
-    [Finnish, iFinnish]
+    [Harvard, iHarvard, 'Harvard+Art+Museum'],
+    [Walters, iWalters, 'The+Walters+Art+Museum'],
+    [Auckland, iAuckland, 'Auckland+Museum'],
+    [Cooper, iCooper, 'Cooper+Hewitt,+Smithsonian+Design+Museum'],
+    [Finnish, iFinnish, 'Finnish+National+Gallery']
 ]
 
 const defaultProps = {
@@ -33,10 +34,11 @@ const defaultProps = {
 class Venue extends Component {
     constructor(props) {
         super(props);
-        this.state={ venue:[], works:[] };
+        this.state = { venue: [], works: [] };
         this.museum_url = '';
         this.imuseum_url = '';
         this.map_location = '';
+        this.museum_name = '';
     }
 
     /* Fetches the data from our database and parses it accordingly */
@@ -44,9 +46,10 @@ class Venue extends Component {
         const venue_id = parseInt(this.props.match.params.number, 10)
 
         if(1 <= venue_id && venue_id <= 5) {
-            let museum = MUSEUMS[venue_id-1]
-            this.museum_url = museum[0]
-            this.imuseum_url = museum[1]
+            const museum = MUSEUMS[venue_id-1]
+            this.museum_url = museum[0];
+            this.imuseum_url = museum[1];
+            this.museum_name = museum[2];
         }
 
         fetch(`http://api.museumary.me/venue/` + venue_id)
@@ -109,7 +112,7 @@ class Venue extends Component {
                     <br/>
                     <br/>
 
-                    <h2><strong>Gallery of Works</strong></h2><br/>
+                    <Link to={'/works?venue='+this.museum_name}><h2><strong>Gallery of Works</strong></h2></Link><br/>
                     <div className="container">
                         <div className="row">
                             {works}

@@ -25,17 +25,26 @@ var FullPage = (_defaultProps, PageLoader) => class extends Component {
         this.setState(newParams);
     }
 
-    componentWillReceiveProps(nextProps) {
-        /* change for dynamic loading */
+    componentDidMount() {
+        let search = this.props.location.search;
 
-        const params = this.props.params
-        const nextParams = nextProps.params
+        if(search) {
+            let myParams = Object.assign({}, this.props.defaultParams);
 
-        for(const key in params) {
-            if(params[key] !== nextParams[key]) {
-                this.setState(nextParams)
+            search = search.replace('?', '').split('&');
+            for(let i = 0, len = search.length; i < len; ++i) {
+                let temp = search[i].split('=');
+                if(myParams.hasOwnProperty(temp[0])) {
+                    myParams[temp[0]] = temp[1];
+                }
             }
+
+            this.setState(myParams);
         }
+        else {
+            this.setState(this.props.defaultParams);
+        }
+
     }
 
     render() {
