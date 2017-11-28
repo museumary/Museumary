@@ -1,5 +1,5 @@
 /*
-    ArtistsFilter.js
+    --ArtistsFilter.js--
         Filter Artists through its unique attributes.
 
     State:
@@ -11,8 +11,10 @@
 */
 
 import React from 'react';
+import BaseFilter from './BaseFilter'
+import MasterFilter from 'containers/MasterFilter'
 
-const ArtistFilter = ({ culture, handleChange }) => {
+const ArtistFilter = BaseFilter(({ culture, handleChange }) => {
     return (
         <span>
             <strong> Culture: </strong>
@@ -24,6 +26,7 @@ const ArtistFilter = ({ culture, handleChange }) => {
             />
         </span>
     );
-}
+});
 
-export default ArtistFilter;
+// Export the filter enhanced by the BaseFilter
+export default MasterFilter(ArtistFilter);

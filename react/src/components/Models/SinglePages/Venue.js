@@ -1,20 +1,21 @@
-import React from 'react';
-import Thumbnail from './Thumbnail';
 
-import Harvard from '../static/images/Harvard.jpg';
-import iHarvard from '../static/images/Harvard_interior.jpg';
+import React, { Component } from 'react';
+import Thumbnail from 'components/Thumbnail';
 
-import Cooper from '../static/images/Cooper.jpg';
-import iCooper from '../static/images/Cooper_interior.jpg';
+import Harvard from 'static/images/Harvard.jpg';
+import iHarvard from 'static/images/Harvard_interior.jpg';
 
-import Auckland from '../static/images/Auckland.jpg';
-import iAuckland from '../static/images/Auckland_interior.jpg';
+import Cooper from 'static/images/Cooper.jpg';
+import iCooper from 'static/images/Cooper_interior.jpg';
 
-import Finnish from '../static/images/Finnish.jpg';
-import iFinnish from '../static/images/Finnish_interior.jpg';
+import Auckland from 'static/images/Auckland.jpg';
+import iAuckland from 'static/images/Auckland_interior.jpg';
 
-import Walters from '../static/images/Walters.jpg';
-import iWalters from '../static/images/Walters_interior.jpg';
+import Finnish from 'static/images/Finnish.jpg';
+import iFinnish from 'static/images/Finnish_interior.jpg';
+
+import Walters from 'static/images/Walters.jpg';
+import iWalters from 'static/images/Walters_interior.jpg';
 
 const MUSEUMS = [
     [Harvard, iHarvard],
@@ -29,13 +30,10 @@ const defaultProps = {
     base_url: 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q='
 }
 
-class Venue extends React.Component {
+class Venue extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            venue:[],
-            works:[]
-        };
+        this.state={ venue:[], works:[] };
         this.museum_url = '';
         this.imuseum_url = '';
         this.map_location = '';
@@ -83,6 +81,7 @@ class Venue extends React.Component {
             let works = work_list.map(function(obj) {
                 const url = '/works/' + obj.id;
                 const name = obj.name.substring(0, 25) + (obj.name.length > 25 ? '...': '')
+
                 return (
                     <Thumbnail
                         name={name}

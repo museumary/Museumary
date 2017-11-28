@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Thumbnail.css';
+import 'static/css/Thumbnail.css';
 
 const Harvard = "Ever since their founding, the Harvard Art Museums have been dedicated to advancing and supporting learning at Harvard University, in the local community, and around the world. The museums have played a leading role in the development of art history, conservation, and conservation science, and in the evolution of the art museum as an institution."
 const Cooper = "A 21st-century museum housed in New York City’s landmark Carnegie Mansion, Cooper Hewitt offers four floors of galleries dedicated to all disciplines of design, a permanent collection of more than 210,000 design objects fully digitized and available online, and a world-class design library. In addition to producing major special exhibitions, the museum continually refreshes the installation of objects from its collection of product design, decorative arts, works on paper, graphic design, textiles, wallcoverings, and digital materials."

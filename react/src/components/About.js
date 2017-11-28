@@ -1,11 +1,12 @@
-import React from 'react';
-import style from './About.css';
 
-import Josh from '../static/images/josh_profile.jpg';
-import Kelly from '../static/images/kelly_profile.jpg';
-import Kenny from '../static/images/kenny_profile.jpg';
-import Trenton from '../static/images/trenton_profile.jpg';
-import Max from '../static/images/max_profile.jpg';
+import React from 'react';
+import 'static/css/About.css';
+
+import Josh from 'static/images/josh_profile.jpg';
+import Kelly from 'static/images/kelly_profile.jpg';
+import Kenny from 'static/images/kenny_profile.jpg';
+import Trenton from 'static/images/trenton_profile.jpg';
+import Max from 'static/images/max_profile.jpg';
 
 const About = () => {
     return (

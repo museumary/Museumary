@@ -294,8 +294,6 @@ def get_art_types(page, entries_per_page, **kwargs):
         art_types = art_types.filter(ArtType.name.startswith(kwargs['startswith']))
     if kwargs['medium']:
         art_types = art_types.join(Medium).filter(Medium.name.ilike(kwargs['medium']))
-    # if kwargs['artist']:
-    #     art_types = art_types.join(Artist).filter(Artist.name.ilike(kwargs['artist']))
 
     # get total number of results before applying limit to query
     num_entries = len(art_types.all())
@@ -333,7 +331,8 @@ def get_art_type_data(art_type):
         'name':         art_type.name,
         'artist_ids':   [artist.id for artist in art_type.artists],
         'medium_ids':   [medium.id for medium in art_type.media],
-        'work_ids':     [work.id for work in art_type.works]
+        'work_ids':     [work.id for work in art_type.works],
+        'image_url':    art_type.image_url
     }
     return result
 
