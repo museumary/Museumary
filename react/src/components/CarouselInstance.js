@@ -8,10 +8,8 @@ import American_Gothic from '../static/images/American_Gothic.jpg';
 import Creation_Adam from '../static/images/Creation_of_Adam.jpg';
 
 
+/* Carousel Component: to be used throughout the website */
 const CarouselInstance = () => {
-    /*
-    Carousel Component: to be used throughout the website
-    */
     return (
         <div className="CarouselInstance">
             <Carousel>

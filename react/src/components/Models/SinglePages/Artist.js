@@ -26,6 +26,24 @@ class Artist extends Component {
             })
     }
 
+    buildCarouselItems() {
+        return this.state.work_arr.slice(0, 10).map(function(obj) {
+            return (
+                <Carousel.Item key={obj.id}>
+                    <div>
+                        <Link to={'/works/'+obj.id} activeClassName='active'>
+                            <img className="workimage" src={obj.image_url} alt={obj.name} width="350" height="350" />
+                        </Link>
+                    </div>
+                     <Carousel.Caption>
+                        <p>{obj.name}</p>
+                        <p>{obj.date}</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            );
+        })
+    }
+
     render() {
         var artist_obj = this.state.items;
         var work_list = this.state.work_arr;
@@ -34,33 +52,11 @@ class Artist extends Component {
             //  Do all React code within this div. 'artist_obj' is the object that
             //  associated with this artist page, you should be able to access it
             //  like any other JSON
-            const carouselItems = work_list.slice(0, 10).map(function(obj) {
-                return (
-                    <Carousel.Item key={obj.id}>
-                        <a href={"/works/"+obj.id} onClick={() => {}} >
-                            <div>
-                                <img className="workimage" src={obj.image_url} alt={obj.name} width="350" height="350" />
-                            </div>
-                        </a>
-                        <Carousel.Caption>
-                            <p>{obj.name}</p>
-                            <p>{obj.date}</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                );
-            })
 
             // Life and death of artist
-            var life = artist_obj.birth + " (" + artist_obj.birthplace + ")";
-            if(artist_obj.death) {
-                life += " - " + artist_obj.death + "(" + artist_obj.deathplace + ")";
-            }
-
-            // Image url of artist
-            var image_url = artist_obj.image_url;
-            if(!image_url) {
-                image_url = work_list[0].image_url;
-            }
+            const life = artist_obj.birth + " (" + artist_obj.birthplace + ")";
+            const death = artist_obj.death ? artist_obj.death + '(' + artist_obj.deathplace + ')' : '???';
+            const image_url = artist_obj.image_url || work_list[0].image_url;
 
             // List of works
             let works = work_list.map(function(obj) {
@@ -71,17 +67,26 @@ class Artist extends Component {
             return (
                 <div className="Artist">
                     <h1>{artist_obj.name}</h1><br/>
-                    <img src={image_url} alt={artist_obj.name} className="img-rounded" width="300" height="450"/><br/>
-                    <strong>Culture: </strong>{artist_obj.culture}<br/>
-                    <strong>Birth/Death: </strong>{life}<br/>
+                    <img src={image_url} alt={artist_obj.name} className="artistimg" width="auto" height="450"/><br/><br/>
+                    <strong> Culture: </strong>{artist_obj.culture}<br/>
+                    <strong> Birth: </strong>{life}<br/>
+                    <strong> Death: </strong>{death}<br/>
                     <h3><strong>Notable Works</strong></h3>
-                    <br/>
-                    <div className="CarouselInstance">
-                            <Carousel>
-                                {carouselItems}
-                            </Carousel>
-                        <br/>
-                    </div>
+                    {
+                        work_list.length > 1
+                        ? <div className='container'>
+                                <br/>
+                                <div className="CarouselInstance">
+                                    <Carousel>
+                                        { this.buildCarouselItems() }
+                                    </Carousel>
+                                <br/>
+                                </div>
+                        </div>
+                        : <Link to={'/works/'+work_list[0].id} activeClassName='active'>
+                            <img className="workimage" src={work_list[0].image_url} alt={work_list[0].name} width="350" height="350" />
+                        </Link>
+                    }
                     {works}
                 </div>
             );

@@ -1,8 +1,8 @@
 
 
 import React, { Component } from 'react';
-import Loading from 'static/images/Loading.gif'
-import Pagination from 'components/Pagination'
+import Loader from 'components/Loader';
+import Pagination from 'components/Pagination';
 
 var PageLoader = (Parser, Filter) => class extends Component {
     constructor(props) {
@@ -40,9 +40,9 @@ var PageLoader = (Parser, Filter) => class extends Component {
         return (
             <div>
                 <Filter {...this.props} />
-                {this.state.loading ?
-                    <span><h3>Loading!!!</h3><img src={Loading} alt='Loading' /></span>:
-                    <Parser items={objects} instance_url={this.props.instance_url}/> }
+                {this.state.loading
+                    ? <div> <Loader /> <br/> </div>
+                    : <Parser items={objects} instance_url={this.props.instance_url}/> }
                 <Pagination page={info.page} numPages={info.num_pages} changePage={this.props.changePage} />
             </div>
         );

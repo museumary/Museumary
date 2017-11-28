@@ -10,8 +10,9 @@
 }
 
 .carousel-inner > .item > a > div > img {
-    margin: 0 auto;
-    width: auto;
+    /*margin: 0 auto;*/
+    /*width: 15 auto;*/
     height: 300px;
     max-height: 300px;
 }
+

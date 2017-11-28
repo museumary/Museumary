@@ -1,12 +1,13 @@
 
 import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import 'static/css/CarouselInstance.css';
 
 class Type extends Component {
     constructor(props) {
         super(props);
-        this.state={ items: [], med_arr: [], work_arr: [] };
+        this.state = { items: [], med_arr: [], work_arr: [] };
     }
 
     /* Fetches the data from our database and parses it accordingly */
@@ -16,6 +17,8 @@ class Type extends Component {
         fetch(`http://api.museumary.me/art_type/` + type_id)
             .then(result=>result.json())
             .then(items=>{
+                this.setState({ items });
+
                 for (var i = 0, len = Math.min(items.medium_ids.length, 10); i < len; i++) {
                     fetch('http://api.museumary.me/medium/' + items.medium_ids[i])
                         .then(result=>result.json())
@@ -26,8 +29,8 @@ class Type extends Component {
 
                 for (var j = 0; j < length; j++) {
                     fetch('http://api.museumary.me/work/' + items.work_ids[j])
-                    .then(result=>result.json())
-                    .then(responseJson=>this.setState({work_arr: this.state.work_arr.concat([responseJson])}))
+                        .then(result=>result.json())
+                        .then(responseJson=>this.setState({work_arr: this.state.work_arr.concat([responseJson])}))
                 }
             })
     }
@@ -41,9 +44,9 @@ class Type extends Component {
             const carouselItems = work_list.slice(0, 4).map(function(obj) {
                 return (
                     <Carousel.Item key={obj.id}>
-                        <a href={"/works/"+obj.id} onClick={() => {}} >
+                        <Link to={'/works/'+obj.id} activeClassName='active'>
                             <img className="carousel" src={obj.image_url} alt={obj.name} width="450" height="450" />
-                        </a>
+                        </Link>
                         <Carousel.Caption>
                             <p>{obj.name}</p>
                             <p>{obj.date}</p>
