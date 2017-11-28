@@ -62,9 +62,12 @@ var MasterFilter = WrappedFilter => class extends Component {
                 the wrapped filter.
         */
         render() {
-            const props = {...this.state, ...this.props, ...this.bindFunctions};
-
-            return <WrappedFilter {...props} />;
+            return (
+                <WrappedFilter
+                    {...this.state}
+                    {...this.props}
+                    {...this.bindFunctions} />
+            );
         }
 }
 

@@ -1,12 +1,14 @@
+/*
+    Big Carousel instance in the home page with static images
+*/
 
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 
-import Guernica from '../static/images/Guernica.jpg';
-import Starry_Night from '../static/images/Starry_Night.jpg';
-import American_Gothic from '../static/images/American_Gothic.jpg';
-import Creation_Adam from '../static/images/Creation_of_Adam.jpg';
-
+import Guernica from 'static/images/Guernica.jpg';
+import Starry_Night from 'static/images/Starry_Night.jpg';
+import American_Gothic from 'static/images/American_Gothic.jpg';
+import Creation_Adam from 'static/images/Creation_of_Adam.jpg';
 
 /* Carousel Component: to be used throughout the website */
 const CarouselInstance = () => {

@@ -1,7 +1,12 @@
+/*
+    Static About Page that shows each member of our group.
+    Contains the list of tools, repos, uml, data and report links.
+*/
 
 import React from 'react';
 import 'static/css/About.css';
 
+/* Import Images */
 import Josh from 'static/images/josh_profile.jpg';
 import Kelly from 'static/images/kelly_profile.jpg';
 import Kenny from 'static/images/kenny_profile.jpg';
@@ -81,10 +86,8 @@ const About = () => {
             <a href="https://trello.com/b/IB76HZxe/project-2-idb"><strong>Trello</strong></a>
             </p>
 
-
             <div className="page-header"/>
 
-            
             <div className="container">
                 {/* Data */}
                 <h1>Data Sources</h1>

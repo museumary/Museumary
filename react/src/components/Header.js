@@ -1,3 +1,10 @@
+/*
+    Header for entire website.
+        Has links to each model's FullPage
+        Contains the navbar.
+        Search bar is also embedded
+*/
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Search from 'containers/Search';

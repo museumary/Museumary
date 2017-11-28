@@ -1,8 +1,12 @@
+/*
+    Twitter feed for Cooper and Harvard Museums on the Home Page
+*/
+
 import React from 'react';
 import { Timeline } from 'react-twitter-widgets';
 
+/* Twitter Timeline: give twitter username and displays the twitter feed */
 const Twitter = () => {
-    /* Twitter Timeline: give twitter username and displays the twitter feed */
     return (
         <div className="container">
             <div className="row">
@@ -15,7 +19,7 @@ const Twitter = () => {
                 </div>
                 <div className="col-md-6">
                     {/* Twitter Username: harvardartmuseums */}
-                    <Timeline 
+                    <Timeline
                         dataSource={{sourceType:"profile", screenName:"harvartmuseums"}}
                         options={{username:"harvartmuseums", height:"635", width:"600"}}
                     />

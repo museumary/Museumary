@@ -22,7 +22,6 @@ import MasterFilter from 'containers/MasterFilter'
 
         NOTE: a 'None' key returns defaults to everything in the api
 */
-
 const COUNTRY_LIST = {
     'None': 'All',
     'USA': 'USA',

@@ -1,4 +1,10 @@
+/*
+    Higher Order PageLoader component that wraps a Parser and a Filter
 
+    Fetches the models from the base api and sends it to the filter
+    The parser will determine how the items are actually rendered
+    Links the changePage from fullPage to the Pagination component
+*/
 
 import React, { Component } from 'react';
 import Loader from 'components/Loader';
@@ -10,10 +16,12 @@ var PageLoader = (Parser, Filter) => class extends Component {
         this.state = { loading: true, info: {}, objects: [] }
     }
 
+    /* Load next page everytime we recieve props */
     componentWillReceiveProps(nextProps) {
         this.loadPage(nextProps.params);
     }
 
+    /* Load page based on new parameters */
     loadPage(params) {
         this.setState({ loading: true })
 
@@ -22,6 +30,7 @@ var PageLoader = (Parser, Filter) => class extends Component {
             arr.push(key+'='+params[key])
         }
 
+        // Fetch from api url of full pages with added parameters
         fetch(this.props.base_url+arr.join('&'))
             .then(result=>result.json())
             .then(items=> {
@@ -31,12 +40,12 @@ var PageLoader = (Parser, Filter) => class extends Component {
     }
 
     render() {
-        const { objects, info } = this.state;
+        const { objects, info, loading } = this.state;
 
         return (
             <div>
                 <Filter {...this.props} />
-                {this.state.loading
+                {loading
                     ? <div> <Loader /> <br/> </div>
                     : <Parser items={objects} instance_url={this.props.instance_url}/> }
                 <Pagination page={info.page} numPages={info.num_pages} changePage={this.props.changePage} />

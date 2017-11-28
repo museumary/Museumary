@@ -142,5 +142,4 @@ class SearchResults extends Component {
 }
 
 SearchResults.defaultProps = defaultProps;
-
 export default SearchResults;

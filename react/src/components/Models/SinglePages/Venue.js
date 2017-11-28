@@ -3,38 +3,41 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Thumbnail from 'components/Thumbnail';
 
+/* Import Venue Images */
 import Harvard from 'static/images/Harvard.jpg';
-import iHarvard from 'static/images/Harvard_interior.jpg';
-
-import Cooper from 'static/images/Cooper.jpg';
-import iCooper from 'static/images/Cooper_interior.jpg';
-
+import Walters from 'static/images/Walters.jpg';
 import Auckland from 'static/images/Auckland.jpg';
-import iAuckland from 'static/images/Auckland_interior.jpg';
-
+import Cooper from 'static/images/Cooper.jpg';
 import Finnish from 'static/images/Finnish.jpg';
+
+/* Import Interior Images  */
+import iHarvard from 'static/images/Harvard_interior.jpg';
+import iWalters from 'static/images/Walters_interior.jpg';
+import iAuckland from 'static/images/Auckland_interior.jpg';
+import iCooper from 'static/images/Cooper_interior.jpg';
 import iFinnish from 'static/images/Finnish_interior.jpg';
 
-import Walters from 'static/images/Walters.jpg';
-import iWalters from 'static/images/Walters_interior.jpg';
-
+/*
+    Build MUSEUMS Array with corresponding Image and Name
+    The Name will be used as a parameter to search in the FullWorks Page to get
+    all instances of the work in that venue
+*/
 const MUSEUMS = [
     [Harvard, iHarvard, 'Harvard+Art+Museum'],
     [Walters, iWalters, 'The+Walters+Art+Museum'],
     [Auckland, iAuckland, 'Auckland+Museum'],
     [Cooper, iCooper, 'Cooper+Hewitt,+Smithsonian+Design+Museum'],
     [Finnish, iFinnish, 'Finnish+National+Gallery']
-]
+];
 
-const defaultProps = {
-    parameters: '&maptype=satellite&zoom=19',
-    base_url: 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q='
-}
+const PARAMETERS = '&maptype=satellite&zoom=19';
+const BASE_URL = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAEh4yg0EoQBAqs3ieHnEPCD_ENLeYKUwM&q=';
 
 class Venue extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = { venue: [], works: [] };
+
         this.museum_url = '';
         this.imuseum_url = '';
         this.map_location = '';
@@ -46,7 +49,8 @@ class Venue extends Component {
         const venue_id = parseInt(this.props.match.params.number, 10)
 
         if(1 <= venue_id && venue_id <= 5) {
-            const museum = MUSEUMS[venue_id-1]
+            const museum = MUSEUMS[venue_id - 1]
+
             this.museum_url = museum[0];
             this.imuseum_url = museum[1];
             this.museum_name = museum[2];
@@ -57,17 +61,19 @@ class Venue extends Component {
             .then(venue=> {
                 this.setState({ venue })
 
-                // Street address of venue
-                let street = "";
-                if(venue.street)
-                    street = venue.street.replace(/ /g, "+");
-                const add =  street + "," + venue.city + "," + venue.country;
-                this.map_location = this.props.base_url + add + this.props.parameters;
+                let add = [
+                    // Format Street if there is one, empty otherwise
+                    venue.street ? venue.street.replace(/ /g, '+') : '',
+                    venue.city,
+                    venue.country
+                ];
 
-                for (var i = 0; i < 4; i++) {
+                this.map_location = BASE_URL + add.join(',') + PARAMETERS;
+
+                for (let i = 0; i < 4; i++) {
                     fetch('http://api.museumary.me/work/' + venue.work_ids[i])
-                        .then(result=>result.json())
-                        .then(responseJson=>this.setState({works: this.state.works.concat([responseJson])}))
+                        .then(result => result.json())
+                        .then(responseJson => this.setState({works: this.state.works.concat([responseJson])}))
                 }
             })
     }
@@ -81,23 +87,18 @@ class Venue extends Component {
             //  associated with this Venue page, you should be able to access it
             //  like any other JSON
 
+            // Create 4 Work Thumbnails
             let works = work_list.map(function(obj) {
-                const url = '/works/' + obj.id;
-                const name = obj.name.substring(0, 25) + (obj.name.length > 25 ? '...': '')
+                obj.url = '/works/' + obj.id;
+                obj.name = obj.name.substring(0, 25) + (obj.name.length > 25 ? '...': '')
+                obj.details = [obj.name, 'N/A', 'N/A'];
 
-                return (
-                    <Thumbnail
-                        name={name}
-                        image_url={obj.image_url}
-                        alt="Loading"
-                        url={url}
-                        key={obj.id}
-                        details={[name, "NA", "NA"]}/>
-                );
+                return <Thumbnail key={obj.id} {...obj} />;
             })
 
             return (
                 <div className="Venue">
+                    {/* Venue Name and Base / Interior Images */}
                     <h1>{venue_obj.name}</h1>
                     <div className="container">
                         <div className="row">
@@ -109,19 +110,17 @@ class Venue extends Component {
                             </div>
                         </div>
                     </div>
-                    <br/>
-                    <br/>
 
+                    {/* 4 Works Gallery and link to FullPage */}
                     <Link to={'/works?venue='+this.museum_name}><h2><strong>Gallery of Works</strong></h2></Link><br/>
                     <div className="container">
                         <div className="row">
                             {works}
                         </div>
-                        <br/>
-                        <br/>
                     </div>
-                    <br/>
-                    <br/>
+                    <br />
+
+                    {/* Map */}
                     <iframe width="800" height="600" frameBorder="0" src={ this.map_location } allowFullScreen align="center"></iframe><br/>
                     <p><strong>Address:</strong> {venue_obj.street} {venue_obj.city} {venue_obj.country}</p><br/><br/>
                 </div>
@@ -132,7 +131,5 @@ class Venue extends Component {
         }
     }
 }
-
-Venue.defaultProps = defaultProps;
 
 export default Venue;

@@ -1,3 +1,9 @@
+/*
+    Loading gifs that display when the application is fetching data
+
+    Loading is the fancy image
+    LoadingText is the literal 'Loading' text
+*/
 
 import React from 'react';
 import Loading from 'static/images/Loading-cropped.gif';

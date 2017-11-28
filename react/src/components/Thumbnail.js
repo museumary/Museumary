@@ -1,8 +1,13 @@
+/*
+    Thumbnail Component that contains small clickable images with details for
+    full pages
+*/
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 import 'static/css/Thumbnail.css';
 
+/* Venue Descriptions taken from their wiki */
 const Harvard = "Ever since their founding, the Harvard Art Museums have been dedicated to advancing and supporting learning at Harvard University, in the local community, and around the world. The museums have played a leading role in the development of art history, conservation, and conservation science, and in the evolution of the art museum as an institution."
 const Cooper = "A 21st-century museum housed in New York City’s landmark Carnegie Mansion, Cooper Hewitt offers four floors of galleries dedicated to all disciplines of design, a permanent collection of more than 210,000 design objects fully digitized and available online, and a world-class design library. In addition to producing major special exhibitions, the museum continually refreshes the installation of objects from its collection of product design, decorative arts, works on paper, graphic design, textiles, wallcoverings, and digital materials."
 const Auckland = "The Museum tells the story of New Zealand, its place in the Pacific and its people. The Museum is a war memorial for the province of Auckland and holds one of New Zealand's top three heritage libraries. It has pre-eminent Māori and Pacific collections, significant natural history resources and major social and military history collections, as well as decorative arts and pictorial collections."
@@ -13,7 +18,7 @@ const DESCRIPTION = [Harvard, Walter, Auckland, Cooper, Finnish]
 
 const Thumbnail = ({ name, image_url, url, type, description_id, details=["N/A", "N/A", "N/A"] }) => {
     if(type === "venue") {
-        /* 
+        /*
             Venue thumbnail is treated differently because there are only 5 venues
             An image positioned on the right side
             The name and description of the venue positioned on the left side
@@ -43,8 +48,8 @@ const Thumbnail = ({ name, image_url, url, type, description_id, details=["N/A",
         )
     }
     else {
-        /* 
-            Thumbnail used for Artists, Works, and Types pages 
+        /*
+            Thumbnail used for Artists, Works, and Types pages
             Consists of an image and a name
             When mouse hovers over thumbnail, displays extra information
         */

@@ -1,3 +1,7 @@
+/*
+    FullTypes Component that combines multiple components into a single full
+    Page based on the specific model.
+*/
 
 import React from 'react';
 import Page from './Page';
@@ -9,12 +13,11 @@ import { TypesParams } from './DefaultParameters'
 const TypesParser = ({ items, instance_url }) => {
     const parsedItems = items.map(item => {
         item.url = instance_url + item.id;
-
-        const works_count = item.work_ids.length
-        const artists_count = item.artist_ids.length
-        const medium_count = item.medium_ids.length
-
-        item.details = ["Artists: " + artists_count, "Works: " + works_count, "Mediums: " + medium_count]
+        item.details = [
+            'Artists: ' + item.artist_ids.length,
+            'Works: ' + item.artist_ids.length,
+            'Mediums: ' + item.medium_ids.length
+        ];
 
         return item;
     })

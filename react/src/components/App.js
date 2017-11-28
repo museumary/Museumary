@@ -1,5 +1,9 @@
+/*
+     App component that contains the header and the routing. Root of the App.
+*/
+
 import React from 'react';
-import Header from './Header';
+import Header from 'components/Header';
 import Main from 'containers/Main';
 
 const App = () => {

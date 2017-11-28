@@ -1,3 +1,9 @@
+/*
+    Single Artist Page that fetches its instance from the api and renders it
+
+    Fetches every single work instance of that artist also and builds a
+    Carousel of max 10 items
+*/
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -26,22 +32,25 @@ class Artist extends Component {
             })
     }
 
+    /* Builds 10 or less Carousel Items with and links */
     buildCarouselItems() {
-        return this.state.work_arr.slice(0, 10).map(function(obj) {
-            return (
-                <Carousel.Item key={obj.id}>
-                    <div>
-                        <Link to={'/works/'+obj.id} activeClassName='active'>
-                            <img className="workimage" src={obj.image_url} alt={obj.name} width="350" height="350" />
-                        </Link>
-                    </div>
-                     <Carousel.Caption>
-                        <p>{obj.name}</p>
-                        <p>{obj.date}</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            );
-        })
+        return (
+            this.state.work_arr.slice(0, 10).map(function (obj) {
+                return (
+                    <Carousel.Item key={obj.id}>
+                        <div>
+                            <Link to={'/works/' + obj.id} activeClassName='active'>
+                                <img className="workimage" src={obj.image_url} alt={obj.name} width="350" height="350" />
+                            </Link>
+                        </div>
+                        <Carousel.Caption>
+                            <p>{obj.name}</p>
+                            <p>{obj.date}</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                );
+            })
+        );
     }
 
     render() {
@@ -56,6 +65,8 @@ class Artist extends Component {
             // Life and death of artist
             const life = artist_obj.birth + " (" + artist_obj.birthplace + ")";
             const death = artist_obj.death ? artist_obj.death + '(' + artist_obj.deathplace + ')' : '???';
+
+            // Image url of the artist or the first work if there's no image
             const image_url = artist_obj.image_url || work_list[0].image_url;
 
             // List of works
@@ -67,14 +78,20 @@ class Artist extends Component {
             return (
                 <div className="Artist">
                     <h1>{artist_obj.name}</h1><br/>
-                    <img src={image_url} alt={artist_obj.name} className="artistimg" width="auto" height="450"/><br/><br/>
+                    <img
+                        src={image_url} alt={artist_obj.name}
+                        className="artistimg"
+                        width="auto" height="450" />
+                    <br/>
+                    <br/>
                     <strong> Culture: </strong>{artist_obj.culture}<br/>
                     <strong> Birth: </strong>{life}<br/>
                     <strong> Death: </strong>{death}<br/>
                     <h3><strong>Notable Works</strong></h3>
                     {
                         work_list.length > 1
-                        ? <div className='container'>
+                        ? // If there's more than 1 work build a carousel
+                            <div className='container'>
                                 <br/>
                                 <div className="CarouselInstance">
                                     <Carousel>
@@ -82,10 +99,15 @@ class Artist extends Component {
                                     </Carousel>
                                 <br/>
                                 </div>
-                        </div>
-                        : <Link to={'/works/'+work_list[0].id} activeClassName='active'>
-                            <img className="workimage" src={work_list[0].image_url} alt={work_list[0].name} width="350" height="350" />
-                        </Link>
+                            </div>
+                        : // If there's only 1 work load only that work
+                            <Link to={'/works/' + work_list[0].id} activeClassName='active'>
+                                <img
+                                    className="workimage"
+                                    src={work_list[0].image_url}
+                                    alt={work_list[0].name}
+                                    width="350" height="350" />
+                            </Link>
                     }
                     {works}
                 </div>

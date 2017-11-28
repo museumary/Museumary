@@ -40,8 +40,9 @@ class Type extends Component {
         const med_list = this.state.med_arr;
         const work_list = this.state.work_arr;
 
-        if(type_obj && work_list && med_list) {
-            const carouselItems = work_list.slice(0, 4).map(function(obj) {
+        if (type_obj && work_list && med_list) {
+            // Create 4 carousel items with links to the work
+            const carouselItems = work_list.slice(0, 4).map(function (obj) {
                 return (
                     <Carousel.Item key={obj.id}>
                         <Link to={'/works/'+obj.id} activeClassName='active'>
@@ -55,27 +56,27 @@ class Type extends Component {
                 );
             })
 
-        //  Do all React code within this div. 'Type_obj' is the object that
-        //  associated with this Type page, you should be able to access it
-        //  like any other JSON
+            //  Do all React code within this div. 'Type_obj' is the object that
+            //  associated with this Type page, you should be able to access it
+            //  like any other JSON
             return (
                 <div className="Type">
                     <h1>{type_obj.name}</h1>
-                    <br/>
+                    <br />
+
+                    {/* Carousel of Works */}
                     <div className="container">
                         <div className="CarouselInstance">
                             <Carousel>
                                 {carouselItems}
                             </Carousel>
-                        <br/>
+                            <br/>
+                        </div>
                     </div>
-                    </div>
-                    {
-                        med_list.map(
-                            function(obj) {
-                                return <div key={obj.id}>{obj.name}<br/></div>;
-                            }
-                        )
+                    {/* Medium List */
+                        med_list.map(obj => {
+                            return <div key={obj.id}>{obj.name}<br/></div>;
+                        })
                     }
                 </div>
             );

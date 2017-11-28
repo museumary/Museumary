@@ -1,3 +1,4 @@
+/* Export File for Single Pages */
 
 export { default as ArtistPage } from './Artist'
 export { default as TypePage } from './Type'

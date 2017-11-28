@@ -1,3 +1,6 @@
+/*
+    Pagination component that renders buttons and signals a change page request
+*/
 
 import React, { Component } from 'react';
 import 'static/css/Pagination.css'
@@ -15,10 +18,12 @@ class Pagination extends Component {
         this.state = { buttonText: [] }
     }
 
+    /* Build default button text on initial component mount */
     componentDidMount() {
         this.buildButtonText(this.props)
     }
 
+    /* Rebuild the button text when changing the page */
     componentWillReceiveProps(nextProps) {
         const { page, numPages } = this.props;
         const { nextPage, nextNumPages } = nextProps;
@@ -28,33 +33,32 @@ class Pagination extends Component {
         }
     }
 
+    /* Change the page only if the new page is within valid boundaries */
     changePage(pageNumber) {
         if(1 <= pageNumber && pageNumber  <= this.props.numPages) {
             this.props.changePage(pageNumber);
         }
     }
 
+    /* Build 5 or less buttons */
     buildButtonText(props) {
         const { page, numPages, range, half } = props
 
         let minPage = page-half, maxPage = page+half;
 
-        if(page < 3) {
+        if (page < 3) {
+            // If the active page is less than 3, the page range is from 1-numPages
             minPage = 1
             maxPage = Math.min(minPage+range, numPages)
         }
-        else if(page > numPages - 2) {
+        else if (page > numPages - 2) {
+            // If the active page is close to the end.
+            // The page range is numPages - 2 - numPages
             maxPage = numPages;
             minPage = Math.max(maxPage-range, 1)
         }
 
-        this.setState({ buttonText: Array.from(new Array(maxPage-minPage + 1), (_, i) => i + minPage) });
-    }
-
-    render() {
-        const { page, numPages } = this.props
-
-        const buttonText = this.state.buttonText.map(number => {
+        let buttonText = Array.from(new Array(maxPage - minPage + 1), (_, i) => i + minPage).map(number => {
             return (
                 <button
                     type='button'
@@ -66,11 +70,17 @@ class Pagination extends Component {
             );
         })
 
+        this.setState({ buttonText })
+    }
+
+    render() {
+        const { page, numPages } = this.props
+
         return (
             <ul>
                 <button type="button" onClick={() => this.changePage(1)} key={"<<"}>{"<<"}</button>
                 <button type="button" onClick={() => this.changePage(page - 1)} key={"<"}>{"<"}</button>
-                {buttonText}
+                {this.state.buttonText}
                 <button type="button" onClick={() => this.changePage(page + 1)} key=">" >></button>
                 <button type="button" onClick={() => this.changePage(numPages)} key=">>" >>></button>
             </ul>

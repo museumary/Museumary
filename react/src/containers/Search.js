@@ -1,6 +1,10 @@
+/*
+    Search component embedded in the navbar
+*/
 
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+
 import 'static/css/Header.css';
 
 class Search extends Component {
@@ -18,6 +22,7 @@ class Search extends Component {
         this.onButtonClick = this.onButtonClick.bind(this)
     }
 
+    /* When the enter key is pressed, redirect */
     onInputKeyPress(event) {
         switch (event.keyCode) {
             case 13:
