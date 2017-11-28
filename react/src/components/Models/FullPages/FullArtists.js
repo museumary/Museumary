@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Page from 'components/Page';
+import Page from './Page';
 import FullPage from 'containers/FullPage';
 import PageLoader from 'containers/PageLoader'
 

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Thumbnail from './Thumbnail';
+import Thumbnail from 'components/Thumbnail';
 
 const Page = ({ items }) => {
     return (

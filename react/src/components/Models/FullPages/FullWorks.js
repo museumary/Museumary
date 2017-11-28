@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Page from 'components/Page';
+import Page from './Page';
 import FullPage from 'containers/FullPage';
 import PageLoader from 'containers/PageLoader'
 import { WorksFilter } from 'components/Filters'
@@ -15,7 +15,7 @@ const WorksParser = ({ items, instance_url }) => {
 
         venue = venue.slice(0, 7);
         artist = artist.slice(0, 7) + (artist.length > 7 ? '...' : '')
-        item.details = ['Artist: ' + artist, 'Date: ' + item.date, "Venue: " + venue];
+        item.details = ['Artist: ' + artist, 'Date: ' + item.date, 'Venue: ' + venue];
 
         return item;
     })
