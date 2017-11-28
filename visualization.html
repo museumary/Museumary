@@ -5,13 +5,14 @@
   <script src="http://d3js.org/topojson.v1.min.js"></script>
   <!-- I recommend you host this file on your own, since this will change without warning -->
   <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
-  <h2>Datamaps Playground</h2>
-  <p><a href="http://datamaps.github.io/">DataMaps Project Homepage</a></p>
+  <h2>Endangered Animals</h2>
+  <p><a href="Endangered-Animals.me">Endangered Animals Homepage</a></p>
   <div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
  
      
      <script>
-       //basic map config with custom fills, mercator projection
+      //basic map config with custom fills, mercator projection
+    
       var map = new Datamap({
         scope: 'world',
         element: document.getElementById('container1'),
@@ -518,31 +519,34 @@
       		highlightOnHover: true,
       		popupTemplate: function(geo, data) {
                   return ['<div class="hoverinfo"><strong>',
-                          geo.properties.name,
-                          ': ' + httpGetAsync(data.country_url),
+                            geo.properties.name + ": " + httpGetAsync(data.country_url),
                           '</strong></div>'].join('');
           }
-  		  }
+  		  },
+        done: function(datamap) {
+            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+                console.log("click detected!")
+                // httpGetAsync(data.country_url);
+                alert([geography.properties.name].join(''));
+            });
+        }
 
       })
+
 
       function httpGetAsync(theUrl)
       {
           var xmlHttp = new XMLHttpRequest();
           xmlHttp.onreadystatechange = function() {
               console.log(xmlHttp.readyState);
-
               if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
               {
-                  return formatData(xmlHttp.responseText);
+                  formatData(xmlHttp.responseText);
               }
-
-
           };
+
           xmlHttp.open("GET", theUrl, true); // true for asynchronous 
           xmlHttp.send();
-          
-          
           
       }
 
@@ -560,10 +564,7 @@
         console.log(output);
         return output;
       }
-      
-      
-       
-      
+     
 
      </script>
 </body>

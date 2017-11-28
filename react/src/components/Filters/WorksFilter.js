@@ -1,5 +1,5 @@
 /*
-    WorksFilter.js
+    -- WorksFilter.js --
         Filter Works through its unique attributes.
 
     State:
@@ -13,7 +13,9 @@
 */
 
 import React from 'react';
+import BaseFilter from './BaseFilter'
 import SelectFilter from './SelectFilter';
+import MasterFilter from 'containers/MasterFilter'
 
 /*
     Define a Venues list with its corresponding value
@@ -24,42 +26,43 @@ import SelectFilter from './SelectFilter';
 */
 
 const VENUES_LIST = {
-    "None": "All",
-    "Harvard Art Museum": "Harvard",
-    "The Walters Art Museum": "Walters",
-    "Auckland Museum": "Auckland",
-    "Cooper Hewitt, Smithsonian Design Museum": "Cooper",
-    "Finnish National Gallery": "Finnish"
+    'None': 'All',
+    'Harvard Art Museum': 'Harvard',
+    'The Walters Art Museum': 'Walters',
+    'Auckland Museum': 'Auckland',
+    'Cooper Hewitt, Smithsonian Design Museum': 'Cooper',
+    'Finnish National Gallery': 'Finnish'
 }
 
-const WorksFilter = ({ art_type, medium, venue, handleChange }) => {
+const WorksFilter = BaseFilter(({ art_type, medium, venue, handleChange }) => {
     return (
         <span>
             <strong> Art Type: </strong>
-            <input
-                type="text"
-                name="art_type"
+            <input                                      // art_type
+                type='text'
+                name='art_type'
                 value={art_type}
                 onChange={handleChange}
             />
             &nbsp;&nbsp;
             <strong> Medium: </strong>
-            <input
-                type="text"
-                name="medium"
+            <input                                      // medium
+                type='text'
+                name='medium'
                 value={medium}
                 onChange={handleChange}
             />
             &nbsp;&nbsp;
             <strong> Venue: </strong>
-            <SelectFilter
-                name="venue"
+            <SelectFilter                               // venue
+                name='venue'
                 value={venue}
                 attributes={VENUES_LIST}
                 handleChange={handleChange} />
             &nbsp;&nbsp;
         </span>
     );
-}
+});
 
-export default WorksFilter;
+// Export the filter enhanced by the BaseFilter
+export default MasterFilter(WorksFilter);

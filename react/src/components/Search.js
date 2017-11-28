@@ -1,38 +1,43 @@
-import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import './../Header.css';
 
-class Search extends React.Component {
+import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import 'static/css/Header.css';
+
+class Search extends Component {
     constructor() {
         super();
-        this.state={
-            items:[],
+        this.state = {
+            items: [],
             activePage: 1,
             search_value: "",
             redirect: false
         };
+
+        this.textChange = this.textChange.bind(this)
+        this.onInputKeyPress = this.onInputKeyPress.bind(this)
+        this.onButtonClick = this.onButtonClick.bind(this)
     }
 
     onInputKeyPress(event) {
         switch (event.keyCode) {
             case 13:
-                this.setState({redirect: true})
+                this.setState({ redirect: true })
                 event.preventDefault();
                 break;
         }
     }
 
     onButtonClick(event) {
-        this.setState({redirect: true})
+        this.setState({ redirect: true })
     }
 
     textChange(event) {
-        this.setState({search_value: event.target.value});
+        this.setState({ search_value: event.target.value });
     }
 
     render() {
         if(this.state.redirect) {
-            this.setState({redirect: false})
+            this.setState({ redirect: false })
             return (
                 <Redirect to={{
                     pathname: '/results',
@@ -48,11 +53,11 @@ class Search extends React.Component {
                         name="name"
                         class="form-control"
                         placeholder="Search"
-                        onChange={this.textChange.bind(this)}
-                        onKeyDown={this.onInputKeyPress.bind(this)}
+                        onChange={this.textChange}
+                        onKeyDown={this.onInputKeyPress}
                     />
                     <div class="input-group-btn">
-                        <button class="btn btn-default" onClick={this.onButtonClick.bind(this)}>
+                        <button class="btn btn-default" onClick={this.onButtonClick}>
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
                     </div>

@@ -9,27 +9,43 @@ Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
 +++
 
 ### Trenton Strahan
-
-watch out its trenton oooOOOoOoOo
+* About Me
+    * Houston sports is everything to me
+    * Astros 4 lyfe
+    * Rockets 4 lyfe
+* Project Responsibilites
+    * Front-end design
+    * Data visualization
+    * Pagination
 
 +++
 
 ### Max West
-
-watch out its max oooOOOoOoOo
+* About Me
+    * I have a cat named Richard
+    * I enjoy long walks on the beach
+    * I like reading and I'm getting a minor in history
+    * I like movies and Amazon™
+* Project Responsibilities
+    * Front-end React Captain
 
 +++
 
 ### Josh Morris
-
-watch out its josh oooOOOoOoOo
+* About Me
+    * Fourth-year CS major
+    * I enjoy Mexican food, being active, and playing Rocket League™
+    * Rocket League please sponsor me
+* Project Responsibilities
+    * Worked with the back-end team
+    * Data visualization
+    * Unit testing
 
 +++
 
 ### Kelly Nguyen
-
 * About Me
-    * I am a loving mother to my cats Magpie and Rorschach (and my roommate's cats Pigeon and Poncho) and my dog Bear
+    * I am a loving mother to my many cats and my dog, Bear
     * They are my only hobby because I don't have time for anything else
     * I also like Tom Hanks and sushi
 * Project Responsibilities
@@ -40,7 +56,6 @@ watch out its josh oooOOOoOoOo
 +++
 
 ### Kenny Le
-
 * About Me
     * I like to watch League at 5 AM
     * I live in the basement lab
@@ -52,6 +67,9 @@ watch out its josh oooOOOoOoOo
 ---
 
 ## Demonstration
+Navigate, 
+Search, 
+Unit Tests
 
 ---
 
@@ -64,16 +82,14 @@ watch out its josh oooOOOoOoOo
 +++
 
 ### What did we learn?
-
 * What a web application is comprised of in terms of front-end and back-end and how the two interact with each other
 * What a RESTful API is and how to write one
 * How to define database models, set up a Postgres database, and manipulate it using SQL and an ORM like SQLAlchemy
-* *insert stuff about front end*
+* How to use Javascript and React
 
 +++
 
 ### What can we do better?
-
 * Search
     * Our search time outs for queries with too many results because it does the whole query at once (i.e. query="drawing")
 * Mobile Site
@@ -83,7 +99,6 @@ watch out its josh oooOOOoOoOo
 +++
 
 ### (continued)
-
 * Data
     * There weren't many good RESTful API sources for our topic
     * We have limited data on artists and not many well-known artists since our source APIs are limited to the works contained in a specific museum
@@ -93,13 +108,14 @@ watch out its josh oooOOOoOoOo
 +++
 
 ### What puzzles us?
-
 * Search
     * How to search across multiple tables and have the combined results sorted by relevancy (Our method was kind of hacky)
+* 
 
 ---
 
-## Critique of endangered-animals.me
+## Critique of
+## endangered-animals
 
 +++
 

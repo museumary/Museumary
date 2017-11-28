@@ -1,18 +1,16 @@
-import React from 'react';
+
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap';
 
-class Artist extends React.Component {
+class Artist extends Component {
     constructor() {
         super();
-        this.state={
-            items:[],
-            work_arr:[]
-        };
+        this.state = { items: [], work_arr: [] };
     }
 
     /* Fetches the data from our database and parses it accordingly */
-    componentDidMount(){
+    componentDidMount() {
         const artist_id = parseInt(this.props.match.params.number, 10)
 
         fetch(`http://api.museumary.me/artist/` + artist_id)
@@ -27,7 +25,6 @@ class Artist extends React.Component {
                 }
             })
     }
-
 
     render() {
         var artist_obj = this.state.items;
