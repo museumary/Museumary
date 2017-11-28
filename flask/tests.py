@@ -153,7 +153,7 @@ class TestMuseumaryProject(unittest.TestCase):
         """
         r = requests.get('http://api.museumary.me/art_type/79')
         json = r.json()
-        self.assertEqual("altered readymade", json['name'])
+        self.assertEqual("Altered Readymade", json['name'])
 
     def test_arttype_2(self):
         """
