@@ -5,13 +5,46 @@
   <script src="http://d3js.org/topojson.v1.min.js"></script>
   <!-- I recommend you host this file on your own, since this will change without warning -->
   <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
-  <h2>Datamaps Playground</h2>
-  <p><a href="http://datamaps.github.io/">DataMaps Project Homepage</a></p>
+  <h2>Endangered Animals</h2>
+  <p><a href="Endangered-Animals.me">Endangered Animals Homepage</a></p>
   <div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
  
      
      <script>
        //basic map config with custom fills, mercator projection
+      // var test_data = '{' + 
+  // '"name": "Bahamas", +
+//   '"flag": "http://3.bp.blogspot.com/-rm5nXBEpXgc/TdASNH3jEuI/AAAAAAAATos/Bf2eixz8NPo/s1600/Bahamas_Flag27.jpg",'+
+//   '"coordinate": "lat: 25.03428 lng: -77.39628",'+
+//   '"assoc_animals": ['+
+//     '"Night Sergeant",'+
+//    '"Doctorfish",'+
+//     '"Sergeant-major",'+
+//     '"Blue Tang",'+
+//     '"Wahoo",'+
+//     '"Redpoll"'+
+//   '],'+
+//   '"assoc_habitats": ['+
+//     '"Marine Neritic - Seagrass (Submerged)",'+
+//     '"Marine Intertidal - Tidepools",'+
+//     '"Shrubland - Temperate",'+
+//     '"Inter-Reef Soft Substrate",'+
+//     '"Forest - Boreal",'+
+//     '"Artificial/Terrestrial - Rural Gardens",'+
+//     '"Back Slope",'+
+//     '"Forest - Temperate",'+
+//     '"Inter-Reef Rubble Substrate",'+
+//     '"Lagoon",'+
+//     '"Marine Neritic - Pelagic",'+
+//     '"Outer Reef Channel",'+
+//     '"Artificial/Terrestrial - Plantations",'+
+//     '"Marine Oceanic - Epipelagic (0-200m)",'+
+//     '"Foreslope (Outer Reef Slope)",'+
+//     '"Marine Neritic - Subtidal Rock and Rocky Reefs",'+
+//     '"Marine Intertidal - Rocky Shoreline"'+
+//   ']'+
+// '}';
+      var test_data = '{"name":"Bahamas"}'
       var map = new Datamap({
         scope: 'world',
         element: document.getElementById('container1'),
@@ -517,30 +550,35 @@
       		popupOnHover:true,
       		highlightOnHover: true,
       		popupTemplate: function(geo, data) {
-                  var x = httpGetAsync(data.country_url);
-                  // console.log(x);
                   return ['<div class="hoverinfo"><strong>',
                           geo.properties.name,
-                          ': ' + x,
                           '</strong></div>'].join('');
           }
-  		  }
+  		},
+        done: function(datamap) {
+            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+                console.log("click detected!")
+                alert([geography.properties.name].join(''));
+            });
+        }
 
       })
+
       function httpGetAsync(theUrl)
           {
               var xmlHttp = new XMLHttpRequest();
               xmlHttp.onreadystatechange = function() { 
                   if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
                   {
-                      console.log("here");
+                      console.log(xmlHttp.responseText)
+                      return xmlHttp.responseText;
                   }
 
 
               }
               xmlHttp.open("GET", theUrl, true); // true for asynchronous 
               xmlHttp.send(null);
-              console.log("!!!!!!!!!!!!!!");
+              console.log("!!!!!!!!!!!!!!!!");
               console.log(xmlHttp.status);
               console.log(xmlHttp.responseText);
               return xmlHttp.responseText
