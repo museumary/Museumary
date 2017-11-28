@@ -114,7 +114,8 @@ Unit Tests
 
 ---
 
-## Critique of \nendangered-animals
+## Critique of
+## endangered-animals
 
 +++
 
