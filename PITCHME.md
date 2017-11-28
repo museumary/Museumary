@@ -1,6 +1,7 @@
 # Museumary
 
-Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
+Trenton Strahan, Maxwell West, Joshua Morris,   
+Kelly Nguyen, Kenny Le
 
 ---
 
