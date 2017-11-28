@@ -80,7 +80,9 @@ Unit Tests
 ### What did we do well?
 * We did a good job delegating tasks to be done and getting things done in a timely manner
 * Our code is well organized and well documented
-* 
+* We have a lot of content about more obscure artists
+    * Gotta help out the starving artist
+* The real art was the friends we made along the way
 
 +++
 
