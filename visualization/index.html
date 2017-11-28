@@ -40,9 +40,10 @@
             </div>
 
             <div id="Habitats" class="w3-container city">
-               <h1>Paris</h1>
-               <p>Paris is the capital of France.</p>
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+               <h1>Habitats</h1>
+               <div id="HabitatsText">
+                   
+               </div>
             </div>
 
             <div id="Threats" class="w3-container city">
@@ -80,8 +81,8 @@
                     var country_code = geography.id;
                     try {
                         var url = url_mappings[country_code].country_url
-                        // httpGetAsync(url, displayModal);
-                        displayModal(null)
+                        httpGetAsync(url, displayModal);
+                        // displayModal(null)
                     }
                     catch (TypeError) {
                         console.error("No Data on " + geography.properties.name)
@@ -104,27 +105,22 @@
 
         function displayModal(data) {
             // Replace with data.flag and image src
-            document.getElementById('FlagImage').src = "https://vignette.wikia.nocookie.net/althistory/images/4/4d/Random_flag.png/revision/latest?cb=20140108043235"
-            document.getElementById('CountryHeader').innerText = 'Bello'
+            document.getElementById('FlagImage').src = data.flag
+            document.getElementById('CountryHeader').innerText = data.name
 
-            // formatAnimals(data);
-            // formatHabitats(data);
+            formatAnimals(data);
+            formatHabitats(data);
             modal.style.display = "block";
         }
 
         function formatAnimals(data) {
-            let animal_output = data.assoc_animals.join('<br/>');
-            document.getElementById('AnimalsText').innerHTML = animal_output
+            let output = data.assoc_animals.join('<br/>');
+            document.getElementById('AnimalsText').innerHTML = output
         }
 
         function formatHabitats(data) {
-            // console.log(data);
-            var output = "";
-            for( i = 0; i < data.assoc_habitats.length; i++ ) {
-                output = output + (data.assoc_habitats[i] + (data.assoc_habitats.length > 1 ? ", " : ""));
-            }
-
-            document.getElementById('Habitats').innerHTML = output
+            let output = data.assoc_habitats.join('<br/>');
+            document.getElementById('HabitatsText').innerHTML = output
         }
     </script>
 </body>
