@@ -1,14 +1,85 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<head>
+<style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+</head>
 <body>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="http://d3js.org/topojson.v1.min.js"></script>
-  <!-- I recommend you host this file on your own, since this will change without warning -->
-  <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
-  <h2>Endangered Animals</h2>
-  <p><a href="Endangered-Animals.me">Endangered Animals Homepage</a></p>
-  <div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
- 
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+    <h2>Endangered Animals</h2>
+    <p><a href="Endangered-Animals.me">Endangered Animals Homepage</a></p>
+    <div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
+
+    <!-- The Modal -->
+    <div id="Modal" class="modal">
+
+          <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal..</p>
+        </div>
+
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('Modal');
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
      
      <script>
       var url_mappings =  {
@@ -526,8 +597,16 @@
                 console.log("click detected!")
                 var country_code = geography.id;
                 // console.log(country_code)
-                var url = url_mappings[country_code].country_url
-                httpGetAsync(url, formatData);
+                try {
+                    var url = url_mappings[country_code].country_url
+                    httpGetAsync(url, formatData);
+
+                }
+                catch (TypeError) {
+                    console.error("No Data on " + geography.properties.name)
+                }
+                
+                
     
                 // alert([geography.properties.name, out].join(''));
             });
@@ -562,8 +641,8 @@
           output = output + (obj.assoc_animals[i] + (obj.assoc_animals.length > 1 ? ", " : ""));
         }
         
-
-        alert([output].join(''));
+        modal.style.display = "block";
+        // alert([output].join(''));
       }
      
 
