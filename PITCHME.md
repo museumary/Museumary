@@ -56,7 +56,6 @@ Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
 +++
 
 ### Kenny Le
-
 * About Me
     * I like to watch League at 5 AM
     * I live in the basement lab
@@ -68,8 +67,8 @@ Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
 ---
 
 ## Demonstration
-Navigate,
-Search,
+Navigate, 
+Search, 
 Unit Tests
 
 ---
@@ -79,6 +78,9 @@ Unit Tests
 +++
 
 ### What did we do well?
+* We did a good job delegating tasks to be done and getting things done in a timely manner
+* Our code is well organized and well documented
+* 
 
 +++
 
@@ -104,14 +106,14 @@ Unit Tests
     * There weren't many good RESTful API sources for our topic
     * We have limited data on artists and not many well-known artists since our source APIs are limited to the works contained in a specific museum
     * Artists don't have data on all their works, only the works in the museums we scraped
-    * Data on only five museums
+    * We have data on only five museums
 
 +++
 
 ### What puzzles us?
 * Search
     * How to search across multiple tables and have the combined results sorted by relevancy (Our method was kind of hacky)
-*
+* 
 
 ---
 
@@ -123,11 +125,15 @@ Unit Tests
 ### What did they do well?
 * Search results appear very quickly in real time on the model pages
 * Models are rich in information and have good relationships to the other main models
-* 
+* The site is very responsive when it comes to filtering and sorting and it loads quickly in general
 
 +++
 
 ### What did we learn from their website?
+* Save the animals!!!
+* React-bootstrap-table is cool
+    * Search, filtering, and sorting
+* The threat with the highest severity is the abstraction of ground water for agricultural use
 
 +++
 
@@ -147,7 +153,10 @@ Unit Tests
 +++
 
 ### What puzzles us about their website?
+* We couldn't figure out how their API worked because there was no API files in their GitHub. After reading their technical report, it looks like there is an additional "back-end" folder not included in the public repo
+* They have so many JS files, it was hard to understand how their app was structured and their GitHub organization was unclear
 
 ---
 
 ## Visualization
+
