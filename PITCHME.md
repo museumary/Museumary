@@ -21,11 +21,13 @@ Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
 +++
 
 ### Max West
-
-watch out its max oooOOOoOoOo
-
 * About Me
     * I have a cat named Richard
+    * I enjoy long walks on the beach
+    * I like reading and I'm getting a minor in history
+    * I like movies and Amazon™
+* Project Responsibilities
+    * Front-end React Captain
 
 +++
 
