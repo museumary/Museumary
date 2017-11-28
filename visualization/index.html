@@ -3,19 +3,20 @@
 <head>
     <link rel="stylesheet" href="Modal.css">
 </head>
-<body>
-    <script type='text/javascript' src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="http://d3js.org/topojson.v1.min.js"></script>
-    <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
-    <script type='text/javascript' src='Mappings.js'></script>
 
-    <h2>Endangered Animals</h2>
-    <p><a href="http://endangered-animals.me">Endangered Animals Homepage</a></p>
-    <div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
+<script type='text/javascript' src="http://d3js.org/d3.v3.min.js"></script>
+<script type='text/javascript' src="http://d3js.org/topojson.v1.min.js"></script>
+<script type='text/javascript' src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+<script type='text/javascript' src='Mappings.js'></script>
+
+<body>
+    <!-- <h2>Endangered Animals</h2> -->
+    <h2 align='middle'><a href="http://endangered-animals.me">Endangered Animals</a></h2>
+    <div id="container1" style="position: relative; width: 100%; max-height: 400px;"></div>
 
     <!-- The Modal -->
     <div id="Modal" class="modal">
-          <!-- Modal content -->
+        <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
                 <div class="w3-bar w3-border-bottom">
@@ -23,6 +24,7 @@
                     <button class="tablink button" onclick="openModel(event, 'Habitats')">Habitats</button>
                     <button class="tablink button" onclick="openModel(event, 'Threats')">Threats</button>
                 </div>
+
             <div id="Animals" class="container city">
                <h1>London</h1>
                <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
@@ -41,46 +43,8 @@
             </div>
         </div>
 
+        <script type='text/javascript' src='Modal.js'></script>
     </div>
-
-    <script>
-        document.getElementsByClassName("tablink")[0].click();
-
-        function openModel(evt, model) {
-          var i, x, tablinks;
-          x = document.getElementsByClassName("city");
-          for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-          }
-          tablinks = document.getElementsByClassName("tablink");
-          for (i = 0; i < x.length; i++) {
-            tablinks[i].classList.remove("w3-light-grey");
-          }
-          document.getElementById(model).style.display = "block";
-          evt.currentTarget.classList.add("w3-light-grey");
-        }
-    </script>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById('Modal');
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
 
     <script>
         var map = new Datamap({
@@ -136,6 +100,8 @@
             for( i = 0; i < obj.assoc_animals.length; i++ ) {
                 output = output + (obj.assoc_animals[i] + (obj.assoc_animals.length > 1 ? ", " : ""));
             }
+
+            document.getElementById('Animals').innerHTML = output
 
             modal.style.display = "block";
             // alert([output].join(''));
