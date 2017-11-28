@@ -11,19 +11,7 @@
  
      
      <script>
-      //basic map config with custom fills, mercator projection
-    
-      var map = new Datamap({
-        scope: 'world',
-        element: document.getElementById('container1'),
-        projection: 'mercator',
-        height: 1000,
-        fills: {
-          defaultFill: '4ba50e',
-          lt50: 'rgba(0,244,244,0.9)',
-          gt50: 'red'
-        },
-        data: {
+      var url_mappings =  {
           AFG : {
             country_url:  "https://swe-endangered-animals.appspot.com/single_country_data/?country_name=Afghanistan"
           },
@@ -513,35 +501,49 @@
           USA : {
             country_url:  "https://swe-endangered-animals.appspot.com/single_country_data/?country_name=United%20States"
           }
+        }
+      var map = new Datamap({
+        scope: 'world',
+        element: document.getElementById('container1'),
+        projection: 'mercator',
+        height: 1000,
+        fills: {
+          defaultFill: '4ba50e',
+          lt50: 'rgba(0,244,244,0.9)',
+          gt50: 'red'
         },
         geographyConfig: {
       		popupOnHover:true,
       		highlightOnHover: true,
       		popupTemplate: function(geo, data) {
                   return ['<div class="hoverinfo"><strong>',
-                            geo.properties.name + ": " + httpGetAsync(data.country_url),
+                            geo.properties.name,
                           '</strong></div>'].join('');
           }
   		  },
         done: function(datamap) {
             datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
                 console.log("click detected!")
-                // httpGetAsync(data.country_url);
-                alert([geography.properties.name].join(''));
+                var country_code = geography.id;
+                // console.log(country_code)
+                var url = url_mappings[country_code].country_url
+                httpGetAsync(url, formatData);
+    
+                // alert([geography.properties.name, out].join(''));
             });
         }
 
       })
 
 
-      function httpGetAsync(theUrl)
+      function httpGetAsync(theUrl, callback)
       {
           var xmlHttp = new XMLHttpRequest();
           xmlHttp.onreadystatechange = function() {
-              console.log(xmlHttp.readyState);
+              // console.log(xmlHttp.readyState);
               if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
               {
-                  formatData(xmlHttp.responseText);
+                  callback(xmlHttp.responseText); 
               }
           };
 
@@ -552,7 +554,7 @@
 
       function formatData(data)
       {
-        console.log(data);
+        // console.log(data);
         var obj = JSON.parse(data);
         var output = "";
         for( i = 0; i < obj.assoc_animals.length; i++ )
@@ -561,8 +563,7 @@
         }
         
 
-        console.log(output);
-        return output;
+        alert([output].join(''));
       }
      
 

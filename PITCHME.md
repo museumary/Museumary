@@ -56,6 +56,7 @@ Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
 +++
 
 ### Kenny Le
+
 * About Me
     * I like to watch League at 5 AM
     * I live in the basement lab
@@ -67,8 +68,8 @@ Trenton Strahan, Maxwell West, Joshua Morris, Kelly Nguyen, Kenny Le
 ---
 
 ## Demonstration
-Navigate, 
-Search, 
+Navigate,
+Search,
 Unit Tests
 
 ---
@@ -110,7 +111,7 @@ Unit Tests
 ### What puzzles us?
 * Search
     * How to search across multiple tables and have the combined results sorted by relevancy (Our method was kind of hacky)
-* 
+*
 
 ---
 
@@ -148,4 +149,3 @@ Unit Tests
 ---
 
 ## Visualization
-
