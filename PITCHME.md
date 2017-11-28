@@ -121,23 +121,25 @@ Unit Tests
 +++
 
 ### What did they do well?
-
-* Search
-    * Very fast search results that appear on the model pages themselves
+* Search results appear very quickly in real time on the model pages
+* Models are rich in information and have good relationships to the other main models
+* 
 
 +++
 
 ### What did we learn from their website?
 
-* They did everything in javascript??
-
 +++
 
 ### What can they do better?
-
 * Model Pages
     * Too much data is shown on the model page with multiple instances
-    * We think it should be more condensed and expanded upon in the individual instance page
+    * We think it should be more condensed and expanded upon in the individual instance page, or be formatted so that information does not run off the screen
+    * Some images are cut off in the page with multiple models
+
++++
+
+### Continued
 * Filtering and Search
     * It seems a little bit overkill to have a general search as well as search functions for every attribute of every model
     * It would be nice to be able to search multiple models at once rather than one at a time
