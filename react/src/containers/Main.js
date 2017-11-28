@@ -3,6 +3,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Home from 'components/Home';
+import About from 'components/About';
+import SearchResults from 'components/SearchResults';
 
 import {
     ArtistPage,
@@ -10,14 +12,6 @@ import {
     VenuePage,
     WorkPage
 } from 'components/Models/SinglePages'
-
-// import Artist from './components/Artist';
-// import Work from './components/Work';
-// import Type from './components/Type';
-// import Venue from './components/Venue';
-import About from 'components/About';
-
-import SearchResults from 'components/SearchResults';
 
 import {
     FullWorks,

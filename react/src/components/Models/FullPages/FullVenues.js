@@ -4,7 +4,7 @@ import Page from './Page';
 import FullPage from 'containers/FullPage';
 import PageLoader from 'containers/PageLoader'
 import { VenuesFilter } from 'components/Filters'
-import { VenuesParams } from 'DefaultParameters'
+import { VenuesParams } from './DefaultParameters'
 
 import Harvard from 'static/images/Harvard.jpg';
 import Cooper from 'static/images/Cooper.jpg';

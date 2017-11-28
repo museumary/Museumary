@@ -4,7 +4,7 @@ import Page from './Page';
 import FullPage from 'containers/FullPage';
 import PageLoader from 'containers/PageLoader'
 import { WorksFilter } from 'components/Filters'
-import { WorksParams } from 'DefaultParameters'
+import { WorksParams } from './DefaultParameters'
 
 const WorksParser = ({ items, instance_url }) => {
     const parsedItems = items.map(item => {

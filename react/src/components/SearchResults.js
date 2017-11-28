@@ -48,7 +48,6 @@ class SearchResults extends Component {
         );
     }
 
-
     render() {
         if(this.state.oldQuery !== this.props.location.state.search) {
             this.changePage(1);

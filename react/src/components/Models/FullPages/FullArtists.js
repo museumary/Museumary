@@ -3,9 +3,8 @@ import React from 'react';
 import Page from './Page';
 import FullPage from 'containers/FullPage';
 import PageLoader from 'containers/PageLoader'
-
 import { ArtistsFilter } from 'components/Filters'
-import { ArtistsParams } from 'DefaultParameters'
+import { ArtistsParams } from './DefaultParameters'
 
 import Gentleman from 'static/images/Gentleman.png'
 

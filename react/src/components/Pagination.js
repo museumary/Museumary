@@ -28,6 +28,12 @@ class Pagination extends Component {
         }
     }
 
+    changePage(pageNumber) {
+        if(1 <= pageNumber && pageNumber  <= this.props.numPages) {
+            this.props.changePage(pageNumber);
+        }
+    }
+
     buildButtonText(props) {
         const { page, numPages, range, half } = props
 
@@ -46,14 +52,14 @@ class Pagination extends Component {
     }
 
     render() {
-        const { page, numPages, changePage } = this.props
+        const { page, numPages } = this.props
 
         const buttonText = this.state.buttonText.map(number => {
             return (
                 <button
                     type='button'
                     className={number === page ? 'active': ''}
-                    onClick={() => changePage(number)}
+                    onClick={() => this.changePage(number)}
                     key={number}>
                     {number}
                 </button>
@@ -62,11 +68,11 @@ class Pagination extends Component {
 
         return (
             <ul>
-                <button type="button" onClick={() => changePage(1)} key={"<<"}>{"<<"}</button>
-                <button type="button" onClick={() => changePage(page - 1)} key={"<"}>{"<"}</button>
+                <button type="button" onClick={() => this.changePage(1)} key={"<<"}>{"<<"}</button>
+                <button type="button" onClick={() => this.changePage(page - 1)} key={"<"}>{"<"}</button>
                 {buttonText}
-                <button type="button" onClick={() => changePage(page + 1)} key=">" >></button>
-                <button type="button" onClick={() => changePage(numPages)} key=">>" >>></button>
+                <button type="button" onClick={() => this.changePage(page + 1)} key=">" >></button>
+                <button type="button" onClick={() => this.changePage(numPages)} key=">>" >>></button>
             </ul>
         );
     };

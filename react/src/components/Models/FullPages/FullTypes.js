@@ -4,7 +4,7 @@ import Page from './Page';
 import FullPage from 'containers/FullPage';
 import PageLoader from 'containers/PageLoader'
 import { TypesFilter } from 'components/Filters'
-import { TypesParams } from 'DefaultParameters'
+import { TypesParams } from './DefaultParameters'
 
 const TypesParser = ({ items, instance_url }) => {
     const parsedItems = items.map(item => {

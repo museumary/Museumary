@@ -1,3 +1,23 @@
+/*
+    Contains parameters used when making FullPages.
+
+    defaultParams:
+        page
+        entries_per_page
+        order_by
+        order
+        startswith
+        --custom params for each model--
+
+    attributes:
+        list of attributes that can be used to sort the model
+
+    base_url:
+        api url of that gets all instances of the model
+
+    instance_url:
+        api url of a single instance of the model
+*/
 
 export const WorksParams = {
     defaultParams: {
@@ -77,8 +97,6 @@ export const TypesParams = {
     attributes: {
         name: "Name"
     },
-
-    work_url: 'http://api.museumary.me/work/',
 
     base_url: 'http://api.museumary.me/art_type?',
     instance_url: '/types/'
