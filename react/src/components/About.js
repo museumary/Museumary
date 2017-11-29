@@ -34,14 +34,14 @@ const About = () => {
                         <h2><strong>Kenny Le</strong></h2>
                         <p>Hello, Kenny here! I am a Computer Science major at UT and I am graduating this year. I really appreciate the group leader.</p>
                         <p><strong>Responsibilities:</strong><br/> With the frontend team, worked on pagination and filtering. Focused on quality assurance to maintain a well constructed website.</p>
-                        <p><strong>No. of Commits:</strong> 49<br/><strong>No. of Issues:</strong> 12<br/><strong>No. of Tests:</strong> 3</p>
+                        <p><strong>No. of Commits:</strong> 82<br/><strong>No. of Issues:</strong> 12<br/><strong>No. of Tests:</strong> 3</p>
                     </div>
                     <div className="col-md-6">
                         <img src={ Josh } className="img-circle" alt="Josh" width="256" height="256" />
                         <h2><strong>Josh Morris</strong></h2>
                         <p>4th year Computer Science major at the University of Texas at Austin. I enjoy Mexican food, being active, and playing Rocket League.</p>
                         <p><strong>Responsibilities:</strong><br/> Worked on creating the database and structuring it to JSON format. Worked with the backend team.</p>
-                        <p><strong>No. of Commits:</strong> 10<br/><strong>No. of Issues:</strong> 6<br/><strong>No. of Tests:</strong> 30</p>
+                        <p><strong>No. of Commits:</strong> 21<br/><strong>No. of Issues:</strong> 8<br/><strong>No. of Tests:</strong> 30</p>
                     </div>
             </div>
                 <br/>
@@ -53,14 +53,14 @@ const About = () => {
                     <h2><strong>Kelly Nguyen</strong></h2>
                     <p>3rd year Computer Science major at UT. I am 20 years old and I have 3 cats. There names are Poncho, Magpie, Pigeon.</p>
                     <p><strong>Responsibilities:</strong><br/> Designed our apiary.io. Used Flask and other tools for backend work.</p>
-                    <p><strong>No. of Commits:</strong> 47<br/><strong>No. of Issues:</strong> 20<br/><strong>No. of Tests:</strong> 8</p>
+                    <p><strong>No. of Commits:</strong> 77<br/><strong>No. of Issues:</strong> 23<br/><strong>No. of Tests:</strong> 8</p>
                 </div>
                 <div className="col-md-6">
                     <img src={ Trenton } className="img-circle" alt="Trenton" width="256" height="256" />
                     <h2><strong>Trenton Strahan</strong></h2>
                     <p>A 4th year Computer Science major at UT with a minor in RTF. Very excited for Software Engineering this semester. Houston sports fan. Go 'Stros!</p>
                     <p><strong>Responsibilities:</strong><br/> Designed and built the home page and the about page. Worked as a frontend designer. Helped with pagination and model pages.</p>
-                    <p><strong>No. of Commits:</strong> 42<br/><strong>No. of Issues:</strong> 7<br/><strong>No. of Tests:</strong> 0</p>
+                    <p><strong>No. of Commits:</strong> 47<br/><strong>No. of Issues:</strong> 10<br/><strong>No. of Tests:</strong> 2</p>
                 </div>
             </div>
             <div className="row">
@@ -69,7 +69,7 @@ const About = () => {
                     <h2><strong>Max West</strong></h2>
                     <p>This is my 4th year as a Computer Science major at UT. After graduation I am moving to Seattle to work for Amazon Publishing. I like long walks on the beach and Ruby on Rails.</p>
                     <p><strong>Responsibility:</strong><br/> Used React to build the front end of the website. Queried the database for information and then displayed that accordingly.</p>
-                    <p><strong>No. of Commits:</strong>  38<br/><strong>No. of Issues:</strong> 7<br/><strong>No. of Tests:</strong> 5</p>
+                    <p><strong>No. of Commits:</strong>  39<br/><strong>No. of Issues:</strong> 10<br/><strong>No. of Tests:</strong> 12</p>
                 </div>
               </div>
             </div>
@@ -77,13 +77,16 @@ const About = () => {
             {/* Stats */}
             <div className="page-header"/>
             <h1>Stats</h1>
-            <p><strong>Total No. of Commits:</strong> 232<br/><strong>Total No. of Issues:</strong> 52
-            <br/><strong>Total No. of Tests:</strong> 46</p>
-            <p><a href="http://docs.museumary.apiary.io/#"><strong>Apiary API</strong></a>
+            <p><strong>Total No. of Commits:</strong> 232<br/><strong>Total No. of Issues:</strong> 63
+            <br/><strong>Total No. of Tests:</strong> 55</p>
+            <p><a href="https://gitpitch.com/museumary/Museumary"><strong>GitPitch</strong></a>
             <br/>
             <a href="https://github.com/museumary/Museumary"><strong>GitHub Repo</strong></a>
             <br/>
+            <a href="https://trentonstrahan.gitbooks.io/museumary/content/"><strong>GitBook</strong></a>
+            <br/>
             <a href="https://trello.com/b/IB76HZxe/project-2-idb"><strong>Trello</strong></a>
+
             </p>
 
             <div className="page-header"/>
