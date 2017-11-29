@@ -7,13 +7,15 @@ var modal = document.getElementById('Modal');
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+span.onclick = function () {
+    document.getElementsByClassName("tablink")[0].click();
     modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
+        document.getElementsByClassName("tablink")[0].click();
         modal.style.display = "none";
     }
 }

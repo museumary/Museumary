@@ -19,36 +19,75 @@
         <div class="modal-content  w3-animate-zoom">
             <header class="w3-container w3-blue">
                 <h2>
-                    <span id='CountryHeader'>Hello</span>
-                    <img id='FlagImage' src='https://i.imgur.com/oFtScJt.png' alt="Mountain View" style="max-height: 30px; margin-top: 5px;" />
+                    <span id='CountryHeader'></span>
+                    <img id='FlagImage' alt="Mountain View" style="max-height: 30px; margin-top: 5px;" />
                     <span class="close">&times;</span>
                 </h2>
             </header>
                 <div class="w3-border-bottom w3-border-top">
                     <button class="tablink w3-bar-item w3-button" onclick="openModel(event, 'Animals')">Animals</button>
                     <button class="tablink w3-bar-item w3-button" onclick="openModel(event, 'Habitats')">Habitats</button>
-                    <button class="tablink w3-bar-item w3-button" onclick="openModel(event, 'Threats')">Threats</button>
+                    <button class="tablink w3-bar-item w3-button" onclick="openModel(event, 'Data')">Data</button>
                 </div>
-
 
             <div id="Animals" class="w3-container city">
-                <h2> Animals </h2>
-                <div id="AnimalsText" >
-                    <p>London is the most populous city in the United Kingdom, with a metropolitan area of over 9 million inhabitants.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
+                <h3> Animals </h3>
+                <div id="AnimalsText" ></div>
             </div>
 
             <div id="Habitats" class="w3-container city">
-               <h1>Habitats</h1>
-               <div id="HabitatsText">
-                   
-               </div>
+                <h3>Habitats</h3>
+                <div id="HabitatsText"></div>
             </div>
 
-            <div id="Threats" class="w3-container city">
-               <h1>Tokyo</h1>
-               <p>Tokyo is the capital of Japan.</p><br>
+            <!--
+                click detected!
+index.html:77:21
+{…}
+assoc_countries: Array [ "Bermuda", "Lithuania", "Malta", … ]
+assoc_habitats: […]
+0: "Forest - Temperate"
+1: "Artificial/Terrestrial - Rural Gardens"
+2: "Shrubland - Temperate"
+3: "Artificial/Terrestrial - Plantations"
+4: "Forest - Boreal"
+length: 5
+__proto__: Array []
+assoc_threats: Array [ "Habitat shifting & alteration" ]
+citationLink: "BirdLife International 2016. Acanthis flammea. The IUCN Red List of Threatened Species 2016: e.T22725044A88470766. http://dx.doi.org/10.2305/IUCN.UK.2016-3.RLTS.T22725044A88470766.en"
+conservationMeasure: "Species recovery"
+imageLink: "http://www.birdwatchireland.ie/Portals/0/Irelands%20Birds/Redpoll%2036%20(Michael%20Finn).jpg"
+name: "Redpoll"
+scientificName: "Acanthis flammea"
+videoLink: "https://www.youtube.com/watch?v=pqyXRDAD93M"
+vulnerability: "Least Concern"
+webLink: "http://apiv3.iucnredlist.org/api/v3/website/Acanthis flammea"
+__proto__: Object { … }
+index.html:159:13
+
+             -->
+            <div id="Data" class="w3-container city">
+                <h3>Data</h3>
+                <div id="DataText" class='col-md-6'>
+                    Name:
+                    <span id="name"></span>
+                    <br/>
+                    Scientific Name:
+                    <span id="scientificName"></span>
+                    <br/>
+                    Vulnerability:
+                    <span id="vulnerability"></span>
+                    <br/>
+                    <br/>
+                    <div>
+                        <img id='imageLink' alt="Loading" style="max-height: 200px;" />
+                    </div>
+                    <br/>
+                </div>
+                <div class='col-md-6'>
+                    <iframe id='videoLink' width="450" height="450" src="" >
+                    </iframe>
+                </div>
             </div>
         </div>
 
@@ -113,14 +152,67 @@
             modal.style.display = "block";
         }
 
+        function loadAnimalData(animal) {
+            let animalUrl = 'https://swe-endangered-animals.appspot.com/single_animal_data?animal_name='+animal;
+            httpGetAsync(animalUrl, formatData);
+        }
+
         function formatAnimals(data) {
-            let output = data.assoc_animals.join('<br/>');
-            document.getElementById('AnimalsText').innerHTML = output
+            // let output = data.assoc_animals.join('<br/>');
+            var myList = document.createElement("UL");
+
+            data.assoc_animals.map(animal => {
+                let it = document.createElement('LI');
+                let button = document.createElement('button');
+                button.innerHTML = animal;
+                button.style = "background-color: Transparent; border: none;";
+
+                button.addEventListener('click', event => {
+                    /* Do fetching  */
+                    loadAnimalData(button.innerHTML);
+                    openModel(event, 'Data');
+                })
+                it.appendChild(button);
+
+                myList.appendChild(it);
+            });
+
+            let item = document.getElementById('AnimalsText');
+
+            if (item.hasChildNodes()) {
+                item.replaceChild(myList, item.childNodes[0]);
+            }
+            else {
+                item.appendChild(myList);
+            }
         }
 
         function formatHabitats(data) {
             let output = data.assoc_habitats.join('<br/>');
             document.getElementById('HabitatsText').innerHTML = output
         }
+
+        function formatData(data) {
+            console.log(data);
+
+            // Name:
+            // <span id="name" />
+            // scientificName:
+            // <span id="scientificName" />
+            // vulnerability:
+            // <span id="vulnerability" />
+            // imageLink:
+            // <span id="imageLink" />
+            // <video width="300" height="300" controls>
+            //     <source id="videoLink" />
+            // </video>
+
+            document.getElementById('name').innerHTML = data.name;
+            document.getElementById('scientificName').innerHTML = data.scientificName;
+            document.getElementById('vulnerability').innerHTML = data.vulnerability;
+            document.getElementById('imageLink').src = data.imageLink;
+            document.getElementById('videoLink').src = data.videoLink.replace('watch?v=', 'embed/');
+        }
+
     </script>
 </body>
