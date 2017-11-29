@@ -11,7 +11,7 @@
 <body>
     <!-- <h2>Endangered Animals</h2> -->
     <h2 align='middle'><a href="http://endangered-animals.me">Endangered Animals</a></h2>
-    <div id="container1" style="position: relative; width: 100%; max-height: 400px;"></div>
+    <div id="container1" style="position: relative; width: 85%; max-height: 400px;"></div>
 
     <!-- The Modal -->
     <div id="Modal" class="modal">
@@ -40,32 +40,6 @@
                 <div id="HabitatsText"></div>
             </div>
 
-            <!--
-                click detected!
-index.html:77:21
-{…}
-assoc_countries: Array [ "Bermuda", "Lithuania", "Malta", … ]
-assoc_habitats: […]
-0: "Forest - Temperate"
-1: "Artificial/Terrestrial - Rural Gardens"
-2: "Shrubland - Temperate"
-3: "Artificial/Terrestrial - Plantations"
-4: "Forest - Boreal"
-length: 5
-__proto__: Array []
-assoc_threats: Array [ "Habitat shifting & alteration" ]
-citationLink: "BirdLife International 2016. Acanthis flammea. The IUCN Red List of Threatened Species 2016: e.T22725044A88470766. http://dx.doi.org/10.2305/IUCN.UK.2016-3.RLTS.T22725044A88470766.en"
-conservationMeasure: "Species recovery"
-imageLink: "http://www.birdwatchireland.ie/Portals/0/Irelands%20Birds/Redpoll%2036%20(Michael%20Finn).jpg"
-name: "Redpoll"
-scientificName: "Acanthis flammea"
-videoLink: "https://www.youtube.com/watch?v=pqyXRDAD93M"
-vulnerability: "Least Concern"
-webLink: "http://apiv3.iucnredlist.org/api/v3/website/Acanthis flammea"
-__proto__: Object { … }
-index.html:159:13
-
-             -->
             <div id="Data" class="w3-container city">
                 <h3>Data</h3>
                 <div id="DataText" class='col-md-6'>
@@ -78,6 +52,8 @@ index.html:159:13
                     Vulnerability:
                     <span id="vulnerability"></span>
                     <br/>
+                    Habitats:
+                    <div id="assoc_habitats"></div>
                     <br/>
                     <div>
                         <img id='imageLink' alt="Loading" style="max-height: 200px;" />
@@ -116,12 +92,10 @@ index.html:159:13
             },
             done: function(datamap) {
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-                    console.log("click detected!")
                     var country_code = geography.id;
                     try {
                         var url = url_mappings[country_code].country_url
                         httpGetAsync(url, displayModal);
-                        // displayModal(null)
                     }
                     catch (TypeError) {
                         console.error("No Data on " + geography.properties.name)
@@ -143,7 +117,6 @@ index.html:159:13
         }
 
         function displayModal(data) {
-            // Replace with data.flag and image src
             document.getElementById('FlagImage').src = data.flag
             document.getElementById('CountryHeader').innerText = data.name
 
@@ -152,13 +125,7 @@ index.html:159:13
             modal.style.display = "block";
         }
 
-        function loadAnimalData(animal) {
-            let animalUrl = 'https://swe-endangered-animals.appspot.com/single_animal_data?animal_name='+animal;
-            httpGetAsync(animalUrl, formatData);
-        }
-
         function formatAnimals(data) {
-            // let output = data.assoc_animals.join('<br/>');
             var myList = document.createElement("UL");
 
             data.assoc_animals.map(animal => {
@@ -168,8 +135,9 @@ index.html:159:13
                 button.style = "background-color: Transparent; border: none;";
 
                 button.addEventListener('click', event => {
-                    /* Do fetching  */
-                    loadAnimalData(button.innerHTML);
+                    let animalUrl = 'https://swe-endangered-animals.appspot.com/single_animal_data?animal_name='+animal;
+                    httpGetAsync(animalUrl, formatData);
+
                     openModel(event, 'Data');
                 })
                 it.appendChild(button);
@@ -193,25 +161,30 @@ index.html:159:13
         }
 
         function formatData(data) {
-            console.log(data);
+            let myList = document.createElement("UL");
 
-            // Name:
-            // <span id="name" />
-            // scientificName:
-            // <span id="scientificName" />
-            // vulnerability:
-            // <span id="vulnerability" />
-            // imageLink:
-            // <span id="imageLink" />
-            // <video width="300" height="300" controls>
-            //     <source id="videoLink" />
-            // </video>
+            data.assoc_habitats.map(habitat => {
+                let it = document.createElement('LI');
+                it.innerHTML = habitat;
+
+                myList.appendChild(it);
+            });
+
+            let item = document.getElementById('assoc_habitats');
+            if (item.hasChildNodes()) {
+                item.replaceChild(myList, item.childNodes[0]);
+            }
+            else {
+                item.appendChild(myList);
+            }
+
+            document.getElementById('assoc_habitats').appendChild(myList) // = myList //data.assoc_habitats;
 
             document.getElementById('name').innerHTML = data.name;
             document.getElementById('scientificName').innerHTML = data.scientificName;
             document.getElementById('vulnerability').innerHTML = data.vulnerability;
             document.getElementById('imageLink').src = data.imageLink;
-            document.getElementById('videoLink').src = data.videoLink.replace('watch?v=', 'embed/');
+            document.getElementById('videoLink').src = data.videoLink.replace('watch?v=', 'embed/') || '';
         }
 
     </script>
