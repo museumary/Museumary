@@ -1,0 +1,12 @@
+body {
+    font-family: 'Monteserrat'
+}
+
+.Home-banner {
+    text-align: center;
+
+    color: white;
+    font-size: 20px;
+    background: linear-gradient(black, #3b3a30);
+    height: 60px;
+}

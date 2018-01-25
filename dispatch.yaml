@@ -1,7 +1,0 @@
-dispatch:
-  - url: "museumary.me/*"
-    service: default
-  - url: "www.museumary.me/*"
-    service: default
-  - url: "api.museumary.me/*"
-    service: api

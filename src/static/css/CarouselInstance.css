@@ -1,0 +1,18 @@
+.CarouselInstance {
+    margin-top: -20px;
+}
+
+.carousel-inner > .item > a > img {
+    margin: 0 auto;
+    width: auto;
+    height: 500px;
+    max-height: 500px;
+}
+
+.carousel-inner > .item > a > div > img {
+    /*margin: 0 auto;*/
+    /*width: 15 auto;*/
+    height: 300px;
+    max-height: 300px;
+}
+

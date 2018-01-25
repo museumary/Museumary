@@ -1,9 +1,0 @@
-runtime: nodejs
-env: flex
-
-skip_files:
-- \.gitignore
-- ^node_modules/(.*/)?
-- ^README\..*
-- ^react/(.*/)?
-
